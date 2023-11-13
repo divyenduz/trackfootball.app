@@ -1,0 +1,54 @@
+name: Migrate Database and Deploy
+# This workflow is triggered on pushes to the repository.
+on:
+  workflow_dispatch:
+
+env:
+  NO_COLOR: true
+  CI: 1
+  NEXT_TELEMETRY_DISABLED: 1
+  DATABASE_URL: ${{ secrets.DATABASE_URL }}
+  SSH_KEY: ${{ secrets.SSH_KEY }}
+
+jobs:
+  build:
+    name: Test
+    timeout-minutes: 30
+    runs-on: [ubuntu-latest]
+    # runs-on: [self-hosted]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Turnstyle
+        uses: softprops/turnstyle@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Tailscale
+        if: github.ref == 'refs/heads/master'
+        uses: tailscale/github-action@v2
+        with:
+          authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
+
+      - name: Setup SSH
+        if: github.ref == 'refs/heads/master'
+        run: |
+          echo "Disabling StrictHostKeyChecking"
+          mkdir -p ~/.ssh
+          ssh-keyscan -p 1221 100.91.236.18 >> ~/.ssh/known_hosts
+          echo "$SSH_KEY" > ./server-key.pem
+          if test -f "./server-key.pem"; then
+            chmod 600 ./server-key.pem
+          fi
+
+      - name: Run Remote Command to Deploy
+        if: github.ref == 'refs/heads/master'
+        run: |
+          ssh -i ./server-key.pem div@100.91.236.18 -p 1221 -tt "
+            cd /home/div/code/trackfootball
+            git pull origin master
+            yarn
+            yarn build
+            yarn migrate
+            pm2 reload trackfootball
+            pm2 logs trackfootball --nostream
+          "

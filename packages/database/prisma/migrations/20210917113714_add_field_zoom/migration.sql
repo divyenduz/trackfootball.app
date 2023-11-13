@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Field" ADD COLUMN     "zoom" INTEGER NOT NULL DEFAULT 15;

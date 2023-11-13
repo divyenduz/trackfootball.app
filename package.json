@@ -1,0 +1,32 @@
+{
+  "name": "trackfootball",
+  "version": "2.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "nx run-many --parallel 1 --output-style=stream --target=dev --projects @trackfootball/next-js-app",
+    "build": "nx run-many --parallel 4 --output-style=stream --target=build --projects @trackfootball/*",
+    "start": "nx run-many --parallel 1 --output-style=stream --target=start --projects @trackfootball/next-js-app",
+    "test": "nx run-many --parallel 4 --output-style=stream --target=test --projects @trackfootball/*",
+    "lint": "nx run-many --parallel 4 --output-style=stream --target=lint --projects @trackfootball/*",
+    "migrate": "nx run-many --parallel 1 --output-style=stream --target=lint --projects @trackfootball/database"
+  },
+  "devDependencies": {
+    "nx": "16.10.0",
+    "nx-cloud": "latest"
+  },
+  "dependencies": {
+    "typescript": "5.1.6"
+  },
+  "nx": {
+    "targets": {
+      "build": {
+        "outputs": [
+          "{projectRoot}/.next"
+        ]
+      }
+    }
+  }
+}

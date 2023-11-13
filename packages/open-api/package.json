@@ -1,0 +1,23 @@
+{
+  "name": "@trackfootball/open-api",
+  "version": "0.0.0",
+  "private": true,
+  "main": "index.ts",
+  "scripts": {
+    "test": "vitest run",
+    "lint": "yarn tsc --noEmit",
+    "generate:strava": "yarn swagger-typescript-api -p https://developers.strava.com/swagger/swagger.json --output ./services/strava/generated && mv ./services/strava/generated/Api.ts ./services/strava/generated/index.ts"
+  },
+  "devDependencies": {
+    "vitest": "0.34.6",
+    "prisma": "4.16.2",
+    "@prisma/client": "4.16.2"
+  },
+  "dependencies": {
+    "typescript": "4.9.5",
+    "swagger-typescript-api": "6.4.2"
+  },
+  "resolutions": {
+    "typescript": "4.9.5"
+  }
+}

@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Post" ADD COLUMN     "numberOfRuns" INTEGER NOT NULL DEFAULT -1,
+ADD COLUMN     "numberOfSprints" INTEGER NOT NULL DEFAULT -1;
