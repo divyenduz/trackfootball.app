@@ -20,10 +20,10 @@ export const handleCallbackCustom = async (
   )[0]
 
   const data = {
-    firstName: session.user.given_name!,
-    lastName: session.user.family_name!,
+    firstName: session.user.given_name ?? session.user.nickname,
+    lastName: session.user.family_name ?? '',
     email: session.user.email!,
-    locale: session.user.locale!,
+    locale: session.user.locale ?? 'en',
     picture: session.user.picture!,
     auth0Sub: session.user.sub!,
     emailVerified: session.user.email_verified!,
@@ -43,6 +43,14 @@ export const handleCallbackCustom = async (
   if (!existingUser) {
     await createDiscordMessage({
       heading: 'New User Created',
+      name: `${user.firstName} ${user.lastName}`,
+      description: `
+ID: ${user.id}
+Link: ${process.env.HOMEPAGE_URL}/athlete/${user.id}`,
+    })
+  } else {
+    await createDiscordMessage({
+      heading: '🐛 New User Creation Failed',
       name: `${user.firstName} ${user.lastName}`,
       description: `
 ID: ${user.id}
