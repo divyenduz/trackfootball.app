@@ -1,7 +1,14 @@
 name: Migrate Database and Deploy
 # This workflow is triggered on pushes to the repository.
 on:
+  push:
   workflow_dispatch:
+    inputs:
+      debug_enabled:
+        type: boolean
+        description: 'Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)'
+        required: false
+        default: false
 
 env:
   NO_COLOR: true
