@@ -8,14 +8,12 @@ env:
   NO_COLOR: true
   CI: 1
   NEXT_TELEMETRY_DISABLED: 1
-  DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
 jobs:
   build:
     name: Test
     timeout-minutes: 30
     runs-on: [ubuntu-latest]
-    # runs-on: [self-hosted]
     steps:
       - uses: actions/checkout@v3
       # Note: setup yarn is based on https://github.com/actions/setup-node/issues/182#issuecomment-978176609

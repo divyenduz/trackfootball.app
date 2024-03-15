@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 6060",
     "build": "next build",
     "build:analyse": "ANALYZE=true next build",
     "start": "next start -p 6060",
@@ -87,8 +87,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-map-gl": "6.1.19",
-    "react-notion-x": "6.16.0",
-    "react-query": "^3.39.3",
+    "react-query": "3.39.3",
     "react-s3-uploader": "5.0.0",
     "react-static-tweets": "1.0.0",
     "recompose": "0.30.0",

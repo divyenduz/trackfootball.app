@@ -102,7 +102,7 @@ export default function Activity({ post }: Props /**/) {
               console.error(e)
               alert(
                 `Something went wrong, please contact singh@trackfootball.app` +
-                  e
+                e
               )
             }
           }}
@@ -131,22 +131,5 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
 }
 
 export async function getStaticPaths() {
-  const paths = await sql<{ id: number }[]>`
-  SELECT "id" from "Post"
-  ORDER BY "id" DESC
-  LIMIT 5;
-  `
-
-  const pathMaps = paths.map((p) => {
-    return {
-      params: {
-        id: p.id.toString(),
-      },
-    }
-  })
-
-  return {
-    paths: pathMaps,
-    fallback: true,
-  }
+  return { paths: [], fallback: true }
 }

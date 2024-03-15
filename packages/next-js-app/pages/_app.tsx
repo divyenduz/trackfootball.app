@@ -3,7 +3,6 @@ import { withLDProvider } from 'launchdarkly-react-client-sdk'
 import type { AppProps } from 'next/app'
 import getConfig from 'next/config'
 import Script from 'next/script'
-import 'react-notion-x/src/styles.css'
 import { compose } from 'recompose'
 import 'tailwindcss/tailwind.css'
 
@@ -32,9 +31,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 }
 
 export default compose(
-  withLDProvider({
-    clientSideID: publicRuntimeConfig.LaunchDarklyClientSideId,
-  }),
   withTRPC<AppRouter>({
     config() {
       const url = publicRuntimeConfig.BackendApiUrl + '/trpc'

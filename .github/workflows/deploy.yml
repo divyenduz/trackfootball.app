@@ -7,48 +7,58 @@ env:
   NO_COLOR: true
   CI: 1
   NEXT_TELEMETRY_DISABLED: 1
-  DATABASE_URL: ${{ secrets.DATABASE_URL }}
-  SSH_KEY: ${{ secrets.SSH_KEY }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  SSH_KEY_ORB_UBUNTU: ${{ secrets.SSH_KEY_ORB_UBUNTU }}
+  HOST_IP: ${{ secrets.HOST_IP }}
+  SSH_USER: ${{ secrets.SSH_USER }}
+  SSH_PORT: ${{ secrets.SSH_PORT }}
+  KAMAL_REGISTRY_USERNAME: ${{ secrets.KAMAL_REGISTRY_USERNAME }}
+  KAMAL_REGISTRY_PASSWORD: ${{ secrets.KAMAL_REGISTRY_PASSWORD }}
 
 jobs:
   build:
     name: Test
     timeout-minutes: 30
     runs-on: [ubuntu-latest]
-    # runs-on: [self-hosted]
     steps:
       - uses: actions/checkout@v3
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.3
+          bundler-cache: true
+
+      - name: Install dependencies
+        run: |
+          gem install kamal -v 1.3.1
+
       - name: Turnstyle
         uses: softprops/turnstyle@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Tailscale
-        if: github.ref == 'refs/heads/master'
-        uses: tailscale/github-action@v2
-        with:
-          authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
-
-      - name: Setup SSH
-        if: github.ref == 'refs/heads/master'
+      - name: Write ENV
         run: |
-          echo "Disabling StrictHostKeyChecking"
+          echo "${{ secrets.ENV_BASE64 }}" | base64 -d > .env
+          cat .env
+
+      - name: SSH Keyscan
+        run: |
           mkdir -p ~/.ssh
-          ssh-keyscan -p 1221 100.91.236.18 >> ~/.ssh/known_hosts
-          echo "$SSH_KEY" > ./server-key.pem
-          if test -f "./server-key.pem"; then
-            chmod 600 ./server-key.pem
-          fi
+          echo "$SSH_KEY_ORB_UBUNTU" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -p ${{ env.SSH_PORT }} ${{ env.HOST_IP }} >> ~/.ssh/known_hosts
 
-      - name: Run Remote Command to Deploy
-        if: github.ref == 'refs/heads/master'
+      - name: SSH Run Command
         run: |
-          ssh -i ./server-key.pem div@100.91.236.18 -p 1221 -tt "
-            cd /home/div/code/trackfootball
-            git pull origin master
-            yarn
-            yarn build
-            yarn migrate
-            pm2 reload trackfootball
-            pm2 logs trackfootball --nostream
-          "
+          ssh -p ${{ env.SSH_PORT } ${{ env.SSH_USER }@${{ env.HOST_IP }} "ls"
+
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
+
+      - name: Kamal Deploy
+        run: |
+          kamal env push
+          kamal deploy

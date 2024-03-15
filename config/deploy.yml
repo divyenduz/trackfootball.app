@@ -1,0 +1,68 @@
+service: trackfootball
+image: <%= ENV['KAMAL_REGISTRY_USERNAME'] %>/trackfootball
+servers:
+  web:
+    hosts:
+      - <%= ENV['HOST_IP'] %>
+    options:
+      "add-host": host.docker.internal:host-gateway
+    labels:
+      traefik.http.routers.trackfootball.rule: Host(`trackfootball.app`)
+
+env:
+  secret:
+    - NODE_ENV
+    - NEXT_TELEMETRY_DISABLED
+    - COOKIE_DOMAIN
+    - BACKEND_API
+    - MAPBOX_API_TOKEN
+    - DATABASE_URL
+    - STRAVA_CLIENT_ID
+    - STRAVA_CLIENT_SECRET
+    - HOMEPAGE_URL
+    - AUTH0_SECRET
+    - AUTH0_BASE_URL
+    - AUTH0_ISSUER_BASE_URL
+    - AUTH0_CLIENT_ID
+    - AUTH0_CLIENT_SECRET
+    - DISCORD_TRACKFOOTBALL_APPLICATION_EVENTS_WEBHOOK
+
+builder:
+  multiarch: false
+  cache:
+    type: gha
+
+registry:
+  username: 
+    - KAMAL_REGISTRY_USERNAME
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+
+ssh:
+  user: <%= ENV['SSH_USER'] %>
+  port: <%= ENV['SSH_PORT'] %>
+
+traefik:
+  host_port: <%= ENV['TRAEFIK_PORT'] %>
+  args:
+    api.dashboard: true
+  labels:
+    traefik.enable: true
+    entryPoints.web.address: ":80"
+    traefik.http.routers.dashboard.rule: Host(`<%= ENV['TRAEFIK_HOST'] %>`)
+    traefik.http.routers.dashboard.service: api@internal
+    traefik.http.routers.dashboard.middlewares: auth
+    traefik.http.middlewares.auth.basicauth.users: <%= ENV['TRAEFIK_AUTH_PAIR'] %>
+
+registry:
+  server: ghcr.io
+  username:
+    - KAMAL_REGISTRY_USERNAME
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+
+healthcheck:
+  path: /api/healthcheck
+  port: <%= ENV['APP_PORT'] %>
+  max_attempts: 10
+  interval: 20s
