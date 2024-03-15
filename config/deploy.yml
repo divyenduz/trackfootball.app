@@ -28,7 +28,7 @@ env:
     - DISCORD_TRACKFOOTBALL_APPLICATION_EVENTS_WEBHOOK
 
 builder:
-  multiarch: false
+  # multiarch: false
   cache:
     type: gha
 
@@ -52,7 +52,7 @@ traefik:
     traefik.http.routers.dashboard.rule: Host(`<%= ENV['TRAEFIK_HOST'] %>`)
     traefik.http.routers.dashboard.service: api@internal
     traefik.http.routers.dashboard.middlewares: auth
-    traefik.http.middlewares.auth.basicauth.users: <%= ENV['TRAEFIK_AUTH_PAIR'] %>
+    traefik.http.middlewares.auth.basicauth.users: <%= ENV['SSH_USER'] %>:$apr1$IGfJd4Fv$JWAY9EMWYvarLLIH4ebOY0
 
 registry:
   server: ghcr.io
