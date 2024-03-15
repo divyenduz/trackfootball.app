@@ -139,7 +139,7 @@ export default function Activity() {
           pageSize={5}
           checkboxSelection={false}
           disableSelectionOnClick
-          onRowClick={(params) => {}}
+          onRowClick={(params) => { }}
           columns={[
             {
               field: 'id',
@@ -352,7 +352,7 @@ export default function Activity() {
                     key={index}
                     latitude={lat}
                     longitude={lng}
-                    onDragStart={() => {}}
+                    onDragStart={() => { }}
                     onDrag={({ lngLat }) => {
                       const [lng, lat] = lngLat
                       //@ts-expect-error

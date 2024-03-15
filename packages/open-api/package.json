@@ -9,13 +9,12 @@
     "generate:strava": "yarn swagger-typescript-api -p https://developers.strava.com/swagger/swagger.json --output ./services/strava/generated && mv ./services/strava/generated/Api.ts ./services/strava/generated/index.ts"
   },
   "devDependencies": {
-    "vitest": "0.34.6",
-    "prisma": "4.16.2",
-    "@prisma/client": "4.16.2"
+    "@prisma/client": "5.11.0",
+    "vitest": "0.34.6"
   },
   "dependencies": {
-    "typescript": "4.9.5",
-    "swagger-typescript-api": "6.4.2"
+    "swagger-typescript-api": "6.4.2",
+    "typescript": "5.4.2"
   },
   "resolutions": {
     "typescript": "4.9.5"

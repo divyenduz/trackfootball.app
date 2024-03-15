@@ -31,6 +31,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 }
 
 export default compose(
+  withLDProvider({
+    clientSideID: publicRuntimeConfig.LaunchDarklyClientSideId,
+  }),
   withTRPC<AppRouter>({
     config() {
       const url = publicRuntimeConfig.BackendApiUrl + '/trpc'

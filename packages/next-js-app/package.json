@@ -14,7 +14,7 @@
     "ts:madge": "npx madge --extensions ts,tsx ./packages ./components ./services ./hooks ./repository -i /tmp/img.png && open /tmp/img.png "
   },
   "devDependencies": {
-    "@babel/core": "7.23.3",
+    "@babel/core": "7.24.0",
     "@trivago/prettier-plugin-sort-imports": "4.3.0",
     "@types/dotenv": "8.2.0",
     "@types/node-fetch": "2.6.9",
@@ -29,14 +29,12 @@
     "arg": "5.0.2",
     "eslint": "8.17.0",
     "eslint-config-next": "12.1.6",
-    "launchdarkly-js-client-sdk": "3.1.4",
     "postcss": "8.4.31",
     "prettier": "2.8.8",
     "semantic-release": "21.1.2",
     "vitest": "0.34.6"
   },
   "dependencies": {
-    "@actions/github": "5.1.1",
     "@auth0/nextjs-auth0": "1.9.3",
     "@emotion/react": "11.11.1",
     "@emotion/styled": "11.11.0",
@@ -91,11 +89,11 @@
     "react-s3-uploader": "5.0.0",
     "react-static-tweets": "1.0.0",
     "recompose": "0.30.0",
-    "tailwindcss": "3.3.5",
-    "ts-pattern": "5.0.5",
+    "tailwindcss": "3.4.1",
+    "ts-pattern": "5.0.8",
     "ts-toolbelt": "9.6.0",
-    "typescript": "5.1.6",
-    "utility-types": "3.10.0",
+    "typescript": "5.4.2",
+    "utility-types": "3.11.0",
     "uuid": "9.0.1",
     "zod": "3.22.4"
   }
