@@ -59,7 +59,7 @@ jobs:
 
       - name: SSH Run Command
         run: |
-          ssh -p ${{ env.SSH_PORT }} ${{ env.SSH_USER }@${{ env.HOST_IP }} "ls"
+          ssh -p ${{ env.SSH_PORT }} ${{ env.SSH_USER }}@${{ env.HOST_IP }} "ls"
 
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
