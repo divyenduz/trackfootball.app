@@ -28,7 +28,7 @@ env:
     - DISCORD_TRACKFOOTBALL_APPLICATION_EVENTS_WEBHOOK
 
 builder:
-  # multiarch: false
+  multiarch: false
   cache:
     type: gha
 
