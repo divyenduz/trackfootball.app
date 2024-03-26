@@ -7,7 +7,7 @@ servers:
     options:
       "add-host": host.docker.internal:host-gateway
     labels:
-      traefik.http.routers.trackfootball-web.rule: Host(`trackfootball.app`)
+      traefik.http.routers.trackfootball-web.rule: Host(`trackfootball.app`) && PathPrefix(`/`)
 
 env:
   secret:
