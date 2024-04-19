@@ -4,16 +4,6 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 })
 
 const config = {
-  // env is Required for getStaticProps + next build https://github.com/vercel/next.js/discussions/11493#discussioncomment-14606
-  env: {},
-  publicRuntimeConfig: {
-    // Will be available on both server and client
-    BackendApiUrl: process.env.BACKEND_API || 'https://trackfootball.app/api',
-    LaunchDarklyClientSideId: process.env.LaunchDarklyClientSideId || '6485f666a3414f12de1e8b7a',
-  },
-  serverRuntimeConfig: {
-    BackendApiUrl: process.env.BACKEND_API,
-  },
   images: {
     domains: [
       'lh3.googleusercontent.com',
