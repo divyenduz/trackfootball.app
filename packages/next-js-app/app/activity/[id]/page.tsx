@@ -55,7 +55,6 @@ export async function generateMetadata(
 
 export default async function Activity({ params: { id } }: Props) {
   const post = await getPost(parseInt(id))
-  const homepageUrl = getHomepageUrl()
 
   if (!post) {
     return notFound()
@@ -70,7 +69,7 @@ export default async function Activity({ params: { id } }: Props) {
 
   return (
     <>
-      <div className="w-full p-3 sm:p-5">
+      <div className="w-full max-w-4xl p-3 sm:p-5">
         <ActivityItem post={post} user={user}></ActivityItem>
       </div>
     </>

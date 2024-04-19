@@ -53,7 +53,7 @@ export const AppBar: React.FC<Props> = ({
             </div>
           </Link>
 
-          <div className="flex justify-end flex-1 ">
+          <div className="flex justify-end flex-1">
             {match(Boolean(user))
               .with(true, () => {
                 return (

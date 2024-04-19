@@ -221,11 +221,9 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
         title={
           <>
             <Link href={`/athlete/${post.userId}`}>
-              <a>
-                <div className="text-base font-bold text-left text-gray-900 cursor-pointer">
-                  {post.User?.firstName || ''} {post.User?.lastName || ''}
-                </div>
-              </a>
+              <div className="text-base font-bold text-left text-gray-900 cursor-pointer">
+                {post.User?.firstName || ''} {post.User?.lastName || ''}
+              </div>
             </Link>
             <div className="text-xs font-normal text-gray-500">
               {formatDistance(

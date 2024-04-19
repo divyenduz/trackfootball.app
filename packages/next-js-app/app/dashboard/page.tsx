@@ -1,6 +1,3 @@
-import { Field, Post, User } from '@trackfootball/database'
-import { sql } from '@trackfootball/database'
-import { FeatureCollection, LineString } from '@turf/helpers'
 import { getFeed } from 'app/actions/getFeed'
 import { redirect } from 'next/navigation'
 import { auth } from 'utils/auth'
