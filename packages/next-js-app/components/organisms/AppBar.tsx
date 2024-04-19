@@ -37,7 +37,7 @@ export const AppBar: React.FC<Props> = ({
     <div>
       <MaterialAppBar position="fixed" color="default">
         <Toolbar className="p-3">
-          <Link href="/">
+          <Link href="/home">
             <div className="flex flex-row flex-wrap items-center justify-center flex-none gap-2 cursor-pointer">
               <Logo size={'xs'} />
               {/* @ts-ignore */}
