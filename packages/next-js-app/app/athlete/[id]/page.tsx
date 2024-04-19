@@ -5,12 +5,10 @@ import {
   CardHeader,
   Typography,
 } from '@mui/material'
-import { AwaitedUser } from 'app/layout'
+import { checkStravaToken } from 'app/actions/checkStravaToken'
 import { Metadata } from 'next'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
-import { checkStravaAccessToken } from 'repository/strava'
-import { match } from 'ts-pattern'
 import { auth } from 'utils/auth'
 
 import { Space } from '../../../components/atoms/Space'
@@ -37,41 +35,6 @@ export function getBackendApiUrl() {
   return backendApiUrl
 }
 
-export async function checkStrava(user: AwaitedUser) {
-  // if (!ctx.user) {
-  //   throw new Error(MESSAGE_UNAUTHORIZED)
-  // }
-
-  const socialLogin = user?.socialLogin?.find((sl) => sl.platform === 'STRAVA')
-
-  // Note: if no social login, strava is not connected
-  if (!Boolean(socialLogin)) {
-    return 'NOT_CONNECTED'
-  }
-
-  try {
-    return (await checkStravaToken(user)) as CheckStravaState
-  } catch (e) {
-    console.error('Error: strava check failed')
-    console.error(e)
-    return 'NOT_WORKING' as CheckStravaState
-  }
-}
-
-async function checkStravaToken(user: AwaitedUser) {
-  if (!user) {
-    console.error(
-      'Note: failed to get strava access token, user not found in context'
-    )
-    return 'NOT_WORKING'
-  }
-  const r = await checkStravaAccessToken(user.id)
-  return match(r)
-    .with(true, () => 'WORKING')
-    .with(false, () => 'NOT_WORKING')
-    .exhaustive()
-}
-
 interface Props {
   params: {
     id: string
@@ -90,7 +53,7 @@ export default async function Profile({ params }: Props) {
   }
 
   const backendApiUrl = getBackendApiUrl()
-  const checkStravaState = await checkStrava(user)
+  const checkStravaState = (await checkStravaToken(user)) as CheckStravaState
 
   return (
     <div className="w-full max-w-4xl">

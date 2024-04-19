@@ -1,6 +1,7 @@
 'use server'
 
 import { sql } from '@trackfootball/database'
+import { revalidatePath } from 'next/cache'
 import { auth } from 'utils/auth'
 
 export async function disconnectStrava() {
@@ -14,5 +15,6 @@ export async function disconnectStrava() {
     DELETE FROM "SocialLogin"
     WHERE "id" = ${stravaLogin!.id}
   `
+  revalidatePath(`/athlete/${user.id}`)
   return true
 }
