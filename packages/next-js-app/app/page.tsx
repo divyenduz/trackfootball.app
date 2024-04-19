@@ -1,22 +1,8 @@
 import Link from 'next/link'
-import { redirect } from 'next/navigation'
-import React from 'react'
-import { auth } from 'utils/auth'
 
 import { Button } from '../components/atoms/Button'
-import './styles.css'
 
 export default async function Home() {
-  let user = null
-  try {
-    user = await auth()
-  } catch (e) {
-    console.error(e)
-  }
-  if (user) {
-    // Note: logged in, redirect to dashboard!
-    redirect('/dashboard')
-  }
   return (
     <>
       <div className="hero-landing">

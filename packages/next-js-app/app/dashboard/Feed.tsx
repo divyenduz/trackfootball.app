@@ -51,7 +51,7 @@ export default function Feed({ initialFeed, initialNextCursor }: Props) {
             }
           }}
         >
-          Load More
+          {loading ? 'Loading...' : 'Load More'}
         </Button>
       )}
     </>

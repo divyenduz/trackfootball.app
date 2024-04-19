@@ -37,14 +37,7 @@ export const AppBar: React.FC<Props> = ({
     <div>
       <MaterialAppBar position="fixed" color="default">
         <Toolbar className="p-3">
-          <Link
-            legacyBehavior
-            href={match(Boolean(user))
-              .with(true, () => '/dashboard')
-              .with(false, () => '/')
-              .exhaustive()}
-            passHref
-          >
+          <Link legacyBehavior href={'/'} passHref>
             <a>
               <div className="flex flex-row flex-wrap items-center justify-center flex-none gap-2 cursor-pointer">
                 <Logo size={'xs'} />
@@ -67,6 +60,11 @@ export const AppBar: React.FC<Props> = ({
               .with(true, () => {
                 return (
                   <>
+                    <Link legacyBehavior href={`/dashboard`} passHref>
+                      <a>
+                        <Button>Dashboard</Button>
+                      </a>
+                    </Link>
                     <Link legacyBehavior href={`/leaderboard`} passHref>
                       <a>
                         <Button>Leaderboard</Button>

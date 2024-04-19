@@ -1,7 +1,7 @@
 import 'tailwindcss/tailwind.css'
 import { auth } from 'utils/auth'
 
-import BaseLayout from './BaseLayout'
+import BaseLayout from '../BaseLayout'
 
 export const metadata = {
   title: 'Landing | TrackFootball',
@@ -15,5 +15,5 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  return <BaseLayout fullWidth={true}>{children}</BaseLayout>
+  return <BaseLayout fullWidth={false}>{children}</BaseLayout>
 }
