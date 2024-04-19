@@ -1,4 +1,4 @@
-import { Button } from '@mui/material'
+import Button from 'components/atoms/Button'
 import Link from 'next/link'
 
 export default function Home() {
