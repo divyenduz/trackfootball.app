@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Privacy() {
+export default async function Terms() {
   return (
     <div className="w-full max-w-4xl">
       <h1>Website Terms and Conditions of Use</h1>

@@ -29,7 +29,7 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-export function getBackendApiUrl() {
+export async function getBackendApiUrl() {
   const backendApiUrl =
     process.env.BACKEND_API || 'https://trackfootball.app/api'
   return backendApiUrl
@@ -45,14 +45,12 @@ export default async function Profile({ params }: Props) {
   let user = null
   try {
     user = await auth()
-  } catch (e) {
-    console.error(e)
-  }
+  } catch (e) {}
   if (!user) {
     return notFound()
   }
 
-  const backendApiUrl = getBackendApiUrl()
+  const backendApiUrl = await getBackendApiUrl()
   const checkStravaState = (await checkStravaToken(user)) as CheckStravaState
 
   return (

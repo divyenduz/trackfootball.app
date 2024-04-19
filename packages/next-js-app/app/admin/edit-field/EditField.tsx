@@ -2,6 +2,7 @@
 
 import { LocationOnTwoTone } from '@mui/icons-material'
 import { Typography } from '@mui/material'
+import { Field } from '@trackfootball/database'
 import { FieldSpace } from '@trackfootball/sprint-detection'
 import center from '@turf/center'
 import { getCoord } from '@turf/invariant'
@@ -13,7 +14,6 @@ import React, { useEffect, useState } from 'react'
 import { match } from 'ts-pattern'
 
 import { getFields } from './page'
-import { Field } from '.prisma/client'
 
 const DataGrid = dynamic(() =>
   namedComponent(import('@mui/x-data-grid'), 'DataGrid')

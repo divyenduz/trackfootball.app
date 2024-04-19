@@ -13,7 +13,7 @@ export const metadata = {
   title: 'Dashboard | TrackFootball',
 }
 
-export function getBackendApiUrl() {
+export async function getBackendApiUrl() {
   const backendApiUrl =
     process.env.BACKEND_API || 'https://trackfootball.app/api'
   return backendApiUrl
@@ -23,9 +23,7 @@ export default async function Home() {
   let user = null
   try {
     user = await auth()
-  } catch (e) {
-    console.error(e)
-  }
+  } catch (e) {}
   if (!user) {
     // Note: not logged in, redirect to home page!
     redirect('/')
@@ -37,7 +35,7 @@ export default async function Home() {
   const feed = feedQuery.posts
   const nextCursor = feedQuery.nextCursor
 
-  const backendApiUrl = getBackendApiUrl()
+  const backendApiUrl = await getBackendApiUrl()
 
   return (
     <div className="w-full max-w-4xl">

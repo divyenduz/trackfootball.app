@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Privacy() {
+export default async function Privacy() {
   return (
     <div className="w-full max-w-4xl">
       <h1>Privacy Policy for TrackFootball.app</h1>

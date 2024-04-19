@@ -1,4 +1,4 @@
-import { Metadata, ResolvingMetadata } from 'next'
+import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { auth } from 'utils/auth'
 
@@ -11,20 +11,17 @@ type Props = {
   }
 }
 
-export function getHomepageUrl() {
+export async function getHomepageUrl() {
   const url = process.env.HOMEPAGE_URL || 'https://trackfootball.app'
   return url
 }
 
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const id = params.id
 
   const post = await getPost(parseInt(id))
 
-  const homepageUrl = getHomepageUrl()
+  const homepageUrl = await getHomepageUrl()
 
   const title = `${post?.text} | Activity | TrackFootball`
   const description = `${post?.text} is a Football activity on TrackFootball`
@@ -63,9 +60,7 @@ export default async function Activity({ params: { id } }: Props) {
   let user = null
   try {
     user = await auth()
-  } catch (e) {
-    console.error(e)
-  }
+  } catch (e) {}
 
   return (
     <>

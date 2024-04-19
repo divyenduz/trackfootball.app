@@ -1,6 +1,6 @@
 import { UserType, sql } from '@trackfootball/database'
 import { Metadata } from 'next'
-import { MESSAGE_UNAUTHORIZED } from 'packages/auth/utils'
+import { redirect } from 'next/navigation'
 import { auth } from 'utils/auth'
 
 import AddField from './AddField'
@@ -20,15 +20,14 @@ export async function getPostsWithoutFields() {
 
   return postsWithoutField
 }
-export default async function Activity() {
+export default async function AddFieldFn() {
   let user = null
   try {
     user = await auth()
-  } catch (e) {
-    console.error(e)
-  }
+  } catch (e) {}
+
   if (!user || !(user.type === UserType.ADMIN)) {
-    throw new Error(MESSAGE_UNAUTHORIZED)
+    redirect('/')
   }
 
   const posts = await getPostsWithoutFields()

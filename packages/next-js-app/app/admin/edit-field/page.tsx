@@ -1,9 +1,8 @@
-import { UserType, sql } from '@trackfootball/database'
-import { MESSAGE_UNAUTHORIZED } from 'packages/auth/utils'
+import { Field, UserType, sql } from '@trackfootball/database'
+import { redirect } from 'next/navigation'
 import { auth } from 'utils/auth'
 
 import EditField from './EditField'
-import { Field } from '.prisma/client'
 
 export const metadata = {
   title: `Admin | Edit Field | TrackFootball`,
@@ -18,15 +17,13 @@ export async function getFields() {
   return fields
 }
 
-export default async function Activity() {
+export default async function EditFieldFn() {
   let user = null
   try {
     user = await auth()
-  } catch (e) {
-    console.error(e)
-  }
+  } catch (e) {}
   if (!user || !(user.type === UserType.ADMIN)) {
-    throw new Error(MESSAGE_UNAUTHORIZED)
+    redirect('/')
   }
   const fields = await getFields()
 

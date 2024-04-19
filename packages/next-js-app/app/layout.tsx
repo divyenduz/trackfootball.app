@@ -21,9 +21,7 @@ export default async function RootLayout({
   let user = null
   try {
     user = await auth()
-  } catch (e) {
-    console.error(e)
-  }
+  } catch (e) {}
 
   return (
     <html lang="en">

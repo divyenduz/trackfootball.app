@@ -4,6 +4,8 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 })
 
 const config = {
+  reactStrictMode: true,
+  swcMinify: true,
   images: {
     domains: [
       'lh3.googleusercontent.com',
@@ -14,9 +16,6 @@ const config = {
     ],
   },
   transpilePackages: ['@trackfootball/*'],
-  typescript: {
-    ignoreBuildErrors: true,
-  },
 }
 
 module.exports = withBundleAnalyzer(config)

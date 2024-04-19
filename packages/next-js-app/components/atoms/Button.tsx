@@ -1,3 +1,5 @@
+'use client'
+
 import MaterialButton, { ButtonProps } from '@mui/material/Button'
 
 export const Button = (props: ButtonProps) => {

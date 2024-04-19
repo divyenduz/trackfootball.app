@@ -5,9 +5,7 @@ export default async function Home() {
   let user = null
   try {
     user = await auth()
-  } catch (e) {
-    console.error(e)
-  }
+  } catch (e) {}
 
   if (user) {
     redirect('/dashboard')

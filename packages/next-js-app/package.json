@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 6060",
-    "build": "next build",
+    "build": "NODE_ENV=production next build",
     "build:analyse": "ANALYZE=true next build",
     "start": "next start -p 6060",
     "lint": "yarn tsc --noEmit; next lint",
@@ -54,7 +54,7 @@
     "dotenv": "16.3.1",
     "form-data": "4.0.0",
     "multilines": "1.0.3",
-    "next": "14.2.2",
+    "next": "14.2.0",
     "node-fetch": "2.6.7",
     "postgres": "3.4.3",
     "react": "18.2.0",

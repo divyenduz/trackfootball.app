@@ -1,3 +1,5 @@
+'use server'
+
 import { AwaitedUser } from 'app/layout'
 import { checkStravaAccessToken } from 'repository/strava'
 import { match } from 'ts-pattern'
