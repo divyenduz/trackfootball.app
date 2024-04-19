@@ -1,5 +1,5 @@
 import { UserType, sql } from '@trackfootball/database'
-import { Metadata, ResolvingMetadata } from 'next'
+import { Metadata } from 'next'
 import { MESSAGE_UNAUTHORIZED } from 'packages/auth/utils'
 import { auth } from 'utils/auth'
 
@@ -34,8 +34,8 @@ export default async function Activity() {
   const posts = await getPostsWithoutFields()
 
   return (
-    <>
+    <div className="w-full max-w-4xl">
       <AddField posts={posts}></AddField>
-    </>
+    </div>
   )
 }

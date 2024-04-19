@@ -45,7 +45,7 @@ const prettyRunMetricSpeed = (hasSprints: boolean, speed: number) => {
   return mpsToKmph(speed)
 }
 
-type AwaitedPost = NonNullable<Awaited<ReturnType<typeof getPost>>>
+export type AwaitedPost = NonNullable<Awaited<ReturnType<typeof getPost>>>
 
 export interface Props {
   post: AwaitedPost
@@ -106,43 +106,29 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
         <CardHeader
           className="p-2"
           avatar={
-            <Link
-              legacyBehavior
-              href="`/athlete/[id]`"
-              as={`/athlete/${post.userId}`}
-              passHref={true}
-            >
-              <a>
-                <Avatar className="w-10 h-10">
-                  <Image
-                    alt="User's display picture"
-                    width={40}
-                    height={40}
-                    src={
-                      post.User?.picture ||
-                      'https://trackfootball-public.s3.ap-southeast-1.amazonaws.com/prod/user.svg'
-                    }
-                  ></Image>
-                </Avatar>
-              </a>
+            <Link href={`/athlete/${post.userId}`}>
+              <Avatar className="w-10 h-10">
+                <Image
+                  alt="User's display picture"
+                  width={40}
+                  height={40}
+                  src={
+                    post.User?.picture ||
+                    'https://trackfootball-public.s3.ap-southeast-1.amazonaws.com/prod/user.svg'
+                  }
+                ></Image>
+              </Avatar>
             </Link>
           }
           title={
             <>
-              <Link
-                legacyBehavior
-                href="/athlete/[id]"
-                as={`/athlete/${post.userId}`}
-                passHref={true}
-              >
-                <a>
-                  <Typography
-                    component="strong"
-                    className="font-medium text-left text-gray-900 cursor-pointer"
-                  >
-                    {post.User?.firstName || ''} {post.User?.lastName || ''}
-                  </Typography>
-                </a>
+              <Link href={`/athlete/${post.userId}`}>
+                <Typography
+                  component="strong"
+                  className="font-medium text-left text-gray-900 cursor-pointer"
+                >
+                  {post.User?.firstName || ''} {post.User?.lastName || ''}
+                </Typography>
               </Link>
               <Typography className="text-xs font-normal text-gray-500">
                 {formatDistance(
@@ -168,20 +154,13 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
           <CardHeader
             className="flex flex-wrap gap-4 p-1"
             title={
-              <Link
-                legacyBehavior
-                href="/activity/[id]"
-                as={`/activity/${post.id}`}
-                passHref={true}
-              >
-                <a>
-                  <Typography
-                    component="h2"
-                    className="text-base font-medium text-left cursor-pointer"
-                  >
-                    {post.text}
-                  </Typography>
-                </a>
+              <Link href={`/activity/${post.id}`}>
+                <Typography
+                  component="h2"
+                  className="text-base font-medium text-left cursor-pointer"
+                >
+                  {post.text}
+                </Typography>
               </Link>
             }
             action={
@@ -224,36 +203,24 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
       <CardHeader
         className="p-1"
         avatar={
-          <Link
-            legacyBehavior
-            href="/athlete/[id]"
-            as={`/athlete/${post.userId}`}
-            passHref={true}
-          >
-            <a>
-              <Avatar className="w-10 h-10">
-                <Image
-                  alt="User's display picture"
-                  width={40}
-                  height={40}
-                  className="object-cover"
-                  src={
-                    post.User?.picture ||
-                    'https://trackfootball-public.s3.ap-southeast-1.amazonaws.com/prod/user.svg'
-                  }
-                ></Image>
-              </Avatar>
-            </a>
+          <Link href={`/athlete/${post.userId}`}>
+            <Avatar className="w-10 h-10">
+              <Image
+                alt="User's display picture"
+                width={40}
+                height={40}
+                className="object-cover"
+                src={
+                  post.User?.picture ||
+                  'https://trackfootball-public.s3.ap-southeast-1.amazonaws.com/prod/user.svg'
+                }
+              ></Image>
+            </Avatar>
           </Link>
         }
         title={
           <>
-            <Link
-              legacyBehavior
-              href="/athlete/[id]"
-              as={`/athlete/${post.userId}`}
-              passHref={true}
-            >
+            <Link href={`/athlete/${post.userId}`}>
               <a>
                 <div className="text-base font-bold text-left text-gray-900 cursor-pointer">
                   {post.User?.firstName || ''} {post.User?.lastName || ''}
@@ -284,17 +251,10 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
         <CardHeader
           className="flex flex-wrap p-1"
           title={
-            <Link
-              legacyBehavior
-              href="/activity/[id]"
-              as={`/activity/${post.id}`}
-              passHref={true}
-            >
-              <a className="text-gray-900">
-                <div className="text-2xl font-semibold text-left cursor-pointer">
-                  {post.text}
-                </div>
-              </a>
+            <Link href={`/activity/${post.id}`}>
+              <div className="text-2xl font-semibold text-left text-gray-900 cursor-pointer">
+                {post.text}
+              </div>
             </Link>
           }
           action={
@@ -461,11 +421,10 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
           <ConditionalDisplay visible={post.type === 'STRAVA_ACTIVITY'}>
             <div className="flex items-center justify-center">
               <Link
-                legacyBehavior
                 href={`https://strava.com/activities/${post.key}`}
-                passHref
+                target="_blank"
               >
-                <a target="_blank">View on Strava</a>
+                View on Strava
               </Link>
             </div>
           </ConditionalDisplay>

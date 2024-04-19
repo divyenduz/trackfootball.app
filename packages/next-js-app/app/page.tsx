@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 import { Button } from '../components/atoms/Button'
 
-export default async function Home() {
+export default function Home() {
   return (
     <>
       <div className="hero-landing">
@@ -22,10 +22,8 @@ export default async function Home() {
             football and record your game with any GPS watch/phone and upload it
             to TrackFootball.
           </p>
-          <Link legacyBehavior href="/api/auth/login" passHref>
-            <a>
-              <Button variant="contained">Get started now</Button>
-            </a>
+          <Link href="/api/auth/login">
+            <Button variant="contained">Get started now</Button>
           </Link>
         </div>
       </div>
@@ -108,10 +106,8 @@ export default async function Home() {
               for a club to get meaningful stats for your game.
             </p>
           </div>
-          <Link legacyBehavior href="/api/auth/login" passHref>
-            <a>
-              <Button variant="contained">Get started now</Button>
-            </a>
+          <Link href="/api/auth/login">
+            <Button variant="contained">Get started now</Button>
           </Link>
         </div>
       </div>

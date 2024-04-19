@@ -15,7 +15,7 @@ export default function LeaderboardPage() {
 
   // Note: last month and this month questions are embedded directly as metabase dashboard doesn't support tabs yet.
   return (
-    <>
+    <div className="w-full max-w-4xl">
       <div className="flex flex-col w-full">
         <TabContext value={tab}>
           <TabList
@@ -64,6 +64,6 @@ export default function LeaderboardPage() {
           </TabPanel>
         </TabContext>
       </div>
-    </>
+    </div>
   )
 }

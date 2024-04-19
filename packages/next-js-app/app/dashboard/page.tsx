@@ -11,14 +11,6 @@ export const metadata = {
   title: 'Dashboard | TrackFootball',
 }
 
-export type FeedItemType = Post & {
-  geoJson: FeatureCollection<LineString>
-  sprints: Array<FeatureCollection<LineString>>
-  runs: Array<FeatureCollection<LineString>>
-  Field: Field
-  User: User
-}
-
 export default async function Home() {
   let user = null
   try {
@@ -36,12 +28,12 @@ export default async function Home() {
   const nextCursor = feedQuery.nextCursor
 
   return (
-    <>
+    <div className="w-full max-w-4xl">
       {feed.length > 0 && (
         <div className="w-full px-3 sm:px-5">
           <Feed initialFeed={feed} initialNextCursor={nextCursor} />
         </div>
       )}
-    </>
+    </div>
   )
 }

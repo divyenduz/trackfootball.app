@@ -1,7 +1,15 @@
 'use server'
 
-import { sql } from '@trackfootball/database'
-import { FeedItemType } from 'app/dashboard/page'
+import { Field, Post, User, sql } from '@trackfootball/database'
+import { FeatureCollection, LineString } from '@turf/helpers'
+
+export type FeedItemType = Post & {
+  geoJson: FeatureCollection<LineString>
+  sprints: Array<FeatureCollection<LineString>>
+  runs: Array<FeatureCollection<LineString>>
+  Field: Field
+  User: User
+}
 
 export async function getFeed(cursor: number = 0, limit: number = 3) {
   const maxPostId = (

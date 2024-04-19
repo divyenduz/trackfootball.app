@@ -37,22 +37,20 @@ export const AppBar: React.FC<Props> = ({
     <div>
       <MaterialAppBar position="fixed" color="default">
         <Toolbar className="p-3">
-          <Link legacyBehavior href={'/'} passHref>
-            <a>
-              <div className="flex flex-row flex-wrap items-center justify-center flex-none gap-2 cursor-pointer">
-                <Logo size={'xs'} />
-                {/* @ts-ignore */}
-                <Hidden mdDown>
-                  <Typography
-                    className="text-gray-900"
-                    variant="h6"
-                    component={'h5'}
-                  >
-                    {pageName}
-                  </Typography>
-                </Hidden>
-              </div>
-            </a>
+          <Link href="/">
+            <div className="flex flex-row flex-wrap items-center justify-center flex-none gap-2 cursor-pointer">
+              <Logo size={'xs'} />
+              {/* @ts-ignore */}
+              <Hidden mdDown>
+                <Typography
+                  className="text-gray-900"
+                  variant="h6"
+                  component={'h5'}
+                >
+                  {pageName}
+                </Typography>
+              </Hidden>
+            </div>
           </Link>
 
           <div className="flex justify-end flex-1 ">
@@ -60,15 +58,11 @@ export const AppBar: React.FC<Props> = ({
               .with(true, () => {
                 return (
                   <>
-                    <Link legacyBehavior href={`/dashboard`} passHref>
-                      <a>
-                        <Button>Dashboard</Button>
-                      </a>
+                    <Link href={`/dashboard`}>
+                      <Button>Dashboard</Button>
                     </Link>
-                    <Link legacyBehavior href={`/leaderboard`} passHref>
-                      <a>
-                        <Button>Leaderboard</Button>
-                      </a>
+                    <Link href={`/leaderboard`}>
+                      <Button>Leaderboard</Button>
                     </Link>
                     <IconButton
                       aria-label="account of current user"
@@ -122,12 +116,10 @@ export const AppBar: React.FC<Props> = ({
                       >
                         <ListItemIcon>👤</ListItemIcon>
                         <Link
-                          legacyBehavior
                           href={`/athlete/[id]`}
                           as={`/athlete/${user?.id}`}
-                          passHref
                         >
-                          <a className="w-full text-rose-700">Profile</a>
+                          <span className="w-full">Profile</span>
                         </Link>
                       </MenuItem>
 
@@ -139,11 +131,6 @@ export const AppBar: React.FC<Props> = ({
                         }}
                       >
                         <ListItemIcon>😵</ListItemIcon>
-                        {/* <Link legacyBehavior href="/api/auth/logout" passHref>
-                          <a className="w-full">Logout</a>
-                        </Link> */}
-                        {/* <Link legacyBehavior href="/api/auth/logout" passHref>
-                        </Link> */}
                         <a className="w-full" href="/api/auth/logout">
                           Logout
                         </a>
@@ -154,10 +141,8 @@ export const AppBar: React.FC<Props> = ({
               })
               .with(false, () => {
                 return (
-                  <Link legacyBehavior href="/api/auth/login" passHref>
-                    <a>
-                      <Button variant="contained">Login</Button>
-                    </a>
+                  <Link href="/api/auth/login">
+                    <Button variant="contained">Login</Button>
                   </Link>
                 )
               })

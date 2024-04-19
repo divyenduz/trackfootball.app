@@ -171,18 +171,16 @@ export default function AddField({ posts }: Props) {
               width: 140,
               renderCell: (params) => {
                 return (
-                  <Link legacyBehavior href={``}>
-                    <a
-                      onClick={() => {
-                        const post = posts.find(
-                          (post) => params.row.id === post.id
-                        )
-                        setPost(post!)
-                      }}
-                    >
-                      {params.row.id}
-                    </a>
-                  </Link>
+                  <Button
+                    onClick={() => {
+                      const post = posts.find(
+                        (post) => params.row.id === post.id
+                      )
+                      setPost(post!)
+                    }}
+                  >
+                    {params.row.id}
+                  </Button>
                 )
               },
             },
@@ -192,18 +190,16 @@ export default function AddField({ posts }: Props) {
               width: 140,
               renderCell: (params) => {
                 return (
-                  <Link legacyBehavior href={``}>
-                    <a
-                      onClick={() => {
-                        const post = posts.find(
-                          (post) => params.row.id === post.id
-                        )
-                        setPost(post!)
-                      }}
-                    >
-                      {params.row.text}
-                    </a>
-                  </Link>
+                  <Button
+                    onClick={() => {
+                      const post = posts.find(
+                        (post) => params.row.id === post.id
+                      )
+                      setPost(post!)
+                    }}
+                  >
+                    {params.row.text}
+                  </Button>
                 )
               },
             },
@@ -228,10 +224,10 @@ export default function AddField({ posts }: Props) {
       <div style={{ marginBottom: 30 }}></div>
 
       <Link
-        legacyBehavior
         href={`http://maps.google.com?q=${latitude},${longitude}&ll=${latitude},${longitude}&z=15`}
+        target="_blank"
       >
-        <a target="_blank">Open in Google maps</a>
+        Open in Google maps
       </Link>
 
       <span

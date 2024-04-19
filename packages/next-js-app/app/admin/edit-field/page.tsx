@@ -1,5 +1,3 @@
-'use client'
-
 import { UserType, sql } from '@trackfootball/database'
 import { MESSAGE_UNAUTHORIZED } from 'packages/auth/utils'
 import { auth } from 'utils/auth'
@@ -33,8 +31,8 @@ export default async function Activity() {
   const fields = await getFields()
 
   return (
-    <>
+    <div className="w-full max-w-4xl">
       <EditField fields={fields}></EditField>
-    </>
+    </div>
   )
 }

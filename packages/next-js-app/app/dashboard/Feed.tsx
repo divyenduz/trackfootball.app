@@ -1,12 +1,9 @@
 'use client'
 
 import { Button } from '@mui/material'
-import { getFeed } from 'app/actions/getFeed'
+import { FeedItemType, getFeed } from 'app/actions/getFeed'
 import { FeedItem } from 'components/organisms/Feed/FeedItem'
-import next from 'next'
 import { useState } from 'react'
-
-import { FeedItemType } from './page'
 
 export const metadata = {
   title: 'Dashboard | TrackFootball',
@@ -16,10 +13,6 @@ interface Props {
   initialFeed: Array<FeedItemType>
   initialNextCursor?: number | null
 }
-
-// export type FeedPost = Awaited<ReturnType<typeof getFeed>>['posts'][0]
-// export type FullPost = NonNullable<Awaited<ReturnType<typeof getPost>>>
-// export type AwaitedPost = FeedPost | FullPost
 
 export default function Feed({ initialFeed, initialNextCursor }: Props) {
   const [feed, setFeed] = useState(initialFeed)

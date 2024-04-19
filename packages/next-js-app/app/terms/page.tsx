@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Privacy() {
   return (
-    <>
+    <div className="w-full max-w-4xl">
       <h1>Website Terms and Conditions of Use</h1>
 
       <h2>1. Terms</h2>
@@ -118,6 +118,6 @@ export default function Privacy() {
         Any claim related to TrackFootball&apos;s Website shall be governed by
         the laws of de without regards to its conflict of law provisions.
       </p>
-    </>
+    </div>
   )
 }

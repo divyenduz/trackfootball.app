@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Privacy() {
   return (
-    <>
+    <div className="w-full max-w-4xl">
       <h1>Privacy Policy for TrackFootball.app</h1>
       <p>
         At https://trackfootball.app, accessible from https://trackfootball.app,
@@ -223,6 +223,6 @@ export default function Privacy() {
         strongly encourage you to contact us immediately and we will do our best
         efforts to promptly remove such information from our records.
       </p>
-    </>
+    </div>
   )
 }

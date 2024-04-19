@@ -3,6 +3,7 @@ import { Core } from '@trackfootball/sprint-detection'
 import { FieldSpace } from '@trackfootball/sprint-detection'
 import bearing from '@turf/bearing'
 import { FeatureCollection, LineString, bearingToAzimuth } from '@turf/helpers'
+import { FeedItemType } from 'app/actions/getFeed'
 import dynamic from 'next/dynamic'
 import React, { useState } from 'react'
 import type { ViewState } from 'react-map-gl'
@@ -11,7 +12,9 @@ import { match } from 'ts-pattern'
 import { getNthCoord } from '../../packages/utils/map'
 import { namedComponent } from '../../packages/utils/utils'
 import { ConditionalDisplay } from '../atoms/ConditionalDisplay'
-import { AwaitedPost, FullPost } from './Feed/Feed'
+import { AwaitedPost } from './Activity/ActivityItem'
+
+type MapInstancePost = FeedItemType | AwaitedPost
 
 const ReactMapGL = dynamic(() => import('react-map-gl'), {
   ssr: false,
@@ -38,7 +41,7 @@ interface MapInstanceProps {
   showSprints: boolean
   showRuns: boolean
   showHeatmap: boolean
-  post: AwaitedPost
+  post: MapInstancePost
   page: 'activity' | 'feed'
 }
 
@@ -47,7 +50,7 @@ interface ArrowIconProps {
   bearingValue: number
 }
 
-function postIsFullPost(post: AwaitedPost): post is FullPost {
+function postIsFullPost(post: MapInstancePost): post is AwaitedPost {
   if ('numberOfCoordinates' in post) {
     return true
   }
@@ -69,7 +72,7 @@ const ArrowIcon: React.FC<ArrowIconProps> = ({ color, bearingValue }) => {
   )
 }
 
-function getHeatmapRadius(post: AwaitedPost) {
+function getHeatmapRadius(post: MapInstancePost) {
   if (postIsFullPost(post)) {
     const heatmapRadius = 25000 / post.numberOfCoordinates
     if (heatmapRadius < 3) {

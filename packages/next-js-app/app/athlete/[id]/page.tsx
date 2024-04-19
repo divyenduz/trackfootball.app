@@ -87,7 +87,7 @@ export default async function Profile() {
   const checkStravaState = await checkStrava(user)
 
   return (
-    <>
+    <div className="w-full max-w-4xl">
       <Card>
         <CardHeader
           className="flex flex-wrap gap-4 p-1"
@@ -135,6 +135,6 @@ export default async function Profile() {
           </ShowToOwner>
         </CardContent>
       </Card>
-    </>
+    </div>
   )
 }

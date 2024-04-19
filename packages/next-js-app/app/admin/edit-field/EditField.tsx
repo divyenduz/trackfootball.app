@@ -129,18 +129,17 @@ export default async function EditField({ fields }: Props) {
               width: 140,
               renderCell: (params) => {
                 return (
-                  <Link legacyBehavior href={``}>
-                    <a
-                      onClick={() => {
-                        const field = fields.find(
-                          (field) => params.row.id === field.id
-                        )
-                        setField(field!)
-                        setImmutableField(field!)
-                      }}
-                    >
-                      {params.row.id}
-                    </a>
+                  <Link
+                    href=""
+                    onClick={() => {
+                      const field = fields.find(
+                        (field) => params.row.id === field.id
+                      )
+                      setField(field!)
+                      setImmutableField(field!)
+                    }}
+                  >
+                    {params.row.id}
                   </Link>
                 )
               },
@@ -151,18 +150,17 @@ export default async function EditField({ fields }: Props) {
               width: 140,
               renderCell: (params) => {
                 return (
-                  <Link legacyBehavior href={``}>
-                    <a
-                      onClick={() => {
-                        const field = fields.find(
-                          (field) => params.row.id === field.id
-                        )
-                        setField(field!)
-                        setImmutableField(field!)
-                      }}
-                    >
-                      {params.row.name}
-                    </a>
+                  <Link
+                    href=""
+                    onClick={() => {
+                      const field = fields.find(
+                        (field) => params.row.id === field.id
+                      )
+                      setField(field!)
+                      setImmutableField(field!)
+                    }}
+                  >
+                    {params.row.name}
                   </Link>
                 )
               },
@@ -240,10 +238,10 @@ export default async function EditField({ fields }: Props) {
       <div style={{ marginBottom: 30 }}></div>
 
       <Link
-        legacyBehavior
         href={`http://maps.google.com?q=${latitude},${longitude}&ll=${latitude},${longitude}&z=15`}
+        target="_blank"
       >
-        <a target="_blank">Open in Google maps</a>
+        Open in Google maps
       </Link>
 
       <span
