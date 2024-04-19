@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 // https://developers.strava.com/guidelines/
 
 interface Props {
@@ -13,12 +15,12 @@ export const ConnectWithStrava: React.FC<Props> = ({ callbackUrl }) => {
       <a
         href={`https://www.strava.com/oauth/authorize?client_id=${clientId}&redirect_uri=${callbackUrl}&response_type=code&approval_prompt=auto&scope=${scope}`}
       >
-        <img
+        <Image
           alt="Connect with Strava button"
           src="/assets/strava/connect-with-strava.png"
           width={200}
           height={50}
-        ></img>
+        ></Image>
       </a>
     </div>
   )

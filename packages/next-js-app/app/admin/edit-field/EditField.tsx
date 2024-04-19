@@ -35,7 +35,7 @@ interface Props {
   fields: Awaited<ReturnType<typeof getFields>>
 }
 
-export default async function EditField({ fields }: Props) {
+export default function EditField({ fields }: Props) {
   const [immutableField, setImmutableField] = useState<Field | null>(null)
   const [field, setField] = useState<Field | null>(null)
 
@@ -90,7 +90,7 @@ export default async function EditField({ fields }: Props) {
       setViewport(newViewport)
     }
     effect()
-  }, [field])
+  }, [field, immutableField])
 
   if (!field) {
     return <>Loading...</>
