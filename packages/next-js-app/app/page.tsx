@@ -8,11 +8,11 @@ export default function Home() {
     <>
       <div className="hero-landing">
         <div className="hero-image">
-          <Image
+          <img
             alt="stats"
             style={{ height: '100%', width: '100%', objectFit: 'cover' }}
             src="/assets/core/landing/images/hero_intro.jpg"
-          ></Image>
+          ></img>
         </div>
         <div className="overlay" />
         <div className="content-wrapper">
@@ -31,41 +31,41 @@ export default function Home() {
       <div className="hero-stats">
         <div className="stats">
           <div className="stat-icon">
-            <Image
+            <img
               style={{ width: '60%' }}
               alt="stat icon analyse"
               src="/assets/core/landing/images/stat_icons/analyse.svg"
-            ></Image>
+            ></img>
           </div>
           <span>Track, Analyse and Improve Your Game</span>
         </div>
         <div className="stats">
           <div className="stat-icon">
-            <Image
+            <img
               style={{ width: '60%' }}
               alt="stat icon compete"
               src="/assets/core/landing/images/stat_icons/compare.svg"
-            ></Image>
+            ></img>
           </div>
           <span>Compete with Your Friends</span>
         </div>
         <div className="stat icon overview">
           <div className="stat-icon">
-            <Image
+            <img
               className="w-full"
               alt="stat icon overview"
               src="/assets/core/landing/images/stat_icons/overview.svg"
-            ></Image>
+            ></img>
           </div>
           <span>Get Overview of Progress</span>
         </div>
         <div className="stat icon social media">
           <div className="stat-icon">
-            <Image
+            <img
               style={{ width: '80%' }}
               alt="stat icon share"
               src="/assets/core/landing/images/stat_icons/share.svg"
-            ></Image>
+            ></img>
           </div>
           <span>Share on Social Media</span>
         </div>
@@ -73,11 +73,11 @@ export default function Home() {
 
       <div className="hero-landing">
         <div className="hero-image" style={{ filter: 'none' }}>
-          <Image
+          <img
             alt="stats"
             style={{ height: '100%', width: '100%', objectFit: 'cover' }}
             src="/assets/core/landing/images/hero_club.jpg"
-          ></Image>
+          ></img>
         </div>
         <div className="overlay" style={{ mixBlendMode: 'multiply' }} />
         <div
