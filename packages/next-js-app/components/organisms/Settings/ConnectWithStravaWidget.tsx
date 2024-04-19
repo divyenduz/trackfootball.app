@@ -1,24 +1,24 @@
+'use client'
+
 import { Button, Card, CardContent, CardHeader } from '@mui/material'
+import { disconnectStrava } from 'app/actions/disconnectStrava'
+import { CheckStravaState } from 'app/athlete/[id]/page'
 import { match } from 'ts-pattern'
 
 import { Space } from '../../../components/atoms/Space'
 import ConnectWithStrava from '../../../components/atoms/brand/strava/ConnectWithStrava'
-import { useCheckStrava } from '../../../hooks/social/checkStrava'
-import { trpc } from '../../../packages/utils/trpcReact'
 
 interface Props {
   redirectTo: 'dashboard' | 'athlete'
+  backendApiUrl: string
+  checkStravaState: CheckStravaState
 }
 
-export const ConnectWithStravaWidget: React.FC<Props> = ({ redirectTo }) => {
-  const trpcContext = trpc.useContext()
-  const stravaDisconnect = trpc.useMutation('integration.strava.disconnect')
-  const { checkStravaState } = useCheckStrava()
-
-  const backendApiUrlQuery = trpc.useQuery(['system.backendApiUrl'], {
-    ssr: true,
-  })
-
+export const ConnectWithStravaWidget: React.FC<Props> = ({
+  redirectTo,
+  backendApiUrl,
+  checkStravaState,
+}) => {
   return (
     <Card>
       <Space direction="vertical">
@@ -30,8 +30,7 @@ export const ConnectWithStravaWidget: React.FC<Props> = ({ redirectTo }) => {
                 variant="contained"
                 color="secondary"
                 onClick={async () => {
-                  await stravaDisconnect.mutateAsync()
-                  trpcContext.invalidateQueries(['user.social.checkStrava'])
+                  await disconnectStrava()
                 }}
               >
                 Disconnect Strava
@@ -39,7 +38,7 @@ export const ConnectWithStravaWidget: React.FC<Props> = ({ redirectTo }) => {
             ))
             .otherwise(() => (
               <ConnectWithStrava
-                callbackUrl={`${backendApiUrlQuery.data?.backendApiUrl}/social/strava/callback/?redirect_to=${redirectTo}`}
+                callbackUrl={`${backendApiUrl}/social/strava/callback/?redirect_to=${redirectTo}`}
               ></ConnectWithStrava>
             ))}
         </CardContent>

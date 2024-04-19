@@ -1,5 +1,6 @@
 import type { Field, Post } from '@prisma/client'
 import { FeatureCollection, LineString } from '@turf/helpers'
+import { WebMercatorViewport } from 'react-map-gl'
 import { match } from 'ts-pattern'
 
 export function getNthCoord(geoJson: FeatureCollection<LineString>, n: number) {
@@ -22,7 +23,7 @@ type PostWithField = Post & {
   Field: Field
 }
 
-export const getBoundsForPoints = async (post: PostWithField) => {
+export const getBoundsForPoints = (post: PostWithField) => {
   //@ts-expect-error
   const coordinates = post.geoJson?.features[0].geometry.coordinates
 
@@ -80,8 +81,6 @@ export const getBoundsForPoints = async (post: PostWithField) => {
 
   try {
     // Use WebMercatorViewport to get center longitude/latitude and zoom
-    const WebMercatorViewport = (await import('react-map-gl'))
-      .WebMercatorViewport
     const viewport = new WebMercatorViewport({
       width: getWindowWidth(),
       height: 400,

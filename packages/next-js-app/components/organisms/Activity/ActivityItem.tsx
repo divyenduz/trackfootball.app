@@ -1,3 +1,5 @@
+'use client'
+
 import { TabContext, TabList, TabPanel } from '@mui/lab'
 import {
   Avatar,
@@ -12,23 +14,21 @@ import {
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { Core } from '@trackfootball/sprint-detection'
 import { metersToKilometers, mpsToKmph } from '@trackfootball/utils'
+import { refreshPost } from 'app/actions/refreshPost'
+import { AwaitedUser } from 'app/layout'
 import { formatDistance } from 'date-fns'
-import { useFlags } from 'launchdarkly-react-client-sdk'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
+import { getPost } from 'repository/post'
 import { match } from 'ts-pattern'
 
 import Button from '../../../components/atoms/Button'
 import { getBoundsForPoints } from '../../../packages/utils/map'
-import { GetPostRouterResponse } from '../../../pages/api/trpc/queries/getPost'
 import { ConditionalDisplay } from '../../atoms/ConditionalDisplay'
 import ShowToOwner from '../../user/role-based-access/ShowToOwner'
-import { FeedPost } from '../Feed/Feed'
 import { FeedItemAction } from '../Feed/FeedItemAction'
 import { MapInstance } from '../MapInstance'
-
-export type FeedItemFeedPost = FeedPost<GetPostRouterResponse>
 
 const prettyRunMetricDistance = (hasSprints: boolean, distance: number) => {
   if (!hasSprints) {
@@ -43,17 +43,14 @@ const prettyRunMetricSpeed = (hasSprints: boolean, speed: number) => {
   return mpsToKmph(speed)
 }
 
+export type AwaitedPost = NonNullable<Awaited<ReturnType<typeof getPost>>>
+
 export interface Props {
-  post: FeedItemFeedPost
-  onRefresh?: () => void
-  onDelete?: (post: FeedItemFeedPost) => void
+  post: AwaitedPost
+  user: AwaitedUser | null
 }
 
-const ActivityItem: React.FC<Props> = ({
-  post,
-  onRefresh = () => {},
-  onDelete = () => {},
-}) => {
+const ActivityItem: React.FC<Props> = ({ post, user }) => {
   const [tab, setTab] = useState('distance')
 
   const classes = {
@@ -78,7 +75,6 @@ const ActivityItem: React.FC<Props> = ({
         return
       }
 
-      //@ts-expect-error
       const bounds = await getBoundsForPoints(post)
 
       const newViewport = {
@@ -108,43 +104,29 @@ const ActivityItem: React.FC<Props> = ({
         <CardHeader
           className="p-2"
           avatar={
-            <Link
-              legacyBehavior
-              href="`/athlete/[id]`"
-              as={`/athlete/${post.userId}`}
-              passHref={true}
-            >
-              <a>
-                <Avatar className="w-10 h-10">
-                  <Image
-                    alt="User's display picture"
-                    width={40}
-                    height={40}
-                    src={
-                      post.User?.picture ||
-                      'https://trackfootball-public.s3.ap-southeast-1.amazonaws.com/prod/user.svg'
-                    }
-                  ></Image>
-                </Avatar>
-              </a>
+            <Link href={`/athlete/${post.userId}`}>
+              <Avatar className="w-10 h-10">
+                <Image
+                  alt="User's display picture"
+                  width={40}
+                  height={40}
+                  src={
+                    post.User?.picture ||
+                    'https://trackfootball-public.s3.ap-southeast-1.amazonaws.com/prod/user.svg'
+                  }
+                ></Image>
+              </Avatar>
             </Link>
           }
           title={
             <>
-              <Link
-                legacyBehavior
-                href="/athlete/[id]"
-                as={`/athlete/${post.userId}`}
-                passHref={true}
-              >
-                <a>
-                  <Typography
-                    component="strong"
-                    className="font-medium text-left text-gray-900 cursor-pointer"
-                  >
-                    {post.User?.firstName || ''} {post.User?.lastName || ''}
-                  </Typography>
-                </a>
+              <Link href={`/athlete/${post.userId}`}>
+                <Typography
+                  component="strong"
+                  className="font-medium text-left text-gray-900 cursor-pointer"
+                >
+                  {post.User?.firstName || ''} {post.User?.lastName || ''}
+                </Typography>
               </Link>
               <Typography className="text-xs font-normal text-gray-500">
                 {formatDistance(
@@ -170,29 +152,27 @@ const ActivityItem: React.FC<Props> = ({
           <CardHeader
             className="flex flex-wrap gap-4 p-1"
             title={
-              <Link
-                legacyBehavior
-                href="/activity/[id]"
-                as={`/activity/${post.id}`}
-                passHref={true}
-              >
-                <a>
-                  <Typography
-                    component="h2"
-                    className="text-base font-medium text-left cursor-pointer"
-                  >
-                    {post.text}
-                  </Typography>
-                </a>
+              <Link href={`/activity/${post.id}`}>
+                <Typography
+                  component="h2"
+                  className="text-base font-medium text-left cursor-pointer"
+                >
+                  {post.text}
+                </Typography>
               </Link>
             }
             action={
               <div className="md:w-full">
                 <ActivityItemAdminActions
-                  onRefresh={onRefresh}
+                  postId={post.id}
+                  userIsAdmin={user?.type === 'ADMIN'}
                 ></ActivityItemAdminActions>
-                <ShowToOwner ownerId={post.userId}>
-                  <FeedItemAction onDelete={onDelete} />
+                <ShowToOwner
+                  ownerId={post.userId}
+                  userId={user?.id || -1}
+                  userIsAdmin={user?.type === 'ADMIN'}
+                >
+                  <FeedItemAction postId={post.id} />
                 </ShowToOwner>
               </div>
             }
@@ -226,41 +206,27 @@ const ActivityItem: React.FC<Props> = ({
       <CardHeader
         className="p-1"
         avatar={
-          <Link
-            legacyBehavior
-            href="/athlete/[id]"
-            as={`/athlete/${post.userId}`}
-            passHref={true}
-          >
-            <a>
-              <Avatar className="w-10 h-10">
-                <Image
-                  alt="User's display picture"
-                  width={40}
-                  height={40}
-                  className="object-cover"
-                  src={
-                    post.User?.picture ||
-                    'https://trackfootball-public.s3.ap-southeast-1.amazonaws.com/prod/user.svg'
-                  }
-                ></Image>
-              </Avatar>
-            </a>
+          <Link href={`/athlete/${post.userId}`}>
+            <Avatar className="w-10 h-10">
+              <Image
+                alt="User's display picture"
+                width={40}
+                height={40}
+                className="object-cover"
+                src={
+                  post.User?.picture ||
+                  'https://trackfootball-public.s3.ap-southeast-1.amazonaws.com/prod/user.svg'
+                }
+              ></Image>
+            </Avatar>
           </Link>
         }
         title={
           <>
-            <Link
-              legacyBehavior
-              href="/athlete/[id]"
-              as={`/athlete/${post.userId}`}
-              passHref={true}
-            >
-              <a>
-                <div className="text-base font-bold text-left text-gray-900 cursor-pointer">
-                  {post.User?.firstName || ''} {post.User?.lastName || ''}
-                </div>
-              </a>
+            <Link href={`/athlete/${post.userId}`}>
+              <div className="text-base font-bold text-left text-gray-900 cursor-pointer">
+                {post.User?.firstName || ''} {post.User?.lastName || ''}
+              </div>
             </Link>
             <div className="text-xs font-normal text-gray-500">
               {formatDistance(
@@ -286,26 +252,24 @@ const ActivityItem: React.FC<Props> = ({
         <CardHeader
           className="flex flex-wrap p-1"
           title={
-            <Link
-              legacyBehavior
-              href="/activity/[id]"
-              as={`/activity/${post.id}`}
-              passHref={true}
-            >
-              <a className="text-gray-900">
-                <div className="text-2xl font-semibold text-left cursor-pointer">
-                  {post.text}
-                </div>
-              </a>
+            <Link href={`/activity/${post.id}`}>
+              <div className="text-2xl font-semibold text-left text-gray-900 cursor-pointer">
+                {post.text}
+              </div>
             </Link>
           }
           action={
             <div className="flex space-x-2 md:w-full">
               <ActivityItemAdminActions
-                onRefresh={onRefresh}
+                postId={post.id}
+                userIsAdmin={user?.type === 'ADMIN'}
               ></ActivityItemAdminActions>
-              <ShowToOwner ownerId={post.userId}>
-                <FeedItemAction onDelete={onDelete} />
+              <ShowToOwner
+                ownerId={post.userId}
+                userId={user?.id || -1}
+                userIsAdmin={user?.type === 'ADMIN'}
+              >
+                <FeedItemAction postId={post.id} />
               </ShowToOwner>
             </div>
           }
@@ -319,12 +283,22 @@ const ActivityItem: React.FC<Props> = ({
               </div>
             </div>
 
-            <ShowToOwner className={classes.paper} ownerId={post.userId}>
+            <ShowToOwner
+              className={classes.paper}
+              ownerId={post.userId}
+              userId={user?.id || -1}
+              userIsAdmin={user?.type === 'ADMIN'}
+            >
               <div className={classes.title}>❤️ Max Heart Rate</div>
               <div className={classes.value}>{post.maxHeartRate}</div>
             </ShowToOwner>
 
-            <ShowToOwner className={classes.paper} ownerId={post.userId}>
+            <ShowToOwner
+              className={classes.paper}
+              ownerId={post.userId}
+              userId={user?.id || -1}
+              userIsAdmin={user?.type === 'ADMIN'}
+            >
               <div className={classes.title}>❤️ Average Heart Rate</div>
               <div className={classes.value}>{post.averageHeartRate}</div>
             </ShowToOwner>
@@ -455,11 +429,10 @@ const ActivityItem: React.FC<Props> = ({
           <ConditionalDisplay visible={post.type === 'STRAVA_ACTIVITY'}>
             <div className="flex items-center justify-center">
               <Link
-                legacyBehavior
                 href={`https://strava.com/activities/${post.key}`}
-                passHref
+                target="_blank"
               >
-                <a target="_blank">View on Strava</a>
+                View on Strava
               </Link>
             </div>
           </ConditionalDisplay>
@@ -469,12 +442,14 @@ const ActivityItem: React.FC<Props> = ({
   )
 }
 
-const ActivityItemAdminActions: React.FC<Pick<Props, 'onRefresh'>> = ({
-  onRefresh = () => {},
+const ActivityItemAdminActions = ({
+  postId,
+  userIsAdmin,
+}: {
+  postId: number
+  userIsAdmin: boolean
 }) => {
-  const flags = useFlags()
-
-  if (!flags.showToAdmin) {
+  if (!userIsAdmin) {
     return null
   }
 
@@ -482,12 +457,12 @@ const ActivityItemAdminActions: React.FC<Pick<Props, 'onRefresh'>> = ({
     <span style={{ border: 'dashed 1px red' }}>
       <Button
         variant="outlined"
-        onClick={() => {
+        onClick={async () => {
           const r = confirm(
             'Are you sure that you want to refresh the statistics of this post?'
           )
           if (r) {
-            onRefresh()
+            await refreshPost(postId)
           }
         }}
       >

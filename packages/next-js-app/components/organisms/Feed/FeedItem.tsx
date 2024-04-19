@@ -1,3 +1,5 @@
+'use client'
+
 import {
   Avatar,
   Card,
@@ -6,6 +8,7 @@ import {
   Paper,
   Typography,
 } from '@mui/material'
+import { FeedItemType } from 'app/actions/getFeed'
 import { formatDistance } from 'date-fns'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -13,14 +16,10 @@ import React, { useEffect, useState } from 'react'
 import { match } from 'ts-pattern'
 
 import { getBoundsForPoints } from '../../../packages/utils/map'
-import { GetPostRouterResponse } from '../../../pages/api/trpc/queries/getPost'
 import { MapInstance } from '../MapInstance'
-import { FeedPost } from './Feed'
-
-export type FeedItemFeedPost = FeedPost<GetPostRouterResponse>
 
 export interface Props {
-  post: FeedItemFeedPost
+  post: FeedItemType
 }
 
 export const FeedItem: React.FC<Props> = ({ post }) => {
@@ -37,7 +36,6 @@ export const FeedItem: React.FC<Props> = ({ post }) => {
         return
       }
 
-      //@ts-expect-error
       const bounds = await getBoundsForPoints(post)
 
       const newViewport = {
@@ -61,43 +59,29 @@ export const FeedItem: React.FC<Props> = ({ post }) => {
         <CardHeader
           className="p-2"
           avatar={
-            <Link
-              legacyBehavior
-              href="/athlete/[id]"
-              as={`/athlete/${post.userId}`}
-              passHref={true}
-            >
-              <a>
-                <Avatar className="w-10 h-10">
-                  <Image
-                    alt="User's display picture"
-                    width={40}
-                    height={40}
-                    src={
-                      post.User?.picture ||
-                      'https://trackfootball-public.s3.ap-southeast-1.amazonaws.com/prod/user.svg'
-                    }
-                  ></Image>
-                </Avatar>
-              </a>
+            <Link href={`/athlete/${post.userId}`}>
+              <Avatar className="w-10 h-10">
+                <Image
+                  alt="User's display picture"
+                  width={40}
+                  height={40}
+                  src={
+                    post.User?.picture ||
+                    'https://trackfootball-public.s3.ap-southeast-1.amazonaws.com/prod/user.svg'
+                  }
+                ></Image>
+              </Avatar>
             </Link>
           }
           title={
             <>
-              <Link
-                legacyBehavior
-                href="/athlete/[id]"
-                as={`/athlete/${post.userId}`}
-                passHref={true}
-              >
-                <a>
-                  <Typography
-                    component="strong"
-                    className="font-medium text-left text-gray-900 cursor-pointer"
-                  >
-                    {post.User?.firstName || ''} {post.User?.lastName || ''}
-                  </Typography>
-                </a>
+              <Link href={`/athlete/${post.userId}`}>
+                <Typography
+                  component="strong"
+                  className="font-medium text-left text-gray-900 cursor-pointer"
+                >
+                  {post.User?.firstName || ''} {post.User?.lastName || ''}
+                </Typography>
               </Link>
               <Typography className="text-xs font-normal text-gray-500">
                 {formatDistance(
@@ -123,20 +107,13 @@ export const FeedItem: React.FC<Props> = ({ post }) => {
           <CardHeader
             className="flex flex-wrap p-1"
             title={
-              <Link
-                legacyBehavior
-                href="/activity/[id]"
-                as={`/activity/${post.id}`}
-                passHref={true}
-              >
-                <a>
-                  <Typography
-                    component="h2"
-                    className="text-base font-medium text-left cursor-pointer"
-                  >
-                    {post.text}
-                  </Typography>
-                </a>
+              <Link href={`/activity/${post.id}`}>
+                <Typography
+                  component="h2"
+                  className="text-base font-medium text-left cursor-pointer"
+                >
+                  {post.text}
+                </Typography>
               </Link>
             }
           ></CardHeader>
@@ -161,41 +138,27 @@ export const FeedItem: React.FC<Props> = ({ post }) => {
       <CardHeader
         className="p-1"
         avatar={
-          <Link
-            legacyBehavior
-            href="/athlete/[id]"
-            as={`/athlete/${post.userId}`}
-            passHref={true}
-          >
-            <a>
-              <Avatar className="w-10 h-10">
-                <Image
-                  alt="User's display picture"
-                  width={40}
-                  height={40}
-                  className="object-cover"
-                  src={
-                    post.User?.picture ||
-                    'https://trackfootball-public.s3.ap-southeast-1.amazonaws.com/prod/user.svg'
-                  }
-                ></Image>
-              </Avatar>
-            </a>
+          <Link href={`/athlete/${post.userId}`}>
+            <Avatar className="w-10 h-10">
+              <Image
+                alt="User's display picture"
+                width={40}
+                height={40}
+                className="object-cover"
+                src={
+                  post.User?.picture ||
+                  'https://trackfootball-public.s3.ap-southeast-1.amazonaws.com/prod/user.svg'
+                }
+              ></Image>
+            </Avatar>
           </Link>
         }
         title={
           <>
-            <Link
-              legacyBehavior
-              href="/athlete/[id]"
-              as={`/athlete/${post.userId}`}
-              passHref={true}
-            >
-              <a>
-                <div className="text-base font-bold text-left text-gray-900 cursor-pointer">
-                  {post.User?.firstName || ''} {post.User?.lastName || ''}
-                </div>
-              </a>
+            <Link href={`/athlete/${post.userId}`}>
+              <div className="text-base font-bold text-left text-gray-900 cursor-pointer">
+                {post.User?.firstName || ''} {post.User?.lastName || ''}
+              </div>
             </Link>
             <div className="text-xs font-normal text-gray-500">
               {formatDistance(
@@ -221,40 +184,26 @@ export const FeedItem: React.FC<Props> = ({ post }) => {
         <CardHeader
           className="flex flex-wrap p-1"
           title={
-            <Link
-              legacyBehavior
-              href="/activity/[id]"
-              as={`/activity/${post.id}`}
-              passHref={true}
-            >
-              <a className="text-gray-900">
-                <div className="text-2xl font-semibold text-left cursor-pointer">
-                  {post.text}
-                </div>
-              </a>
+            <Link href={`/activity/${post.id}`}>
+              <div className="text-2xl font-semibold text-left text-gray-900 cursor-pointer">
+                {post.text}
+              </div>
             </Link>
           }
         ></CardHeader>
         <CardContent>
-          <Link
-            legacyBehavior
-            href="/activity/[id]"
-            as={`/activity/${post.id}`}
-            passHref={true}
-          >
-            <a>
-              <MapInstance
-                isMapMovable={false}
-                viewport={viewport}
-                setViewport={setViewport}
-                topSprintOnly={false}
-                showSprints={false}
-                showRuns={false}
-                showHeatmap={true}
-                post={post}
-                page={'feed'}
-              />
-            </a>
+          <Link href={`/activity/${post.id}`}>
+            <MapInstance
+              isMapMovable={false}
+              viewport={viewport}
+              setViewport={setViewport}
+              topSprintOnly={false}
+              showSprints={false}
+              showRuns={false}
+              showHeatmap={true}
+              post={post}
+              page={'feed'}
+            />
           </Link>
         </CardContent>
       </Paper>

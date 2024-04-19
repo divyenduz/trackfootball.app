@@ -2,7 +2,8 @@ import { ArrowUpward } from '@mui/icons-material'
 import { Core } from '@trackfootball/sprint-detection'
 import { FieldSpace } from '@trackfootball/sprint-detection'
 import bearing from '@turf/bearing'
-import { bearingToAzimuth } from '@turf/helpers'
+import { FeatureCollection, LineString, bearingToAzimuth } from '@turf/helpers'
+import { FeedItemType } from 'app/actions/getFeed'
 import dynamic from 'next/dynamic'
 import React, { useState } from 'react'
 import type { ViewState } from 'react-map-gl'
@@ -11,7 +12,9 @@ import { match } from 'ts-pattern'
 import { getNthCoord } from '../../packages/utils/map'
 import { namedComponent } from '../../packages/utils/utils'
 import { ConditionalDisplay } from '../atoms/ConditionalDisplay'
-import { FeedItemFeedPost } from './Feed/FeedItem'
+import { AwaitedPost } from './Activity/ActivityItem'
+
+type MapInstancePost = FeedItemType | AwaitedPost
 
 const ReactMapGL = dynamic(() => import('react-map-gl'), {
   ssr: false,
@@ -38,13 +41,20 @@ interface MapInstanceProps {
   showSprints: boolean
   showRuns: boolean
   showHeatmap: boolean
-  post: FeedItemFeedPost
+  post: MapInstancePost
   page: 'activity' | 'feed'
 }
 
 interface ArrowIconProps {
   color: 'red' | 'yellow'
   bearingValue: number
+}
+
+function postIsFullPost(post: MapInstancePost): post is AwaitedPost {
+  if ('numberOfCoordinates' in post) {
+    return true
+  }
+  return false
 }
 
 const ArrowIcon: React.FC<ArrowIconProps> = ({ color, bearingValue }) => {
@@ -60,6 +70,21 @@ const ArrowIcon: React.FC<ArrowIconProps> = ({ color, bearingValue }) => {
       }}
     />
   )
+}
+
+function getHeatmapRadius(post: MapInstancePost) {
+  if (postIsFullPost(post)) {
+    const heatmapRadius = 25000 / post.numberOfCoordinates
+    if (heatmapRadius < 3) {
+      return 3
+    }
+    if (heatmapRadius > 10) {
+      return 10
+    }
+    return heatmapRadius
+  } else {
+    return 5
+  }
 }
 
 export const MapInstance: React.FC<MapInstanceProps> = ({
@@ -90,7 +115,9 @@ export const MapInstance: React.FC<MapInstanceProps> = ({
     .with(false, () => null)
     .exhaustive()
 
-  const core = new Core(post.geoJson!)
+  const core = new Core(
+    post.geoJson! as unknown as FeatureCollection<LineString>
+  )
 
   return (
     <>
@@ -173,19 +200,7 @@ export const MapInstance: React.FC<MapInstanceProps> = ({
               visibility: showHeatmap ? 'visible' : 'none',
             }}
             paint={{
-              'heatmap-radius': match(Boolean(post.numberOfCoordinates))
-                .with(true, () => {
-                  const heatmapRadius = 25000 / post.numberOfCoordinates
-                  if (heatmapRadius < 3) {
-                    return 3
-                  }
-                  if (heatmapRadius > 10) {
-                    return 10
-                  }
-                  return heatmapRadius
-                })
-                .with(false, () => 5)
-                .exhaustive(),
+              'heatmap-radius': getHeatmapRadius(post),
             }}
           />
         </Source>

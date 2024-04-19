@@ -1,7 +1,7 @@
 
 module.exports = {
   content: [
-    './pages/**/*.{html,js,ts,jsx,tsx}',
+    './app/**/*.{html,js,ts,jsx,tsx}',
     './components/**/*.{html,js,ts,jsx,tsx}',
     './layouts/**/*.{html,js,ts,jsx,tsx}',
   ],

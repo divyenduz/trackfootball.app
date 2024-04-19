@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 type Size = 'xs'
 
 interface Props {
@@ -11,12 +13,12 @@ export const Logo = ({ size }: Props) => {
   const sizePx = sizePxMap[size ?? 'xs']
   return (
     <>
-      <img
+      <Image
         alt="Logo of trackfootball.app"
         src="/assets/core/track-football.svg"
         height={sizePx}
         width={sizePx}
-      />
+      ></Image>
     </>
   )
 }

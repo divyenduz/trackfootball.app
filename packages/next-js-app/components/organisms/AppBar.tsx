@@ -1,3 +1,5 @@
+'use client'
+
 import {
   Divider,
   Hidden,
@@ -8,9 +10,8 @@ import {
   MenuItem,
   Toolbar,
   Typography,
-  useMediaQuery,
-  useTheme,
 } from '@mui/material'
+import { AwaitedUser } from 'app/layout'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
@@ -19,14 +20,16 @@ import { match } from 'ts-pattern'
 import Button from '../atoms/Button'
 import { ConditionalDisplay } from '../atoms/ConditionalDisplay'
 import Logo from '../atoms/brand/core/Logo'
-import { useUser } from '../context/UserContext'
 
 interface Props {
+  user: AwaitedUser | null
   pageName?: string
 }
 
-export const AppBar: React.FC<Props> = ({ pageName = 'TrackFootball' }) => {
-  const { isLoading: _, error: __, user } = useUser()
+export const AppBar: React.FC<Props> = ({
+  pageName = 'TrackFootball',
+  user,
+}) => {
   const [anchorEl, setAnchorEl] = useState(null)
   const open = Boolean(anchorEl)
 
@@ -34,40 +37,32 @@ export const AppBar: React.FC<Props> = ({ pageName = 'TrackFootball' }) => {
     <div>
       <MaterialAppBar position="fixed" color="default">
         <Toolbar className="p-3">
-          <Link
-            legacyBehavior
-            href={match(Boolean(user))
-              .with(true, () => '/dashboard')
-              .with(false, () => '/')
-              .exhaustive()}
-            passHref
-          >
-            <a>
-              <div className="flex flex-row flex-wrap items-center justify-center flex-none gap-2 cursor-pointer">
-                <Logo size={'xs'} />
-                {/* @ts-ignore */}
-                <Hidden mdDown>
-                  <Typography
-                    className="text-gray-900"
-                    variant="h6"
-                    component={'h5'}
-                  >
-                    {pageName}
-                  </Typography>
-                </Hidden>
-              </div>
-            </a>
+          <Link href="/home">
+            <div className="flex flex-row flex-wrap items-center justify-center flex-none gap-2 cursor-pointer">
+              <Logo size={'xs'} />
+              {/* @ts-ignore */}
+              <Hidden mdDown>
+                <Typography
+                  className="text-gray-900"
+                  variant="h6"
+                  component={'h5'}
+                >
+                  {pageName}
+                </Typography>
+              </Hidden>
+            </div>
           </Link>
 
-          <div className="flex justify-end flex-1 ">
+          <div className="flex justify-end flex-1">
             {match(Boolean(user))
               .with(true, () => {
                 return (
                   <>
-                    <Link legacyBehavior href={`/leaderboard`} passHref>
-                      <a>
-                        <Button>Leaderboard</Button>
-                      </a>
+                    <Link href={`/dashboard`}>
+                      <Button>Dashboard</Button>
+                    </Link>
+                    <Link href={`/leaderboard`}>
+                      <Button>Leaderboard</Button>
                     </Link>
                     <IconButton
                       aria-label="account of current user"
@@ -121,12 +116,10 @@ export const AppBar: React.FC<Props> = ({ pageName = 'TrackFootball' }) => {
                       >
                         <ListItemIcon>👤</ListItemIcon>
                         <Link
-                          legacyBehavior
                           href={`/athlete/[id]`}
                           as={`/athlete/${user?.id}`}
-                          passHref
                         >
-                          <a className="w-full text-rose-700">Profile</a>
+                          <span className="w-full">Profile</span>
                         </Link>
                       </MenuItem>
 
@@ -138,9 +131,9 @@ export const AppBar: React.FC<Props> = ({ pageName = 'TrackFootball' }) => {
                         }}
                       >
                         <ListItemIcon>😵</ListItemIcon>
-                        <Link legacyBehavior href="/api/auth/logout" passHref>
-                          <a className="w-full">Logout</a>
-                        </Link>
+                        <a className="w-full" href="/api/auth/logout">
+                          Logout
+                        </a>
                       </MenuItem>
                     </Menu>
                   </>
@@ -148,10 +141,8 @@ export const AppBar: React.FC<Props> = ({ pageName = 'TrackFootball' }) => {
               })
               .with(false, () => {
                 return (
-                  <Link legacyBehavior href="/api/auth/login" passHref>
-                    <a>
-                      <Button variant="contained">Login</Button>
-                    </a>
+                  <Link href="/api/auth/login">
+                    <Button variant="contained">Login</Button>
                   </Link>
                 )
               })
