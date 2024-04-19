@@ -86,7 +86,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>`,
           <AppBar pageName={'TrackFootball'} user={user}></AppBar>
         </div>
 
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center min-h-[600px]">
           <div
             className={`flex flex-col items-center justify-center w-full mt-24`}
           >

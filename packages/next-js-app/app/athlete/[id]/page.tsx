@@ -6,7 +6,7 @@ import {
   Typography,
 } from '@mui/material'
 import { AwaitedUser } from 'app/layout'
-import { Metadata, ResolvingMetadata } from 'next'
+import { Metadata } from 'next'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { checkStravaAccessToken } from 'repository/strava'
@@ -72,7 +72,13 @@ async function checkStravaToken(user: AwaitedUser) {
     .exhaustive()
 }
 
-export default async function Profile() {
+interface Props {
+  params: {
+    id: string
+  }
+}
+
+export default async function Profile({ params }: Props) {
   let user = null
   try {
     user = await auth()
@@ -117,7 +123,11 @@ export default async function Profile() {
         <CardContent>
           <div style={{ marginBottom: 30 }}></div>
 
-          <ShowToOwner ownerId={user.id} userId={user.id}>
+          <ShowToOwner
+            ownerId={user.id}
+            userId={user.id}
+            userIsAdmin={user.type === 'ADMIN'}
+          >
             <Card>
               <Space direction="vertical">
                 <CardHeader title="Integrations"></CardHeader>

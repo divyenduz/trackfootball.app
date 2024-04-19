@@ -1,15 +1,13 @@
 'use client'
 
-import { useFlags } from 'launchdarkly-react-client-sdk'
 import React from 'react'
 import { match } from 'ts-pattern'
-
-import { useUser } from '../../context/UserContext'
 
 interface ShowToOwnerProps {
   children: React.ReactNode
   ownerId: number
   userId: number
+  userIsAdmin: boolean
   className?: string
 }
 
@@ -17,25 +15,18 @@ export const ShowToOwner: React.FC<ShowToOwnerProps> = ({
   children,
   ownerId,
   userId,
+  userIsAdmin,
   className = '',
 }) => {
-  const { isLoading, user, error } = useUser()
-  const flags = useFlags()
-
-  if (isLoading) {
-    return <></>
-  }
-
-  if (Boolean(error)) {
-    return <></>
-  }
+  const isOwner = ownerId === userId
+  console.log({ ownerId, userId })
 
   if (ownerId === userId) {
     return (
       <span
         className={className}
         style={{
-          border: match(flags.showToAdmin)
+          border: match(userIsAdmin)
             .with(true, () => `dashed 1px blue`)
             .otherwise(() => ``),
         }}
@@ -43,7 +34,7 @@ export const ShowToOwner: React.FC<ShowToOwnerProps> = ({
         {children}
       </span>
     )
-  } else if (flags.showToAdmin) {
+  } else if (userIsAdmin) {
     return (
       <span className={className} style={{ border: 'dashed 1px red' }}>
         {children}

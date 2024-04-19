@@ -3,32 +3,12 @@
 import { Post, PostStatus, User, sql } from '@trackfootball/database'
 import { Core } from '@trackfootball/sprint-detection'
 import { durationToSeconds } from '@trackfootball/utils'
-import { revalidatePath } from 'next/cache'
 import { MESSAGE_UNAUTHORIZED } from 'packages/auth/utils'
 import { postAddField } from 'packages/services/post/addField'
 import { fetchStravaActivityGeoJson } from 'repository/strava'
 import { auth } from 'utils/auth'
-import { z } from 'zod'
 
-import { FormValidationFailedError } from './actions'
-
-const schema = z.object({
-  postId: z.number().nonnegative(),
-})
-
-export async function refreshPost(formData: FormData) {
-  const validatedFields = schema.safeParse({
-    postId: formData.get('postId'),
-  })
-
-  if (!validatedFields.success) {
-    throw new FormValidationFailedError(
-      JSON.stringify(validatedFields.error.flatten().fieldErrors)
-    )
-  }
-
-  const { postId } = validatedFields.data
-
+export async function refreshPost(postId: number) {
   const user = await auth()
 
   const post = (

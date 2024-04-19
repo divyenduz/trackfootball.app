@@ -17,13 +17,11 @@ import { metersToKilometers, mpsToKmph } from '@trackfootball/utils'
 import { refreshPost } from 'app/actions/refreshPost'
 import { AwaitedUser } from 'app/layout'
 import { formatDistance } from 'date-fns'
-import { useFlags } from 'launchdarkly-react-client-sdk'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { getPost } from 'repository/post'
 import { match } from 'ts-pattern'
-import { auth } from 'utils/auth'
 
 import Button from '../../../components/atoms/Button'
 import { getBoundsForPoints } from '../../../packages/utils/map'
@@ -167,8 +165,13 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
               <div className="md:w-full">
                 <ActivityItemAdminActions
                   postId={post.id}
+                  userIsAdmin={user?.type === 'ADMIN'}
                 ></ActivityItemAdminActions>
-                <ShowToOwner ownerId={post.userId} userId={user?.id || -1}>
+                <ShowToOwner
+                  ownerId={post.userId}
+                  userId={user?.id || -1}
+                  userIsAdmin={user?.type === 'ADMIN'}
+                >
                   <FeedItemAction postId={post.id} />
                 </ShowToOwner>
               </div>
@@ -259,8 +262,13 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
             <div className="flex space-x-2 md:w-full">
               <ActivityItemAdminActions
                 postId={post.id}
+                userIsAdmin={user?.type === 'ADMIN'}
               ></ActivityItemAdminActions>
-              <ShowToOwner ownerId={post.userId} userId={user?.id || -1}>
+              <ShowToOwner
+                ownerId={post.userId}
+                userId={user?.id || -1}
+                userIsAdmin={user?.type === 'ADMIN'}
+              >
                 <FeedItemAction postId={post.id} />
               </ShowToOwner>
             </div>
@@ -279,6 +287,7 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
               className={classes.paper}
               ownerId={post.userId}
               userId={user?.id || -1}
+              userIsAdmin={user?.type === 'ADMIN'}
             >
               <div className={classes.title}>❤️ Max Heart Rate</div>
               <div className={classes.value}>{post.maxHeartRate}</div>
@@ -288,6 +297,7 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
               className={classes.paper}
               ownerId={post.userId}
               userId={user?.id || -1}
+              userIsAdmin={user?.type === 'ADMIN'}
             >
               <div className={classes.title}>❤️ Average Heart Rate</div>
               <div className={classes.value}>{post.averageHeartRate}</div>
@@ -432,10 +442,14 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
   )
 }
 
-const ActivityItemAdminActions = ({ postId }: { postId: number }) => {
-  const flags = useFlags()
-
-  if (!flags.showToAdmin) {
+const ActivityItemAdminActions = ({
+  postId,
+  userIsAdmin,
+}: {
+  postId: number
+  userIsAdmin: boolean
+}) => {
+  if (!userIsAdmin) {
     return null
   }
 
@@ -448,9 +462,7 @@ const ActivityItemAdminActions = ({ postId }: { postId: number }) => {
             'Are you sure that you want to refresh the statistics of this post?'
           )
           if (r) {
-            const formData = new FormData()
-            formData.append('postId', postId.toString())
-            await refreshPost(formData)
+            await refreshPost(postId)
           }
         }}
       >

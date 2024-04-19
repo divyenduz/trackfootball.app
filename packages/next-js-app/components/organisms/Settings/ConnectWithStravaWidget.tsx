@@ -1,12 +1,12 @@
 'use client'
 
 import { Button, Card, CardContent, CardHeader } from '@mui/material'
+import { disconnectStrava } from 'app/actions/disconnectStrava'
+import { CheckStravaState } from 'app/athlete/[id]/page'
 import { match } from 'ts-pattern'
 
 import { Space } from '../../../components/atoms/Space'
 import ConnectWithStrava from '../../../components/atoms/brand/strava/ConnectWithStrava'
-import { CheckStravaState } from 'app/athlete/[id]/page'
-import { disconnectStrava } from 'app/actions/disconnectStrava'
 
 interface Props {
   redirectTo: 'dashboard' | 'athlete'
@@ -14,9 +14,11 @@ interface Props {
   checkStravaState: CheckStravaState
 }
 
-
-
-export const ConnectWithStravaWidget: React.FC<Props> = ({ redirectTo, backendApiUrl, checkStravaState }) => {
+export const ConnectWithStravaWidget: React.FC<Props> = ({
+  redirectTo,
+  backendApiUrl,
+  checkStravaState,
+}) => {
   return (
     <Card>
       <Space direction="vertical">
@@ -28,7 +30,7 @@ export const ConnectWithStravaWidget: React.FC<Props> = ({ redirectTo, backendAp
                 variant="contained"
                 color="secondary"
                 onClick={async () => {
-                  await disconnectStrava(new FormData())
+                  await disconnectStrava()
                 }}
               >
                 Disconnect Strava

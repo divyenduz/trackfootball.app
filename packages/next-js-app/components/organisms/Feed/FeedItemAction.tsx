@@ -1,11 +1,11 @@
-"use client"
+'use client'
 
+import { deletePost } from 'app/actions/deletePost'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 
 import { Space } from '../../../components/atoms/Space'
 import { Button } from '../../atoms/Button'
-import { deletePost } from 'app/actions/deletePost'
-import { useRouter } from 'next/navigation'
 
 interface FeedItemActionProps {
   postId: number
@@ -25,15 +25,12 @@ export const FeedItemAction = ({ postId }: FeedItemActionProps) => {
             return
           }
           try {
-            const formData = new FormData()
-            formData.append('postId', postId.toString())
-            const r = await deletePost(formData)
+            const r = await deletePost(postId)
             router.replace('/dashboard')
           } catch (e) {
             console.error(e)
             alert(
-              `Something went wrong, please contact singh@trackfootball.app` +
-              e
+              `Something went wrong, please contact singh@trackfootball.app` + e
             )
           }
         }}
