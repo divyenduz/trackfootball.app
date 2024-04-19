@@ -50,7 +50,6 @@ export const ShowToOwner: React.FC<ShowToOwnerProps> = ({
       </span>
     )
   } else {
-    console.log('Not owner or admin!')
     return <></>
   }
 }

@@ -1,13 +1,15 @@
 'use client'
 
-import { Field } from '.prisma/client'
 import { UserType, sql } from '@trackfootball/database'
 import { MESSAGE_UNAUTHORIZED } from 'packages/auth/utils'
 import { auth } from 'utils/auth'
+
 import EditField from './EditField'
+import { Field } from '.prisma/client'
 
-
-// pageTitle={`Admin | Edit Field | TrackFootball`}
+export const metadata = {
+  title: `Admin | Edit Field | TrackFootball`,
+}
 
 export async function getFields() {
   const fields = await sql<Field[]>`
@@ -19,7 +21,6 @@ export async function getFields() {
 }
 
 export default async function Activity() {
-
   let user = null
   try {
     user = await auth()

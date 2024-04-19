@@ -1,8 +1,14 @@
-import { Post } from '.prisma/client'
-import { auth } from 'utils/auth'
-import { MESSAGE_UNAUTHORIZED } from 'packages/auth/utils'
 import { UserType, sql } from '@trackfootball/database'
+import { Metadata, ResolvingMetadata } from 'next'
+import { MESSAGE_UNAUTHORIZED } from 'packages/auth/utils'
+import { auth } from 'utils/auth'
+
 import AddField from './AddField'
+import { Post } from '.prisma/client'
+
+export const metadata: Metadata = {
+  title: `Admin | Add Field | TrackFootball`,
+}
 
 export async function getPostsWithoutFields() {
   const postsWithoutField = await sql<Post[]>`
@@ -27,7 +33,9 @@ export default async function Activity() {
 
   const posts = await getPostsWithoutFields()
 
-  return <>
-    <AddField posts={posts}></AddField>
-  </>
+  return (
+    <>
+      <AddField posts={posts}></AddField>
+    </>
+  )
 }

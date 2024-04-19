@@ -135,8 +135,6 @@ export default function AddField({ posts }: Props) {
     fieldEnvelope,
   }
 
-  // pageTitle={`Admin | Add Field | TrackFootball`}
-
   if (!post) {
     return <div>Loading...</div>
   }
@@ -152,8 +150,6 @@ export default function AddField({ posts }: Props) {
   } catch (e) {
     console.error(e)
   }
-
-  // pageTitle={`Admin | Add Field | TrackFootball`}
 
   return (
     <>

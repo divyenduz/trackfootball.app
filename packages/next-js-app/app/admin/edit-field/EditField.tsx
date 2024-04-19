@@ -7,13 +7,13 @@ import center from '@turf/center'
 import { getCoord } from '@turf/invariant'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
+import { getBoundsForPoints } from 'packages/utils/map'
+import { namedComponent } from 'packages/utils/utils'
 import React, { useEffect, useState } from 'react'
 import { match } from 'ts-pattern'
 
-import { Field } from '.prisma/client'
 import { getFields } from './page'
-import { namedComponent } from 'packages/utils/utils'
-import { getBoundsForPoints } from 'packages/utils/map'
+import { Field } from '.prisma/client'
 
 const DataGrid = dynamic(() =>
   namedComponent(import('@mui/x-data-grid'), 'DataGrid')
@@ -31,14 +31,11 @@ const NavigationControl = dynamic(() =>
 )
 const Source = dynamic(() => namedComponent(import('react-map-gl'), 'Source'))
 
-// pageTitle={`Admin | Edit Field | TrackFootball`}
-
 interface Props {
   fields: Awaited<ReturnType<typeof getFields>>
 }
 
 export default async function EditField({ fields }: Props) {
-
   const [immutableField, setImmutableField] = useState<Field | null>(null)
   const [field, setField] = useState<Field | null>(null)
 
@@ -124,7 +121,7 @@ export default async function EditField({ fields }: Props) {
           pageSize={5}
           checkboxSelection={false}
           disableSelectionOnClick
-          onRowClick={(params) => { }}
+          onRowClick={(params) => {}}
           columns={[
             {
               field: 'id',
@@ -337,7 +334,7 @@ export default async function EditField({ fields }: Props) {
                     key={index}
                     latitude={lat}
                     longitude={lng}
-                    onDragStart={() => { }}
+                    onDragStart={() => {}}
                     onDrag={({ lngLat }) => {
                       const [lng, lat] = lngLat
                       //@ts-expect-error

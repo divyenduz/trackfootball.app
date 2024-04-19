@@ -187,7 +187,6 @@ export async function GET(req: Request) {
   const hubVerifyToken = searchParams.get('hub.verify_token')
   const hubMode = searchParams.get('hub.mode')
 
-  // process.env.STRAVA_WEBHOOK_VERIFY_TOKEN
   if (
     hubMode === 'subscribe' &&
     hubVerifyToken === '_STRAVA_HOOKS_OF_WEB_SECRET_'
@@ -221,8 +220,6 @@ export async function POST(req: Request) {
       console.error(`Error while processing event`, e)
     })
   }
-
-  // TODO: Process pending events here async or in admin!
 
   Response.json({ ok: true })
 }

@@ -5,9 +5,6 @@ import auth0 from './auth0'
 
 export async function getCurrentUser() {
   const session = await auth0.getSession()
-
-  console.log('getCurrentUser:', { session })
-
   if (!session) {
     return null
   }

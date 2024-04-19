@@ -10,7 +10,7 @@ const auth0 = initAuth0({
   issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL,
   baseURL: process.env.AUTH0_BASE_URL,
   session: {
-    absoluteDuration: 86400 * 30, // 30 days
+    absoluteDuration: 86400 * 365, // 365 days
     rolling: false,
     cookie: {
       domain: process.env.COOKIE_DOMAIN,

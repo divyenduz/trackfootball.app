@@ -6,7 +6,6 @@ import auth0 from 'utils/auth0'
 // https://github.com/auth0/nextjs-auth0/blob/main/EXAMPLES.md
 export const GET = auth0.handleAuth({
   onError(req: Request, error: Error) {
-    console.log('ENTERING ON ERROR')
     console.error(error)
   },
   async login(req: NextApiRequest, res: NextApiResponse) {
@@ -20,18 +19,18 @@ export const GET = auth0.handleAuth({
     const existingUser = (
       await sql<User[]>`
   SELECT * FROM "User"
-  WHERE "auth0Sub" = ${session.user.sub}
+  WHERE "auth0Sub" = ${session?.user.sub}
   `
     )[0]
 
     const data = {
-      firstName: session.user.given_name ?? session.user.nickname,
-      lastName: session.user.family_name ?? '',
-      email: session.user.email!,
-      locale: session.user.locale ?? 'en',
-      picture: session.user.picture!,
-      auth0Sub: session.user.sub!,
-      emailVerified: session.user.email_verified!,
+      firstName: session?.user.given_name ?? session?.user.nickname,
+      lastName: session?.user.family_name ?? '',
+      email: session?.user.email!,
+      locale: session?.user.locale ?? 'en',
+      picture: session?.user.picture!,
+      auth0Sub: session?.user.sub!,
+      emailVerified: session?.user.email_verified!,
       // TODO: use database's now()
       updatedAt: new Date(),
     }

@@ -6,6 +6,7 @@ import {
   Typography,
 } from '@mui/material'
 import { AwaitedUser } from 'app/layout'
+import { Metadata, ResolvingMetadata } from 'next'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { checkStravaAccessToken } from 'repository/strava'
@@ -22,8 +23,12 @@ export type CheckStravaState =
   | 'WORKING'
   | 'NOT_WORKING'
 
-export const metadata = {
-  title: 'Profile | TrackFootball',
+export async function generateMetadata(): Promise<Metadata> {
+  const user = await auth()
+
+  return {
+    title: `${user.firstName} ${user.lastName} | Profile | TrackFootball`,
+  }
 }
 
 export function getBackendApiUrl() {
@@ -80,8 +85,6 @@ export default async function Profile() {
 
   const backendApiUrl = getBackendApiUrl()
   const checkStravaState = await checkStrava(user)
-
-  // TODO: pageTitle={`${user.firstName} ${user.lastName} | Profile | TrackFootball`}
 
   return (
     <>
