@@ -1,29 +1,16 @@
-import { Field, Post } from '@prisma/client'
-import type { FeatureCollection, LineString } from 'geojson'
+import { getFeed } from 'app/dashboard/page'
 import React from 'react'
+import { getPost } from 'repository/post'
 
-import { FeedItem, FeedItemFeedPost } from './FeedItem'
+import { FeedItem } from './FeedItem'
 
-// Post might be with extra includes like Field, take the actual type as input and re-write the JSON fields
-export type FeedPost<IPost extends Post = Post> = Omit<
-  IPost,
-  'geoJson' | 'sprints' | 'runs'
-> & {
-  maxHeartRate: number
-  averageHeartRate: number
-  geoJson?: FeatureCollection<LineString>
-  sprints?: Array<FeatureCollection<LineString>>
-  runs?: Array<FeatureCollection<LineString>>
-  User: {
-    firstName?: string
-    lastName?: string
-    picture?: string
-  }
-  Field?: Field
-}
+export type FeedPost = Awaited<ReturnType<typeof getFeed>>['posts'][0]
+export type FullPost = NonNullable<Awaited<ReturnType<typeof getPost>>>
 
-export interface Props {
-  feed: FeedItemFeedPost[]
+export type AwaitedPost = FeedPost | FullPost
+
+interface Props {
+  feed: Array<AwaitedPost>
 }
 
 export const Feed: React.FC<Props> = ({ feed }) => {

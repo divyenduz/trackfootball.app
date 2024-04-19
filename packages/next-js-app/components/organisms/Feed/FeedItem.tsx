@@ -1,3 +1,5 @@
+'use client'
+
 import {
   Avatar,
   Card,
@@ -13,14 +15,11 @@ import React, { useEffect, useState } from 'react'
 import { match } from 'ts-pattern'
 
 import { getBoundsForPoints } from '../../../packages/utils/map'
-import { GetPostRouterResponse } from '../../../pages/api/trpc/queries/getPost'
 import { MapInstance } from '../MapInstance'
-import { FeedPost } from './Feed'
-
-export type FeedItemFeedPost = FeedPost<GetPostRouterResponse>
+import { AwaitedPost } from './Feed'
 
 export interface Props {
-  post: FeedItemFeedPost
+  post: AwaitedPost
 }
 
 export const FeedItem: React.FC<Props> = ({ post }) => {
@@ -37,7 +36,6 @@ export const FeedItem: React.FC<Props> = ({ post }) => {
         return
       }
 
-      //@ts-expect-error
       const bounds = await getBoundsForPoints(post)
 
       const newViewport = {

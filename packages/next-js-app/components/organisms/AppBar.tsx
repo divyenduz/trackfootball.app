@@ -1,3 +1,5 @@
+'use client'
+
 import {
   Divider,
   Hidden,
@@ -8,9 +10,8 @@ import {
   MenuItem,
   Toolbar,
   Typography,
-  useMediaQuery,
-  useTheme,
 } from '@mui/material'
+import { AwaitedUser } from 'app/layout'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
@@ -19,14 +20,16 @@ import { match } from 'ts-pattern'
 import Button from '../atoms/Button'
 import { ConditionalDisplay } from '../atoms/ConditionalDisplay'
 import Logo from '../atoms/brand/core/Logo'
-import { useUser } from '../context/UserContext'
 
 interface Props {
+  user: AwaitedUser | null
   pageName?: string
 }
 
-export const AppBar: React.FC<Props> = ({ pageName = 'TrackFootball' }) => {
-  const { isLoading: _, error: __, user } = useUser()
+export const AppBar: React.FC<Props> = ({
+  pageName = 'TrackFootball',
+  user,
+}) => {
   const [anchorEl, setAnchorEl] = useState(null)
   const open = Boolean(anchorEl)
 
@@ -138,9 +141,14 @@ export const AppBar: React.FC<Props> = ({ pageName = 'TrackFootball' }) => {
                         }}
                       >
                         <ListItemIcon>😵</ListItemIcon>
-                        <Link legacyBehavior href="/api/auth/logout" passHref>
+                        {/* <Link legacyBehavior href="/api/auth/logout" passHref>
                           <a className="w-full">Logout</a>
-                        </Link>
+                        </Link> */}
+                        {/* <Link legacyBehavior href="/api/auth/logout" passHref>
+                        </Link> */}
+                        <a className="w-full" href="/api/auth/logout">
+                          Logout
+                        </a>
                       </MenuItem>
                     </Menu>
                   </>

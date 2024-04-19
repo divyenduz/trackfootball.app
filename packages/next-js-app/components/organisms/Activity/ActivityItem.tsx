@@ -1,3 +1,5 @@
+'use client'
+
 import { TabContext, TabList, TabPanel } from '@mui/lab'
 import {
   Avatar,
@@ -12,23 +14,23 @@ import {
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { Core } from '@trackfootball/sprint-detection'
 import { metersToKilometers, mpsToKmph } from '@trackfootball/utils'
+import { refreshPost } from 'app/actions/refreshPost'
+import { AwaitedUser } from 'app/layout'
 import { formatDistance } from 'date-fns'
 import { useFlags } from 'launchdarkly-react-client-sdk'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
+import { getPost } from 'repository/post'
 import { match } from 'ts-pattern'
+import { auth } from 'utils/auth'
 
 import Button from '../../../components/atoms/Button'
 import { getBoundsForPoints } from '../../../packages/utils/map'
-import { GetPostRouterResponse } from '../../../pages/api/trpc/queries/getPost'
 import { ConditionalDisplay } from '../../atoms/ConditionalDisplay'
 import ShowToOwner from '../../user/role-based-access/ShowToOwner'
-import { FeedPost } from '../Feed/Feed'
 import { FeedItemAction } from '../Feed/FeedItemAction'
 import { MapInstance } from '../MapInstance'
-
-export type FeedItemFeedPost = FeedPost<GetPostRouterResponse>
 
 const prettyRunMetricDistance = (hasSprints: boolean, distance: number) => {
   if (!hasSprints) {
@@ -43,17 +45,14 @@ const prettyRunMetricSpeed = (hasSprints: boolean, speed: number) => {
   return mpsToKmph(speed)
 }
 
+type AwaitedPost = NonNullable<Awaited<ReturnType<typeof getPost>>>
+
 export interface Props {
-  post: FeedItemFeedPost
-  onRefresh?: () => void
-  onDelete?: (post: FeedItemFeedPost) => void
+  post: AwaitedPost
+  user: AwaitedUser | null
 }
 
-const ActivityItem: React.FC<Props> = ({
-  post,
-  onRefresh = () => {},
-  onDelete = () => {},
-}) => {
+const ActivityItem: React.FC<Props> = ({ post, user }) => {
   const [tab, setTab] = useState('distance')
 
   const classes = {
@@ -78,7 +77,6 @@ const ActivityItem: React.FC<Props> = ({
         return
       }
 
-      //@ts-expect-error
       const bounds = await getBoundsForPoints(post)
 
       const newViewport = {
@@ -189,10 +187,10 @@ const ActivityItem: React.FC<Props> = ({
             action={
               <div className="md:w-full">
                 <ActivityItemAdminActions
-                  onRefresh={onRefresh}
+                  postId={post.id}
                 ></ActivityItemAdminActions>
-                <ShowToOwner ownerId={post.userId}>
-                  <FeedItemAction onDelete={onDelete} />
+                <ShowToOwner ownerId={post.userId} userId={user?.id || -1}>
+                  <FeedItemAction postId={post.id} />
                 </ShowToOwner>
               </div>
             }
@@ -302,10 +300,10 @@ const ActivityItem: React.FC<Props> = ({
           action={
             <div className="flex space-x-2 md:w-full">
               <ActivityItemAdminActions
-                onRefresh={onRefresh}
+                postId={post.id}
               ></ActivityItemAdminActions>
-              <ShowToOwner ownerId={post.userId}>
-                <FeedItemAction onDelete={onDelete} />
+              <ShowToOwner ownerId={post.userId} userId={user?.id || -1}>
+                <FeedItemAction postId={post.id} />
               </ShowToOwner>
             </div>
           }
@@ -319,12 +317,20 @@ const ActivityItem: React.FC<Props> = ({
               </div>
             </div>
 
-            <ShowToOwner className={classes.paper} ownerId={post.userId}>
+            <ShowToOwner
+              className={classes.paper}
+              ownerId={post.userId}
+              userId={user?.id || -1}
+            >
               <div className={classes.title}>❤️ Max Heart Rate</div>
               <div className={classes.value}>{post.maxHeartRate}</div>
             </ShowToOwner>
 
-            <ShowToOwner className={classes.paper} ownerId={post.userId}>
+            <ShowToOwner
+              className={classes.paper}
+              ownerId={post.userId}
+              userId={user?.id || -1}
+            >
               <div className={classes.title}>❤️ Average Heart Rate</div>
               <div className={classes.value}>{post.averageHeartRate}</div>
             </ShowToOwner>
@@ -469,9 +475,7 @@ const ActivityItem: React.FC<Props> = ({
   )
 }
 
-const ActivityItemAdminActions: React.FC<Pick<Props, 'onRefresh'>> = ({
-  onRefresh = () => {},
-}) => {
+const ActivityItemAdminActions = ({ postId }: { postId: number }) => {
   const flags = useFlags()
 
   if (!flags.showToAdmin) {
@@ -482,12 +486,14 @@ const ActivityItemAdminActions: React.FC<Pick<Props, 'onRefresh'>> = ({
     <span style={{ border: 'dashed 1px red' }}>
       <Button
         variant="outlined"
-        onClick={() => {
+        onClick={async () => {
           const r = confirm(
             'Are you sure that you want to refresh the statistics of this post?'
           )
           if (r) {
-            onRefresh()
+            const formData = new FormData()
+            formData.append('postId', postId.toString())
+            await refreshPost(formData)
           }
         }}
       >

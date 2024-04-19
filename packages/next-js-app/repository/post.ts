@@ -1,5 +1,6 @@
 import { Field, Post, PostType, User } from '@prisma/client'
 import { sql } from '@trackfootball/database'
+import { FeatureCollection, LineString } from '@turf/helpers'
 
 import { stringify } from '../packages/utils/utils'
 
@@ -61,9 +62,15 @@ async function getPostMeta(id: number) {
   }
 }
 
+type TypedPost = Post & {
+  geoJson: FeatureCollection<LineString>
+  sprints: Array<FeatureCollection<LineString>>
+  runs: Array<FeatureCollection<LineString>>
+}
+
 export async function getPost(id: number) {
   const post = (
-    await sql<Post[]>`
+    await sql<TypedPost[]>`
     SELECT * from "Post"
     WHERE "id" = ${id}
     `
