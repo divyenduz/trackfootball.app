@@ -46,6 +46,7 @@ type StravaEvent = StravaEventActivity | StravaEventAthlete
 
 async function processEvent(event: StravaWebhookEvent) {
   const body: StravaEvent = JSON.parse(event.body)
+
   await match(body)
     .with(
       { object_type: 'activity', aspect_type: 'create' },
@@ -199,7 +200,7 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
-  const body = req.json()
+  const body = await req.json()
 
   const data = {
     status: StravaWebhookEventStatus.PENDING,
@@ -221,5 +222,5 @@ export async function POST(req: Request) {
     })
   }
 
-  Response.json({ ok: true })
+  return Response.json({ ok: true })
 }
