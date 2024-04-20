@@ -5,6 +5,8 @@ import mls from 'multilines'
 
 import pjson from '../../../../package.json'
 
+export const dynamic = 'force-dynamic'
+
 dotenv.config()
 
 export async function GET() {
