@@ -64,5 +64,5 @@ registry:
 healthcheck:
   path: /api/healthcheck
   port: "<%= ENV['APP_PORT'] %>"
-  max_attempts: 10
-  interval: 20s
+  max_attempts: 20
+  interval: 30s
