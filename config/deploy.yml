@@ -43,7 +43,7 @@ ssh:
   port: <%= ENV['SSH_PORT'] %>
 
 traefik:
-  host_port: <%= ENV['TRAEFIK_PORT'] %>
+  host_port: "<%= ENV['TRAEFIK_PORT'] %>"
   args:
     api.dashboard: true
   labels:
