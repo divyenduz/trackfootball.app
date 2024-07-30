@@ -19,9 +19,9 @@ export async function createPost(input: CreatePostInput) {
 
   const postQuery = sql<Post[]>`
       INSERT INTO "Post" ${
-        //@ts-expect-error
-        sql(data)
-      }
+    //@ts-expect-error
+    sql(data)
+    }
       RETURNING *
       `
 
@@ -40,16 +40,20 @@ async function getPostMeta(id: number) {
         number_of_runs: number
       }>
     >`
-  SELECT
-    jsonb_array_length("geoJson" -> 'features' -> 0 -> 'geometry' -> 'coordinates') as number_of_coordinates,
-    jsonb_array_max("geoJson" -> 'features' -> 0 -> 'properties' -> 'heartRates') as max_heart_rate,
-    jsonb_array_avg("geoJson" -> 'features' -> 0 -> 'properties' -> 'heartRates') as average_heart_rate,
-    jsonb_array_length("Post"."sprints") as number_of_sprints,
-    jsonb_array_length("Post"."runs") as number_of_runs
-  FROM
-      "Post"
-  WHERE
-      id = ${id};
+  WITH heart_rates AS (
+    SELECT jsonb_array_elements_text("geoJson" -> 'features' -> 0 -> 'properties' -> 'heartRates')::int as heart_rate FROM "Post" WHERE id=${id}
+  ),
+  heart_rate_agg AS (
+    SELECT max(heart_rate) AS max_heart_rate, floor(avg(heart_rate)) AS average_heart_rate FROM heart_rates
+  ),
+  post_data AS (
+    SELECT
+      jsonb_array_length("geoJson" -> 'features' -> 0 -> 'geometry' -> 'coordinates') as number_of_coordinates,
+      jsonb_array_length("Post"."sprints") as number_of_sprints,
+      jsonb_array_length("Post"."runs") as number_of_runs
+    FROM "Post" WHERE id=${id}
+  )
+  SELECT max_heart_rate, average_heart_rate, number_of_coordinates, number_of_sprints, number_of_runs from heart_rate_agg, post_data;
     `
   )[0]
 
@@ -60,6 +64,7 @@ async function getPostMeta(id: number) {
     numberOfSprints: postMeta?.number_of_sprints || 0,
     numberOfRuns: postMeta?.number_of_runs || 0,
   }
+
 }
 
 type TypedPost = Post & {
