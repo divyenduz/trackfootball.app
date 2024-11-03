@@ -94,7 +94,7 @@ async function processEvent(event: StravaWebhookEvent) {
           heading: 'New Activity Created (Webhook)',
           name: `${post.text}`,
           description: `
-      ID: ${post.id}
+      ID: ${post.id} / Strava ID: ${activityCreateEvent.object_id}
       Activity Time: ${updatedPost?.startTime}
       User: ${user.firstName} ${user.lastName}
       Link: ${process.env.HOMEPAGE_URL}/activity/${post.id}`,
@@ -157,7 +157,7 @@ async function processEvent(event: StravaWebhookEvent) {
             heading: 'New Activity Created (via Update Webhook)',
             name: `${post.text}`,
             description: `
-        ID: ${post.id}
+        ID: ${post.id} / Strava ID: ${activityUpdateEvent.object_id}
         Activity Time: ${updatedPost?.startTime}
         User: ${user.firstName} ${user.lastName}
         Link: ${process.env.HOMEPAGE_URL}/activity/${post.id}`,
@@ -189,7 +189,7 @@ async function processEvent(event: StravaWebhookEvent) {
           heading: 'Activity Deleted (Webhook)',
           name: `${post.text}`,
           description: `
-      ID: ${post.id}
+      ID: ${post.id} / Strava ID: ${activityDeleteEvent.object_id}
       Activity Time: ${post?.startTime}
       User: ${user.firstName} ${user.lastName}
       Link: ${process.env.HOMEPAGE_URL}/activity/${post.id}`,
