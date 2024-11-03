@@ -11,6 +11,7 @@ import {
   createPost,
   deletePostBy,
   getPost,
+  getPostIdBy,
   updatePostTitle,
 } from 'repository/post'
 import { fetchStravaActivity } from 'repository/strava'
@@ -123,13 +124,44 @@ async function processEvent(event: StravaWebhookEvent) {
           return
         }
 
-        try {
-          await updatePostTitle(
-            activityUpdateEvent.object_id,
-            activityUpdateEvent.updates.title
-          )
-        } catch (e) {
-          console.error(`activityUpdateEvent: `, e)
+        const postId = await getPostIdBy(activityUpdateEvent.object_id)
+        if (postId) {
+          try {
+            await updatePostTitle(
+              activityUpdateEvent.object_id,
+              activityUpdateEvent.updates.title
+            )
+          } catch (e) {
+            console.error(`activityUpdateEvent: `, e)
+          }
+        } else {
+          const data = {
+            type: 'STRAVA_ACTIVITY' as PostType,
+            key: stringify(activityUpdateEvent.object_id),
+            text: activity.name,
+            userId: user.id,
+          }
+
+          const post = await createPost(data)
+
+          if (!post) {
+            throw new Error(`Failed to create post for data ${data}`)
+          }
+
+          await fetchCompletePost({
+            postId: post.id,
+          })
+          const updatedPost = await getPost(post.id)
+
+          await createDiscordMessage({
+            heading: 'New Activity Created (via Update Webhook)',
+            name: `${post.text}`,
+            description: `
+        ID: ${post.id}
+        Activity Time: ${updatedPost?.startTime}
+        User: ${user.firstName} ${user.lastName}
+        Link: ${process.env.HOMEPAGE_URL}/activity/${post.id}`,
+          })
         }
       }
     )

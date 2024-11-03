@@ -19,9 +19,9 @@ export async function createPost(input: CreatePostInput) {
 
   const postQuery = sql<Post[]>`
       INSERT INTO "Post" ${
-    //@ts-expect-error
-    sql(data)
-    }
+        //@ts-expect-error
+        sql(data)
+      }
       RETURNING *
       `
 
@@ -64,7 +64,6 @@ async function getPostMeta(id: number) {
     numberOfSprints: postMeta?.number_of_sprints || 0,
     numberOfRuns: postMeta?.number_of_runs || 0,
   }
-
 }
 
 type TypedPost = Post & {
@@ -114,6 +113,21 @@ export async function getPost(id: number) {
     ...postWithData!,
     ...postMeta,
   }
+}
+
+export async function getPostIdBy(stravaId: number) {
+  const post = (
+    await sql<TypedPost[]>`
+    SELECT * from "Post"
+    WHERE "key" = ${stringify(stravaId)}
+    `
+  )[0]
+
+  if (!post) {
+    return null
+  }
+
+  return post.id
 }
 
 export async function updatePostTitle(stravaId: number, title: string) {
