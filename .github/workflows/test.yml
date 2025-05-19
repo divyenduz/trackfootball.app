@@ -21,10 +21,6 @@ jobs:
         with:
           bun-version: latest
 
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '22'
-
       - name: Turnstyle
         uses: softprops/turnstyle@v1
         env:
@@ -32,6 +28,9 @@ jobs:
 
       - name: Install Dependencies
         run: bun install
+
+      - name: Install Dependencies
+        run: bun run build
 
       - name: Run Lint
         run: bun run lint
