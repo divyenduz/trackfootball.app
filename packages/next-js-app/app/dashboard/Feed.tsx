@@ -42,7 +42,9 @@ export default function Feed({ initialFeed, initialNextCursor }: Props) {
             if (nextPage.nextCursor) {
               setNextCursor(nextPage.nextCursor)
             }
+            setLoading(false)
           }}
+          disabled={loading}
         >
           {loading ? 'Loading...' : 'Load More'}
         </Button>
