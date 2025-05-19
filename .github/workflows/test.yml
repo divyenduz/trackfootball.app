@@ -23,8 +23,7 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: '18'
-          cache: 'bun'
+          node-version: '22'
 
       - name: Turnstyle
         uses: softprops/turnstyle@v1
