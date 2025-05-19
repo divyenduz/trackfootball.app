@@ -2,11 +2,11 @@
 
 ## Commands
 
-- **Build**: `nx run-many --target=build --projects @trackfootball/next-js-app` or `yarn build`
-- **Dev**: `nx run-many --target=dev --projects @trackfootball/next-js-app` or `yarn dev`
-- **Lint**: `nx run-many --target=lint --projects @trackfootball/next-js-app` or `yarn lint`
-- **Test**: `nx run-many --target=test --projects @trackfootball/next-js-app` or `yarn test`
-- **Run single test**: `yarn test path/to/test.ts`
+- **Build**: `nx run-many --target=build --projects @trackfootball/next-js-app` or `bun run build`
+- **Dev**: `nx run-many --target=dev --projects @trackfootball/next-js-app` or `bun run dev`
+- **Lint**: `nx run-many --target=lint --projects @trackfootball/next-js-app` or `bun run lint`
+- **Test**: `nx run-many --target=test --projects @trackfootball/next-js-app` or `bun run test`
+- **Run single test**: `bun test path/to/test.ts`
 
 ## Code Style
 

@@ -5,8 +5,8 @@ Repository for code of TrackFootball.app
 # Contributing
 
 1. Copy `.env-sample` to `.env`
-2. `yarn`
-3. `yarn dev`
+2. `bun install`
+3. `bun run dev`
    (and more)
 
 # Specification

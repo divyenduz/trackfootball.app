@@ -18,7 +18,6 @@ tsconfig.tsbuildinfo
 .env.production
 keys/
 
-yarn-error.log
 backups
 
 scripts/pg.ts

@@ -16,18 +16,15 @@ jobs:
     runs-on: [ubuntu-latest]
     steps:
       - uses: actions/checkout@v3
-      # Note: setup yarn is based on https://github.com/actions/setup-node/issues/182#issuecomment-978176609
-      - name: Setup yarn
-        run: |
-          mkdir -p ~/.local/bin
-          curl -fsSL \
-            https://github.com/yarnpkg/yarn/releases/download/v1.22.18/yarn-1.22.18.js > ~/.local/bin/yarn
-          chmod +x ~/.local/bin/yarn
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
 
       - uses: actions/setup-node@v3
         with:
           node-version: '18'
-          cache: 'yarn'
+          cache: 'bun'
 
       - name: Turnstyle
         uses: softprops/turnstyle@v1
@@ -35,10 +32,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install Dependencies
-        run: yarn install
+        run: bun install
 
       - name: Run Lint
-        run: yarn lint
+        run: bun run lint
 
       - name: Run Tests
-        run: yarn test
+        run: bun run test
