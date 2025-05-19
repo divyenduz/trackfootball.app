@@ -61,9 +61,6 @@ export const AppBar: React.FC<Props> = ({
                     <Link href={`/dashboard`}>
                       <Button>Dashboard</Button>
                     </Link>
-                    <Link href={`/leaderboard`}>
-                      <Button>Leaderboard</Button>
-                    </Link>
                     <IconButton
                       aria-label="account of current user"
                       aria-controls="menu-appbar"
