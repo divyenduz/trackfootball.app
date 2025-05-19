@@ -11,7 +11,7 @@
     "start": "nx run-many --parallel 1 --output-style=stream --target=start --projects @trackfootball/next-js-app",
     "test": "nx run-many --parallel 4 --output-style=stream --target=test --projects @trackfootball/*",
     "lint": "nx run-many --parallel 4 --output-style=stream --target=lint --projects @trackfootball/*",
-    "migrate": "nx run-many --parallel 1 --output-style=stream --target=lint --projects @trackfootball/database"
+    "migrate": "nx run-many --parallel 1 --output-style=stream --target=migrate --projects @trackfootball/database"
   },
   "devDependencies": {
     "nx": "16.10.0",

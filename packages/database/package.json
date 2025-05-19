@@ -4,10 +4,10 @@
   "private": true,
   "main": "index.ts",
   "scripts": {
-    "build": "yarn prisma generate",
+    "build": "bun prisma generate",
     "test": "echo 'No tests' && exit 0",
-    "lint": "yarn tsc --noEmit",
-    "migrate": "yarn prisma migrate deploy",
+    "lint": "bun tsc --noEmit",
+    "migrate": "bun prisma migrate deploy",
     "pg:dump": "command -v pg_dump && PGPASSWORD=postgres pg_dump -U postgres -h localhost trackfootball@dev --schema-only --no-owner > ./prisma/schema.sql || echo 'pg_dump not found'"
   },
   "devDependencies": {

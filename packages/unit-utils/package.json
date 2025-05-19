@@ -5,7 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "test": "echo 'No tests' && exit 0",
-    "lint": "yarn tsc --noEmit"
+    "lint": "bun tsc --noEmit"
   },
   "devDependencies": {
     "vitest": "0.34.6"
