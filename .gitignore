@@ -8,8 +8,6 @@ node_modules
 
 .idea
 .DS_Store
-.vscode
-.snaplet
 
 seed-strava.sql
 
