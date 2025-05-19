@@ -26,11 +26,10 @@ export async function getFeed(cursor: number = 0, limit: number = 3) {
     `
 
   let nextCursor: typeof cursor | null = null
-  const sortedPosts = posts.slice().sort((a, b) => b.id - a.id)
-  if (sortedPosts.length > limit) {
-    const nextItem = sortedPosts.pop()
+  if (posts.length > limit) {
+    const nextItem = posts.pop()
     nextCursor = nextItem!.id
   }
 
-  return { posts: sortedPosts, nextCursor }
+  return { posts, nextCursor }
 }
