@@ -8,13 +8,16 @@ import {
 import { checkStravaToken } from 'app/actions/checkStravaToken'
 import { Metadata } from 'next'
 import Image from 'next/image'
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import { auth } from 'utils/auth'
 
 import { Space } from '../../../components/atoms/Space'
 import { ConnectWithStravaWidget } from '../../../components/organisms/Settings/ConnectWithStravaWidget'
 import ShowToOwner from '../../../components/user/role-based-access/ShowToOwner'
-import { getUser } from '../../../repository/user/user'
+import {
+  getUser,
+  getUserStravaSocialLogin,
+} from '../../../repository/user/user'
 
 export type CheckStravaState =
   | 'LOADING'
@@ -60,14 +63,31 @@ export default async function Profile({ params }: Props) {
     return notFound()
   }
 
-  // Get current logged in user for permission checks
+  const socialLogin = await getUserStravaSocialLogin(athlete.id)
+  if (!socialLogin) {
+    return notFound()
+  }
+  const athleteWithSocialLogin = {
+    ...athlete,
+    socialLogin: [socialLogin],
+  }
+
   let currentUser = null
   try {
     currentUser = await auth()
-  } catch (e) {}
+  } catch (e) {
+    console.error(e)
+  }
+
+  if (!currentUser) {
+    redirect('/api/auth/login')
+  }
 
   const backendApiUrl = await getBackendApiUrl()
-  const checkStravaState = (await checkStravaToken(athlete)) as CheckStravaState
+  const checkStravaState = (await checkStravaToken(
+    //@ts-expect-error match the social login types
+    athleteWithSocialLogin
+  )) as CheckStravaState
 
   return (
     <div className="w-full max-w-4xl">
@@ -102,8 +122,8 @@ export default async function Profile({ params }: Props) {
 
           <ShowToOwner
             ownerId={athlete.id}
-            userId={currentUser?.id}
-            userIsAdmin={currentUser?.type === 'ADMIN'}
+            userId={currentUser.id}
+            userIsAdmin={Boolean(currentUser?.type === 'ADMIN')}
           >
             <Card>
               <Space direction="vertical">
