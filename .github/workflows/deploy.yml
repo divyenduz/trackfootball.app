@@ -15,7 +15,7 @@ env:
   CI: 1
   NEXT_TELEMETRY_DISABLED: 1
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  SSH_KEY_ORB_UBUNTU: ${{ secrets.SSH_KEY_ORB_UBUNTU }}
+  SSH_KEY: ${{ secrets.SSH_KEY }}
   HOST_IP: ${{ secrets.HOST_IP }}
   SSH_USER: ${{ secrets.SSH_USER }}
   SSH_PORT: ${{ secrets.SSH_PORT }}
@@ -60,7 +60,7 @@ jobs:
       - name: SSH Keyscan
         run: |
           mkdir -p ~/.ssh
-          echo "$SSH_KEY_ORB_UBUNTU" > ~/.ssh/id_rsa
+          echo "$SSH_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -p ${{ env.SSH_PORT }} ${{ env.HOST_IP }} >> ~/.ssh/known_hosts
 
