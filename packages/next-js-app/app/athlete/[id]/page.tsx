@@ -14,6 +14,7 @@ import { auth } from 'utils/auth'
 import { Space } from '../../../components/atoms/Space'
 import { ConnectWithStravaWidget } from '../../../components/organisms/Settings/ConnectWithStravaWidget'
 import ShowToOwner from '../../../components/user/role-based-access/ShowToOwner'
+import { getUser } from '../../../repository/user/user'
 
 export type CheckStravaState =
   | 'LOADING'
@@ -21,8 +22,15 @@ export type CheckStravaState =
   | 'WORKING'
   | 'NOT_WORKING'
 
-export async function generateMetadata(): Promise<Metadata> {
-  const user = await auth()
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const userId = parseInt(params.id, 10)
+  const user = await getUser(userId)
+
+  if (!user) {
+    return {
+      title: 'Athlete Not Found | TrackFootball',
+    }
+  }
 
   return {
     title: `${user.firstName} ${user.lastName} | Profile | TrackFootball`,
@@ -42,16 +50,24 @@ interface Props {
 }
 
 export default async function Profile({ params }: Props) {
-  let user = null
-  try {
-    user = await auth()
-  } catch (e) {}
-  if (!user) {
+  const userId = parseInt(params.id, 10)
+  if (isNaN(userId)) {
     return notFound()
   }
 
+  const athlete = await getUser(userId)
+  if (!athlete) {
+    return notFound()
+  }
+
+  // Get current logged in user for permission checks
+  let currentUser = null
+  try {
+    currentUser = await auth()
+  } catch (e) {}
+
   const backendApiUrl = await getBackendApiUrl()
-  const checkStravaState = (await checkStravaToken(user)) as CheckStravaState
+  const checkStravaState = (await checkStravaToken(athlete)) as CheckStravaState
 
   return (
     <div className="w-full max-w-4xl">
@@ -66,7 +82,7 @@ export default async function Profile({ params }: Props) {
                   width={100}
                   height={100}
                   src={
-                    user.picture ||
+                    athlete.picture ||
                     'https://trackfootball-public.s3.ap-southeast-1.amazonaws.com/prod/user.svg'
                   }
                 ></Image>
@@ -75,7 +91,7 @@ export default async function Profile({ params }: Props) {
                 component="h2"
                 className="text-base font-medium text-left cursor-pointer"
               >
-                {user.firstName ?? ''} {user.lastName ?? ''}
+                {athlete.firstName ?? ''} {athlete.lastName ?? ''}
               </Typography>
             </div>
           }
@@ -85,9 +101,9 @@ export default async function Profile({ params }: Props) {
           <div style={{ marginBottom: 30 }}></div>
 
           <ShowToOwner
-            ownerId={user.id}
-            userId={user.id}
-            userIsAdmin={user.type === 'ADMIN'}
+            ownerId={athlete.id}
+            userId={currentUser?.id}
+            userIsAdmin={currentUser?.type === 'ADMIN'}
           >
             <Card>
               <Space direction="vertical">
