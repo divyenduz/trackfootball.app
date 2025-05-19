@@ -2,7 +2,6 @@
 
 import {
   Divider,
-  Hidden,
   IconButton,
   ListItemIcon,
   AppBar as MaterialAppBar,
@@ -40,16 +39,13 @@ export const AppBar: React.FC<Props> = ({
           <Link href="/home">
             <div className="flex flex-row flex-wrap items-center justify-center flex-none gap-2 cursor-pointer">
               <Logo size={'xs'} />
-              {/* @ts-ignore */}
-              <Hidden mdDown>
-                <Typography
-                  className="text-gray-900"
-                  variant="h6"
-                  component={'h5'}
-                >
-                  {pageName}
-                </Typography>
-              </Hidden>
+              <Typography
+                className="text-gray-900 hidden md:block"
+                variant="h6"
+                component={'h5'}
+              >
+                {pageName}
+              </Typography>
             </div>
           </Link>
 
