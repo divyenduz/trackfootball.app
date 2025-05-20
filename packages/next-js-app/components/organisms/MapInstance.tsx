@@ -5,7 +5,7 @@ import bearing from '@turf/bearing'
 import { FeatureCollection, LineString, bearingToAzimuth } from '@turf/helpers'
 import { FeedItemType } from 'app/actions/getFeed'
 import dynamic from 'next/dynamic'
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import type { ViewState } from 'react-map-gl'
 import { match } from 'ts-pattern'
 
@@ -106,6 +106,9 @@ export const MapInstance: React.FC<MapInstanceProps> = ({
   page,
 }) => {
   const [mapStyle, setMapStyle] = useState('mapbox://styles/mapbox/streets-v11')
+  const [mapLoaded, setMapLoaded] = useState(false)
+  const mapRef = useRef(null)
+  
   const mapStyles = [
     { id: 'mapbox://styles/mapbox/streets-v11', name: 'Streets', icon: <Layers fontSize="small" /> },
     { id: 'mapbox://styles/mapbox/satellite-v9', name: 'Satellite', icon: <Terrain fontSize="small" /> },
@@ -126,6 +129,34 @@ export const MapInstance: React.FC<MapInstanceProps> = ({
     })
     .with(false, () => null)
     .exhaustive()
+
+  // Add effect to handle map load and redraws
+  useEffect(() => {
+    if (mapLoaded && mapRef.current) {
+      // Force redraw of layers when map is loaded
+      const map = mapRef.current.getMap()
+      if (map) {
+        map.resize()
+      }
+    }
+  }, [mapLoaded])
+  
+  // Add effect to handle viewport changes
+  useEffect(() => {
+    if (mapLoaded && mapRef.current) {
+      // Slightly modify viewport to trigger a rerender
+      const timeoutId = setTimeout(() => {
+        const currentViewport = {...viewport}
+        // Imperceptible change to force redraw
+        setViewport({
+          ...currentViewport,
+          zoom: currentViewport.zoom + 0.0001
+        })
+      }, 100)
+      
+      return () => clearTimeout(timeoutId)
+    }
+  }, [mapLoaded, viewport])
 
   const core = new Core(
     post.geoJson! as unknown as FeatureCollection<LineString>
@@ -165,6 +196,7 @@ export const MapInstance: React.FC<MapInstanceProps> = ({
 
       <div className="rounded-lg overflow-hidden shadow-md border border-gray-200 mb-4">
         <ReactMapGL
+          ref={mapRef}
           className="map-instance"
           scrollZoom={false}
           touchZoom={false}
@@ -172,6 +204,10 @@ export const MapInstance: React.FC<MapInstanceProps> = ({
           dragPan={isMapMovable}
           bearing={fieldData?.fieldBearing || 0}
           onViewportChange={(viewport: any) => setViewport(viewport)}
+          onLoad={() => {
+            console.log('Map loaded')
+            setMapLoaded(true)
+          }}
           touchAction={'pan-y'}
           mapStyle={mapStyle}
           mapboxApiAccessToken="pk.eyJ1IjoiZGl2eWVuZHV6IiwiYSI6ImNqeTRvc212NzEzdXczY2syam92YnBwY3AifQ.40p53nLBipgbxUpfz5VKfw"
@@ -231,6 +267,8 @@ export const MapInstance: React.FC<MapInstanceProps> = ({
               ],
               'heatmap-opacity': 0.8
             }}
+            // This key forces the layer to re-render when map loads
+            key={`heatmap-${mapLoaded ? 'loaded' : 'loading'}`}
           />
         </Source>
 
