@@ -244,7 +244,8 @@ export default async function Profile({ params }: Props) {
                 </Typography>
               </div>
               <Typography className="text-2xl font-bold text-gray-800">
-                {maxSpeed.toFixed(1)} km/h
+                {maxSpeed && !isNaN(maxSpeed) ? maxSpeed.toFixed(1) : '0.0'}{' '}
+                km/h
               </Typography>
             </div>
           </div>
