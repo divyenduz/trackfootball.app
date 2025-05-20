@@ -1,5 +1,9 @@
 # AGENT.md - Guidelines for AI Coding Agents
 
+## Important Notes
+
+- The build is running and has hot reload build in. You don't have to suggest `bun run build` and `bun run dev` in the chat.
+
 ## Commands
 
 - **Build**: `nx run-many --target=build --projects @trackfootball/next-js-app` or `bun run build`

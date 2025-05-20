@@ -26,15 +26,15 @@ export const ConnectWithStravaWidget: React.FC<Props> = ({
         <CardContent>
           {match(checkStravaState)
             .with('WORKING', () => (
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={async () => {
-                  await disconnectStrava()
-                }}
-              >
-                Disconnect Strava
-              </Button>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={async () => {
+                    await disconnectStrava()
+                  }}
+                >
+                  Disconnect Strava
+                </Button>
             ))
             .otherwise(() => (
               <ConnectWithStrava
