@@ -1,4 +1,4 @@
-import { ArrowUpward } from '@mui/icons-material'
+import { ArrowUpward, Layers, Terrain } from '@mui/icons-material'
 import { Core } from '@trackfootball/sprint-detection'
 import { FieldSpace } from '@trackfootball/sprint-detection'
 import bearing from '@turf/bearing'
@@ -18,7 +18,14 @@ type MapInstancePost = FeedItemType | AwaitedPost
 
 const ReactMapGL = dynamic(() => import('react-map-gl'), {
   ssr: false,
-  loading: () => <p>Loading...</p>,
+  loading: () => (
+    <div className="flex items-center justify-center bg-gray-100 rounded-md" style={{ height: '350px' }}>
+      <div className="text-gray-500 flex flex-col items-center">
+        <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-purple-500 mb-2"></div>
+        <p>Loading map...</p>
+      </div>
+    </div>
+  ),
 })
 
 const Layer = dynamic(() => namedComponent(import('react-map-gl'), 'Layer'))
@@ -99,6 +106,11 @@ export const MapInstance: React.FC<MapInstanceProps> = ({
   page,
 }) => {
   const [mapStyle, setMapStyle] = useState('mapbox://styles/mapbox/streets-v11')
+  const mapStyles = [
+    { id: 'mapbox://styles/mapbox/streets-v11', name: 'Streets', icon: <Layers fontSize="small" /> },
+    { id: 'mapbox://styles/mapbox/satellite-v9', name: 'Satellite', icon: <Terrain fontSize="small" /> },
+    { id: 'mapbox://styles/mapbox/outdoors-v11', name: 'Outdoors', icon: <Layers fontSize="small" /> }
+  ]
 
   const field = post.Field
 
@@ -123,53 +135,54 @@ export const MapInstance: React.FC<MapInstanceProps> = ({
     <>
       {match(page)
         .with('activity', () => (
-          <a
-            onClick={() => {
-              if (mapStyle === 'mapbox://styles/mapbox/satellite-v9') {
-                setMapStyle('mapbox://styles/mapbox/streets-v11')
-              } else {
-                setMapStyle('mapbox://styles/mapbox/satellite-v9')
-              }
-            }}
-          >
-            {match(mapStyle)
-              .with('mapbox://styles/mapbox/satellite-v9', () => (
-                <div className="flex flex-row flex-wrap items-center justify-start gap-2 my-2">
-                  🗺️ Use street map
-                </div>
-              ))
-              .otherwise(() => (
-                <div className="flex flex-row flex-wrap items-center justify-start gap-2 my-2">
-                  🛰️ Use satellite map
-                </div>
-              ))}
-          </a>
+          <div className="flex flex-row justify-start gap-2 my-4 rounded-md bg-gray-50 p-2">
+            <div className="text-xs text-gray-500 flex items-center mr-2">Map style:</div>
+            {mapStyles.map((style) => (
+              <button
+                key={style.id}
+                onClick={() => setMapStyle(style.id)}
+                className={`flex items-center px-3 py-1.5 text-xs rounded-md transition-colors ${mapStyle === style.id 
+                  ? 'bg-purple-500 text-white' 
+                  : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-100'}`}
+              >
+                <span className="mr-1">{style.icon}</span>
+                {style.name}
+              </button>
+            ))}
+          </div>
         ))
         .otherwise(() => null)}
 
       {Boolean(field && page === 'activity') && (
-        <div>
-          <div>
-            {field?.name} ({field?.usage})
+        <div className="mb-2 p-2 bg-gray-50 rounded-md">
+          <div className="flex items-center">
+            <span className="text-purple-600 mr-1">⚽</span>
+            <span className="font-medium">{field?.name}</span>
+            <span className="text-gray-500 text-sm ml-2">({field?.usage})</span>
           </div>
         </div>
       )}
 
-      <ReactMapGL
-        className="map-instance"
-        scrollZoom={false}
-        touchZoom={false}
-        doubleClickZoom={isMapMovable}
-        dragPan={isMapMovable}
-        bearing={fieldData?.fieldBearing || 0}
-        onViewportChange={(viewport: any) => setViewport(viewport)}
-        touchAction={'pan-y'}
-        mapStyle={mapStyle}
-        mapboxApiAccessToken="pk.eyJ1IjoiZGl2eWVuZHV6IiwiYSI6ImNqeTRvc212NzEzdXczY2syam92YnBwY3AifQ.40p53nLBipgbxUpfz5VKfw"
-        {...viewport}
-      >
+      <div className="rounded-lg overflow-hidden shadow-md border border-gray-200 mb-4">
+        <ReactMapGL
+          className="map-instance"
+          scrollZoom={false}
+          touchZoom={false}
+          doubleClickZoom={isMapMovable}
+          dragPan={isMapMovable}
+          bearing={fieldData?.fieldBearing || 0}
+          onViewportChange={(viewport: any) => setViewport(viewport)}
+          touchAction={'pan-y'}
+          mapStyle={mapStyle}
+          mapboxApiAccessToken="pk.eyJ1IjoiZGl2eWVuZHV6IiwiYSI6ImNqeTRvc212NzEzdXczY2syam92YnBwY3AifQ.40p53nLBipgbxUpfz5VKfw"
+          {...viewport}
+        >
         {match(isMapMovable)
-          .with(true, () => <NavigationControl showCompass={false} />)
+          .with(true, () => (
+            <div style={{ position: 'absolute', right: '10px', top: '10px' }}>
+              <NavigationControl showCompass={true} visualizePitch={true} />
+            </div>
+          ))
           .with(false, () => null)
           .exhaustive()}
 
@@ -187,6 +200,8 @@ export const MapInstance: React.FC<MapInstanceProps> = ({
               paint={{
                 'line-color': '#FF8F4C',
                 'line-width': 3,
+                'line-opacity': 0.8,
+                'line-dasharray': [2, 1]
               }}
             ></Layer>
           </Source>
@@ -201,6 +216,20 @@ export const MapInstance: React.FC<MapInstanceProps> = ({
             }}
             paint={{
               'heatmap-radius': getHeatmapRadius(post),
+              'heatmap-weight': 1,
+              'heatmap-intensity': 1,
+              'heatmap-color': [
+                'interpolate',
+                ['linear'],
+                ['heatmap-density'],
+                0, 'rgba(33,102,172,0)',
+                0.2, 'rgb(103,169,207)',
+                0.4, 'rgb(209,229,240)',
+                0.6, 'rgb(253,219,199)',
+                0.8, 'rgb(239,138,98)',
+                1, 'rgb(178,24,43)'
+              ],
+              'heatmap-opacity': 0.8
             }}
           />
         </Source>
@@ -242,7 +271,9 @@ export const MapInstance: React.FC<MapInstanceProps> = ({
                     }}
                     paint={{
                       'line-color': 'red',
-                      'line-width': 3,
+                      'line-width': 4,
+                      'line-opacity': 0.8,
+                      'line-blur': 1
                     }}
                   ></Layer>
                   <Marker latitude={end.latitude} longitude={end.longitude}>
@@ -287,7 +318,9 @@ export const MapInstance: React.FC<MapInstanceProps> = ({
                   }}
                   paint={{
                     'line-color': 'red',
-                    'line-width': 3,
+                    'line-width': 4,
+                    'line-opacity': 0.8,
+                    'line-blur': 1
                   }}
                 ></Layer>
                 <Marker latitude={end.latitude} longitude={end.longitude}>
@@ -330,8 +363,10 @@ export const MapInstance: React.FC<MapInstanceProps> = ({
                     visibility: 'visible',
                   }}
                   paint={{
-                    'line-color': 'yellow',
-                    'line-width': 3,
+                    'line-color': '#FFD700',
+                    'line-width': 4,
+                    'line-opacity': 0.8,
+                    'line-blur': 1
                   }}
                 />
                 <Marker latitude={end.latitude} longitude={end.longitude}>
@@ -345,6 +380,7 @@ export const MapInstance: React.FC<MapInstanceProps> = ({
           })}
         </ConditionalDisplay>
       </ReactMapGL>
+      </div>
     </>
   )
 }
