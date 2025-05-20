@@ -44,17 +44,25 @@ export const GET = auth0.handleAuth({
   `
     )[0]
 
-    if (!existingUser && user) {
-      await createDiscordMessage({
-        heading: 'New User Created',
-        name: `${user.firstName} ${user.lastName}`,
-        description: `
+    if (!existingUser) {
+      if (user) {
+        await createDiscordMessage({
+          heading: 'New User Created',
+          name: `${user.firstName} ${user.lastName}`,
+          description: `
 ID: ${user.id}
 Link: ${process.env.HOMEPAGE_URL}/athlete/${user.id}`,
-      })
+        })
+      } else {
+        await createDiscordMessage({
+          heading: '🐛 New User Creation Failed',
+          name: `${data.firstName} ${data.lastName}`,
+          description: `Failed to create user with email: ${data.email}`,
+        })
+      }
     } else {
       await createDiscordMessage({
-        heading: '🐛 New User Creation Failed',
+        heading: 'Existing User Logged In',
         name: `${user.firstName} ${user.lastName}`,
         description: `
 ID: ${user.id}
