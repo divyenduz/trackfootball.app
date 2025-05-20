@@ -8,10 +8,9 @@ import {
 import { checkStravaToken } from 'app/actions/checkStravaToken'
 import { Metadata } from 'next'
 import Image from 'next/image'
-import { notFound, redirect } from 'next/navigation'
+import { notFound } from 'next/navigation'
 import { auth } from 'utils/auth'
 
-import { Space } from '../../../components/atoms/Space'
 import { ConnectWithStravaWidget } from '../../../components/organisms/Settings/ConnectWithStravaWidget'
 import ShowToOwner from '../../../components/user/role-based-access/ShowToOwner'
 import {
@@ -127,7 +126,7 @@ export default async function Profile({ params }: Props) {
                   <div className="flex items-center mt-2">
                     <span className="mr-2">✅</span>
                     <Typography className="text-blue-100 text-sm">
-                      Connected with Strava
+                      Connected account
                     </Typography>
                   </div>
                 )}
@@ -135,6 +134,20 @@ export default async function Profile({ params }: Props) {
             </div>
           }
         />
+
+        <ShowToOwner
+          ownerId={athlete.id}
+          userId={currentUser?.id || -1}
+          userIsAdmin={false}
+        >
+          <div className="bg-gray-50 border-b border-gray-200 px-6 py-3 flex justify-end">
+            <ConnectWithStravaWidget
+              redirectTo="athlete"
+              backendApiUrl={backendApiUrl}
+              checkStravaState={checkStravaState}
+            />
+          </div>
+        </ShowToOwner>
 
         <CardContent className="p-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
@@ -358,9 +371,9 @@ export default async function Profile({ params }: Props) {
                   No Activities Yet
                 </Typography>
                 <Typography className="text-gray-500 max-w-sm mx-auto">
-                  This athlete hasn't recorded any activities yet. Activities
-                  will appear here once they connect with Strava and record
-                  their games.
+                  This athlete hasn&apos;t recorded any activities yet.
+                  Activities will appear here once they connect with Strava and
+                  record their games.
                 </Typography>
                 {athlete.id === currentUser?.id && (
                   <button className="mt-4 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md font-medium text-sm transition-colors inline-flex items-center">
@@ -378,70 +391,12 @@ export default async function Profile({ params }: Props) {
                         d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
                       />
                     </svg>
-                    Connect With Strava
+                    Connect Account
                   </button>
                 )}
               </div>
             )}
           </div>
-
-          <ShowToOwner
-            ownerId={athlete.id}
-            userId={currentUser?.id || -1}
-            // TODO: better way to handle showing stuff to admin
-            userIsAdmin={false}
-            // userIsAdmin={Boolean(currentUser?.type === 'ADMIN')}
-          >
-            <Card className="mt-8 border border-gray-200 overflow-hidden">
-              <CardHeader
-                title={
-                  <div className="flex items-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 text-red-600 mr-2"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                      />
-                    </svg>
-                    <Typography className="text-lg font-medium">
-                      Integrations
-                    </Typography>
-                  </div>
-                }
-                className="bg-gray-50 border-b border-gray-200"
-              />
-              <CardContent className="p-6">
-                <Space direction="vertical" className="w-full">
-                  <div className="flex items-center justify-between bg-white p-4 rounded-lg border border-gray-200">
-                    <div className="flex items-center">
-                      <div>
-                        <Typography className="font-medium">Strava</Typography>
-                        <Typography className="text-sm text-gray-500">
-                          {checkStravaState === 'WORKING'
-                            ? 'Connected and working properly'
-                            : checkStravaState === 'NOT_CONNECTED'
-                            ? 'Not connected'
-                            : 'Connection needs attention'}
-                        </Typography>
-                      </div>
-                    </div>
-                    <ConnectWithStravaWidget
-                      redirectTo="athlete"
-                      backendApiUrl={backendApiUrl}
-                      checkStravaState={checkStravaState}
-                    />
-                  </div>
-                </Space>
-              </CardContent>
-            </Card>
-          </ShowToOwner>
         </CardContent>
       </Card>
     </div>

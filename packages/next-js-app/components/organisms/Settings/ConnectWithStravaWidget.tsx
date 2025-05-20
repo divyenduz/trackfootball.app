@@ -20,29 +20,23 @@ export const ConnectWithStravaWidget: React.FC<Props> = ({
   checkStravaState,
 }) => {
   return (
-    <Card>
-      <Space direction="vertical">
-        <CardHeader title="Strava"></CardHeader>
-        <CardContent>
-          {match(checkStravaState)
-            .with('WORKING', () => (
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  onClick={async () => {
-                    await disconnectStrava()
-                  }}
-                >
-                  Disconnect Strava
-                </Button>
-            ))
-            .otherwise(() => (
-              <ConnectWithStrava
-                callbackUrl={`${backendApiUrl}/social/strava/callback/?redirect_to=${redirectTo}`}
-              ></ConnectWithStrava>
-            ))}
-        </CardContent>
-      </Space>
-    </Card>
+    match(checkStravaState)
+      .with('WORKING', () => (
+          <Button
+            variant="contained"
+            color="secondary"
+            size="small"
+            onClick={async () => {
+              await disconnectStrava()
+            }}
+          >
+            Disconnect Strava
+          </Button>
+      ))
+      .otherwise(() => (
+        <ConnectWithStrava
+          callbackUrl={`${backendApiUrl}/social/strava/callback/?redirect_to=${redirectTo}`}
+        ></ConnectWithStrava>
+      ))
   )
 }
