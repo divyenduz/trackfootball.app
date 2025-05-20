@@ -315,7 +315,6 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
               aria-label="icon label tabs example"
             >
               <Tab value="distance" label="Distance" />
-              <Tab value="top-speed" label="Top Speed" />
               <Tab value="power" label="Power" />
             </TabList>
             <TabPanel value="distance">
@@ -338,52 +337,7 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
                 page={'activity'}
               />
             </TabPanel>
-            <TabPanel value="top-speed" className="w-full">
-              {match((post.sprints?.length || 0) > 0)
-                .with(true, () => (
-                  <div className={classes.paper}>
-                    <div className={classes.title}>🔥 Fastest Sprint</div>
-                    <div className={classes.value}>
-                      <div>
-                        {prettyRunMetricDistance(
-                          hasSprints,
-                          core.fastestSprintDistance()
-                        )}{' '}
-                        <span className="text-sm font-medium">m,</span>
-                      </div>
-                      <div>
-                        {prettyRunMetricSpeed(
-                          hasSprints,
-                          core.fastestSprintSpeed()
-                        )}{' '}
-                        <span className="text-sm font-medium">Km/h</span>
-                      </div>
-                    </div>
-                  </div>
-                ))
-                .with(false, () => (
-                  <div className={classes.paper}>
-                    <div className={classes.title}>💨 Top Speed</div>
-                    <div className={classes.value}>
-                      {+mpsToKmph(core.maxSpeed() || 0)}
-                      <span className="text-sm font-medium">km/h</span>
-                    </div>
-                  </div>
-                ))
-                .exhaustive()}
 
-              <MapInstance
-                isMapMovable={isMapMovable}
-                viewport={viewport}
-                setViewport={setViewport}
-                topSprintOnly={true}
-                showSprints={true}
-                showRuns={true}
-                showHeatmap={false}
-                post={post}
-                page={'activity'}
-              />
-            </TabPanel>
             <TabPanel value="power" className="w-full space-y-2">
               <div className={classes.paper}>
                 <div className={classes.title}>🔋 Sprints + Runs</div>
