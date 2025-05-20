@@ -175,7 +175,7 @@ export const MapInstance: React.FC<MapInstanceProps> = ({
                 key={style.id}
                 onClick={() => setMapStyle(style.id)}
                 className={`flex items-center px-3 py-1.5 text-xs rounded-md transition-colors ${mapStyle === style.id 
-                  ? 'bg-purple-500 text-white' 
+                  ? 'bg-purple-500 text-white'
                   : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-100'}`}
               >
                 <span className="mr-1">{style.icon}</span>

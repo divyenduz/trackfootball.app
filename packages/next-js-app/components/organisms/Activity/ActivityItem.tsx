@@ -13,6 +13,7 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 import { Core } from '@trackfootball/sprint-detection'
 import { metersToKilometers, mpsToKmph } from '@trackfootball/utils'
 import { refreshPost } from 'app/actions/refreshPost'
+import { deletePost } from 'app/actions/deletePost'
 import { AwaitedUser } from 'app/layout'
 import Button from 'components/atoms/Button'
 import { formatDistance } from 'date-fns'
@@ -47,6 +48,50 @@ export interface Props {
   post: AwaitedPost
   user: AwaitedUser | null
 }
+
+interface AdminControlsProps {
+  post: AwaitedPost
+  userIsAdmin?: boolean
+}
+
+const AdminControls: React.FC<AdminControlsProps> = ({ post, userIsAdmin }) => {
+  if (!userIsAdmin) return null;
+  
+  return (
+    <div className="flex justify-between items-center p-2 mb-3 bg-gray-50 border border-gray-200 rounded-md">
+      <div className="text-sm font-medium text-gray-700">Admin Controls</div>
+      <div className="flex space-x-2">
+        <button 
+          className="px-3 py-1.5 text-xs rounded-md bg-blue-100 text-blue-700 border border-blue-300 hover:bg-blue-200 transition-colors"
+          onClick={async () => {
+            const r = confirm('Are you sure that you want to refresh the statistics of this post?')
+            if (r) {
+              await refreshPost(post.id)
+            }
+          }}
+        >
+          🔄 Refresh
+        </button>
+        <button 
+          className="px-3 py-1.5 text-xs rounded-md bg-red-100 text-red-700 border border-red-300 hover:bg-red-200 transition-colors"
+          onClick={async () => {
+            const rc = confirm('Are you sure that you want to delete this activity? This cannot be undone.')
+            if (!rc) return;
+            try {
+              await deletePost(post.id)
+              window.location.href = '/dashboard'
+            } catch (e) {
+              console.error(e)
+              alert(`Something went wrong, please contact singh@trackfootball.app` + e)
+            }
+          }}
+        >
+          🗑️ Delete
+        </button>
+      </div>
+    </div>
+  );
+};
 
 const ActivityItem: React.FC<Props> = ({ post, user }) => {
   const [showPower, setShowPower] = useState(false)
@@ -99,6 +144,7 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
         id={`activity-item-${post.id}`}
         className={'w-full mb-5'}
       >
+        {user?.type === 'ADMIN' && <AdminControls post={post} userIsAdmin={user?.type === 'ADMIN'} />}
         <CardHeader
           className="p-2"
           avatar={
@@ -161,10 +207,6 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
             }
             action={
               <div className="md:w-full">
-                <ActivityItemAdminActions
-                  postId={post.id}
-                  userIsAdmin={user?.type === 'ADMIN'}
-                ></ActivityItemAdminActions>
                 <ShowToOwner
                   ownerId={post.userId}
                   userId={user?.id || -1}
@@ -201,6 +243,7 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
       id={`activity-item-${post.id}`}
       className="w-full mb-5"
     >
+      {user?.type === 'ADMIN' && <AdminControls post={post} userIsAdmin={user?.type === 'ADMIN'} />}
       <CardHeader
         className="p-1"
         avatar={
@@ -258,10 +301,6 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
           }
           action={
             <div className="flex space-x-2 md:w-full">
-              <ActivityItemAdminActions
-                postId={post.id}
-                userIsAdmin={user?.type === 'ADMIN'}
-              ></ActivityItemAdminActions>
               <ShowToOwner
                 ownerId={post.userId}
                 userId={user?.id || -1}
@@ -387,36 +426,6 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
         </CardContent>
       </Paper>
     </Card>
-  )
-}
-
-const ActivityItemAdminActions = ({
-  postId,
-  userIsAdmin,
-}: {
-  postId: number
-  userIsAdmin: boolean
-}) => {
-  if (!userIsAdmin) {
-    return null
-  }
-
-  return (
-    <span style={{ border: 'dashed 1px red' }}>
-      <Button
-        variant="outlined"
-        onClick={async () => {
-          const r = confirm(
-            'Are you sure that you want to refresh the statistics of this post?'
-          )
-          if (r) {
-            await refreshPost(postId)
-          }
-        }}
-      >
-        🔄
-      </Button>
-    </span>
   )
 }
 
