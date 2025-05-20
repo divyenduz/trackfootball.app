@@ -1,13 +1,11 @@
 'use client'
 
-import { TabContext, TabList, TabPanel } from '@mui/lab'
 import {
   Avatar,
   Card,
   CardContent,
   CardHeader,
   Paper,
-  Tab,
   Typography,
   useTheme,
 } from '@mui/material'
@@ -51,7 +49,7 @@ export interface Props {
 }
 
 const ActivityItem: React.FC<Props> = ({ post, user }) => {
-  const [tab, setTab] = useState('distance')
+  const [showPower, setShowPower] = useState(false)
 
   const classes = {
     paper:
@@ -304,21 +302,25 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
             </ShowToOwner>
           </div>
 
-          <TabContext value={tab}>
-            <TabList
-              onChange={(_, newValue) => {
-                setTab(newValue)
-              }}
-              variant="fullWidth"
-              indicatorColor="secondary"
-              textColor="secondary"
-              aria-label="icon label tabs example"
-            >
-              <Tab value="distance" label="Distance" />
-              <Tab value="top-speed" label="Top Speed" />
-              <Tab value="power" label="Power" />
-            </TabList>
-            <TabPanel value="distance">
+          <div className="flex justify-center my-4 border-b border-gray-200 w-full">
+            <div className="flex w-full">
+              <button
+                className={`flex-1 py-2 px-4 text-center transition-colors ${!showPower ? 'border-b-2 border-purple-500 text-purple-500 font-medium' : 'text-gray-500 hover:text-gray-700'}`}
+                onClick={() => setShowPower(false)}
+              >
+                Distance
+              </button>
+              <button
+                className={`flex-1 py-2 px-4 text-center transition-colors ${showPower ? 'border-b-2 border-purple-500 text-purple-500 font-medium' : 'text-gray-500 hover:text-gray-700'}`}
+                onClick={() => setShowPower(true)}
+              >
+                Power
+              </button>
+            </div>
+          </div>
+
+          {!showPower && (
+            <div className="mt-4">
               <div className={classes.paper}>
                 <div className={classes.title}>🏃‍♂️ Total Distance</div>
                 <div className={classes.value}>
@@ -326,65 +328,11 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
                   <span className="text-sm font-medium">km</span>
                 </div>
               </div>
-              <MapInstance
-                isMapMovable={isMapMovable}
-                viewport={viewport}
-                setViewport={setViewport}
-                topSprintOnly={false}
-                showSprints={false}
-                showRuns={false}
-                showHeatmap={true}
-                post={post}
-                page={'activity'}
-              />
-            </TabPanel>
-            <TabPanel value="top-speed" className="w-full">
-              {match((post.sprints?.length || 0) > 0)
-                .with(true, () => (
-                  <div className={classes.paper}>
-                    <div className={classes.title}>🔥 Fastest Sprint</div>
-                    <div className={classes.value}>
-                      <div>
-                        {prettyRunMetricDistance(
-                          hasSprints,
-                          core.fastestSprintDistance()
-                        )}{' '}
-                        <span className="text-sm font-medium">m,</span>
-                      </div>
-                      <div>
-                        {prettyRunMetricSpeed(
-                          hasSprints,
-                          core.fastestSprintSpeed()
-                        )}{' '}
-                        <span className="text-sm font-medium">Km/h</span>
-                      </div>
-                    </div>
-                  </div>
-                ))
-                .with(false, () => (
-                  <div className={classes.paper}>
-                    <div className={classes.title}>💨 Top Speed</div>
-                    <div className={classes.value}>
-                      {+mpsToKmph(core.maxSpeed() || 0)}
-                      <span className="text-sm font-medium">km/h</span>
-                    </div>
-                  </div>
-                ))
-                .exhaustive()}
+            </div>
+          )}
 
-              <MapInstance
-                isMapMovable={isMapMovable}
-                viewport={viewport}
-                setViewport={setViewport}
-                topSprintOnly={true}
-                showSprints={true}
-                showRuns={true}
-                showHeatmap={false}
-                post={post}
-                page={'activity'}
-              />
-            </TabPanel>
-            <TabPanel value="power" className="w-full space-y-2">
+          {showPower && (
+            <div className="mt-4">
               <div className={classes.paper}>
                 <div className={classes.title}>🔋 Sprints + Runs</div>
                 <div className={classes.value}>{power}</div>
@@ -411,20 +359,20 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
                   </div>
                 </div>
               </ConditionalDisplay>
+            </div>
+          )}
 
-              <MapInstance
-                isMapMovable={isMapMovable}
-                viewport={viewport}
-                setViewport={setViewport}
-                topSprintOnly={false}
-                showSprints={true}
-                showRuns={true}
-                showHeatmap={false}
-                post={post}
-                page={'activity'}
-              />
-            </TabPanel>
-          </TabContext>
+          <MapInstance
+            isMapMovable={isMapMovable}
+            viewport={viewport}
+            setViewport={setViewport}
+            topSprintOnly={false}
+            showSprints={showPower}
+            showRuns={showPower}
+            showHeatmap={!showPower}
+            post={post}
+            page={'activity'}
+          />
 
           <ConditionalDisplay visible={post.type === 'STRAVA_ACTIVITY'}>
             <div className="flex items-center justify-center">
