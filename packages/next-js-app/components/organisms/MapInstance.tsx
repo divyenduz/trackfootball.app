@@ -21,7 +21,7 @@ const ReactMapGL = dynamic(() => import('react-map-gl'), {
   loading: () => (
     <div className="flex items-center justify-center bg-gray-100 rounded-md" style={{ height: '350px' }}>
       <div className="text-gray-500 flex flex-col items-center">
-        <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-indigo-500 mb-2"></div>
+        <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-purple-500 mb-2"></div>
         <p>Loading map...</p>
       </div>
     </div>
@@ -175,7 +175,7 @@ export const MapInstance: React.FC<MapInstanceProps> = ({
                 key={style.id}
                 onClick={() => setMapStyle(style.id)}
                 className={`flex items-center px-3 py-1.5 text-xs rounded-md transition-colors ${mapStyle === style.id 
-                  ? 'bg-indigo-500 text-white' 
+                  ? 'bg-purple-500 text-white'
                   : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-100'}`}
               >
                 <span className="mr-1">{style.icon}</span>
@@ -189,7 +189,7 @@ export const MapInstance: React.FC<MapInstanceProps> = ({
       {Boolean(field && page === 'activity') && (
         <div className="mb-2 p-2 bg-gray-50 rounded-md">
           <div className="flex items-center">
-            <span className="text-red-600 mr-1">⚽</span>
+            <span className="text-purple-600 mr-1">⚽</span>
             <span className="font-medium">{field?.name}</span>
             <span className="text-gray-500 text-sm ml-2">({field?.usage})</span>
           </div>
