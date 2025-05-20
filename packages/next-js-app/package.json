@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 6060",
-    "build": "NODE_ENV=production next build",
+    "build": "NODE_ENV=production bun --bun run next build",
     "build:analyse": "ANALYZE=true next build",
     "start": "next start -p 6060",
     "lint": "bun tsc --noEmit; next lint",

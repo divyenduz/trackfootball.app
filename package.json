@@ -15,5 +15,8 @@
   },
   "dependencies": {
     "typescript": "5.4.5"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.21"
   }
 }
