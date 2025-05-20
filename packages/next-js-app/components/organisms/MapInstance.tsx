@@ -133,9 +133,12 @@ export const MapInstance: React.FC<MapInstanceProps> = ({
   useEffect(() => {
     if (mapLoaded && mapRef.current) {
       // Force redraw of layers when map is loaded
-      const map = mapRef.current.getMap()
-      if (map) {
-        map.resize()
+      const mapInstance = mapRef.current as any
+      if (mapInstance && mapInstance.getMap) {
+        const map = mapInstance.getMap()
+        if (map) {
+          map.resize()
+        }
       }
     }
   }, [mapLoaded])
@@ -155,7 +158,7 @@ export const MapInstance: React.FC<MapInstanceProps> = ({
       
       return () => clearTimeout(timeoutId)
     }
-  }, [mapLoaded, viewport])
+  }, [mapLoaded, viewport, setViewport])
 
   const core = new Core(
     post.geoJson! as unknown as FeatureCollection<LineString>
@@ -215,7 +218,7 @@ export const MapInstance: React.FC<MapInstanceProps> = ({
         {match(isMapMovable)
           .with(true, () => (
             <div style={{ position: 'absolute', right: '10px', top: '10px' }}>
-              <NavigationControl showCompass={true} visualizePitch={true} />
+              <NavigationControl showCompass={true} />
             </div>
           ))
           .with(false, () => null)
