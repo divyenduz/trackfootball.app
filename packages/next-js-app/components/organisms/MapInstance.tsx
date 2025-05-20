@@ -111,8 +111,7 @@ export const MapInstance: React.FC<MapInstanceProps> = ({
   
   const mapStyles = [
     { id: 'mapbox://styles/mapbox/streets-v11', name: 'Streets', icon: <Layers fontSize="small" /> },
-    { id: 'mapbox://styles/mapbox/satellite-v9', name: 'Satellite', icon: <Terrain fontSize="small" /> },
-    { id: 'mapbox://styles/mapbox/outdoors-v11', name: 'Outdoors', icon: <Layers fontSize="small" /> }
+    { id: 'mapbox://styles/mapbox/satellite-v9', name: 'Satellite', icon: <Terrain fontSize="small" /> }
   ]
 
   const field = post.Field
