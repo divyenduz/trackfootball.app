@@ -1,6 +1,4 @@
 import { sql as sqlImport } from '@trackfootball/database'
-import FormData from 'form-data'
-import fetch from 'node-fetch'
 
 import { Maybe } from '../../packages/utils/types'
 import { getUser, getUserStravaSocialLogin } from '../../repository/user/user'

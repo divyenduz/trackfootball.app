@@ -14,9 +14,7 @@
     "next",
     "eslint-config-next",
     "react-map-gl",
-    "chalk",
     "node-fetch",
-    "swagger-typescript-api",
-    "react-static-tweets"
+    "swagger-typescript-api"
   ]
 }
