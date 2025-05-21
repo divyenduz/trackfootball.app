@@ -44,7 +44,7 @@
         "@types/node": "18.18.9",
         "@xmldom/xmldom": "0.8.10",
         "abort-controller": "3.0.0",
-        "autoprefixer": "10.4.16",
+        "autoprefixer": "10.4.21",
         "date-fns": "2.30.0",
         "dotenv": "16.3.1",
         "form-data": "4.0.0",
@@ -1710,8 +1710,6 @@
     "@mui/utils/react-is": ["react-is@19.1.0", "", {}, "sha512-Oe56aUPnkHyyDxxkvqtd7KkdQP5uIUfHxd5XTb3wE9d/kRnZLmKbDB0GWk919tdQ+mxxPtG6EAs6RMT6i1qtHg=="],
 
     "@mui/x-data-grid/clsx": ["clsx@1.2.1", "", {}, "sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg=="],
-
-    "@trackfootball/next-js-app/autoprefixer": ["autoprefixer@10.4.16", "", { "dependencies": { "browserslist": "^4.21.10", "caniuse-lite": "^1.0.30001538", "fraction.js": "^4.3.6", "normalize-range": "^0.1.2", "picocolors": "^1.0.0", "postcss-value-parser": "^4.2.0" }, "peerDependencies": { "postcss": "^8.1.0" }, "bin": { "autoprefixer": "bin/autoprefixer" } }, "sha512-7vd3UC6xKp0HLfua5IjZlcXvGAGy7cBAXTg2lyQ/8WpNhd6SiZ8Be+xm3FyBSYJx5GKcpRCzBh7RH4/0dnY+uQ=="],
 
     "@turf/polygon-to-linestring/@turf/helpers": ["@turf/helpers@5.0.0", "", {}, "sha512-ddoeaVE8BI1eRE0LLSBQLyXoM79YJdN3AaA+sHhsEG6DWOmsn89h0amthiG9oRPHrjOY7AyEK4MCP/DhS6FgZA=="],
 
