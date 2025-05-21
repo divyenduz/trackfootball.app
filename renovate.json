@@ -14,7 +14,6 @@
     "next",
     "eslint-config-next",
     "react-map-gl",
-    "node-fetch",
     "swagger-typescript-api"
   ]
 }
