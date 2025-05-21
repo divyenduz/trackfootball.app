@@ -12,7 +12,7 @@ const config = {
       'picsum.photos'
     ],
   },
-  transpilePackages: ['@trackfootball/*', 'mapbox-gl'],
+  transpilePackages: ['@trackfootball/*'],
 }
 
 module.exports = config
