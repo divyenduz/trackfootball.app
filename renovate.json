@@ -9,10 +9,5 @@
   "masterIssue": true,
   "prConcurrentLimit": 25,
   "rebaseWhen": "conflicted",
-  "ignoreDeps": [
-    "eslint",
-    "next",
-    "eslint-config-next",
-    "kubb.dev"
-  ]
+  "ignoreDeps": ["eslint", "next", "eslint-config-next"]
 }
