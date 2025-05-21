@@ -16,7 +16,7 @@
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "5.2.2",
     "@types/dotenv": "8.2.0",
-    "@types/node-fetch": "2.6.9",
+    "@types/node-fetch": "2.6.12",
     "@types/react": "18.2.37",
     "@types/react-map-gl": "6.1.6",
     "arg": "5.0.2",
