@@ -16,6 +16,7 @@ import {
 } from 'repository/post'
 import { fetchStravaActivity } from 'repository/strava'
 import { deleteStravaSocialLogin, getUserBy } from 'repository/user/user'
+import invariant from 'tiny-invariant'
 import { match } from 'ts-pattern'
 
 type StravaEventBase = {
@@ -64,18 +65,23 @@ async function processEvent(event: StravaWebhookEvent) {
           activityCreateEvent.object_id,
           user.id
         )
+        const activityType = activity.type
+        invariant(activityType, 'invariant: activity must have a type')
 
-        if (!['Run', 'Soccer'].includes(activity.type)) {
+        if (!['Run', 'Soccer'].includes(activityType)) {
           console.info(
             `Activity type ${activity.type} not supported, Strava key: ${activityCreateEvent.object_id}`
           )
           return
         }
 
+        const activityName = activity.name
+        invariant(activityName, 'invariant: activity must have a name')
+
         const data = {
           type: 'STRAVA_ACTIVITY' as PostType,
           key: stringify(activityCreateEvent.object_id),
-          text: activity.name,
+          text: activityName,
           userId: user.id,
         }
 
@@ -116,8 +122,10 @@ async function processEvent(event: StravaWebhookEvent) {
           activityUpdateEvent.object_id,
           user.id
         )
+        const activityType = activity.type
+        invariant(activityType, 'invariant: activity must have a type')
 
-        if (!['Run', 'Soccer'].includes(activity.type)) {
+        if (!['Run', 'Soccer'].includes(activityType)) {
           console.info(
             `Activity type ${activity.type} not supported, Strava key: ${activityUpdateEvent.object_id}`
           )
@@ -135,10 +143,12 @@ async function processEvent(event: StravaWebhookEvent) {
             console.error(`activityUpdateEvent: `, e)
           }
         } else {
+          const activityName = activity.name
+          invariant(activityName, 'invariant: activity must have a name')
           const data = {
             type: 'STRAVA_ACTIVITY' as PostType,
             key: stringify(activityUpdateEvent.object_id),
-            text: activity.name,
+            text: activityName,
             userId: user.id,
           }
 

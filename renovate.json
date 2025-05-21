@@ -13,6 +13,6 @@
     "eslint",
     "next",
     "eslint-config-next",
-    "swagger-typescript-api"
+    "kubb.dev"
   ]
 }
