@@ -11,8 +11,8 @@
     "pg:dump": "command -v pg_dump && PGPASSWORD=postgres pg_dump -U postgres -h localhost trackfootball@dev --schema-only --no-owner > ./prisma/schema.sql || echo 'pg_dump not found'"
   },
   "devDependencies": {
-    "@prisma/client": "5.12.1",
-    "prisma": "5.12.1",
+    "@prisma/client": "5.22.0",
+    "prisma": "5.22.0",
     "vitest": "0.34.6"
   }
 }

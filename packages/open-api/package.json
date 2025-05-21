@@ -9,7 +9,7 @@
     "generate:strava": "bun swagger-typescript-api -p https://developers.strava.com/swagger/swagger.json --output ./services/strava/generated && mv ./services/strava/generated/Api.ts ./services/strava/generated/index.ts"
   },
   "devDependencies": {
-    "@prisma/client": "5.12.1",
+    "@prisma/client": "5.22.0",
     "vitest": "0.34.6"
   },
   "dependencies": {
