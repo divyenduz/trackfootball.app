@@ -14,7 +14,7 @@
     "ts:madge": "npx madge --extensions ts,tsx ./packages ./components ./services ./hooks ./repository -i /tmp/img.png && open /tmp/img.png "
   },
   "devDependencies": {
-    "@trivago/prettier-plugin-sort-imports": "4.3.0",
+    "@trivago/prettier-plugin-sort-imports": "5.2.2",
     "@types/dotenv": "8.2.0",
     "@types/node-fetch": "2.6.9",
     "@types/react": "18.2.37",
