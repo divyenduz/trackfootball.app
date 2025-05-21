@@ -10,8 +10,8 @@
   },
   "devDependencies": {
     "@kubb/cli": "latest",
-    "@kubb/plugin-client": "^3.10.12",
-    "@kubb/plugin-oas": "^3.10.12",
+    "@kubb/plugin-client": "3.10.12",
+    "@kubb/plugin-oas": "3.10.12",
     "@prisma/client": "5.22.0",
     "typescript": "5.4.5",
     "vitest": "0.34.6"
