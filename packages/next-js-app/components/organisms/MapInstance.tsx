@@ -220,9 +220,8 @@ export const MapInstance: React.FC<MapInstanceProps> = ({
       <div className="rounded-lg overflow-hidden shadow-md border border-gray-200 mb-4">
         <ReactMapGL
           ref={mapRef}
-          className="map-instance"
           scrollZoom={false}
-          touchZoom={false}
+          touchZoomRotate={false}
           doubleClickZoom={isMapMovable}
           dragPan={isMapMovable}
           // @ts-expect-error unify viewport properties
@@ -232,9 +231,8 @@ export const MapInstance: React.FC<MapInstanceProps> = ({
             console.log('Map loaded')
             setMapLoaded(true)
           }}
-          touchAction={'pan-y'}
           mapStyle={mapStyle}
-          style={{ height: 400 }}
+          style={{ height: 400, touchAction: 'pan-y' }}
           mapboxAccessToken="pk.eyJ1IjoiZGl2eWVuZHV6IiwiYSI6ImNqeTRvc212NzEzdXczY2syam92YnBwY3AifQ.40p53nLBipgbxUpfz5VKfw"
           {...viewport}
         >
