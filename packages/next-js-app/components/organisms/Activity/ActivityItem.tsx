@@ -42,11 +42,14 @@ const prettyRunMetricSpeed = (hasSprints: boolean, speed: number) => {
   return mpsToKmph(speed)
 }
 
-export type AwaitedPost = NonNullable<Awaited<ReturnType<typeof getPost>>>
+export type AwaitedPost = NonNullable<Awaited<ReturnType<typeof getPost>>> & {
+  mapImageUrl?: string
+}
 
 export interface Props {
   post: AwaitedPost
   user: AwaitedUser | null
+  page?: 'feed' | 'activity'
 }
 
 interface AdminControlsProps {
@@ -93,7 +96,7 @@ const AdminControls: React.FC<AdminControlsProps> = ({ post, userIsAdmin }) => {
   );
 };
 
-const ActivityItem: React.FC<Props> = ({ post, user }) => {
+const ActivityItem: React.FC<Props> = ({ post, user, page = 'activity' }) => {
   const [showPower, setShowPower] = useState(false)
 
   const classes = {
@@ -401,17 +404,30 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
             </div>
           )}
 
-          <MapInstance
-            isMapMovable={isMapMovable}
-            viewport={viewport}
-            setViewport={setViewport}
-            topSprintOnly={false}
-            showSprints={showPower}
-            showRuns={showPower}
-            showHeatmap={!showPower}
-            post={post}
-            page={'activity'}
-          />
+          {page === 'feed' && post.mapImageUrl ? (
+            <div className="rounded-lg overflow-hidden shadow-md border border-gray-200 mb-4">
+              <Link href={`/activity/${post.id}`}>
+                <img 
+                  src={post.mapImageUrl} 
+                  alt="Activity Map" 
+                  className="w-full h-[350px] object-cover"
+                  loading="lazy"
+                />
+              </Link>
+            </div>
+          ) : (
+            <MapInstance
+              isMapMovable={isMapMovable}
+              viewport={viewport}
+              setViewport={setViewport}
+              topSprintOnly={false}
+              showSprints={showPower}
+              showRuns={showPower}
+              showHeatmap={!showPower}
+              post={post}
+              page={'activity'}
+            />
+          )}
 
           <ConditionalDisplay visible={post.type === 'STRAVA_ACTIVITY'}>
             <div className="flex items-center justify-center">

@@ -42,6 +42,7 @@ model Post {
   startTime       DateTime?
   fieldId         Int?
   image           String?
+  mapImageUrl     String?
   halfTime        Int        @default(-1)
   status          PostStatus @default(INIT)
   statusInfo      String     @default("")
