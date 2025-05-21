@@ -52,7 +52,7 @@
     "autoprefixer": "10.4.16",
     "date-fns": "2.30.0",
     "dotenv": "16.3.1",
-    "form-data": "4.0.0",
+    "form-data": "4.0.2",
     "multilines": "1.0.3",
     "next": "14.2.0",
     "node-fetch": "2.6.7",
