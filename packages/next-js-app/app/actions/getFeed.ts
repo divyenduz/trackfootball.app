@@ -12,6 +12,7 @@ export type FeedItemType = Post & {
   avgSpeed?: number
   maxSpeed?: number
   sprintCount?: number
+  mapImageUrl?: string
 }
 
 export async function getFeed(cursor: number = 0, limit: number = 3) {
@@ -35,6 +36,7 @@ export async function getFeed(cursor: number = 0, limit: number = 3) {
         ELSE NULL 
       END as "avgSpeed",
       "Post"."maxSpeed",
+      "Post"."mapImageUrl",
       CASE WHEN "Post".sprints IS NOT NULL 
         THEN (SELECT COUNT(*) FROM jsonb_array_elements("Post".sprints) as sprints) 
         ELSE 0 

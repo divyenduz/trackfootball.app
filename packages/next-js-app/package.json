@@ -9,6 +9,7 @@
     "start": "next start -p 6060",
     "lint": "bun tsc --noEmit; next lint",
     "test": "vitest run",
+    "generate-map-images": "node scripts/generate-map-images.js",
     "code:analyze": "tokei . -f -s 'lines' -t 'typescript,tsx' -e 'generated'",
     "ts:prune": "npx ts-prune --project tsconfig.json | grep -v '(used in module)' | grep -v default",
     "ts:madge": "npx madge --extensions ts,tsx ./packages ./components ./services ./hooks ./repository -i /tmp/img.png && open /tmp/img.png "
@@ -28,6 +29,7 @@
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "3.5.0",
+    "@aws-sdk/client-s3": "3.477.0",
     "@emotion/react": "11.11.1",
     "@emotion/styled": "11.11.0",
     "@mui/icons-material": "5.14.16",
@@ -57,6 +59,7 @@
     "next": "14.2.0",
     "node-fetch": "2.6.7",
     "postgres": "3.4.3",
+    "puppeteer": "21.6.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-map-gl": "6.1.19",
