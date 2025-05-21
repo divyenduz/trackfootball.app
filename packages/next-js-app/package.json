@@ -35,7 +35,6 @@
     "@mui/material": "5.14.17",
     "@mui/styles": "5.14.17",
     "@mui/x-data-grid": "5.17.26",
-    "@next/bundle-analyzer": "12.1.6",
     "@tmcw/togeojson": "5.8.1",
     "@trackfootball/database": "*",
     "@trackfootball/open-api": "*",
