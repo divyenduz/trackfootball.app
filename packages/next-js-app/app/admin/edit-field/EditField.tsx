@@ -89,7 +89,7 @@ export default function EditField({ fields }: Props) {
 
       const newViewport = {
         width: '100%',
-        height: 700,
+        height: 400,
         ...bounds,
         zoom: field.zoom || 15,
       }
@@ -296,7 +296,7 @@ export default function EditField({ fields }: Props) {
         {...viewport}
         mapStyle={mapStyle}
         bearing={fieldBearing}
-        style={{ height: 700 }}
+        style={{ height: 400 }}
         onMove={(evt) => setViewport(evt.viewState)}
         mapboxAccessToken="pk.eyJ1IjoiZGl2eWVuZHV6IiwiYSI6ImNqeTRvc212NzEzdXczY2syam92YnBwY3AifQ.40p53nLBipgbxUpfz5VKfw"
       >

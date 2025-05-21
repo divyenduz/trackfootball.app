@@ -40,7 +40,7 @@ export const FeedItem: React.FC<Props> = ({ post }) => {
 
       const newViewport = {
         width: '100%',
-        height: 350,
+        height: 400,
         ...bounds,
       }
       setViewport(newViewport)

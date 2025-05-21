@@ -21,7 +21,7 @@ const ReactMapGL = dynamic(() => import('react-map-gl/mapbox'), {
   loading: () => (
     <div
       className="flex items-center justify-center bg-gray-100 rounded-md"
-      style={{ height: '350px' }}
+      style={{ height: '400px' }}
     >
       <div className="text-gray-500 flex flex-col items-center">
         <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-purple-500 mb-2"></div>
@@ -234,7 +234,7 @@ export const MapInstance: React.FC<MapInstanceProps> = ({
           }}
           touchAction={'pan-y'}
           mapStyle={mapStyle}
-          style={{ height: 350 }}
+          style={{ height: 400 }}
           mapboxAccessToken="pk.eyJ1IjoiZGl2eWVuZHV6IiwiYSI6ImNqeTRvc212NzEzdXczY2syam92YnBwY3AifQ.40p53nLBipgbxUpfz5VKfw"
           {...viewport}
         >

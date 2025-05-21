@@ -99,7 +99,7 @@ export default function AddField({ posts }: Props) {
 
       const newViewport = {
         width: '100%',
-        height: 700,
+        height: 400,
         ...bounds,
       }
       setViewport(newViewport)
@@ -272,7 +272,7 @@ export default function AddField({ posts }: Props) {
         // zoom={viewport.zoom || 15}
         // width="100%"
         // height="700px"
-        style={{ height: 700 }}
+        style={{ height: 400 }}
         {...viewport}
         onMove={(evt) => setViewport(evt.viewState)}
         mapStyle="mapbox://styles/mapbox/satellite-v9"
