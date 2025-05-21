@@ -19,17 +19,23 @@ const DataGrid = dynamic(() =>
   namedComponent(import('@mui/x-data-grid'), 'DataGrid')
 )
 
-const ReactMapGL = dynamic(() => import('react-map-gl'), {
+const ReactMapGL = dynamic(() => import('react-map-gl/mapbox'), {
   ssr: false,
   loading: () => <p>Loading...</p>,
 })
 
-const Layer = dynamic(() => namedComponent(import('react-map-gl'), 'Layer'))
-const Marker = dynamic(() => namedComponent(import('react-map-gl'), 'Marker'))
-const NavigationControl = dynamic(() =>
-  namedComponent(import('react-map-gl'), 'NavigationControl')
+const Layer = dynamic(() =>
+  namedComponent(import('react-map-gl/mapbox'), 'Layer')
 )
-const Source = dynamic(() => namedComponent(import('react-map-gl'), 'Source'))
+const Marker = dynamic(() =>
+  namedComponent(import('react-map-gl/mapbox'), 'Marker')
+)
+const NavigationControl = dynamic(() =>
+  namedComponent(import('react-map-gl/mapbox'), 'NavigationControl')
+)
+const Source = dynamic(() =>
+  namedComponent(import('react-map-gl/mapbox'), 'Source')
+)
 
 interface Props {
   fields: Awaited<ReturnType<typeof getFields>>
@@ -290,8 +296,9 @@ export default function EditField({ fields }: Props) {
         {...viewport}
         mapStyle={mapStyle}
         bearing={fieldBearing}
-        onViewportChange={setViewport}
-        mapboxApiAccessToken="pk.eyJ1IjoiZGl2eWVuZHV6IiwiYSI6ImNqeTRvc212NzEzdXczY2syam92YnBwY3AifQ.40p53nLBipgbxUpfz5VKfw"
+        style={{ height: 700 }}
+        onMove={(evt) => setViewport(evt.viewState)}
+        mapboxAccessToken="pk.eyJ1IjoiZGl2eWVuZHV6IiwiYSI6ImNqeTRvc212NzEzdXczY2syam92YnBwY3AifQ.40p53nLBipgbxUpfz5VKfw"
       >
         <NavigationControl showCompass={true} />
 
@@ -334,7 +341,7 @@ export default function EditField({ fields }: Props) {
                     longitude={lng}
                     onDragStart={() => {}}
                     onDrag={({ lngLat }) => {
-                      const [lng, lat] = lngLat
+                      const { lng, lat } = lngLat
                       //@ts-expect-error
                       setField((field) => {
                         return {

@@ -14,6 +14,7 @@
     "migrate": "bun run --filter @trackfootball/database migrate"
   },
   "dependencies": {
+    "@math.gl/web-mercator": "^4.1.0",
     "typescript": "5.4.5"
   },
   "devDependencies": {

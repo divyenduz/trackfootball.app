@@ -195,7 +195,9 @@ export const FeedItem: React.FC<Props> = ({ post }) => {
           <Link href={`/activity/${post.id}`}>
             <MapInstance
               isMapMovable={false}
+              // @ts-expect-error unify viewport properties
               viewport={viewport}
+              // @ts-expect-error unify viewport properties
               setViewport={setViewport}
               topSprintOnly={false}
               showSprints={false}

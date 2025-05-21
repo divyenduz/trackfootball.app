@@ -16,7 +16,7 @@
 
 - **Formatting**: Use Prettier with single quotes, no semicolons
 - **Imports**: Sorted using importOrder pattern in .prettierrc.json
-- **Types**: Use TypeScript with strong typing, avoid `any`
+- **Types**: Use TypeScript with strong typing, avoid `any`. Never use `@ts-ignore`, if you have to use `@ts-expect-error` with a helpful message
 - **Error Handling**: Try/catch with appropriate fallbacks (see profile page)
 - **Components**: React functional components with TypeScript interfaces
 - **Naming**:

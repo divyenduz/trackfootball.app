@@ -1,6 +1,6 @@
+import { WebMercatorViewport } from '@math.gl/web-mercator'
 import type { Field, Post } from '@prisma/client'
 import { FeatureCollection, LineString } from '@turf/helpers'
-import { WebMercatorViewport } from 'react-map-gl'
 import { match } from 'ts-pattern'
 
 export function getNthCoord(geoJson: FeatureCollection<LineString>, n: number) {
@@ -83,7 +83,7 @@ export const getBoundsForPoints = (post: PostWithField) => {
     // Use WebMercatorViewport to get center longitude/latitude and zoom
     const viewport = new WebMercatorViewport({
       width: getWindowWidth(),
-      height: 400,
+      height: 600,
     }).fitBounds(cornersLongLat as any, {
       padding: 30,
     })

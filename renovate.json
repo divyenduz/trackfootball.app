@@ -13,7 +13,6 @@
     "eslint",
     "next",
     "eslint-config-next",
-    "react-map-gl",
     "swagger-typescript-api"
   ]
 }
