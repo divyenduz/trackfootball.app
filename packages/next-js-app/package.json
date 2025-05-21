@@ -18,7 +18,7 @@
     "@types/dotenv": "8.2.0",
     "@types/node-fetch": "2.6.12",
     "@types/react": "18.2.37",
-    "@types/react-map-gl": "6.1.6",
+    "@types/react-map-gl": "6.1.7",
     "arg": "5.0.2",
     "eslint": "8.57.0",
     "eslint-config-next": "14.1.3",
