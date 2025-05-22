@@ -47,7 +47,7 @@
     "@xmldom/xmldom": "0.8.10",
     "abort-controller": "3.0.0",
     "autoprefixer": "10.4.21",
-    "date-fns": "2.30.0",
+    "date-fns": "4.1.0",
     "dotenv": "16.5.0",
     "form-data": "4.0.2",
     "mapbox-gl": "3.12.0",
