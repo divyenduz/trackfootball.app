@@ -43,7 +43,7 @@
     "@turf/helpers": "6.5.0",
     "@turf/invariant": "6.5.0",
     "@turf/turf": "6.5.0",
-    "@types/node": "18.19.103",
+    "@types/node": "22.15.21",
     "@xmldom/xmldom": "0.8.10",
     "abort-controller": "3.0.0",
     "autoprefixer": "10.4.21",
