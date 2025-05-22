@@ -7,7 +7,9 @@
     "test": "bun test",
     "lint": "bun tsc --noEmit"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/bun": "1.2.14"
+  },
   "dependencies": {
     "@trackfootball/utils": "*",
     "@turf/distance": "6.5.0",

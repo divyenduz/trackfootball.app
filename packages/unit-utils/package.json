@@ -7,7 +7,9 @@
     "test": "echo 'No tests' && exit 0",
     "lint": "bun tsc --noEmit"
   },
-  "devDependencies": { },
+  "devDependencies": {
+    "@types/bun": "1.2.14"
+  },
   "dependencies": {
     "@turf/distance": "6.5.0",
     "@turf/helpers": "6.5.0",
