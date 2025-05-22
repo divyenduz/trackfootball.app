@@ -6,12 +6,12 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "bun run --filter @trackfootball/next-js-app dev",
-    "build": "bun run --filter @trackfootball/* build",
-    "start": "bun run --filter @trackfootball/next-js-app start",
-    "test": "bun run --filter @trackfootball/* test",
-    "lint": "bun run --filter @trackfootball/* lint",
-    "migrate": "bun run --filter @trackfootball/database migrate"
+    "dev": "bun --bun run --filter @trackfootball/next-js-app dev",
+    "build": "bun --bun run --filter @trackfootball/* build",
+    "start": "bun --bun run --filter @trackfootball/next-js-app start",
+    "test": "bun --bun run --filter @trackfootball/* test",
+    "lint": "bun --bun run --filter @trackfootball/* lint",
+    "migrate": "bun --bun run --filter @trackfootball/database migrate"
   },
   "dependencies": {
     "@math.gl/web-mercator": "4.1.0",
