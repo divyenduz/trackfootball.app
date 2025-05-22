@@ -42,7 +42,7 @@ jobs:
           gem install kamal -v 1.8.1
 
       - name: Turnstyle
-        uses: softprops/turnstyle@v1
+        uses: softprops/turnstyle@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
