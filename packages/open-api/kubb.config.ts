@@ -40,6 +40,7 @@ export default defineConfig({
         path: './generated/client.ts',
         barrelType: false
       },
+      importPath: '../../../fetch.ts'
     }),
   ],
 })

@@ -3,7 +3,8 @@
  * Do not edit manually.
  */
 
-import client from '@kubb/plugin-client/clients/axios'
+import client from '../../../fetch.ts'
+import type { RequestConfig, ResponseErrorConfig } from '../../../fetch.ts'
 import type {
   GetStatsQueryResponse,
   GetStatsPathParams,
@@ -83,7 +84,6 @@ import type {
   GetRouteStreamsQueryResponse,
   GetRouteStreamsPathParams,
 } from './types.ts'
-import type { RequestConfig, ResponseErrorConfig } from '@kubb/plugin-client/clients/axios'
 
 function getGetStatsUrl(id: GetStatsPathParams['id']) {
   return `https://www.strava.com/api/v3/athletes/${id}/stats` as const
