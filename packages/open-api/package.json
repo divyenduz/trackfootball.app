@@ -13,6 +13,6 @@
     "@kubb/plugin-client": "3.10.12",
     "@kubb/plugin-oas": "3.10.12",
     "@prisma/client": "5.22.0",
-    "typescript": "5.4.5",
+    "typescript": "5.4.5"
   }
 }
