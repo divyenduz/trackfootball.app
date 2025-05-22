@@ -1,30 +1,31 @@
-import { StravaApi } from '@trackfootball/open-api'
+import {
+  getActivityById,
+  getActivityStreams,
+  getLoggedInAthleteActivities,
+} from '@trackfootball/open-api'
 import { GeoData } from '@trackfootball/sprint-detection/geoData'
 import { getStravaToken } from 'services/strava/token'
+import invariant from 'tiny-invariant'
 import { match } from 'ts-pattern'
 
-import { DetailedActivity } from './strava/DetailedActivity'
-
-async function getStravaApi(userId: number) {
+async function getStravaAccessTokenHeaders(userId: number) {
   const stravaAccessToken = await getStravaToken(userId)
-  const stravaApi = new StravaApi({
-    baseApiParams: {
-      headers: {
-        Authorization: `Bearer ${stravaAccessToken}`,
-      },
-    },
-  })
-  return stravaApi
+  return {
+    Authorization: `Bearer ${stravaAccessToken}`,
+  }
 }
 
 export async function checkStravaAccessToken(userId: number) {
+  const stravaAccessTokenHeaders = await getStravaAccessTokenHeaders(userId)
   try {
-    const stravaApi = await getStravaApi(userId)
-    await (
-      await stravaApi.athlete.getLoggedInAthleteActivities({
+    await getLoggedInAthleteActivities(
+      {
         per_page: 1,
-      })
-    ).data
+      },
+      {
+        headers: stravaAccessTokenHeaders,
+      }
+    )
     return true
   } catch (e) {
     console.error('Error: strava check failed')
@@ -34,36 +35,47 @@ export async function checkStravaAccessToken(userId: number) {
 }
 
 export async function fetchStravaActivity(activityId: number, userId: number) {
-  const stravaApi = await getStravaApi(userId)
-
-  const activity = (
-    await stravaApi.activities.getActivityById(activityId, {
+  const stravaAccessTokenHeaders = await getStravaAccessTokenHeaders(userId)
+  const activity = await getActivityById(
+    activityId,
+    {
       include_all_efforts: false,
-    })
-  ).data
-  return activity as DetailedActivity
+    },
+    {
+      headers: stravaAccessTokenHeaders,
+    }
+  )
+  return activity
 }
 
 export async function fetchStravaActivityGeoJson(
   activityId: number,
   userId: number
 ) {
-  const stravaApi = await getStravaApi(userId)
-  const activityStreams = (
-    await stravaApi.activities.getActivityStreams(activityId, {
+  const stravaAccessTokenHeaders = await getStravaAccessTokenHeaders(userId)
+  const activityStreams = await getActivityStreams(
+    activityId,
+    {
       keys: ['latlng', 'time', 'heartrate'],
       key_by_type: true,
-    })
-  ).data
+    },
+    {
+      headers: stravaAccessTokenHeaders,
+    }
+  )
 
   const activity = await fetchStravaActivity(activityId, userId)
+  const activityName = activity.name
+  invariant(activityName, 'invariant: activity must have a name')
+  const activityStartDate = activity.start_date
+  invariant(activityStartDate, 'invariant: activity must have a start date')
   const geoJson = match(Boolean(activityStreams))
     .with(true, () =>
       new GeoData(
-        activity.name,
+        activityName,
         JSON.stringify(activityStreams),
         'StravaActivityStream',
-        new Date(activity.start_date)
+        new Date(activityStartDate)
       ).toGeoJson()
     )
     .otherwise(() => null)

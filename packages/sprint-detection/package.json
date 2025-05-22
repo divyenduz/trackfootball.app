@@ -4,11 +4,11 @@
   "private": true,
   "main": "index.ts",
   "scripts": {
-    "test": "vitest run",
+    "test": "bun test",
     "lint": "bun tsc --noEmit"
   },
   "devDependencies": {
-    "vitest": "0.34.6"
+    "@types/bun": "1.2.14"
   },
   "dependencies": {
     "@trackfootball/utils": "*",

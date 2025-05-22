@@ -8,8 +8,8 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN bun install && \
-  bun run build && \
+RUN bun install --frozen-lockfile && \
+  bun --bun run build && \
   rm -rf /usr/local/share/.cache && \
   rm -rf /usr/local/share/.config && \
   rm -rf /tmp && rm -rf /root/.cache

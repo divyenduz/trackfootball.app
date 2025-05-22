@@ -8,6 +8,7 @@
     "noUnusedLocals": false,
     "noUncheckedIndexedAccess": false, // TODO: make true
     "forceConsistentCasingInFileNames": true,
+    "allowImportingTsExtensions": true,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",

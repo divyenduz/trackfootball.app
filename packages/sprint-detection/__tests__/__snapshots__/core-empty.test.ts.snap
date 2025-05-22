@@ -20,3 +20,24 @@ exports[`core - empty data tests > should work base numeric metrics with empty d
   },
 }
 `;
+
+exports[`core - empty data tests should work base numeric metrics with empty data 1`] = `
+{
+  "averageSpeed": 0,
+  "elapsedTime": {
+    "hours": 0,
+    "minutes": 0,
+    "seconds": 0,
+  },
+  "maxSpeed": 0,
+  "totalDistance": 0,
+  "totalSprintTime": {
+    "days": 0,
+    "hours": 0,
+    "minutes": 0,
+    "months": 0,
+    "seconds": 0,
+    "years": 0,
+  },
+}
+`;

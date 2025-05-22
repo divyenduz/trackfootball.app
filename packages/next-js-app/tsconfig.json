@@ -7,6 +7,7 @@
     "strict": true,
     "noUnusedLocals": false,
     "noUncheckedIndexedAccess": false, // TODO: make true
+    "allowImportingTsExtensions": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,

@@ -86,8 +86,7 @@ export default async function Profile({ params }: Props) {
   )) as CheckStravaState
 
   // Fetch athlete stats from database
-  const { totalActivities, totalDistance, totalSprints, maxSpeed, totalTime } =
-    await getAthleteStats(athlete.id)
+  const { totalActivities, totalDistance, totalSprints, maxSpeed } = await getAthleteStats(athlete.id)
 
   // Fetch athlete activities (up to 5 most recent for display)
   const athletePosts = await getAthleteActivities(athlete.id, 5)

@@ -160,13 +160,10 @@ export const MapInstance: React.FC<MapInstanceProps> = ({
     }
   }, [mapLoaded])
 
-  // Add effect to handle viewport changes
   useEffect(() => {
     if (mapLoaded && mapRef.current) {
-      // Slightly modify viewport to trigger a rerender
       const timeoutId = setTimeout(() => {
         const currentViewport = { ...viewport }
-        // Imperceptible change to force redraw
         setViewport({
           ...currentViewport,
           zoom: currentViewport.zoom + 0.0001,
