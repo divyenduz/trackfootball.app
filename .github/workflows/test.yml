@@ -10,24 +10,6 @@ env:
   NEXT_TELEMETRY_DISABLED: 1
 
 jobs:
-  setup:
-    name: Setup
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
-      - name: Turnstyle
-        uses: softprops/turnstyle@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Install Dependencies
-        run: bun install --frozen-lockfile
-      - name: Generate Prisma Client
-        run: bun run --filter @trackfootball/database build
-
   test_matrix:
     needs: Setup
     name: ${{ matrix.task }}
@@ -43,7 +25,12 @@ jobs:
         uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
+
       - name: Install Dependencies
-        run: bun install
+        run: bun install --frozen-lockfile
+
+      - name: Generate Prisma Client
+        run: bun run --filter @trackfootball/database build
+
       - name: Run ${{ matrix.task }}
         run: bun run ${{ matrix.task }}
