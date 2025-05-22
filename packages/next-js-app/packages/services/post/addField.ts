@@ -1,5 +1,4 @@
 import { Field, Post } from '@prisma/client'
-import { sql } from '@trackfootball/database'
 import area from '@turf/area'
 import booleanPointInPolygon from '@turf/boolean-point-in-polygon'
 import center from '@turf/center'
@@ -11,6 +10,7 @@ import {
   point,
 } from '@turf/helpers'
 import intersect from '@turf/intersect'
+import { sql } from 'bun'
 import { match } from 'ts-pattern'
 
 interface PostAddFieldArgs {
@@ -19,12 +19,11 @@ interface PostAddFieldArgs {
 
 export async function postAddField({ postId }: PostAddFieldArgs) {
   {
-    const post = (
-      await sql<Post[]>`
+    const posts: Post[] = await sql`
         SELECT * FROM "Post"
         WHERE "id" = ${postId}
         `
-    )[0]
+    const post = posts[0]
 
     if (!post) {
       console.error(`post.tagging.addField: Post ${postId} not found`)
@@ -35,9 +34,8 @@ export async function postAddField({ postId }: PostAddFieldArgs) {
     const centerValue = center(geoJson)
     const geoJsonCover = envelope(geoJson)
 
-    const fullFields = (await sql<
-      Field[]
-    >`SELECT * FROM "Field" WHERE usage='FULL_FIELD'`) as Field[]
+    const fullFields: Field[] =
+      (await sql`SELECT * FROM "Field" WHERE usage='FULL_FIELD'`) as Field[]
     // Note: get the matching full field
     const matchingFullField = fullFields.find((field) => {
       const fieldFeatures = featureCollection([
@@ -52,12 +50,12 @@ export async function postAddField({ postId }: PostAddFieldArgs) {
 
     if (!Boolean(matchingFullField)) {
       console.error(
-        `info: post ${post.id} unable to find a matching full field`
+        `info: post ${post.id} unable to find a matching full field`,
       )
       return
     }
 
-    const fields = (await sql<Field[]>`SELECT * FROM "Field" WHERE name=${
+    const fields: Field[] = (await sql`SELECT * FROM "Field" WHERE name=${
       matchingFullField!.name
     }`) as Field[]
 
@@ -77,7 +75,7 @@ export async function postAddField({ postId }: PostAddFieldArgs) {
         .exhaustive()
 
       const percentageAreaCovered = Math.round(
-        (intersectionArea / totalFieldArea) * 100
+        (intersectionArea / totalFieldArea) * 100,
       )
 
       return {
@@ -97,21 +95,20 @@ export async function postAddField({ postId }: PostAddFieldArgs) {
           return maxAreaField
         }
       },
-      fieldsWithIntersectionArea[0]
+      fieldsWithIntersectionArea[0],
     ).field
 
     if (Boolean(matchingField)) {
-      const updatedPost = (
-        await sql<Post[]>`
+      const updatedPosts: Post[] = await sql`
           UPDATE "Post"
           SET "fieldId" = ${matchingField!.id}
           WHERE "id" = ${post.id}
           RETURNING *
           `
-      )[0]
+      const updatedPost = updatedPosts[0]
 
       console.info(
-        `info: post ${updatedPost.id} updated with a field named ${matchingField?.name} (${matchingField?.usage})`
+        `info: post ${updatedPost.id} updated with a field named ${matchingField?.name} (${matchingField?.usage})`,
       )
     } else {
       console.info(`info: post ${post.id} unable to find matching field`)

@@ -1,6 +1,6 @@
 'use server'
 
-import { sql } from '@trackfootball/database'
+import { sql } from 'bun'
 import { revalidatePath } from 'next/cache'
 import { auth } from 'utils/auth'
 

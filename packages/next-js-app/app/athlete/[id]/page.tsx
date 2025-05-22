@@ -16,11 +16,9 @@ import ShowToOwner from '../../../components/user/role-based-access/ShowToOwner'
 import {
   getAthleteActivities,
   getAthleteStats,
-} from '../../../repository/stats'
-import {
   getUser,
   getUserStravaSocialLogin,
-} from '../../../repository/user/user'
+} from '@trackfootball/database'
 
 export type CheckStravaState =
   | 'LOADING'
@@ -81,12 +79,12 @@ export default async function Profile({ params }: Props) {
 
   const backendApiUrl = await getBackendApiUrl()
   const checkStravaState = (await checkStravaToken(
-    //@ts-expect-error match the social login types
-    athleteWithSocialLogin
+    athleteWithSocialLogin,
   )) as CheckStravaState
 
   // Fetch athlete stats from database
-  const { totalActivities, totalDistance, totalSprints, maxSpeed } = await getAthleteStats(athlete.id)
+  const { totalActivities, totalDistance, totalSprints, maxSpeed } =
+    await getAthleteStats(athlete.id)
 
   // Fetch athlete activities (up to 5 most recent for display)
   const athletePosts = await getAthleteActivities(athlete.id, 5)

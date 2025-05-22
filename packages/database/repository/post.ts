@@ -1,8 +1,7 @@
 import { Field, Post, PostType, User } from '@prisma/client'
-import { sql } from '@trackfootball/database'
+import { stringify } from '../../next-js-app/packages/utils/utils'
 import { FeatureCollection, LineString } from '@turf/helpers'
-
-import { stringify } from '../packages/utils/utils'
+import { sql } from 'bun'
 
 interface CreatePostInput {
   type: PostType
@@ -17,29 +16,23 @@ export async function createPost(input: CreatePostInput) {
     updatedAt: sql`now()`,
   }
 
-  const postQuery = sql<Post[]>`
-      INSERT INTO "Post" ${
-        //@ts-expect-error
-        sql(data)
-      }
+  const posts: Post[] = await sql`
+      INSERT INTO "Post" ${sql(data)}
       RETURNING *
       `
 
-  const post = (await postQuery)[0]
+  const post = posts[0]
   return post
 }
 
 async function getPostMeta(id: number) {
-  const postMeta = (
-    await sql<
-      Array<{
-        number_of_coordinates: number
-        max_heart_rate: number
-        average_heart_rate: number
-        number_of_sprints: number
-        number_of_runs: number
-      }>
-    >`
+  const postsMeta: Array<{
+    number_of_coordinates: number
+    max_heart_rate: number
+    average_heart_rate: number
+    number_of_sprints: number
+    number_of_runs: number
+  }> = await sql`
   WITH heart_rates AS (
     SELECT jsonb_array_elements_text("geoJson" -> 'features' -> 0 -> 'properties' -> 'heartRates')::int as heart_rate FROM "Post" WHERE id=${id}
   ),
@@ -55,7 +48,7 @@ async function getPostMeta(id: number) {
   )
   SELECT max_heart_rate, average_heart_rate, number_of_coordinates, number_of_sprints, number_of_runs from heart_rate_agg, post_data;
     `
-  )[0]
+  const postMeta = postsMeta[0]
 
   return {
     numberOfCoordinates: postMeta?.number_of_coordinates || 0,
@@ -73,30 +66,28 @@ type TypedPost = Post & {
 }
 
 export async function getPost(id: number) {
-  const post = (
-    await sql<TypedPost[]>`
+  const posts: TypedPost[] = await sql`
     SELECT * from "Post"
     WHERE "id" = ${id}
     `
-  )[0]
+  const post = posts[0]
 
   if (!post) {
     return null
   }
 
-  const user = (
-    await sql<Pick<User, 'id' | 'firstName' | 'lastName' | 'picture'>[]>`
+  const users: Array<Pick<User, 'id' | 'firstName' | 'lastName' | 'picture'>> =
+    await sql`
     SELECT "id", "firstName", "lastName", "picture" from "User"
     WHERE "id" = ${post.userId}
     `
-  )[0]
+  const user = users[0]
 
-  const field = (
-    await sql<Field[]>`
+  const fields: Field[] = await sql`
     SELECT * from "Field"
     WHERE "id" = ${post.fieldId}
     `
-  )[0]
+  const field = fields[0]
 
   const postWithData = {
     ...post,
@@ -116,12 +107,11 @@ export async function getPost(id: number) {
 }
 
 export async function getPostIdBy(stravaId: number) {
-  const post = (
-    await sql<TypedPost[]>`
+  const posts: TypedPost[] = await sql`
     SELECT * from "Post"
     WHERE "key" = ${stringify(stravaId)}
     `
-  )[0]
+  const post = posts[0]
 
   if (!post) {
     return null
@@ -131,27 +121,25 @@ export async function getPostIdBy(stravaId: number) {
 }
 
 export async function updatePostTitle(stravaId: number, title: string) {
-  const post = (
-    await sql<Post[]>`
+  const posts: Post[] = await sql`
     UPDATE "Post"
     SET "text" = ${title}
     WHERE "key" = ${stringify(stravaId)}
     RETURNING *
     `
-  )[0]
+  const post = posts[0]
 
   return post
 }
 
 export async function deletePostBy(stravaId: number): Promise<Post | null> {
   const key = `${stravaId}`
-  const post = (
-    await sql<Post[]>`
+  const posts: Post[] = await sql`
     DELETE FROM "Post"
     WHERE "key" = ${key}
     RETURNING *
     `
-  )[0]
+  const post = posts[0]
 
   return post
 }

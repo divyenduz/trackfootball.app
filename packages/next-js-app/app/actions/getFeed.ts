@@ -1,7 +1,8 @@
 'use server'
 
-import { Field, Post, User, sql } from '@trackfootball/database'
+import { Field, Post, User } from '@trackfootball/database'
 import { FeatureCollection, LineString } from '@turf/helpers'
+import { sql } from 'bun'
 
 export type FeedItemType = Post & {
   geoJson: FeatureCollection<LineString>
@@ -12,11 +13,10 @@ export type FeedItemType = Post & {
 }
 
 export async function getFeed(cursor: number = 0, limit: number = 3) {
-  const maxPostId = (
-    await sql<{ max: number }[]>`SELECT MAX("id") FROM "Post"`
-  )[0].max
+  const maxPostIdQ: { max: number }[] = await sql`SELECT MAX("id") FROM "Post"`
+  const maxPostId = maxPostIdQ[0].max
 
-  const posts = await sql<FeedItemType[]>`
+  const posts: FeedItemType[] = await sql`
     SELECT row_to_json("Field".*::"Field") as "Field", row_to_json("User".*::"User") as "User", "Post".* FROM "Post"
     LEFT JOIN "Field" ON "Post"."fieldId" = "Field"."id"
     INNER JOIN "User" ON "Post"."userId" = "User"."id"

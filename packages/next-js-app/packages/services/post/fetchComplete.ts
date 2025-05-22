@@ -1,10 +1,10 @@
 import { Post } from '@prisma/client'
-import { sql } from '@trackfootball/database'
 import { Core } from '@trackfootball/sprint-detection'
 import { durationToSeconds } from '@trackfootball/utils'
 
-import { fetchStravaActivityGeoJson } from '../../../repository/strava'
 import { postAddField } from './addField'
+import { fetchStravaActivityGeoJson } from 'services/strava/token'
+import { sql } from 'bun'
 
 interface FetchCompletePostArgs {
   postId: number
@@ -12,12 +12,11 @@ interface FetchCompletePostArgs {
 
 export async function fetchCompletePost({ postId }: FetchCompletePostArgs) {
   {
-    const post = (
-      await sql<Post[]>`
+    const posts = await sql`
         SELECT * FROM "Post"
         WHERE "id" = ${postId} AND "fieldId" IS NULL
         `
-    )[0]
+    const post = posts[0]
 
     if (!post) {
       console.error(`post.fetchComplete: post ${postId} not found`)
@@ -32,7 +31,7 @@ export async function fetchCompletePost({ postId }: FetchCompletePostArgs) {
 
     const geoJson = await fetchStravaActivityGeoJson(
       parseInt(post.key),
-      post.userId
+      post.userId,
     )
 
     if (geoJson instanceof Error) {
@@ -45,8 +44,7 @@ export async function fetchCompletePost({ postId }: FetchCompletePostArgs) {
 
     const core = new Core(geoJson)
 
-    const updatedPost = (
-      await sql<Post[]>`
+    const updatedPosts: Post[] = await sql`
         WITH PostModified AS (
           UPDATE "Post"
           SET "status" = 'COMPLETED',
@@ -68,7 +66,7 @@ export async function fetchCompletePost({ postId }: FetchCompletePostArgs) {
         FROM
           "Post"
         `
-    )[0]
+    const updatedPost = updatedPosts[0]
 
     await postAddField({
       postId: post.id,
