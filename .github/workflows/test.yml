@@ -10,30 +10,38 @@ env:
   NEXT_TELEMETRY_DISABLED: 1
 
 jobs:
-  build:
-    name: Test
-    timeout-minutes: 30
-    runs-on: [ubuntu-latest]
+  setup:
+    name: Setup
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
-
       - name: Turnstyle
         uses: softprops/turnstyle@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Install Dependencies
         run: bun install
 
-      - name: Build Dependencies
-        run: bun run build
-
-      - name: Run Lint
-        run: bun run lint
-
-      - name: Run Tests
-        run: bun run test
+  test_matrix:
+    needs: Setup
+    name: ${{ matrix.task }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      matrix:
+        task: [build, lint, test]
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+      - name: Install Dependencies
+        run: bun install
+      - name: Run ${{ matrix.task }}
+        run: bun run ${{ matrix.task }}
