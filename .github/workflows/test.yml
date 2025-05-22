@@ -29,7 +29,7 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: Generate Prisma Client
-        run: bun run --filter @trackfootball/database build
+        run: bun --bun run --filter @trackfootball/database build
 
       - name: Run ${{ matrix.task }}
-        run: bun run ${{ matrix.task }}
+        run: bun --bun run ${{ matrix.task }}
