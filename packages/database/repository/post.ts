@@ -1,8 +1,7 @@
 import { Field, Post, PostType, User } from '@prisma/client'
 import { sql } from '@trackfootball/database'
+import { stringify } from '../../next-js-app/packages/utils/utils'
 import { FeatureCollection, LineString } from '@turf/helpers'
-
-import { stringify } from '../packages/utils/utils'
 
 interface CreatePostInput {
   type: PostType

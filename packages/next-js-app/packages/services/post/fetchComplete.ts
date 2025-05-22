@@ -3,8 +3,8 @@ import { sql } from '@trackfootball/database'
 import { Core } from '@trackfootball/sprint-detection'
 import { durationToSeconds } from '@trackfootball/utils'
 
-import { fetchStravaActivityGeoJson } from '../../../repository/strava'
 import { postAddField } from './addField'
+import { fetchStravaActivityGeoJson } from 'services/strava/token'
 
 interface FetchCompletePostArgs {
   postId: number

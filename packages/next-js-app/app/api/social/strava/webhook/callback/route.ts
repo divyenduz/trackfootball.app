@@ -13,11 +13,12 @@ import {
   getPost,
   getPostIdBy,
   updatePostTitle,
-} from 'repository/post'
-import { fetchStravaActivity } from 'repository/strava'
-import { deleteStravaSocialLogin, getUserBy } from 'repository/user/user'
+  deleteStravaSocialLogin,
+  getUserBy
+} from '@trackfootball/database'
 import invariant from 'tiny-invariant'
 import { match } from 'ts-pattern'
+import { fetchStravaActivity } from 'services/strava/token'
 
 type StravaEventBase = {
   object_id: number

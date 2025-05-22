@@ -5,7 +5,7 @@ import { Core } from '@trackfootball/sprint-detection'
 import { durationToSeconds } from '@trackfootball/utils'
 import { MESSAGE_UNAUTHORIZED } from 'packages/auth/utils'
 import { postAddField } from 'packages/services/post/addField'
-import { fetchStravaActivityGeoJson } from 'repository/strava'
+import { fetchStravaActivityGeoJson } from 'services/strava/token'
 import { auth } from 'utils/auth'
 
 export async function refreshPost(postId: number) {

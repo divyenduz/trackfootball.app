@@ -21,7 +21,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { getBoundsForPoints } from 'packages/utils/map'
 import React, { useEffect, useState } from 'react'
-import { getPost } from 'repository/post'
+import { getPost } from '@trackfootball/database'
 import { match } from 'ts-pattern'
 
 import { ConditionalDisplay } from '../../atoms/ConditionalDisplay'

@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import { auth } from 'utils/auth'
 
 import ActivityItem from '../../../components/organisms/Activity/ActivityItem'
-import { getPost } from '../../../repository/post'
+import { getPost } from '@trackfootball/database'
 
 type Props = {
   params: {

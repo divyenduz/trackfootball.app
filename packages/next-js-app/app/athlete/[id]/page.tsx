@@ -16,11 +16,9 @@ import ShowToOwner from '../../../components/user/role-based-access/ShowToOwner'
 import {
   getAthleteActivities,
   getAthleteStats,
-} from '../../../repository/stats'
-import {
   getUser,
-  getUserStravaSocialLogin,
-} from '../../../repository/user/user'
+  getUserStravaSocialLogin
+} from '@trackfootball/database'
 
 export type CheckStravaState =
   | 'LOADING'

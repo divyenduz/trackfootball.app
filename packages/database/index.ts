@@ -1,2 +1,5 @@
 export * from '@prisma/client'
 export { sql } from './db'
+export * from './repository/post'
+export * from './repository/stats'
+export * from './repository/user'

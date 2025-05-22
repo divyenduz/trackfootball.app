@@ -1,7 +1,7 @@
 'use server'
 
 import { AwaitedUser } from 'app/layout'
-import { checkStravaAccessToken } from 'repository/strava'
+import { checkStravaAccessToken } from 'services/strava/token'
 import { match } from 'ts-pattern'
 
 export async function checkStravaToken(user: AwaitedUser) {
