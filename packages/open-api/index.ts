@@ -1,1 +1,1 @@
-export * from './services/strava'
+export * from './services/strava/generated/client'

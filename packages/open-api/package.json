@@ -9,7 +9,7 @@
     "generate:strava": "bun run kubb --config kubb.config.ts"
   },
   "devDependencies": {
-    "@kubb/cli": "latest",
+    "@kubb/cli": "3.10.12",
     "@kubb/plugin-client": "3.10.12",
     "@kubb/plugin-oas": "3.10.12",
     "@prisma/client": "5.22.0",

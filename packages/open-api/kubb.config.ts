@@ -24,7 +24,7 @@ export default defineConfig({
     }),
     pluginTs({
       output: {
-        path: './types.ts',
+        path: './generated/types.ts',
         barrelType: false,
       },
       enumType: 'asConst',
@@ -38,6 +38,7 @@ export default defineConfig({
       baseURL: 'https://www.strava.com/api/v3',
       output: {
         path: './generated/client.ts',
+        barrelType: false
       },
     }),
   ],
