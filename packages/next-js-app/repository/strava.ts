@@ -53,7 +53,7 @@ export async function fetchStravaActivityGeoJson(
   userId: number
 ) {
   const stravaAccessTokenHeaders = await getStravaAccessTokenHeaders(userId)
-  const activityStreams = getActivityStreams(
+  const activityStreams = await getActivityStreams(
     activityId,
     {
       keys: ['latlng', 'time', 'heartrate'],

@@ -259,9 +259,11 @@ export async function POST(req: Request) {
   `
 
   if (stravaWebhookEvent.length > 0) {
-    processEvent(stravaWebhookEvent[0]).catch((e) => {
+    try {
+      await processEvent(stravaWebhookEvent[0])
+    } catch(e) {
       console.error(`Error while processing event`, e)
-    })
+    }
   }
 
   return Response.json({ ok: true })
