@@ -4,12 +4,10 @@
   "private": true,
   "main": "index.ts",
   "scripts": {
-    "test": "vitest run",
+    "test": "bun test",
     "lint": "bun tsc --noEmit"
   },
-  "devDependencies": {
-    "vitest": "0.34.6"
-  },
+  "devDependencies": {},
   "dependencies": {
     "@trackfootball/utils": "*",
     "@turf/distance": "6.5.0",

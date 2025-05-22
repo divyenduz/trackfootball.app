@@ -10,7 +10,7 @@ const cwd = process.cwd()
 describe('core tests - walk', () => {
   it('should test walk data', () => {
     const gpx = fs.readFileSync(
-      path.join(cwd, './/__tests__/fixtures/jammu-bridge-walk.gpx'),
+      path.join(cwd, './packages/sprint-detection/__tests__/fixtures/jammu-bridge-walk.gpx'),
       'utf-8'
     )
     const geoData = new GeoData('jammu-bridge-walk', gpx, 'gpx')
