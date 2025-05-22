@@ -7,7 +7,7 @@ import { match } from 'ts-pattern'
 export async function checkStravaToken(user: AwaitedUser) {
   if (!user) {
     console.error(
-      'Note: failed to get strava access token, user not found in context'
+      'Note: failed to get strava access token, user not found in context',
     )
     return 'NOT_WORKING'
   }

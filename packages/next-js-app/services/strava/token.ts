@@ -1,11 +1,14 @@
-import { sql as sqlImport } from '@trackfootball/database'
-
 import { Maybe } from '../../packages/utils/types'
 import { getUser, getUserStravaSocialLogin } from '@trackfootball/database'
-import { getActivityById, getActivityStreams, getLoggedInAthleteActivities } from '@trackfootball/open-api'
+import {
+  getActivityById,
+  getActivityStreams,
+  getLoggedInAthleteActivities,
+} from '@trackfootball/open-api'
 import invariant from 'tiny-invariant'
 import { match } from 'ts-pattern'
 import { GeoData } from '@trackfootball/sprint-detection/geoData'
+import { sql } from 'bun'
 
 const stravaClientId = process.env.STRAVA_CLIENT_ID
 const stravaClientSecret = process.env.STRAVA_CLIENT_SECRET
@@ -41,7 +44,7 @@ type TokenExchangeResponse = {
 }
 
 export async function tokenExchange(
-  code: string
+  code: string,
 ): Promise<TokenExchangeResponse> {
   const link = 'https://www.strava.com/api/v3/oauth/token'
 
@@ -60,7 +63,7 @@ export async function tokenExchange(
 }
 
 export async function tokenRefresh(
-  refreshToken: string
+  refreshToken: string,
 ): Promise<Omit<TokenExchangeResponse, 'athlete'>> {
   const link = 'https://www.strava.com/api/v3/oauth/token'
 
@@ -76,12 +79,6 @@ export async function tokenRefresh(
   })
   const tokenRefreshResponse = await r.json()
   return tokenRefreshResponse as TokenExchangeResponse
-}
-
-let sql: typeof sqlImport
-
-if (typeof window === 'undefined') {
-  sql = sqlImport
 }
 
 /**
@@ -101,7 +98,7 @@ export async function getStravaToken(userId: number): Promise<Maybe> {
   const stravaSocialLogin = await getUserStravaSocialLogin(userId)
   if (!stravaSocialLogin) {
     console.error(
-      `getStravaToken: Strava social login with user id ${userId} not found`
+      `getStravaToken: Strava social login with user id ${userId} not found`,
     )
     return null
   }
@@ -123,7 +120,7 @@ export async function getStravaToken(userId: number): Promise<Maybe> {
           tokenRefreshResponse.message,
           ` Errors: `,
           //@ts-expect-error
-          tokenRefreshResponse.errors
+          tokenRefreshResponse.errors,
         )
         return null
       }
@@ -164,7 +161,7 @@ export async function checkStravaAccessToken(userId: number) {
       },
       {
         headers: stravaAccessTokenHeaders,
-      }
+      },
     )
     return true
   } catch (e) {
@@ -183,14 +180,14 @@ export async function fetchStravaActivity(activityId: number, userId: number) {
     },
     {
       headers: stravaAccessTokenHeaders,
-    }
+    },
   )
   return activity
 }
 
 export async function fetchStravaActivityGeoJson(
   activityId: number,
-  userId: number
+  userId: number,
 ) {
   const stravaAccessTokenHeaders = await getStravaAccessTokenHeaders(userId)
   const activityStreams = await getActivityStreams(
@@ -201,7 +198,7 @@ export async function fetchStravaActivityGeoJson(
     },
     {
       headers: stravaAccessTokenHeaders,
-    }
+    },
   )
 
   const activity = await fetchStravaActivity(activityId, userId)
@@ -215,8 +212,8 @@ export async function fetchStravaActivityGeoJson(
         activityName,
         JSON.stringify(activityStreams),
         'StravaActivityStream',
-        new Date(activityStartDate)
-      ).toGeoJson()
+        new Date(activityStartDate),
+      ).toGeoJson(),
     )
     .otherwise(() => null)
 

@@ -1,22 +1,20 @@
 import { SocialLogin, User } from '@prisma/client'
-import { sql } from '@trackfootball/database'
+import { sql } from 'bun'
 
 export async function getUser(id: number): Promise<User | null> {
-  const user = await sql<User[]>`SELECT * FROM "User" WHERE "id" = ${id}`
-  return user[0]
+  const users: User[] = await sql`SELECT * FROM "User" WHERE "id" = ${id}`
+  return users[0]
 }
 
 export async function getUserStravaSocialLogin(
-  userId: number
+  userId: number,
 ): Promise<SocialLogin | null> {
-  const socialLogin = await sql<
-    SocialLogin[]
-  >`SELECT * FROM "SocialLogin" WHERE "userId" = ${userId}`
-  return socialLogin.find((sl) => sl.platform === 'STRAVA') ?? null
+  const socialLogins: SocialLogin[] = await sql`SELECT * FROM "SocialLogin" WHERE "userId" = ${userId}`
+  return socialLogins.find((sl) => sl.platform === 'STRAVA') ?? null
 }
 
 export async function getUserBy(stravaId: string): Promise<User | null> {
-  const user = await sql<User[]>`
+  const users: User[] = await sql`
   SELECT
 	  "User".*
   FROM
@@ -24,12 +22,10 @@ export async function getUserBy(stravaId: string): Promise<User | null> {
     INNER JOIN "SocialLogin" ON "User"."id" = "SocialLogin"."userId"
   WHERE
     "SocialLogin"."platformId" = ${stravaId}`
-  return user[0]
+  return users[0]
 }
 
 export async function deleteStravaSocialLogin(platformId: number) {
-  const r = await sql<
-    SocialLogin[]
-  >`DELETE FROM "SocialLogin" WHERE "platform" = 'STRAVA' AND "platformId" = ${platformId.toString()} RETURNING *`
-  return r
+  const socialLogins: SocialLogin[] = await sql`DELETE FROM "SocialLogin" WHERE "platform" = 'STRAVA' AND "platformId" = ${platformId} RETURNING *`
+  return socialLogins
 }

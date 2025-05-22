@@ -1,4 +1,5 @@
-import { Field, Post, User, sql } from '@trackfootball/database'
+import { Field, PostType, User } from '@prisma/client'
+import { sql } from 'bun'
 import { FeatureCollection, LineString } from '@turf/helpers'
 
 export interface AthleteStats {
@@ -9,39 +10,33 @@ export interface AthleteStats {
   totalTime: number
 }
 
-export type AthleteActivity = Post & {
+export type AthleteActivity = {
+  id: number
+  createdAt: Date
+  updatedAt: Date
+  type: PostType
+  text: string
+  key: string
   geoJson: FeatureCollection<LineString>
   sprints: Array<FeatureCollection<LineString>>
   runs: Array<FeatureCollection<LineString>>
+  totalDistance: number
+  elapsedTime: number
+  totalSprintTime: number
+  maxSpeed: number
+  startTime: Date
+  endTime: Date
+  userId: number
+  fieldId: number | null
+  processedAt: Date | null
+  status: string
+  statusInfo: string
   Field: Field
   User: User
 }
 
 export async function getAthleteStats(userId: number): Promise<AthleteStats> {
-  // Special handling for user ID 1 without early return
-  if (userId === 1) {
-    const result = await sql<AthleteStats[]>`
-      SELECT 
-        COUNT(*) as "totalActivities",
-        COALESCE(SUM("totalDistance"), 0) as "totalDistance",
-        COALESCE(SUM(jsonb_array_length("sprints")), 0) as "totalSprints",
-        COALESCE(SUM("elapsedTime"), 0) as "totalTime"
-      FROM "Post"
-      WHERE "userId" = ${userId}
-    `
-
-    // Safely return with fixed max speed
-    return {
-      totalActivities: result[0]?.totalActivities || 0,
-      totalDistance: result[0]?.totalDistance || 0,
-      totalSprints: result[0]?.totalSprints || 0,
-      maxSpeed: 8.3,
-      totalTime: result[0]?.totalTime || 0,
-    }
-  }
-
-  // Query base stats for other users
-  const result = await sql<AthleteStats[]>`
+  const result: AthleteStats[] = await sql`
     SELECT 
       COUNT(*) as "totalActivities",
       COALESCE(SUM("totalDistance"), 0) as "totalDistance",
@@ -53,7 +48,7 @@ export async function getAthleteStats(userId: number): Promise<AthleteStats> {
   `
 
   try {
-    const rows = await sql`
+    const rows: { id: number; text: string; maxSpeed: number }[] = await sql`
       SELECT "id", "text", "maxSpeed" 
       FROM "Post" 
       WHERE "userId" = ${userId} 
@@ -86,9 +81,9 @@ export async function getAthleteStats(userId: number): Promise<AthleteStats> {
 
 export async function getAthleteActivities(
   userId: number,
-  limit: number = 5
+  limit: number = 5,
 ): Promise<AthleteActivity[]> {
-  const activities = await sql<AthleteActivity[]>`
+  const activities: AthleteActivity[] = await sql`
     SELECT row_to_json("Field".*::"Field") as "Field", row_to_json("User".*::"User") as "User", "Post".* 
     FROM "Post"
     LEFT JOIN "Field" ON "Post"."fieldId" = "Field"."id"

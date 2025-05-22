@@ -1,5 +1,5 @@
 import type { Platform } from '@prisma/client'
-import { sql } from '@trackfootball/database'
+import { sql } from 'bun'
 import { redirect } from 'next/navigation'
 import { MESSAGE_UNAUTHORIZED } from 'packages/auth/utils'
 import { ensureUser } from 'packages/utils/utils'
@@ -19,7 +19,7 @@ export async function GET(req: Request) {
       'Invalid code, maybe the Strava code expired. Please try again.',
       {
         status: 400,
-      }
+      },
     )
   }
   const userStravaId = tokenExchangeResponse.athlete.id.toString()

@@ -1,8 +1,9 @@
 'use server'
 
-import { Post, PostStatus, User, sql } from '@trackfootball/database'
+import { Post, PostStatus, User } from '@trackfootball/database'
 import { Core } from '@trackfootball/sprint-detection'
 import { durationToSeconds } from '@trackfootball/utils'
+import { sql } from 'bun'
 import { MESSAGE_UNAUTHORIZED } from 'packages/auth/utils'
 import { postAddField } from 'packages/services/post/addField'
 import { fetchStravaActivityGeoJson } from 'services/strava/token'
@@ -11,23 +12,21 @@ import { auth } from 'utils/auth'
 export async function refreshPost(postId: number) {
   const user = await auth()
 
-  const post = (
-    await sql<Post[]>`
+  const posts: Post[] = await sql`
     SELECT * FROM "Post"
     WHERE "id" = ${postId}
     `
-  )[0]
+  const post = posts[0]
 
   if (post?.userId !== user.id && user.type !== 'ADMIN') {
     throw new Error(MESSAGE_UNAUTHORIZED)
   }
 
-  const ownerUser = (
-    await sql<User[]>`
+  const ownerUsers: User[] = await sql`
   SELECT * FROM "User"
   WHERE "id" = ${post.userId}
   `
-  )[0]
+  const ownerUser = ownerUsers[0]
 
   const _key = parseInt(post.key)
   const geoJson = await fetchStravaActivityGeoJson(_key, ownerUser.id)
@@ -41,8 +40,7 @@ export async function refreshPost(postId: number) {
   }
   const core = new Core(geoJson)
 
-  const updatedPost = (
-    await sql<Post[]>`
+  const updatedPosts: Post[] = await sql`
   UPDATE "Post"
   SET "geoJson" = ${geoJson as any},
   "totalDistance" = ${core.totalDistance()},
@@ -57,7 +55,7 @@ export async function refreshPost(postId: number) {
   WHERE "id" = ${postId}
   RETURNING *
   `
-  )[0]
+  const updatedPost = updatedPosts[0]
 
   await postAddField({
     postId: post.id,

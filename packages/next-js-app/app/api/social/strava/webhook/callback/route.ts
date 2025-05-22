@@ -3,7 +3,6 @@ import {
   StravaWebhookEvent,
   StravaWebhookEventStatus,
 } from '@prisma/client'
-import { sql } from '@trackfootball/database'
 import { createDiscordMessage } from 'packages/services/discord'
 import { fetchCompletePost } from 'packages/services/post/fetchComplete'
 import { stringify } from 'packages/utils/utils'
@@ -14,11 +13,12 @@ import {
   getPostIdBy,
   updatePostTitle,
   deleteStravaSocialLogin,
-  getUserBy
+  getUserBy,
 } from '@trackfootball/database'
 import invariant from 'tiny-invariant'
 import { match } from 'ts-pattern'
 import { fetchStravaActivity } from 'services/strava/token'
+import { sql } from 'bun'
 
 type StravaEventBase = {
   object_id: number
@@ -58,20 +58,20 @@ async function processEvent(event: StravaWebhookEvent) {
 
         if (!user) {
           throw new Error(
-            `Failed to find user with Strava ID: ${activityCreateEvent.owner_id}`
+            `Failed to find user with Strava ID: ${activityCreateEvent.owner_id}`,
           )
         }
 
         const activity = await fetchStravaActivity(
           activityCreateEvent.object_id,
-          user.id
+          user.id,
         )
         const activityType = activity.type
         invariant(activityType, 'invariant: activity must have a type')
 
         if (!['Run', 'Soccer'].includes(activityType)) {
           console.info(
-            `Activity type ${activity.type} not supported, Strava key: ${activityCreateEvent.object_id}`
+            `Activity type ${activity.type} not supported, Strava key: ${activityCreateEvent.object_id}`,
           )
           return
         }
@@ -106,7 +106,7 @@ async function processEvent(event: StravaWebhookEvent) {
       User: ${user.firstName} ${user.lastName}
       Link: ${process.env.HOMEPAGE_URL}/activity/${post.id}`,
         })
-      }
+      },
     )
     .with(
       { object_type: 'activity', aspect_type: 'update' },
@@ -115,20 +115,20 @@ async function processEvent(event: StravaWebhookEvent) {
 
         if (!user) {
           throw new Error(
-            `Failed to find user with Strava ID: ${activityUpdateEvent.owner_id}`
+            `Failed to find user with Strava ID: ${activityUpdateEvent.owner_id}`,
           )
         }
 
         const activity = await fetchStravaActivity(
           activityUpdateEvent.object_id,
-          user.id
+          user.id,
         )
         const activityType = activity.type
         invariant(activityType, 'invariant: activity must have a type')
 
         if (!['Run', 'Soccer'].includes(activityType)) {
           console.info(
-            `Activity type ${activity.type} not supported, Strava key: ${activityUpdateEvent.object_id}`
+            `Activity type ${activity.type} not supported, Strava key: ${activityUpdateEvent.object_id}`,
           )
           return
         }
@@ -138,7 +138,7 @@ async function processEvent(event: StravaWebhookEvent) {
           try {
             await updatePostTitle(
               activityUpdateEvent.object_id,
-              activityUpdateEvent.updates.title
+              activityUpdateEvent.updates.title,
             )
           } catch (e) {
             console.error(`activityUpdateEvent: `, e)
@@ -174,7 +174,7 @@ async function processEvent(event: StravaWebhookEvent) {
         Link: ${process.env.HOMEPAGE_URL}/activity/${post.id}`,
           })
         }
-      }
+      },
     )
     .with(
       { object_type: 'activity', aspect_type: 'delete' },
@@ -183,7 +183,7 @@ async function processEvent(event: StravaWebhookEvent) {
 
         if (!user) {
           throw new Error(
-            `Failed to find user with Strava ID: ${activityDeleteEvent.owner_id}`
+            `Failed to find user with Strava ID: ${activityDeleteEvent.owner_id}`,
           )
         }
 
@@ -191,7 +191,7 @@ async function processEvent(event: StravaWebhookEvent) {
 
         if (!post) {
           console.error(
-            `Post to be deleted not found, Strava key: ${activityDeleteEvent.object_id}`
+            `Post to be deleted not found, Strava key: ${activityDeleteEvent.object_id}`,
           )
           return
         }
@@ -205,7 +205,7 @@ async function processEvent(event: StravaWebhookEvent) {
       User: ${user.firstName} ${user.lastName}
       Link: ${process.env.HOMEPAGE_URL}/activity/${post.id}`,
         })
-      }
+      },
     )
     .with(
       { object_type: 'athlete', aspect_type: 'update' },
@@ -218,7 +218,7 @@ async function processEvent(event: StravaWebhookEvent) {
             description: ``,
           })
         }
-      }
+      },
     )
     .exhaustive()
 
@@ -251,18 +251,15 @@ export async function POST(req: Request) {
     errors: [],
     updatedAt: sql`now()`,
   }
-  const stravaWebhookEvent = await sql<StravaWebhookEvent[]>`
-    INSERT INTO "public"."StravaWebhookEvent" ${
-      //@ts-expect-error
-      sql(data)
-    }
+  const stravaWebhookEvents: StravaWebhookEvent[] = await sql`
+    INSERT INTO "public"."StravaWebhookEvent" ${sql(data)}
     RETURNING *
   `
 
-  if (stravaWebhookEvent.length > 0) {
+  if (stravaWebhookEvents.length > 0) {
     try {
-      await processEvent(stravaWebhookEvent[0])
-    } catch(e) {
+      await processEvent(stravaWebhookEvents[0])
+    } catch (e) {
       console.error(`Error while processing event`, e)
     }
   }
