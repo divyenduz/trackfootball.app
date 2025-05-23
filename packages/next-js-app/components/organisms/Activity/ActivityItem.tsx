@@ -183,10 +183,9 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
             </Link>
             <div className="text-xs font-normal text-gray-500">
               {formatDistance(
-                match(Boolean(post.startTime))
-                  .with(true, () => new Date(post.startTime!))
-                  .with(false, () => new Date())
-                  .exhaustive(),
+                match(post.startTime)
+                  .with(null, () => new Date())
+                  .otherwise((startTime) => new Date(startTime)),
                 new Date(),
                 {
                   addSuffix: true,
