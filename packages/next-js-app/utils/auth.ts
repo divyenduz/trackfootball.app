@@ -2,6 +2,7 @@ import 'server-only'
 
 import { getCurrentUser } from './getCurrentUser'
 import path from 'path'
+import { CurrentUser } from '@trackfootball/database/repository/currentUser'
 
 export class NotLoggedInError extends Error {
   message: string = 'User is not logged in'
@@ -19,7 +20,7 @@ async function authenticate() {
     const cwd = process.cwd()
     const userFile = Bun.file(path.join(cwd, 'unsafe_user.json'))
     const user = userFile.json()
-    return user
+    return user as unknown as CurrentUser
   }
 
   const user = await getCurrentUser()
