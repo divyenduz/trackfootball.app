@@ -1,4 +1,10 @@
-import { Field, Post } from '@prisma/client'
+import {
+  Field,
+  getPostById,
+  getFieldsByUsage,
+  getFieldsByName,
+  updatePostFieldId,
+} from '@trackfootball/database'
 import area from '@turf/area'
 import booleanPointInPolygon from '@turf/boolean-point-in-polygon'
 import center from '@turf/center'
@@ -10,7 +16,6 @@ import {
   point,
 } from '@turf/helpers'
 import intersect from '@turf/intersect'
-import { sql } from 'bun'
 import { match } from 'ts-pattern'
 
 interface PostAddFieldArgs {
@@ -19,11 +24,7 @@ interface PostAddFieldArgs {
 
 export async function postAddField({ postId }: PostAddFieldArgs) {
   {
-    const posts: Post[] = await sql`
-        SELECT * FROM "Post"
-        WHERE "id" = ${postId}
-        `
-    const post = posts[0]
+    const post = await getPostById(postId)
 
     if (!post) {
       console.error(`post.tagging.addField: Post ${postId} not found`)
@@ -34,8 +35,7 @@ export async function postAddField({ postId }: PostAddFieldArgs) {
     const centerValue = center(geoJson)
     const geoJsonCover = envelope(geoJson)
 
-    const fullFields: Field[] =
-      (await sql`SELECT * FROM "Field" WHERE usage='FULL_FIELD'`) as Field[]
+    const fullFields: Field[] = await getFieldsByUsage('FULL_FIELD')
     // Note: get the matching full field
     const matchingFullField = fullFields.find((field) => {
       const fieldFeatures = featureCollection([
@@ -55,9 +55,7 @@ export async function postAddField({ postId }: PostAddFieldArgs) {
       return
     }
 
-    const fields: Field[] = (await sql`SELECT * FROM "Field" WHERE name=${
-      matchingFullField!.name
-    }`) as Field[]
+    const fields: Field[] = await getFieldsByName(matchingFullField!.name)
 
     const fieldsWithIntersectionArea = fields.map((field) => {
       const fieldFeatures = featureCollection([
@@ -99,13 +97,7 @@ export async function postAddField({ postId }: PostAddFieldArgs) {
     ).field
 
     if (Boolean(matchingField)) {
-      const updatedPosts: Post[] = await sql`
-          UPDATE "Post"
-          SET "fieldId" = ${matchingField!.id}
-          WHERE "id" = ${post.id}
-          RETURNING *
-          `
-      const updatedPost = updatedPosts[0]
+      const updatedPost = await updatePostFieldId(post.id, matchingField!.id)
 
       console.info(
         `info: post ${updatedPost.id} updated with a field named ${matchingField?.name} (${matchingField?.usage})`,

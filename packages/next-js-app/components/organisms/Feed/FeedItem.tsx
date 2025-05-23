@@ -92,7 +92,7 @@ export const FeedItem: React.FC<Props> = ({ post }) => {
                   new Date(),
                   {
                     addSuffix: true,
-                  }
+                  },
                 )}
               </Typography>
             </>
@@ -169,7 +169,7 @@ export const FeedItem: React.FC<Props> = ({ post }) => {
                 new Date(),
                 {
                   addSuffix: true,
-                }
+                },
               )}
             </div>
           </>

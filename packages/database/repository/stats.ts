@@ -1,6 +1,6 @@
 import { Field, PostType, User } from '@prisma/client'
-import { sql } from 'bun'
 import { FeatureCollection, LineString } from '@turf/helpers'
+import { sql } from '../'
 
 export interface AthleteStats {
   totalActivities: number
@@ -94,4 +94,14 @@ export async function getAthleteActivities(
   `
 
   return activities
+}
+
+export async function getUserCount(): Promise<number> {
+  const result: { count: number }[] = await sql`SELECT COUNT(*) FROM "User"`
+  return result[0].count
+}
+
+export async function getPostCount(): Promise<number> {
+  const result: { count: number }[] = await sql`SELECT COUNT(*) FROM "Post"`
+  return result[0].count
 }

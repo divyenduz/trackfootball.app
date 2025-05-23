@@ -1,5 +1,5 @@
 import type { Platform } from '@prisma/client'
-import { sql } from 'bun'
+import { sql } from '@trackfootball/database'
 import { redirect } from 'next/navigation'
 import { MESSAGE_UNAUTHORIZED } from 'packages/auth/utils'
 import { ensureUser } from 'packages/utils/utils'

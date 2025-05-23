@@ -9,16 +9,17 @@ import { stringify } from 'packages/utils/utils'
 import {
   createPost,
   deletePostBy,
-  getPost,
+  getPostWithUserAndFields,
   getPostIdBy,
   updatePostTitle,
   deleteStravaSocialLogin,
   getUserBy,
+  createStravaWebhookEvent,
+  updateStravaWebhookEventStatus,
 } from '@trackfootball/database'
 import invariant from 'tiny-invariant'
 import { match } from 'ts-pattern'
 import { fetchStravaActivity } from 'services/strava/token'
-import { sql } from 'bun'
 
 type StravaEventBase = {
   object_id: number
@@ -95,7 +96,7 @@ async function processEvent(event: StravaWebhookEvent) {
         await fetchCompletePost({
           postId: post.id,
         })
-        const updatedPost = await getPost(post.id)
+        const updatedPost = await getPostWithUserAndFields(post.id)
 
         await createDiscordMessage({
           heading: 'New Activity Created (Webhook)',
@@ -162,7 +163,7 @@ async function processEvent(event: StravaWebhookEvent) {
           await fetchCompletePost({
             postId: post.id,
           })
-          const updatedPost = await getPost(post.id)
+          const updatedPost = await getPostWithUserAndFields(post.id)
 
           await createDiscordMessage({
             heading: 'New Activity Created (via Update Webhook)',
@@ -222,7 +223,10 @@ async function processEvent(event: StravaWebhookEvent) {
     )
     .exhaustive()
 
-  await sql`UPDATE "StravaWebhookEvent" SET "status" = ${StravaWebhookEventStatus.COMPLETED} WHERE "id" = ${event.id}`
+  await updateStravaWebhookEventStatus(
+    event.id,
+    StravaWebhookEventStatus.COMPLETED,
+  )
 }
 
 export async function GET(req: Request) {
@@ -245,23 +249,16 @@ export async function GET(req: Request) {
 export async function POST(req: Request) {
   const body = await req.json()
 
-  const data = {
+  const stravaWebhookEvent = await createStravaWebhookEvent({
     status: StravaWebhookEventStatus.PENDING,
     body: JSON.stringify(body),
     errors: [],
-    updatedAt: sql`now()`,
-  }
-  const stravaWebhookEvents: StravaWebhookEvent[] = await sql`
-    INSERT INTO "public"."StravaWebhookEvent" ${sql(data)}
-    RETURNING *
-  `
+  })
 
-  if (stravaWebhookEvents.length > 0) {
-    try {
-      await processEvent(stravaWebhookEvents[0])
-    } catch (e) {
-      console.error(`Error while processing event`, e)
-    }
+  try {
+    await processEvent(stravaWebhookEvent)
+  } catch (e) {
+    console.error(`Error while processing event`, e)
   }
 
   return Response.json({ ok: true })

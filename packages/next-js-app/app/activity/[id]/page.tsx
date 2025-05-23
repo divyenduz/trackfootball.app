@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import { auth } from 'utils/auth'
 
 import ActivityItem from '../../../components/organisms/Activity/ActivityItem'
-import { getPost } from '@trackfootball/database'
+import { getPostWithUserAndFields } from '@trackfootball/database'
 
 type Props = {
   params: {
@@ -19,7 +19,7 @@ export async function getHomepageUrl() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const id = params.id
 
-  const post = await getPost(parseInt(id))
+  const post = await getPostWithUserAndFields(parseInt(id))
 
   const homepageUrl = await getHomepageUrl()
 
@@ -51,7 +51,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function Activity({ params: { id } }: Props) {
-  const post = await getPost(parseInt(id))
+  const post = await getPostWithUserAndFields(parseInt(id))
 
   if (!post) {
     return notFound()

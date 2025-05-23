@@ -1,5 +1,4 @@
-import { User } from '@trackfootball/database'
-import { sql } from 'bun'
+import { sql, User } from '@trackfootball/database'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { createDiscordMessage } from 'packages/services/discord'
 import auth0 from 'utils/auth0'
@@ -35,14 +34,13 @@ export const GET = auth0.handleAuth({
       updatedAt: new Date(),
     }
 
-    const user = (
-      await sql`
-  INSERT INTO "User" ${sql(data)}
-  ON CONFLICT ("auth0Sub") DO UPDATE
-  SET ${sql(data)}
-  RETURNING *
-  `
-    )[0]
+    const users: User[] = await sql`
+    INSERT INTO "User" ${sql(data)}
+    ON CONFLICT ("auth0Sub") DO UPDATE
+    SET ${sql(data)}
+    RETURNING *
+    `
+    const user = users[0]
 
     if (!existingUser) {
       if (user) {

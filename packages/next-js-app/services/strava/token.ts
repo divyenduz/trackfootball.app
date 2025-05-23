@@ -1,5 +1,9 @@
 import { Maybe } from '../../packages/utils/types'
-import { getUser, getUserStravaSocialLogin } from '@trackfootball/database'
+import {
+  getUser,
+  getUserStravaSocialLogin,
+  updateSocialLoginTokens,
+} from '@trackfootball/database'
 import {
   getActivityById,
   getActivityStreams,
@@ -8,7 +12,6 @@ import {
 import invariant from 'tiny-invariant'
 import { match } from 'ts-pattern'
 import { GeoData } from '@trackfootball/sprint-detection/geoData'
-import { sql } from 'bun'
 
 const stravaClientId = process.env.STRAVA_CLIENT_ID
 const stravaClientSecret = process.env.STRAVA_CLIENT_SECRET
@@ -127,13 +130,12 @@ export async function getStravaToken(userId: number): Promise<Maybe> {
 
       const expiresAt = new Date(tokenRefreshResponse.expires_at * 1000)
 
-      await sql`
-      UPDATE "SocialLogin"
-      SET "accessToken" = ${tokenRefreshResponse.access_token},
-      "refreshToken" = ${tokenRefreshResponse.refresh_token},
-      "expiresAt" = ${expiresAt}
-      WHERE "platform" = 'STRAVA' AND "platformId" = ${userStravaId!.toString()}
-      `
+      await updateSocialLoginTokens(
+        userStravaId!.toString(),
+        tokenRefreshResponse.access_token,
+        tokenRefreshResponse.refresh_token,
+        expiresAt,
+      )
 
       return tokenRefreshResponse.access_token
     } catch (e) {

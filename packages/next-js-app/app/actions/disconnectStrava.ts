@@ -1,7 +1,7 @@
 'use server'
 
-import { sql } from 'bun'
 import { revalidatePath } from 'next/cache'
+import { deleteSocialLoginById } from '@trackfootball/database/repository/socialLogin'
 import { auth } from 'utils/auth'
 
 export async function disconnectStrava() {
@@ -11,10 +11,7 @@ export async function disconnectStrava() {
   if (!Boolean(stravaLogin)) {
     throw new Error("Trying to disconnect Strava login but it doesn't exist")
   }
-  await sql`
-    DELETE FROM "SocialLogin"
-    WHERE "id" = ${stravaLogin!.id}
-  `
+  await deleteSocialLoginById(stravaLogin!.id)
   revalidatePath(`/athlete/${user.id}`)
   return true
 }
