@@ -1,22 +1,17 @@
 'use server'
 
-import { PostStatus } from '@trackfootball/database'
+import { PostStatus, repository } from '@trackfootball/database'
 import { Core } from '@trackfootball/sprint-detection'
 import { durationToSeconds } from '@trackfootball/utils'
 import { MESSAGE_UNAUTHORIZED } from 'packages/auth/utils'
 import { postAddField } from 'packages/services/post/addField'
 import { fetchStravaActivityGeoJson } from 'services/strava/token'
 import { auth } from 'utils/auth'
-import {
-  getPostById,
-  updatePostWithSprintData,
-} from '@trackfootball/database/repository/post'
-import { getUserById } from '@trackfootball/database/repository/user'
 
 export async function refreshPost(postId: number) {
   const user = await auth()
 
-  const post = await getPostById(postId)
+  const post = await repository.getPostById(postId)
   if (!post) {
     throw new Error(`Post with id ${postId} not found`)
   }
@@ -25,7 +20,7 @@ export async function refreshPost(postId: number) {
     throw new Error(MESSAGE_UNAUTHORIZED)
   }
 
-  const ownerUser = await getUserById(post.userId)
+  const ownerUser = await repository.getUserById(post.userId)
   if (!ownerUser) {
     throw new Error(`User with id ${post.userId} not found`)
   }
@@ -42,7 +37,7 @@ export async function refreshPost(postId: number) {
   }
   const core = new Core(geoJson)
 
-  const updatedPost = await updatePostWithSprintData({
+  const updatedPost = await repository.updatePostWithSprintData({
     id: postId,
     geoJson: geoJson as any,
     totalDistance: core.totalDistance(),

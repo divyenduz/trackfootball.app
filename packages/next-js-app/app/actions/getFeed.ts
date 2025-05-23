@@ -1,12 +1,10 @@
 'use server'
 
-import {
-  getFeed as getFeedFromRepo,
-  FeedItemType,
-} from '@trackfootball/database'
+import { repository } from '@trackfootball/database'
+import type { FeedItemType } from '@trackfootball/database/repository/post'
 
 export type { FeedItemType }
 
 export async function getFeed(cursor: number = 0, limit: number = 3) {
-  return getFeedFromRepo(cursor, limit)
+  return repository.getFeed(cursor, limit)
 }

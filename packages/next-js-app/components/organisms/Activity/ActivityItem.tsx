@@ -21,7 +21,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { getBoundsForPoints } from 'packages/utils/map'
 import React, { useEffect, useState } from 'react'
-import { getPostWithUserAndFields } from '@trackfootball/database'
+import { repository } from '@trackfootball/database'
 import { match } from 'ts-pattern'
 
 import { ConditionalDisplay } from '../../atoms/ConditionalDisplay'
@@ -43,7 +43,7 @@ const prettyRunMetricSpeed = (hasSprints: boolean, speed: number) => {
 }
 
 export type AwaitedPost = NonNullable<
-  Awaited<ReturnType<typeof getPostWithUserAndFields>>
+  Awaited<ReturnType<typeof repository.getPostWithUserAndFields>>
 >
 
 export interface Props {

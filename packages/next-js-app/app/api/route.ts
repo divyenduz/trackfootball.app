@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 import mls from 'multilines'
 
 import pjson from '../../../../package.json'
-import { getUserCount, getPostCount } from '@trackfootball/database'
+import { repository } from '@trackfootball/database'
 
 export const dynamic = 'force-dynamic'
 
@@ -14,8 +14,8 @@ export async function GET() {
   const platform = process.env.PLATFORM
 
   const gitStatus = spawnSync('git', ['show', '--summary'])
-  const userCount = await getUserCount()
-  const postCount = await getPostCount()
+  const userCount = await repository.getUserCount()
+  const postCount = await repository.getPostCount()
 
   return new Response(
     mls`

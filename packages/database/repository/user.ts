@@ -59,3 +59,22 @@ export async function getUserWithSocialLoginsByAuth0Sub(auth0Sub: string): Promi
     socialLogin,
   }
 }
+
+export async function upsertUserByAuth0Sub(userData: {
+  firstName: string
+  lastName: string
+  email: string
+  locale: string
+  picture: string
+  auth0Sub: string
+  emailVerified: boolean
+  updatedAt: Date
+}): Promise<User> {
+  const users: User[] = await sql`
+    INSERT INTO "User" ${sql(userData)}
+    ON CONFLICT ("auth0Sub") DO UPDATE
+    SET ${sql(userData)}
+    RETURNING *
+  `
+  return users[0]
+}

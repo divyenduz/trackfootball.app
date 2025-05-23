@@ -1,10 +1,4 @@
-import {
-  Field,
-  getPostById,
-  getFieldsByUsage,
-  getFieldsByName,
-  updatePostFieldId,
-} from '@trackfootball/database'
+import { Field, repository } from '@trackfootball/database'
 import area from '@turf/area'
 import booleanPointInPolygon from '@turf/boolean-point-in-polygon'
 import center from '@turf/center'
@@ -24,7 +18,7 @@ interface PostAddFieldArgs {
 
 export async function postAddField({ postId }: PostAddFieldArgs) {
   {
-    const post = await getPostById(postId)
+    const post = await repository.getPostById(postId)
 
     if (!post) {
       console.error(`post.tagging.addField: Post ${postId} not found`)
@@ -35,7 +29,7 @@ export async function postAddField({ postId }: PostAddFieldArgs) {
     const centerValue = center(geoJson)
     const geoJsonCover = envelope(geoJson)
 
-    const fullFields: Field[] = await getFieldsByUsage('FULL_FIELD')
+    const fullFields: Field[] = await repository.getFieldsByUsage('FULL_FIELD')
     // Note: get the matching full field
     const matchingFullField = fullFields.find((field) => {
       const fieldFeatures = featureCollection([
@@ -55,7 +49,7 @@ export async function postAddField({ postId }: PostAddFieldArgs) {
       return
     }
 
-    const fields: Field[] = await getFieldsByName(matchingFullField!.name)
+    const fields: Field[] = await repository.getFieldsByName(matchingFullField!.name)
 
     const fieldsWithIntersectionArea = fields.map((field) => {
       const fieldFeatures = featureCollection([
@@ -97,7 +91,7 @@ export async function postAddField({ postId }: PostAddFieldArgs) {
     ).field
 
     if (Boolean(matchingField)) {
-      const updatedPost = await updatePostFieldId(post.id, matchingField!.id)
+      const updatedPost = await repository.updatePostFieldId(post.id, matchingField!.id)
 
       console.info(
         `info: post ${updatedPost.id} updated with a field named ${matchingField?.name} (${matchingField?.usage})`,

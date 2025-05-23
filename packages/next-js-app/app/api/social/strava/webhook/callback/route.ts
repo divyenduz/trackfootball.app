@@ -6,17 +6,7 @@ import {
 import { createDiscordMessage } from 'packages/services/discord'
 import { fetchCompletePost } from 'packages/services/post/fetchComplete'
 import { stringify } from 'packages/utils/utils'
-import {
-  createPost,
-  deletePostBy,
-  getPostWithUserAndFields,
-  getPostIdBy,
-  updatePostTitle,
-  deleteStravaSocialLogin,
-  getUserBy,
-  createStravaWebhookEvent,
-  updateStravaWebhookEventStatus,
-} from '@trackfootball/database'
+import { repository } from '@trackfootball/database'
 import invariant from 'tiny-invariant'
 import { match } from 'ts-pattern'
 import { fetchStravaActivity } from 'services/strava/token'
@@ -55,7 +45,9 @@ async function processEvent(event: StravaWebhookEvent) {
     .with(
       { object_type: 'activity', aspect_type: 'create' },
       async (activityCreateEvent) => {
-        const user = await getUserBy(stringify(activityCreateEvent.owner_id))
+        const user = await repository.getUserBy(
+          stringify(activityCreateEvent.owner_id),
+        )
 
         if (!user) {
           throw new Error(
@@ -87,7 +79,7 @@ async function processEvent(event: StravaWebhookEvent) {
           userId: user.id,
         }
 
-        const post = await createPost(data)
+        const post = await repository.createPost(data)
 
         if (!post) {
           throw new Error(`Failed to create post for data ${data}`)
@@ -96,7 +88,7 @@ async function processEvent(event: StravaWebhookEvent) {
         await fetchCompletePost({
           postId: post.id,
         })
-        const updatedPost = await getPostWithUserAndFields(post.id)
+        const updatedPost = await repository.getPostWithUserAndFields(post.id)
 
         await createDiscordMessage({
           heading: 'New Activity Created (Webhook)',
@@ -112,7 +104,9 @@ async function processEvent(event: StravaWebhookEvent) {
     .with(
       { object_type: 'activity', aspect_type: 'update' },
       async (activityUpdateEvent) => {
-        const user = await getUserBy(stringify(activityUpdateEvent.owner_id))
+        const user = await repository.getUserBy(
+          stringify(activityUpdateEvent.owner_id),
+        )
 
         if (!user) {
           throw new Error(
@@ -134,10 +128,12 @@ async function processEvent(event: StravaWebhookEvent) {
           return
         }
 
-        const postId = await getPostIdBy(activityUpdateEvent.object_id)
+        const postId = await repository.getPostIdBy(
+          activityUpdateEvent.object_id,
+        )
         if (postId) {
           try {
-            await updatePostTitle(
+            await repository.updatePostTitle(
               activityUpdateEvent.object_id,
               activityUpdateEvent.updates.title,
             )
@@ -154,7 +150,7 @@ async function processEvent(event: StravaWebhookEvent) {
             userId: user.id,
           }
 
-          const post = await createPost(data)
+          const post = await repository.createPost(data)
 
           if (!post) {
             throw new Error(`Failed to create post for data ${data}`)
@@ -163,7 +159,7 @@ async function processEvent(event: StravaWebhookEvent) {
           await fetchCompletePost({
             postId: post.id,
           })
-          const updatedPost = await getPostWithUserAndFields(post.id)
+          const updatedPost = await repository.getPostWithUserAndFields(post.id)
 
           await createDiscordMessage({
             heading: 'New Activity Created (via Update Webhook)',
@@ -180,7 +176,9 @@ async function processEvent(event: StravaWebhookEvent) {
     .with(
       { object_type: 'activity', aspect_type: 'delete' },
       async (activityDeleteEvent) => {
-        const user = await getUserBy(stringify(activityDeleteEvent.owner_id))
+        const user = await repository.getUserBy(
+          stringify(activityDeleteEvent.owner_id),
+        )
 
         if (!user) {
           throw new Error(
@@ -188,7 +186,9 @@ async function processEvent(event: StravaWebhookEvent) {
           )
         }
 
-        const post = await deletePostBy(activityDeleteEvent.object_id)
+        const post = await repository.deletePostBy(
+          activityDeleteEvent.object_id,
+        )
 
         if (!post) {
           console.error(
@@ -212,7 +212,7 @@ async function processEvent(event: StravaWebhookEvent) {
       { object_type: 'athlete', aspect_type: 'update' },
       async (athleteUpdateEvent) => {
         if (athleteUpdateEvent.updates.authorized === 'false') {
-          deleteStravaSocialLogin(athleteUpdateEvent.owner_id)
+          repository.deleteStravaSocialLogin(athleteUpdateEvent.owner_id)
           await createDiscordMessage({
             heading: 'Athlete Social Login Deleted (Webhook)',
             name: `${athleteUpdateEvent.owner_id}`,
@@ -223,7 +223,7 @@ async function processEvent(event: StravaWebhookEvent) {
     )
     .exhaustive()
 
-  await updateStravaWebhookEventStatus(
+  await repository.updateStravaWebhookEventStatus(
     event.id,
     StravaWebhookEventStatus.COMPLETED,
   )
@@ -249,7 +249,7 @@ export async function GET(req: Request) {
 export async function POST(req: Request) {
   const body = await req.json()
 
-  const stravaWebhookEvent = await createStravaWebhookEvent({
+  const stravaWebhookEvent = await repository.createStravaWebhookEvent({
     status: StravaWebhookEventStatus.PENDING,
     body: JSON.stringify(body),
     errors: [],

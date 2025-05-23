@@ -1,5 +1,5 @@
 import type { Platform } from '@prisma/client'
-import { sql } from '@trackfootball/database'
+import { sql, repository } from '@trackfootball/database'
 import { redirect } from 'next/navigation'
 import { MESSAGE_UNAUTHORIZED } from 'packages/auth/utils'
 import { ensureUser } from 'packages/utils/utils'
@@ -47,11 +47,7 @@ export async function GET(req: Request) {
       updatedAt: new Date(),
     }
 
-    await sql`
-    INSERT INTO "SocialLogin" ${sql(data)}
-    ON CONFLICT ("platformId") DO UPDATE
-    SET ${sql(data)}
-    `
+    await repository.upsertSocialLogin(data)
   }
 
   if (redirectTo === 'athlete') {

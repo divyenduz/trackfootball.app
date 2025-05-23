@@ -13,12 +13,7 @@ import { auth } from 'utils/auth'
 
 import { ConnectWithStravaWidget } from '../../../components/organisms/Settings/ConnectWithStravaWidget'
 import ShowToOwner from '../../../components/user/role-based-access/ShowToOwner'
-import {
-  getAthleteActivities,
-  getAthleteStats,
-  getUser,
-  getUserStravaSocialLogin,
-} from '@trackfootball/database'
+import { repository } from '@trackfootball/database'
 
 export type CheckStravaState =
   | 'LOADING'
@@ -28,7 +23,7 @@ export type CheckStravaState =
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const userId = parseInt(params.id, 10)
-  const user = await getUser(userId)
+  const user = await repository.getUser(userId)
 
   if (!user) {
     return {
@@ -59,12 +54,12 @@ export default async function Profile({ params }: Props) {
     return notFound()
   }
 
-  const athlete = await getUser(userId)
+  const athlete = await repository.getUser(userId)
   if (!athlete) {
     return notFound()
   }
 
-  const socialLogin = await getUserStravaSocialLogin(athlete.id)
+  const socialLogin = await repository.getUserStravaSocialLogin(athlete.id)
   const athleteWithSocialLogin = {
     ...athlete,
     socialLogin: socialLogin ? [socialLogin] : [],
@@ -84,10 +79,10 @@ export default async function Profile({ params }: Props) {
 
   // Fetch athlete stats from database
   const { totalActivities, totalDistance, totalSprints, maxSpeed } =
-    await getAthleteStats(athlete.id)
+    await repository.getAthleteStats(athlete.id)
 
   // Fetch athlete activities (up to 5 most recent for display)
-  const athletePosts = await getAthleteActivities(athlete.id, 5)
+  const athletePosts = await repository.getAthleteActivities(athlete.id, 5)
 
   return (
     <div className="w-full max-w-4xl">

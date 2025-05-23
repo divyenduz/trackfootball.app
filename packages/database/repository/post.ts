@@ -68,7 +68,7 @@ type TypedPost = Post & {
   runs: Array<FeatureCollection<LineString>>
 }
 
-export async function getPostRaw(id: number) {
+export async function getPost(id: number) {
   const posts: Post[] = await sql`
     SELECT * FROM "Post"
     WHERE "id" = ${id}
@@ -209,7 +209,10 @@ export async function updatePostWithSprintData(
   return posts[0]
 }
 
-export async function updatePostFieldId(postId: number, fieldId: number): Promise<Post> {
+export async function updatePostFieldId(
+  postId: number,
+  fieldId: number,
+): Promise<Post> {
   const posts: Post[] = await sql`
     UPDATE "Post"
     SET "fieldId" = ${fieldId}
@@ -219,7 +222,9 @@ export async function updatePostFieldId(postId: number, fieldId: number): Promis
   return posts[0]
 }
 
-export async function getPostByIdWithoutField(postId: number): Promise<Post | null> {
+export async function getPostByIdWithoutField(
+  postId: number,
+): Promise<Post | null> {
   const posts: Post[] = await sql`
     SELECT * FROM "Post"
     WHERE "id" = ${postId} AND "fieldId" IS NULL
@@ -227,7 +232,10 @@ export async function getPostByIdWithoutField(postId: number): Promise<Post | nu
   return posts[0] || null
 }
 
-export async function updatePostStatus(postId: number, status: string): Promise<void> {
+export async function updatePostStatus(
+  postId: number,
+  status: string,
+): Promise<void> {
   await sql`
     UPDATE "Post"
     SET "status" = ${status}
@@ -248,7 +256,9 @@ interface UpdatePostCompleteInput {
   averageSpeed: number
 }
 
-export async function updatePostComplete(input: UpdatePostCompleteInput): Promise<Post> {
+export async function updatePostComplete(
+  input: UpdatePostCompleteInput,
+): Promise<Post> {
   const posts: Post[] = await sql`
     WITH PostModified AS (
       UPDATE "Post"
