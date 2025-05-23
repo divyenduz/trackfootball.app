@@ -11,7 +11,7 @@ import { auth } from 'utils/auth'
 
 export async function refreshPost(postId: number) {
   const user = await auth()
-  invariant(user, 'invariant: disconnect strava called without user')
+  invariant(user, 'invariant: refresh post called without user')
 
   const post = await repository.getPostById(postId)
   if (!post) {

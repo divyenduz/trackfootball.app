@@ -7,7 +7,7 @@ import { auth } from 'utils/auth'
 
 export async function deletePost(postId: number) {
   const user = await auth()
-  invariant(user, 'invariant: disconnect strava called without user')
+  invariant(user, 'invariant: delete post called without user')
   const post = await repository.getPost(postId)
   invariant(post, `invariant: post with ${postId} not found`)
   if (post.userId !== user.id && user.type !== 'ADMIN') {
