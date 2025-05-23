@@ -15,7 +15,7 @@ export { sql }
 
 export const repository = {
   createPost: postRepo.createPost,
-  getPostRaw: postRepo.getPost,
+  getPost: postRepo.getPost,
   getPostById: postRepo.getPostById,
   getPostWithUserAndFields: postRepo.getPostWithUserAndFields,
   getPostIdBy: postRepo.getPostIdBy,
