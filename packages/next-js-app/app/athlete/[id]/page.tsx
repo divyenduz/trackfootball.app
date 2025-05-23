@@ -7,7 +7,6 @@ import {
 } from '@mui/material'
 import { checkStravaToken } from 'app/actions/checkStravaToken'
 import { Metadata } from 'next'
-import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { auth } from 'utils/auth'
 
@@ -73,11 +72,9 @@ export default async function Profile({ params }: Props) {
     athleteWithSocialLogin,
   )) as CheckStravaState
 
-  // Fetch athlete stats from database
   const { totalActivities, totalDistance, totalSprints, maxSpeed } =
     await repository.getAthleteStats(athlete.id)
 
-  // Fetch athlete activities (up to 5 most recent for display)
   const athletePosts = await repository.getAthleteActivities(athlete.id, 5)
 
   return (
@@ -112,7 +109,7 @@ export default async function Profile({ params }: Props) {
           }
         />
 
-        <ShowToOwner ownerId={athlete.id} userId={currentUser.id}>
+        <ShowToOwner ownerId={athlete.id} userId={currentUser?.id}>
           <div className="bg-gray-50 border-b border-gray-200 px-6 py-3 flex justify-end">
             <ConnectWithStravaWidget
               redirectTo="athlete"
@@ -349,7 +346,7 @@ export default async function Profile({ params }: Props) {
                   Activities will appear here once they connect with Strava and
                   record their games.
                 </Typography>
-                {athlete.id === currentUser.id && (
+                {athlete.id === currentUser?.id && (
                   <button className="mt-4 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md font-medium text-sm transition-colors inline-flex items-center">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

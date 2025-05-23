@@ -20,7 +20,7 @@ import Logo from '../atoms/brand/core/Logo'
 import { Photo } from 'components/atoms/Photo'
 
 interface Props {
-  user: AwaitedUser
+  user: AwaitedUser | null
   pageName: string
 }
 
@@ -49,8 +49,15 @@ export const AppBar: React.FC<Props> = ({
           </Link>
 
           <div className="flex justify-end flex-1">
-            {match(Boolean(user))
-              .with(true, () => {
+            {match(user)
+              .with(null, () => {
+                return (
+                  <Link href="/api/auth/login">
+                    <Button variant="contained">Login</Button>
+                  </Link>
+                )
+              })
+              .otherwise((user) => {
                 return (
                   <>
                     <Link href={`/dashboard`}>
@@ -90,7 +97,10 @@ export const AppBar: React.FC<Props> = ({
                         }}
                       >
                         <ListItemIcon>👤</ListItemIcon>
-                        <Link href={`/athlete/[id]`} as={`/athlete/${user.id}`}>
+                        <Link
+                          href={`/athlete/[id]`}
+                          as={`/athlete/${user?.id}`}
+                        >
                           <span className="w-full">Profile</span>
                         </Link>
                       </MenuItem>
@@ -110,15 +120,7 @@ export const AppBar: React.FC<Props> = ({
                     </Menu>
                   </>
                 )
-              })
-              .with(false, () => {
-                return (
-                  <Link href="/api/auth/login">
-                    <Button variant="contained">Login</Button>
-                  </Link>
-                )
-              })
-              .exhaustive()}
+              })}
           </div>
         </Toolbar>
       </MaterialAppBar>

@@ -5,7 +5,7 @@ import React from 'react'
 interface ShowToOwnerProps {
   children: React.ReactNode
   ownerId: number
-  userId: number
+  userId?: number
   className?: string
 }
 

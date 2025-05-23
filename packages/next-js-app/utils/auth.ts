@@ -15,13 +15,13 @@ export class NotLoggedInError extends Error {
 async function authenticate() {
   const user = await getCurrentUser()
   if (!user) {
-    throw new NotLoggedInError()
+    // throw new NotLoggedInError()
+    return null
   }
   return user
 }
 
 export async function auth() {
   const user = await authenticate()
-
   return user
 }

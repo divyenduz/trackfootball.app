@@ -48,7 +48,7 @@ export type AwaitedPost = NonNullable<
 
 export interface Props {
   post: AwaitedPost
-  user: AwaitedUser
+  user: AwaitedUser | null
 }
 
 interface AdminControlsProps {
@@ -164,8 +164,8 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
       id={`activity-item-${post.id}`}
       className="w-full mb-5"
     >
-      {user.type === 'ADMIN' && (
-        <AdminControls post={post} userIsAdmin={user.type === 'ADMIN'} />
+      {user?.type === 'ADMIN' && (
+        <AdminControls post={post} userIsAdmin={user?.type === 'ADMIN'} />
       )}
       <CardHeader
         className="p-1"
@@ -213,7 +213,7 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
           }
           action={
             <div className="flex space-x-2 md:w-full">
-              <ShowToOwner ownerId={post.userId} userId={user.id}>
+              <ShowToOwner ownerId={post.userId} userId={user?.id}>
                 <FeedItemAction postId={post.id} />
               </ShowToOwner>
             </div>
@@ -231,7 +231,7 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
             <ShowToOwner
               className={classes.paper}
               ownerId={post.userId}
-              userId={user.id}
+              userId={user?.id}
             >
               <div className={classes.title}>❤️ Max Heart Rate</div>
               <div className={classes.value}>{post.maxHeartRate}</div>
@@ -240,7 +240,7 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
             <ShowToOwner
               className={classes.paper}
               ownerId={post.userId}
-              userId={user.id}
+              userId={user?.id}
             >
               <div className={classes.title}>❤️ Average Heart Rate</div>
               <div className={classes.value}>{post.averageHeartRate}</div>

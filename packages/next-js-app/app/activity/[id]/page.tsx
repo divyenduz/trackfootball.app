@@ -57,11 +57,7 @@ export default async function Activity({ params: { id } }: Props) {
     return notFound()
   }
 
-  let user = null
-  try {
-    user = await auth()
-  } catch (e) {}
-
+  const user = await auth()
   return (
     <>
       <div className="w-full max-w-4xl p-3 sm:p-5">

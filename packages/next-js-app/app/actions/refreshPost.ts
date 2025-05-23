@@ -6,10 +6,12 @@ import { durationToSeconds } from '@trackfootball/utils'
 import { MESSAGE_UNAUTHORIZED } from 'packages/auth/utils'
 import { postAddField } from 'packages/services/post/addField'
 import { fetchStravaActivityGeoJson } from 'services/strava/token'
+import invariant from 'tiny-invariant'
 import { auth } from 'utils/auth'
 
 export async function refreshPost(postId: number) {
   const user = await auth()
+  invariant(user, 'invariant: disconnect strava called without user')
 
   const post = await repository.getPostById(postId)
   if (!post) {

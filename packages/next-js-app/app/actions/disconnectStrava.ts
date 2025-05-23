@@ -3,14 +3,17 @@
 import { revalidatePath } from 'next/cache'
 import { deleteSocialLoginById } from '@trackfootball/database/repository/socialLogin'
 import { auth } from 'utils/auth'
+import invariant from 'tiny-invariant'
 
 export async function disconnectStrava() {
   const user = await auth()
+  invariant(user, 'invariant: disconnect strava called without user')
 
   const stravaLogin = user.socialLogin.find((sl) => sl.platform === 'STRAVA')
-  if (!Boolean(stravaLogin)) {
-    throw new Error("Trying to disconnect Strava login but it doesn't exist")
-  }
+  invariant(
+    user,
+    'invariant: disconnect strava called without strava connection',
+  )
   await deleteSocialLoginById(stravaLogin!.id)
   revalidatePath(`/athlete/${user.id}`)
   return true

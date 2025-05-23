@@ -3,7 +3,7 @@ import { ConditionalDisplay } from './ConditionalDisplay'
 import Image from 'next/image'
 
 interface Props {
-  photo: string | null
+  photo?: string | null
 }
 
 const Photo = ({ photo }: Props) => {

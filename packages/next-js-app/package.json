@@ -7,7 +7,7 @@
     "build": "NODE_ENV=production bun --bun run next build",
     "build:analyse": "ANALYZE=true next build",
     "start": "next start -p 6060",
-    "lint": "bun tsc --noEmit; next lint",
+    "lint": "bun tsc --noEmit && next lint",
     "test": "bun test",
     "code:analyze": "tokei . -f -s 'lines' -t 'typescript,tsx' -e 'generated'",
     "ts:prune": "npx ts-prune --project tsconfig.json | grep -v '(used in module)' | grep -v default",
