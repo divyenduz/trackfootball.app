@@ -9,9 +9,9 @@ export async function createDiscordMessage({
   name,
   description,
 }: CreateDiscordMessageArgs) {
-  if (process.env.NODE_ENV !== 'production') {
-    return
-  }
+  // if (process.env.NODE_ENV !== 'production') {
+  //   return
+  // }
 
   const content = `
       ## ${heading}

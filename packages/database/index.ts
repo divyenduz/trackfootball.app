@@ -61,6 +61,8 @@ export const repository = {
   createStravaWebhookEvent: stravaWebhookEventRepo.createStravaWebhookEvent,
   updateStravaWebhookEventStatus:
     stravaWebhookEventRepo.updateStravaWebhookEventStatus,
+  findStravaWebhookEventByActivityId:
+    stravaWebhookEventRepo.findStravaWebhookEventByActivityId,
 
   getSocialLoginsByUserId: socialLoginRepo.getSocialLoginsByUserId,
   deleteSocialLoginById: socialLoginRepo.deleteSocialLoginById,

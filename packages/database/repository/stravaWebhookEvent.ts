@@ -36,3 +36,16 @@ export async function updateStravaWebhookEventStatus(
     WHERE "id" = ${id}
   `
 }
+
+export async function findStravaWebhookEventByActivityId(
+  activityId: number,
+): Promise<StravaWebhookEvent | null> {
+  const events: StravaWebhookEvent[] = await sql`
+    SELECT * FROM "StravaWebhookEvent" 
+    WHERE "body"::jsonb ->> 'object_id' = ${activityId.toString()}
+    AND "status" = 'PENDING'
+    LIMIT 1
+  `
+
+  return events[0] || null
+}

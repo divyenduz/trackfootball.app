@@ -50,17 +50,64 @@ async function processEvent(event: StravaWebhookEvent) {
         )
 
         if (!user) {
+          await createDiscordMessage({
+            heading:
+              'New Activity Creation Failed - No Social Login For User (Webhook)',
+            name: `${activityCreateEvent.owner_id}/${activityCreateEvent.object_id}`,
+            description: `
+        User has no Strava social login configured
+        Strava Owner: ${activityCreateEvent.owner_id}
+        Activity ID: ${activityCreateEvent.object_id}
+        Athlete Link: https://strava.com/athletes/${activityCreateEvent.owner_id}
+        Activity Link: https://strava.com/activities/${activityCreateEvent.object_id}`,
+          })
           throw new Error(
             `Failed to find user with Strava ID: ${activityCreateEvent.owner_id}`,
           )
         }
+        invariant(
+          user,
+          `invariant: failed to find user by strava owner_id ${activityCreateEvent.owner_id}`,
+        )
 
         const activity = await fetchStravaActivity(
           activityCreateEvent.object_id,
           user.id,
         )
         const activityType = activity.type
-        invariant(activityType, 'invariant: activity must have a type')
+        if (!activityType) {
+          await createDiscordMessage({
+            heading: 'New Activity Creation Failed - No Type (Webhook)',
+            name: `${activityCreateEvent.owner_id}/${activityCreateEvent.object_id}`,
+            description: `
+        Strava ID: ${activityCreateEvent.object_id}
+        Strava Owner: ${activityCreateEvent.owner_id}
+        Athlete Link: https://strava.com/athletes/${activityCreateEvent.owner_id}
+        Activity Link: https://strava.com/activities/${activityCreateEvent.object_id}`,
+          })
+        }
+        invariant(
+          activityType,
+          `invariant: activity must have a type, found ${activity.name} ${activity.type}`,
+        )
+
+        const isGeoDataAvailable =
+          activity.start_latlng && activity.start_latlng.length > 0
+        if (!isGeoDataAvailable) {
+          await createDiscordMessage({
+            heading: 'New Activity Creation Failed - No Geo Data (Webhook)',
+            name: `${activityCreateEvent.owner_id}/${activityCreateEvent.object_id}`,
+            description: `
+        Strava ID: ${activityCreateEvent.object_id}
+        Strava Owner: ${activityCreateEvent.owner_id}
+        Athlete Link: https://strava.com/athletes/${activityCreateEvent.owner_id}
+        Activity Link: https://strava.com/activities/${activityCreateEvent.object_id}`,
+          })
+        }
+        invariant(
+          isGeoDataAvailable,
+          `invariant: activity must geo data, found ${activity.start_latlng} ${activity.end_latlng}`,
+        )
 
         if (!['Run', 'Soccer'].includes(activityType)) {
           console.info(
@@ -109,17 +156,65 @@ async function processEvent(event: StravaWebhookEvent) {
         )
 
         if (!user) {
+          await createDiscordMessage({
+            heading:
+              'New Activity Creation Failed - No Social Login For User (Update Webhook)',
+            name: `${activityUpdateEvent.owner_id}/${activityUpdateEvent.object_id}`,
+            description: `
+        User has no Strava social login configured
+        Strava Owner: ${activityUpdateEvent.owner_id}
+        Activity ID: ${activityUpdateEvent.object_id}
+        Athlete Link: https://strava.com/athletes/${activityUpdateEvent.owner_id}
+        Activity Link: https://strava.com/activities/${activityUpdateEvent.object_id}`,
+          })
           throw new Error(
             `Failed to find user with Strava ID: ${activityUpdateEvent.owner_id}`,
           )
         }
+        invariant(
+          user,
+          `invariant: failed to find user by strava owner_id ${activityUpdateEvent.owner_id}`,
+        )
 
         const activity = await fetchStravaActivity(
           activityUpdateEvent.object_id,
           user.id,
         )
         const activityType = activity.type
-        invariant(activityType, 'invariant: activity must have a type')
+        if (!activityType) {
+          await createDiscordMessage({
+            heading: 'New Activity Creation Failed - No Type (Update Webhook)',
+            name: `${activityUpdateEvent.owner_id}/${activityUpdateEvent.object_id}`,
+            description: `
+        Strava ID: ${activityUpdateEvent.object_id}
+        Strava Owner: ${activityUpdateEvent.owner_id}
+        Athlete Link: https://strava.com/athletes/${activityUpdateEvent.owner_id}
+        Activity Link: https://strava.com/activities/${activityUpdateEvent.object_id}`,
+          })
+        }
+        invariant(
+          activityType,
+          `invariant: activity must have a type, found ${activity.name} ${activity.type}`,
+        )
+
+        const isGeoDataAvailable =
+          activity.start_latlng && activity.start_latlng.length > 0
+        if (!isGeoDataAvailable) {
+          await createDiscordMessage({
+            heading:
+              'New Activity Creation Failed - No Geo Data (Update Webhook)',
+            name: `${activityUpdateEvent.owner_id}/${activityUpdateEvent.object_id}`,
+            description: `
+        Strava ID: ${activityUpdateEvent.object_id}
+        Strava Owner: ${activityUpdateEvent.owner_id}
+        Athlete Link: https://strava.com/athletes/${activityUpdateEvent.owner_id}
+        Activity Link: https://strava.com/activities/${activityUpdateEvent.object_id}`,
+          })
+        }
+        invariant(
+          isGeoDataAvailable,
+          `invariant: activity must geo data, found ${activity.start_latlng} ${activity.end_latlng}`,
+        )
 
         if (!['Run', 'Soccer'].includes(activityType)) {
           console.info(
@@ -181,10 +276,25 @@ async function processEvent(event: StravaWebhookEvent) {
         )
 
         if (!user) {
+          await createDiscordMessage({
+            heading:
+              'Activity Deletion Failed - No Social Login For User (Webhook)',
+            name: `${activityDeleteEvent.owner_id}/${activityDeleteEvent.object_id}`,
+            description: `
+        User has no Strava social login configured
+        Strava Owner: ${activityDeleteEvent.owner_id}
+        Activity ID: ${activityDeleteEvent.object_id}
+        Athlete Link: https://strava.com/athletes/${activityDeleteEvent.owner_id}
+        Activity Link: https://strava.com/activities/${activityDeleteEvent.object_id}`,
+          })
           throw new Error(
             `Failed to find user with Strava ID: ${activityDeleteEvent.owner_id}`,
           )
         }
+        invariant(
+          user,
+          `invariant: failed to find user by strava owner_id ${activityDeleteEvent.owner_id}`,
+        )
 
         const post = await repository.deletePostBy(
           activityDeleteEvent.object_id,
