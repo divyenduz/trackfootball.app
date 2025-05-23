@@ -36,7 +36,7 @@ export const AppBar: React.FC<Props> = ({
       <MaterialAppBar position="fixed" color="default">
         <Toolbar className="p-3">
           <Link href="/home">
-            <div className="flex flex-row flex-wrap items-center justify-center flex-none gap-2 cursor-pointer">
+            <div className="flex flex-row items-center flex-none gap-2 cursor-pointer">
               <Logo size={'xs'} />
               <Typography
                 className="text-gray-900 hidden md:block"
@@ -48,7 +48,7 @@ export const AppBar: React.FC<Props> = ({
             </div>
           </Link>
 
-          <div className="flex justify-end flex-1">
+          <div className="flex justify-end items-center flex-1 gap-2">
             {match(user)
               .with(null, () => {
                 return (

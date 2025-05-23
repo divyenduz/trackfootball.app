@@ -32,7 +32,9 @@ export async function getUserBy(stravaId: string): Promise<User | null> {
   return users[0]
 }
 
-export async function getUserByAuth0Sub(auth0Sub: string): Promise<User | null> {
+export async function getUserByAuth0Sub(
+  auth0Sub: string,
+): Promise<User | null> {
   const users: User[] = await sql`
   SELECT * FROM "User"
   WHERE "User"."auth0Sub" = ${auth0Sub}
@@ -46,7 +48,9 @@ export async function deleteStravaSocialLogin(platformId: number) {
   return socialLogins
 }
 
-export async function getUserWithSocialLoginsByAuth0Sub(auth0Sub: string): Promise<(User & { socialLogin: SocialLogin[] }) | null> {
+export async function getUserWithSocialLoginsByAuth0Sub(
+  auth0Sub: string,
+): Promise<(User & { socialLogin: SocialLogin[] }) | null> {
   const user = await getUserByAuth0Sub(auth0Sub)
   if (!user) {
     return null

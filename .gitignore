@@ -21,3 +21,4 @@ keys/
 backups
 
 scripts/pg.ts
+unsafe_user.json
