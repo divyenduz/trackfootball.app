@@ -14,6 +14,9 @@
     "packages/database": {
       "name": "@trackfootball/database",
       "version": "0.0.0",
+      "dependencies": {
+        "postgres": "3.4.7",
+      },
       "devDependencies": {
         "@prisma/client": "5.22.0",
         "@types/bun": "1.2.14",

@@ -21,7 +21,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { getBoundsForPoints } from 'packages/utils/map'
 import React, { useEffect, useState } from 'react'
-import { getPost } from '@trackfootball/database'
+import { repository } from '@trackfootball/database'
 import { match } from 'ts-pattern'
 
 import { ConditionalDisplay } from '../../atoms/ConditionalDisplay'
@@ -42,7 +42,9 @@ const prettyRunMetricSpeed = (hasSprints: boolean, speed: number) => {
   return mpsToKmph(speed)
 }
 
-export type AwaitedPost = NonNullable<Awaited<ReturnType<typeof getPost>>>
+export type AwaitedPost = NonNullable<
+  Awaited<ReturnType<typeof repository.getPostWithUserAndFields>>
+>
 
 export interface Props {
   post: AwaitedPost
@@ -65,7 +67,7 @@ const AdminControls: React.FC<AdminControlsProps> = ({ post, userIsAdmin }) => {
           className="px-3 py-1.5 text-xs rounded-md bg-blue-100 text-blue-700 border border-blue-300 hover:bg-blue-200 transition-colors"
           onClick={async () => {
             const r = confirm(
-              'Are you sure that you want to refresh the statistics of this post?'
+              'Are you sure that you want to refresh the statistics of this post?',
             )
             if (r) {
               await refreshPost(post.id)
@@ -78,7 +80,7 @@ const AdminControls: React.FC<AdminControlsProps> = ({ post, userIsAdmin }) => {
           className="px-3 py-1.5 text-xs rounded-md bg-red-100 text-red-700 border border-red-300 hover:bg-red-200 transition-colors"
           onClick={async () => {
             const rc = confirm(
-              'Are you sure that you want to delete this activity? This cannot be undone.'
+              'Are you sure that you want to delete this activity? This cannot be undone.',
             )
             if (!rc) return
             try {
@@ -88,7 +90,7 @@ const AdminControls: React.FC<AdminControlsProps> = ({ post, userIsAdmin }) => {
               console.error(e)
               alert(
                 `Something went wrong, please contact singh@trackfootball.app` +
-                  e
+                  e,
               )
             }
           }}
@@ -190,7 +192,7 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
                   new Date(),
                   {
                     addSuffix: true,
-                  }
+                  },
                 )}
               </Typography>
             </>
@@ -289,7 +291,7 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
                 new Date(),
                 {
                   addSuffix: true,
-                }
+                },
               )}
             </div>
           </>
@@ -403,14 +405,14 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
                     <div>
                       {prettyRunMetricDistance(
                         hasSprints,
-                        core.longestSprintDistance()
+                        core.longestSprintDistance(),
                       )}{' '}
                       <span className="text-sm font-medium">m,</span>{' '}
                     </div>
                     <div>
                       {prettyRunMetricSpeed(
                         hasSprints,
-                        core.longestSprintSpeed()
+                        core.longestSprintSpeed(),
                       )}{' '}
                       <span className="text-sm font-medium">Km/h</span>
                     </div>

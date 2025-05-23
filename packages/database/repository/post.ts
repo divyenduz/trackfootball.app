@@ -1,7 +1,7 @@
 import { Field, Post, PostType, User } from '@prisma/client'
 import { stringify } from '../../next-js-app/packages/utils/utils'
 import { FeatureCollection, LineString } from '@turf/helpers'
-import { sql } from 'bun'
+import { sql } from '../index'
 
 interface CreatePostInput {
   type: PostType
@@ -16,8 +16,11 @@ export async function createPost(input: CreatePostInput) {
     updatedAt: sql`now()`,
   }
 
-  const posts: Post[] = await sql`
-      INSERT INTO "Post" ${sql(data)}
+  const posts = await sql<Post[]>`
+      INSERT INTO "Post" ${
+        //@ts-expect-error
+        sql(data)
+      }
       RETURNING *
       `
 
@@ -66,6 +69,23 @@ type TypedPost = Post & {
 }
 
 export async function getPost(id: number) {
+  const posts: Post[] = await sql`
+    SELECT * FROM "Post"
+    WHERE "id" = ${id}
+    `
+  const post = posts[0]
+  return post
+}
+
+export async function getPostById(id: number): Promise<Post | null> {
+  const posts: Post[] = await sql`
+    SELECT * FROM "Post"
+    WHERE "id" = ${id}
+    `
+  return posts[0] || null
+}
+
+export async function getPostWithUserAndFields(id: number) {
   const posts: TypedPost[] = await sql`
     SELECT * from "Post"
     WHERE "id" = ${id}
@@ -132,6 +152,16 @@ export async function updatePostTitle(stravaId: number, title: string) {
   return post
 }
 
+export async function deletePost(id: number): Promise<Post | null> {
+  const posts: Post[] = await sql`
+    DELETE FROM "Post"
+    WHERE "id" = ${id}
+    RETURNING *
+    `
+  const post = posts[0]
+  return post
+}
+
 export async function deletePostBy(stravaId: number): Promise<Post | null> {
   const key = `${stravaId}`
   const posts: Post[] = await sql`
@@ -142,4 +172,140 @@ export async function deletePostBy(stravaId: number): Promise<Post | null> {
   const post = posts[0]
 
   return post
+}
+
+interface UpdatePostWithSprintDataInput {
+  id: number
+  geoJson: any
+  totalDistance: number
+  startTime: Date
+  elapsedTime: number
+  totalSprintTime: number
+  sprints: any
+  runs: any
+  maxSpeed: number
+  averageSpeed: number
+  status: string
+}
+
+export async function updatePostWithSprintData(
+  input: UpdatePostWithSprintDataInput,
+): Promise<Post> {
+  const posts: Post[] = await sql`
+    UPDATE "Post"
+    SET "geoJson" = ${input.geoJson},
+    "totalDistance" = ${input.totalDistance},
+    "startTime" = ${input.startTime},
+    "elapsedTime" = ${input.elapsedTime},
+    "totalSprintTime" = ${input.totalSprintTime},
+    "sprints" = ${input.sprints},
+    "runs" = ${input.runs},
+    "maxSpeed" = ${input.maxSpeed},
+    "averageSpeed" = ${input.averageSpeed},
+    "status" = ${input.status}
+    WHERE "id" = ${input.id}
+    RETURNING *
+    `
+  return posts[0]
+}
+
+export async function updatePostFieldId(
+  postId: number,
+  fieldId: number,
+): Promise<Post> {
+  const posts: Post[] = await sql`
+    UPDATE "Post"
+    SET "fieldId" = ${fieldId}
+    WHERE "id" = ${postId}
+    RETURNING *
+  `
+  return posts[0]
+}
+
+export async function getPostByIdWithoutField(
+  postId: number,
+): Promise<Post | null> {
+  const posts: Post[] = await sql`
+    SELECT * FROM "Post"
+    WHERE "id" = ${postId} AND "fieldId" IS NULL
+  `
+  return posts[0] || null
+}
+
+export async function updatePostStatus(
+  postId: number,
+  status: string,
+): Promise<void> {
+  await sql`
+    UPDATE "Post"
+    SET "status" = ${status}
+    WHERE "id" = ${postId}
+  `
+}
+
+interface UpdatePostCompleteInput {
+  id: number
+  geoJson: any
+  totalDistance: number
+  startTime: Date
+  elapsedTime: number
+  totalSprintTime: number
+  sprints: any
+  runs: any
+  maxSpeed: number
+  averageSpeed: number
+}
+
+export async function updatePostComplete(
+  input: UpdatePostCompleteInput,
+): Promise<Post> {
+  const posts: Post[] = await sql`
+    WITH PostModified AS (
+      UPDATE "Post"
+      SET "status" = 'COMPLETED',
+      "geoJson" = ${input.geoJson},
+      "totalDistance" = ${input.totalDistance},
+      "startTime" = ${input.startTime},
+      "elapsedTime" = ${input.elapsedTime},
+      "totalSprintTime" = ${input.totalSprintTime},
+      "sprints" = ${input.sprints},
+      "runs" = ${input.runs},
+      "maxSpeed" = ${input.maxSpeed},
+      "averageSpeed" = ${input.averageSpeed}
+      WHERE "id" = ${input.id}
+      RETURNING *
+    )
+    SELECT * FROM "Post"
+  `
+  return posts[0]
+}
+
+export type FeedItemType = Post & {
+  geoJson: FeatureCollection<LineString>
+  sprints: Array<FeatureCollection<LineString>>
+  runs: Array<FeatureCollection<LineString>>
+  Field: Field
+  User: User
+}
+
+export async function getFeed(cursor: number = 0, limit: number = 3) {
+  const maxPostIdQ: { max: number }[] = await sql`SELECT MAX("id") FROM "Post"`
+  const maxPostId = maxPostIdQ[0].max
+
+  const posts: FeedItemType[] = await sql`
+    SELECT row_to_json("Field".*::"Field") as "Field", row_to_json("User".*::"User") as "User", "Post".* FROM "Post"
+    LEFT JOIN "Field" ON "Post"."fieldId" = "Field"."id"
+    INNER JOIN "User" ON "Post"."userId" = "User"."id"
+    WHERE "Post"."id" <= ${cursor || maxPostId}
+    ORDER BY "Post"."startTime" DESC
+    LIMIT ${limit + 1}
+    `
+
+  let nextCursor: typeof cursor | null = null
+  if (posts.length > limit) {
+    const nextItem = posts.pop()
+    nextCursor = nextItem!.id
+  }
+
+  return { posts, nextCursor }
 }
