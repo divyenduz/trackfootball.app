@@ -17,6 +17,7 @@ import { match } from 'ts-pattern'
 
 import { getBoundsForPoints } from '../../../packages/utils/map'
 import { MapInstance } from '../MapInstance'
+import { Photo } from 'components/atoms/Photo'
 
 export interface Props {
   post: FeedItemType
@@ -49,82 +50,8 @@ export const FeedItem: React.FC<Props> = ({ post }) => {
   }, [post])
 
   if (!Boolean(post.geoJson)) {
-    return (
-      <Card
-        raised={false}
-        key={post.id}
-        id={`feed-item-${post.id}`}
-        className={'mt-5 mb-5'}
-      >
-        <CardHeader
-          className="p-2"
-          avatar={
-            <Link href={`/athlete/${post.userId}`}>
-              <Avatar className="w-10 h-10">
-                {post.User.picture ? (
-                  <Image
-                    alt="User's display picture"
-                    width={40}
-                    height={40}
-                    src={post.User.picture}
-                  ></Image>
-                ) : null}
-              </Avatar>
-            </Link>
-          }
-          title={
-            <>
-              <Link href={`/athlete/${post.userId}`}>
-                <Typography
-                  component="strong"
-                  className="font-medium text-left text-gray-900 cursor-pointer"
-                >
-                  {post.User.firstName} {post.User.lastName}
-                </Typography>
-              </Link>
-              <Typography className="text-xs font-normal text-gray-500">
-                {formatDistance(
-                  match(Boolean(post.startTime))
-                    .with(true, () => new Date(post.startTime!))
-                    .with(false, () => new Date())
-                    .exhaustive(),
-                  new Date(),
-                  {
-                    addSuffix: true,
-                  },
-                )}
-              </Typography>
-            </>
-          }
-        ></CardHeader>
-        <Paper
-          elevation={0}
-          key={post.id}
-          id={`feed-item-${post.id}`}
-          className="w-full mb-5"
-        >
-          <CardHeader
-            className="flex flex-wrap p-1"
-            title={
-              <Link href={`/activity/${post.id}`}>
-                <Typography
-                  component="h2"
-                  className="text-base font-medium text-left cursor-pointer"
-                >
-                  {post.text}
-                </Typography>
-              </Link>
-            }
-          ></CardHeader>
-          <CardContent>
-            <>
-              Activity is processing, please refresh the page in a few
-              seconds...
-            </>
-          </CardContent>
-        </Paper>
-      </Card>
-    )
+    console.log(`Note: post ${post.id} without geoJson found on feed`)
+    return null
   }
 
   return (
@@ -137,19 +64,9 @@ export const FeedItem: React.FC<Props> = ({ post }) => {
       <CardHeader
         className="p-1"
         avatar={
-          post.User.picture ? (
-            <Link href={`/athlete/${post.userId}`}>
-              <Avatar className="w-10 h-10">
-                <Image
-                  alt="User's display picture"
-                  width={40}
-                  height={40}
-                  className="object-cover"
-                  src={post.User.picture}
-                ></Image>
-              </Avatar>
-            </Link>
-          ) : null
+          <Link href={`/athlete/${post.userId}`}>
+            <Photo photo={post.User.picture}></Photo>
+          </Link>
         }
         title={
           <>

@@ -10,7 +10,16 @@ import * as currentUserRepo from './repository/currentUser'
 import * as stravaWebhookEventRepo from './repository/stravaWebhookEvent'
 import * as socialLoginRepo from './repository/socialLogin'
 
-const sql = postgres(Bun.env.DATABASE_URL)
+const globalSQL = globalThis as unknown as {
+  sql: ReturnType<typeof postgres> | undefined
+}
+
+const sql = globalSQL.sql ?? postgres(Bun.env.DATABASE_URL)
+
+if (process.env.NODE_ENV !== 'production') {
+  globalSQL.sql = sql
+}
+
 export { sql }
 
 export const repository = {

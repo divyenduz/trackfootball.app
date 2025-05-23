@@ -11,14 +11,13 @@ import {
   Typography,
 } from '@mui/material'
 import { AwaitedUser } from 'app/layout'
-import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
 import { match } from 'ts-pattern'
 
 import Button from '../atoms/Button'
-import { ConditionalDisplay } from '../atoms/ConditionalDisplay'
 import Logo from '../atoms/brand/core/Logo'
+import { Photo } from 'components/atoms/Photo'
 
 interface Props {
   user: AwaitedUser
@@ -68,23 +67,7 @@ export const AppBar: React.FC<Props> = ({
                       color="inherit"
                       size="large"
                     >
-                      <ConditionalDisplay visible={Boolean(user.picture)}>
-                        <div className="rounded-full w-7 h-7">
-                          {user.picture ? (
-                            <Image
-                              alt="User's display picture"
-                              width={30}
-                              height={30}
-                              className="object-cover rounded-full"
-                              src={user.picture}
-                            ></Image>
-                          ) : null}
-                        </div>
-                      </ConditionalDisplay>
-
-                      <ConditionalDisplay visible={!Boolean(user.picture)}>
-                        👤
-                      </ConditionalDisplay>
+                      <Photo photo={user.picture}></Photo>
                     </IconButton>
                     <Menu
                       id="menu-appbar"

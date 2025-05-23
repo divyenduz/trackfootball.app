@@ -21,9 +21,9 @@ export const GET = auth0.handleAuth({
     const data = {
       firstName: session?.user.given_name ?? session?.user.nickname,
       lastName: session?.user.family_name ?? '',
-      email: session?.user.email!,
+      email: session?.user.email,
       locale: session?.user.locale ?? 'en',
-      picture: session?.user.picture!,
+      picture: session?.user.picture,
       auth0Sub: session?.user.sub!,
       emailVerified: session?.user.email_verified!,
       // TODO: use database's now()

@@ -14,6 +14,7 @@ import { auth } from 'utils/auth'
 import { ConnectWithStravaWidget } from '../../../components/organisms/Settings/ConnectWithStravaWidget'
 import ShowToOwner from '../../../components/user/role-based-access/ShowToOwner'
 import { repository } from '@trackfootball/database'
+import { Photo } from 'components/atoms/Photo'
 
 export type CheckStravaState =
   | 'LOADING'
@@ -86,18 +87,7 @@ export default async function Profile({ params }: Props) {
           className="flex flex-wrap gap-4 p-6 bg-gradient-to-r from-red-600 to-red-800 text-white"
           title={
             <div className="flex items-center space-x-4">
-              <Avatar className="w-20 h-20 border-4 border-white shadow-lg">
-                <Image
-                  alt="User's display picture"
-                  width={100}
-                  height={100}
-                  src={
-                    athlete.picture ||
-                    'https://trackfootball-public.s3.ap-southeast-1.amazonaws.com/prod/user.svg'
-                  }
-                  className="object-cover"
-                />
-              </Avatar>
+              <Photo photo={athlete.picture}></Photo>
               <div>
                 <Typography
                   component="h2"
