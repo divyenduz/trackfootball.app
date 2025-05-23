@@ -61,15 +61,14 @@ export const FeedItem: React.FC<Props> = ({ post }) => {
           avatar={
             <Link href={`/athlete/${post.userId}`}>
               <Avatar className="w-10 h-10">
-                <Image
-                  alt="User's display picture"
-                  width={40}
-                  height={40}
-                  src={
-                    post.User?.picture ||
-                    'https://trackfootball-public.s3.ap-southeast-1.amazonaws.com/prod/user.svg'
-                  }
-                ></Image>
+                {post.User.picture ? (
+                  <Image
+                    alt="User's display picture"
+                    width={40}
+                    height={40}
+                    src={post.User.picture}
+                  ></Image>
+                ) : null}
               </Avatar>
             </Link>
           }
@@ -80,7 +79,7 @@ export const FeedItem: React.FC<Props> = ({ post }) => {
                   component="strong"
                   className="font-medium text-left text-gray-900 cursor-pointer"
                 >
-                  {post.User?.firstName || ''} {post.User?.lastName || ''}
+                  {post.User.firstName} {post.User.lastName}
                 </Typography>
               </Link>
               <Typography className="text-xs font-normal text-gray-500">
@@ -138,26 +137,25 @@ export const FeedItem: React.FC<Props> = ({ post }) => {
       <CardHeader
         className="p-1"
         avatar={
-          <Link href={`/athlete/${post.userId}`}>
-            <Avatar className="w-10 h-10">
-              <Image
-                alt="User's display picture"
-                width={40}
-                height={40}
-                className="object-cover"
-                src={
-                  post.User?.picture ||
-                  'https://trackfootball-public.s3.ap-southeast-1.amazonaws.com/prod/user.svg'
-                }
-              ></Image>
-            </Avatar>
-          </Link>
+          post.User.picture ? (
+            <Link href={`/athlete/${post.userId}`}>
+              <Avatar className="w-10 h-10">
+                <Image
+                  alt="User's display picture"
+                  width={40}
+                  height={40}
+                  className="object-cover"
+                  src={post.User.picture}
+                ></Image>
+              </Avatar>
+            </Link>
+          ) : null
         }
         title={
           <>
             <Link href={`/athlete/${post.userId}`}>
               <div className="text-base font-bold text-left text-gray-900 cursor-pointer">
-                {post.User?.firstName || ''} {post.User?.lastName || ''}
+                {post.User.firstName} {post.User.lastName}
               </div>
             </Link>
             <div className="text-xs font-normal text-gray-500">

@@ -65,12 +65,7 @@ export default async function Profile({ params }: Props) {
     socialLogin: socialLogin ? [socialLogin] : [],
   }
 
-  let currentUser = null
-  try {
-    currentUser = await auth()
-  } catch (e) {
-    console.error(e)
-  }
+  const currentUser = await auth()
 
   const backendApiUrl = await getBackendApiUrl()
   const checkStravaState = (await checkStravaToken(
@@ -127,11 +122,7 @@ export default async function Profile({ params }: Props) {
           }
         />
 
-        <ShowToOwner
-          ownerId={athlete.id}
-          userId={currentUser?.id || -1}
-          userIsAdmin={false}
-        >
+        <ShowToOwner ownerId={athlete.id} userId={currentUser.id}>
           <div className="bg-gray-50 border-b border-gray-200 px-6 py-3 flex justify-end">
             <ConnectWithStravaWidget
               redirectTo="athlete"
@@ -368,7 +359,7 @@ export default async function Profile({ params }: Props) {
                   Activities will appear here once they connect with Strava and
                   record their games.
                 </Typography>
-                {athlete.id === currentUser?.id && (
+                {athlete.id === currentUser.id && (
                   <button className="mt-4 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md font-medium text-sm transition-colors inline-flex items-center">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

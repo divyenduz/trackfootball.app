@@ -15,7 +15,6 @@ import { metersToKilometers, mpsToKmph } from '@trackfootball/utils'
 import { deletePost } from 'app/actions/deletePost'
 import { refreshPost } from 'app/actions/refreshPost'
 import { AwaitedUser } from 'app/layout'
-import Button from 'components/atoms/Button'
 import { formatDistance } from 'date-fns'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -48,7 +47,7 @@ export type AwaitedPost = NonNullable<
 
 export interface Props {
   post: AwaitedPost
-  user: AwaitedUser | null
+  user: AwaitedUser
 }
 
 interface AdminControlsProps {
@@ -143,7 +142,6 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
   const hasSprints = Boolean(post.sprints) && post.sprints!.length > 0
-  // const hasRuns = Boolean(post.runs) && post.runs!.length > 0
 
   if (!Boolean(post.geoJson)) {
     return (
@@ -153,23 +151,22 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
         id={`activity-item-${post.id}`}
         className={'w-full mb-5'}
       >
-        {user?.type === 'ADMIN' && (
-          <AdminControls post={post} userIsAdmin={user?.type === 'ADMIN'} />
+        {user.type === 'ADMIN' && (
+          <AdminControls post={post} userIsAdmin={user.type === 'ADMIN'} />
         )}
         <CardHeader
           className="p-2"
           avatar={
             <Link href={`/athlete/${post.userId}`}>
               <Avatar className="w-10 h-10">
-                <Image
-                  alt="User's display picture"
-                  width={40}
-                  height={40}
-                  src={
-                    post.User?.picture ||
-                    'https://trackfootball-public.s3.ap-southeast-1.amazonaws.com/prod/user.svg'
-                  }
-                ></Image>
+                {post.User.picture ? (
+                  <Image
+                    alt="User's display picture"
+                    width={40}
+                    height={40}
+                    src={post.User.picture}
+                  ></Image>
+                ) : null}
               </Avatar>
             </Link>
           }
@@ -180,7 +177,7 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
                   component="strong"
                   className="font-medium text-left text-gray-900 cursor-pointer"
                 >
-                  {post.User?.firstName || ''} {post.User?.lastName || ''}
+                  {post.User.firstName} {post.User.lastName}
                 </Typography>
               </Link>
               <Typography className="text-xs font-normal text-gray-500">
@@ -218,11 +215,7 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
             }
             action={
               <div className="md:w-full">
-                <ShowToOwner
-                  ownerId={post.userId}
-                  userId={user?.id || -1}
-                  userIsAdmin={user?.type === 'ADMIN'}
-                >
+                <ShowToOwner ownerId={post.userId} userId={user.id}>
                   <FeedItemAction postId={post.id} />
                 </ShowToOwner>
               </div>
@@ -239,7 +232,7 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
     )
   }
 
-  const core = new Core(post.geoJson as any)
+  const core = new Core(post.geoJson)
 
   const isMapMovable = match(isMobile)
     .with(false, () => true)
@@ -254,24 +247,23 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
       id={`activity-item-${post.id}`}
       className="w-full mb-5"
     >
-      {user?.type === 'ADMIN' && (
-        <AdminControls post={post} userIsAdmin={user?.type === 'ADMIN'} />
+      {user.type === 'ADMIN' && (
+        <AdminControls post={post} userIsAdmin={user.type === 'ADMIN'} />
       )}
       <CardHeader
         className="p-1"
         avatar={
           <Link href={`/athlete/${post.userId}`}>
             <Avatar className="w-10 h-10">
-              <Image
-                alt="User's display picture"
-                width={40}
-                height={40}
-                className="object-cover"
-                src={
-                  post.User?.picture ||
-                  'https://trackfootball-public.s3.ap-southeast-1.amazonaws.com/prod/user.svg'
-                }
-              ></Image>
+              {post.User.picture ? (
+                <Image
+                  alt="User's display picture"
+                  width={40}
+                  height={40}
+                  className="object-cover"
+                  src={post.User.picture}
+                ></Image>
+              ) : null}
             </Avatar>
           </Link>
         }
@@ -279,7 +271,7 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
           <>
             <Link href={`/athlete/${post.userId}`}>
               <div className="text-base font-bold text-left text-gray-900 cursor-pointer">
-                {post.User?.firstName || ''} {post.User?.lastName || ''}
+                {post.User.firstName} {post.User.lastName}
               </div>
             </Link>
             <div className="text-xs font-normal text-gray-500">
@@ -314,11 +306,7 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
           }
           action={
             <div className="flex space-x-2 md:w-full">
-              <ShowToOwner
-                ownerId={post.userId}
-                userId={user?.id || -1}
-                userIsAdmin={user?.type === 'ADMIN'}
-              >
+              <ShowToOwner ownerId={post.userId} userId={user.id}>
                 <FeedItemAction postId={post.id} />
               </ShowToOwner>
             </div>
@@ -336,8 +324,7 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
             <ShowToOwner
               className={classes.paper}
               ownerId={post.userId}
-              userId={user?.id || -1}
-              userIsAdmin={user?.type === 'ADMIN'}
+              userId={user.id}
             >
               <div className={classes.title}>❤️ Max Heart Rate</div>
               <div className={classes.value}>{post.maxHeartRate}</div>
@@ -346,8 +333,7 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
             <ShowToOwner
               className={classes.paper}
               ownerId={post.userId}
-              userId={user?.id || -1}
-              userIsAdmin={user?.type === 'ADMIN'}
+              userId={user.id}
             >
               <div className={classes.title}>❤️ Average Heart Rate</div>
               <div className={classes.value}>{post.averageHeartRate}</div>

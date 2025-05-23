@@ -21,8 +21,8 @@ import { ConditionalDisplay } from '../atoms/ConditionalDisplay'
 import Logo from '../atoms/brand/core/Logo'
 
 interface Props {
-  user: AwaitedUser | null
-  pageName?: string
+  user: AwaitedUser
+  pageName: string
 }
 
 export const AppBar: React.FC<Props> = ({
@@ -68,22 +68,21 @@ export const AppBar: React.FC<Props> = ({
                       color="inherit"
                       size="large"
                     >
-                      <ConditionalDisplay visible={Boolean(user?.picture)}>
+                      <ConditionalDisplay visible={Boolean(user.picture)}>
                         <div className="rounded-full w-7 h-7">
-                          <Image
-                            alt="User's display picture"
-                            width={30}
-                            height={30}
-                            className="object-cover rounded-full"
-                            src={
-                              user?.picture ||
-                              'https://trackfootball-public.s3.ap-southeast-1.amazonaws.com/prod/user.svg'
-                            }
-                          ></Image>
+                          {user.picture ? (
+                            <Image
+                              alt="User's display picture"
+                              width={30}
+                              height={30}
+                              className="object-cover rounded-full"
+                              src={user.picture}
+                            ></Image>
+                          ) : null}
                         </div>
                       </ConditionalDisplay>
 
-                      <ConditionalDisplay visible={!Boolean(user?.picture)}>
+                      <ConditionalDisplay visible={!Boolean(user.picture)}>
                         👤
                       </ConditionalDisplay>
                     </IconButton>
@@ -108,10 +107,7 @@ export const AppBar: React.FC<Props> = ({
                         }}
                       >
                         <ListItemIcon>👤</ListItemIcon>
-                        <Link
-                          href={`/athlete/[id]`}
-                          as={`/athlete/${user?.id}`}
-                        >
+                        <Link href={`/athlete/[id]`} as={`/athlete/${user.id}`}>
                           <span className="w-full">Profile</span>
                         </Link>
                       </MenuItem>

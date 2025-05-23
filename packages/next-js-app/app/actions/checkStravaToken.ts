@@ -12,9 +12,8 @@ export async function checkStravaToken(user: AwaitedUser) {
     return 'NOT_WORKING'
   }
 
-  const socialLogin = user?.socialLogin?.find((sl) => sl.platform === 'STRAVA')
+  const socialLogin = user.socialLogin.find((sl) => sl.platform === 'STRAVA')
 
-  // Note: if no social login, strava is not connected
   if (!Boolean(socialLogin)) {
     return 'NOT_CONNECTED'
   }
