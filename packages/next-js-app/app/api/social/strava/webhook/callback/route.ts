@@ -255,10 +255,18 @@ export async function GET(req: Request) {
   const hubVerifyToken = searchParams.get('hub.verify_token')
   const hubMode = searchParams.get('hub.mode')
 
+  const expectedVerifyToken = process.env.STRAVA_WEBHOOK_VERIFY_TOKEN
+  invariant(
+    expectedVerifyToken,
+    'invariant: STRAVA_WEBHOOK_VERIFY_TOKEN is required',
+  )
+
   if (
     hubMode === 'subscribe' &&
-    hubVerifyToken === '_STRAVA_HOOKS_OF_WEB_SECRET_'
+    expectedVerifyToken &&
+    hubVerifyToken === expectedVerifyToken
   ) {
+    invariant(hubChallenge, 'hub.challenge is required for subscription')
     console.info('Strava webhook subscription verified')
     return Response.json({ 'hub.challenge': hubChallenge })
   }
