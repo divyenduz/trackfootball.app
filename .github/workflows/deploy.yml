@@ -58,6 +58,25 @@ jobs:
           mkdir -p .kamal
           echo "${{ secrets.ENV_BASE64 }}" | base64 -d > .kamal/secrets
 
+      - name: Import environment variables from a file
+        id: import-env
+        shell: bash
+        run: |
+          while read line; do
+            echo "$line" >> $GITHUB_ENV
+          done < .env
+
+      - name: SSH Keyscan
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -p ${{ env.SSH_PORT }} ${{ env.HOST_IP }} >> ~/.ssh/known_hosts
+
+      - name: SSH Run Command
+        run: |
+          ssh -p ${{ env.SSH_PORT }} ${{ env.SSH_USER }}@${{ env.HOST_IP }} "ls"
+
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
