@@ -14,6 +14,6 @@
     "@kubb/plugin-oas": "3.10.12",
     "@prisma/client": "5.22.0",
     "@types/bun": "1.2.14",
-    "typescript": "5.4.5"
+    "typescript": "5.8.3"
   }
 }
