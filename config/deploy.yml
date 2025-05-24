@@ -48,8 +48,8 @@ proxy:
   hosts:
     - "trackfootball.app"
   app_port: 6060
-  ssl: false
-  forward_headers: true
+  ssl: true
+  forward_headers: false
   response_timeout: 60
   healthcheck:
     interval: 5
