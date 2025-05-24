@@ -58,8 +58,10 @@ jobs:
       - name: Write ENV
         run: |
           echo "${{ secrets.ENV_BASE64 }}" | base64 -d > .env
-          cat .env
 
+      - name: Write .kamal/secrets
+        run: |
+          echo "${{ secrets.ENV_BASE64 }}" | base64 -d > .kamal/secrets
       - name: SSH Keyscan
         run: |
           mkdir -p ~/.ssh
