@@ -52,6 +52,11 @@ async function processEvent(event: StravaWebhookEvent) {
         const activityId = activityCreateEvent.object_id
 
         await importStravaActivity(ownerId, activityId)
+
+        await repository.updateStravaWebhookEventStatus(
+          event.id,
+          StravaWebhookEventStatus.COMPLETED,
+        )
       },
     )
     .with(
