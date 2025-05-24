@@ -5,6 +5,7 @@
       "name": "trackfootball",
       "dependencies": {
         "@math.gl/web-mercator": "4.1.0",
+        "tiny-invariant": "^1.3.3",
         "typescript": "5.4.5",
       },
       "devDependencies": {
@@ -38,6 +39,7 @@
         "@tmcw/togeojson": "5.8.1",
         "@trackfootball/database": "*",
         "@trackfootball/open-api": "*",
+        "@trackfootball/service": "*",
         "@trackfootball/sprint-detection": "*",
         "@trackfootball/utils": "*",
         "@turf/boolean-point-in-polygon": "6.5.0",
@@ -87,6 +89,18 @@
         "@prisma/client": "5.22.0",
         "@types/bun": "1.2.14",
         "typescript": "5.4.5",
+      },
+    },
+    "packages/service": {
+      "name": "@trackfootball/service",
+      "version": "0.0.0",
+      "dependencies": {
+        "@trackfootball/database": "*",
+        "@trackfootball/sprint-detection": "*",
+        "@trackfootball/utils": "*",
+      },
+      "devDependencies": {
+        "@types/bun": "1.2.14",
       },
     },
     "packages/sprint-detection": {
@@ -401,6 +415,8 @@
     "@trackfootball/next-js-app": ["@trackfootball/next-js-app@workspace:packages/next-js-app"],
 
     "@trackfootball/open-api": ["@trackfootball/open-api@workspace:packages/open-api"],
+
+    "@trackfootball/service": ["@trackfootball/service@workspace:packages/service"],
 
     "@trackfootball/sprint-detection": ["@trackfootball/sprint-detection@workspace:packages/sprint-detection"],
 

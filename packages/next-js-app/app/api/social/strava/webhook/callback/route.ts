@@ -3,13 +3,16 @@ import {
   StravaWebhookEvent,
   StravaWebhookEventStatus,
 } from '@prisma/client'
-import { createDiscordMessage } from 'packages/services/discord'
-import { fetchCompletePost } from 'packages/services/post/fetchComplete'
 import { stringify } from 'packages/utils/utils'
 import { repository } from '@trackfootball/database'
 import invariant from 'tiny-invariant'
 import { match } from 'ts-pattern'
-import { fetchStravaActivity } from 'services/strava/token'
+import {
+  createDiscordMessage,
+  fetchCompletePost,
+  fetchStravaActivity,
+  importStravaActivity,
+} from '@trackfootball/service'
 
 type StravaEventBase = {
   object_id: number
@@ -45,107 +48,10 @@ async function processEvent(event: StravaWebhookEvent) {
     .with(
       { object_type: 'activity', aspect_type: 'create' },
       async (activityCreateEvent) => {
-        const user = await repository.getUserBy(
-          stringify(activityCreateEvent.owner_id),
-        )
+        const ownerId = activityCreateEvent.owner_id
+        const activityId = activityCreateEvent.object_id
 
-        if (!user) {
-          await createDiscordMessage({
-            heading:
-              'New Activity Creation Failed - No Social Login For User (Webhook)',
-            name: `${activityCreateEvent.owner_id}/${activityCreateEvent.object_id}`,
-            description: `
-        User has no Strava social login configured
-        Strava Owner: ${activityCreateEvent.owner_id}
-        Activity ID: ${activityCreateEvent.object_id}
-        Athlete Link: https://strava.com/athletes/${activityCreateEvent.owner_id}
-        Activity Link: https://strava.com/activities/${activityCreateEvent.object_id}`,
-          })
-          throw new Error(
-            `Failed to find user with Strava ID: ${activityCreateEvent.owner_id}`,
-          )
-        }
-        invariant(
-          user,
-          `invariant: failed to find user by strava owner_id ${activityCreateEvent.owner_id}`,
-        )
-
-        const activity = await fetchStravaActivity(
-          activityCreateEvent.object_id,
-          user.id,
-        )
-        const activityType = activity.type
-        if (!activityType) {
-          await createDiscordMessage({
-            heading: 'New Activity Creation Failed - No Type (Webhook)',
-            name: `${activityCreateEvent.owner_id}/${activityCreateEvent.object_id}`,
-            description: `
-        Strava ID: ${activityCreateEvent.object_id}
-        Strava Owner: ${activityCreateEvent.owner_id}
-        Athlete Link: https://strava.com/athletes/${activityCreateEvent.owner_id}
-        Activity Link: https://strava.com/activities/${activityCreateEvent.object_id}`,
-          })
-        }
-        invariant(
-          activityType,
-          `invariant: activity must have a type, found ${activity.name} ${activity.type}`,
-        )
-
-        const isGeoDataAvailable =
-          activity.start_latlng && activity.start_latlng.length > 0
-        if (!isGeoDataAvailable) {
-          await createDiscordMessage({
-            heading: 'New Activity Creation Failed - No Geo Data (Webhook)',
-            name: `${activityCreateEvent.owner_id}/${activityCreateEvent.object_id}`,
-            description: `
-        Strava ID: ${activityCreateEvent.object_id}
-        Strava Owner: ${activityCreateEvent.owner_id}
-        Athlete Link: https://strava.com/athletes/${activityCreateEvent.owner_id}
-        Activity Link: https://strava.com/activities/${activityCreateEvent.object_id}`,
-          })
-        }
-        invariant(
-          isGeoDataAvailable,
-          `invariant: activity must geo data, found ${activity.start_latlng} ${activity.end_latlng}`,
-        )
-
-        if (!['Run', 'Soccer'].includes(activityType)) {
-          console.info(
-            `Activity type ${activity.type} not supported, Strava key: ${activityCreateEvent.object_id}`,
-          )
-          return
-        }
-
-        const activityName = activity.name
-        invariant(activityName, 'invariant: activity must have a name')
-
-        const data = {
-          type: 'STRAVA_ACTIVITY' as PostType,
-          key: stringify(activityCreateEvent.object_id),
-          text: activityName,
-          userId: user.id,
-        }
-
-        const post = await repository.createPost(data)
-
-        if (!post) {
-          throw new Error(`Failed to create post for data ${data}`)
-        }
-
-        await fetchCompletePost({
-          postId: post.id,
-        })
-        const updatedPost = await repository.getPostWithUserAndFields(post.id)
-
-        await createDiscordMessage({
-          heading: 'New Activity Created (Webhook)',
-          name: `${post.text}`,
-          description: `
-      ID: ${post.id} / Strava ID: ${activityCreateEvent.object_id}
-      Activity Time: ${updatedPost?.startTime}
-      User: ${user.firstName} ${user.lastName}
-      Link: ${process.env.HOMEPAGE_URL}/activity/${post.id}`,
-        })
+        await importStravaActivity(ownerId, activityId)
       },
     )
     .with(
@@ -191,6 +97,8 @@ async function processEvent(event: StravaWebhookEvent) {
         Athlete Link: https://strava.com/athletes/${activityUpdateEvent.owner_id}
         Activity Link: https://strava.com/activities/${activityUpdateEvent.object_id}`,
           })
+          await repository.deleteStravaWebhookEvent(event.id)
+          return
         }
         invariant(
           activityType,
@@ -210,6 +118,8 @@ async function processEvent(event: StravaWebhookEvent) {
         Athlete Link: https://strava.com/athletes/${activityUpdateEvent.owner_id}
         Activity Link: https://strava.com/activities/${activityUpdateEvent.object_id}`,
           })
+          await repository.deleteStravaWebhookEvent(event.id)
+          return
         }
         invariant(
           isGeoDataAvailable,
@@ -332,11 +242,6 @@ async function processEvent(event: StravaWebhookEvent) {
       },
     )
     .exhaustive()
-
-  await repository.updateStravaWebhookEventStatus(
-    event.id,
-    StravaWebhookEventStatus.COMPLETED,
-  )
 }
 
 export async function GET(req: Request) {

@@ -1,9 +1,9 @@
 import type { Platform } from '@prisma/client'
 import { sql, repository } from '@trackfootball/database'
+import { tokenExchange } from '@trackfootball/service'
 import { redirect } from 'next/navigation'
 import { MESSAGE_UNAUTHORIZED } from 'packages/auth/utils'
 import { ensureUser } from 'packages/utils/utils'
-import { tokenExchange } from 'services/strava/token'
 import { getCurrentUser } from 'utils/getCurrentUser'
 
 export async function GET(req: Request) {

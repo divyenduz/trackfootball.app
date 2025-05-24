@@ -1,6 +1,6 @@
-import { sql, User, repository } from '@trackfootball/database'
+import { repository } from '@trackfootball/database'
+import { createDiscordMessage } from '@trackfootball/service'
 import { NextApiRequest, NextApiResponse } from 'next'
-import { createDiscordMessage } from 'packages/services/discord'
 import auth0 from 'utils/auth0'
 
 // https://github.com/auth0/nextjs-auth0/blob/main/EXAMPLES.md

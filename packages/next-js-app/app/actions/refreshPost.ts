@@ -1,11 +1,11 @@
 'use server'
 
 import { PostStatus, repository } from '@trackfootball/database'
+import { fetchStravaActivityGeoJson } from '@trackfootball/service'
+import { postAddField } from '@trackfootball/service/addField'
 import { Core } from '@trackfootball/sprint-detection'
 import { durationToSeconds } from '@trackfootball/utils'
 import { MESSAGE_UNAUTHORIZED } from 'packages/auth/utils'
-import { postAddField } from 'packages/services/post/addField'
-import { fetchStravaActivityGeoJson } from 'services/strava/token'
 import invariant from 'tiny-invariant'
 import { auth } from 'utils/auth'
 
