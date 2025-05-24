@@ -51,7 +51,7 @@ async function processEvent(event: StravaWebhookEvent) {
         const ownerId = activityCreateEvent.owner_id
         const activityId = activityCreateEvent.object_id
 
-        await importStravaActivity(ownerId, activityId)
+        await importStravaActivity(ownerId, activityId, 'WEBHOOK')
 
         await repository.updateStravaWebhookEventStatus(
           event.id,
@@ -69,7 +69,7 @@ async function processEvent(event: StravaWebhookEvent) {
         if (!user) {
           await createDiscordMessage({
             heading:
-              'New Activity Creation Failed - No Social Login For User (Update Webhook)',
+              'New Activity Update Failed - No Social Login For User (Update Webhook)',
             name: `${activityUpdateEvent.owner_id}/${activityUpdateEvent.object_id}`,
             description: `
         User has no Strava social login configured
@@ -115,7 +115,7 @@ async function processEvent(event: StravaWebhookEvent) {
         if (!isGeoDataAvailable) {
           await createDiscordMessage({
             heading:
-              'New Activity Creation Failed - No Geo Data (Update Webhook)',
+              'New Activity Update Failed - No Geo Data (Update Webhook)',
             name: `${activityUpdateEvent.owner_id}/${activityUpdateEvent.object_id}`,
             description: `
         Strava ID: ${activityUpdateEvent.object_id}

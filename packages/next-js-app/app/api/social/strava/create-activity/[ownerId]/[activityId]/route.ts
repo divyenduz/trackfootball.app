@@ -16,5 +16,5 @@ export async function GET(
     )
   }
 
-  return await importStravaActivity(ownerId, activityId)
+  return await importStravaActivity(ownerId, activityId, 'MANUAL')
 }

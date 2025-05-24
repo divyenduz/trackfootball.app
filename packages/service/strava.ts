@@ -25,13 +25,13 @@ import { Core } from '@trackfootball/sprint-detection'
 export async function importStravaActivity(
   ownerId: number,
   activityId: number,
+  source: 'WEBHOOK' | 'MANUAL',
 ) {
   try {
     const user = await repository.getUserBy(stringify(ownerId))
     if (!user) {
       await createDiscordMessage({
-        heading:
-          'New Activity Creation Failed - No Social Login For User (Manual)',
+        heading: `New Activity Creation Failed - No Social Login For User (${source})`,
         name: `${ownerId}/${activityId}`,
         description: `
       User has no Strava social login configured
@@ -53,7 +53,7 @@ export async function importStravaActivity(
     const existingPostId = await repository.getPostIdBy(activityId)
     if (existingPostId) {
       await createDiscordMessage({
-        heading: 'New Activity Creation Failed - Post Already Exists (Manual)',
+        heading: `New Activity Creation Failed - Post Already Exists (${source})`,
         name: `${ownerId}/${activityId}`,
         description: `
       Strava ID: ${activityId}
@@ -78,7 +78,7 @@ export async function importStravaActivity(
     const activityType = activity.type
     if (!activityType) {
       await createDiscordMessage({
-        heading: 'New Activity Creation Failed - No Type (Manual)',
+        heading: `New Activity Creation Failed - No Type (${source})`,
         name: `${ownerId}/${activityId}`,
         description: `
       Strava ID: ${activityId}
@@ -102,7 +102,7 @@ export async function importStravaActivity(
       activity.start_latlng && activity.start_latlng.length > 0
     if (!isGeoDataAvailable) {
       await createDiscordMessage({
-        heading: 'New Activity Creation Failed - No Geo Data (Manual)',
+        heading: `New Activity Creation Failed - No Geo Data (${source})`,
         name: `${ownerId}/${activityId}`,
         description: `
       Strava ID: ${activityId}
@@ -127,7 +127,7 @@ export async function importStravaActivity(
 
     if (!['Run', 'Soccer'].includes(activityType)) {
       await createDiscordMessage({
-        heading: `New Activity Creation Failed - Type Not Supported ${activityType} (Manual)`,
+        heading: `New Activity Creation Failed - Type Not Supported ${activityType} (${source})`,
         name: `${ownerId}/${activityId}`,
         description: `
       Strava ID: ${activityId}
@@ -173,7 +173,7 @@ export async function importStravaActivity(
     const updatedPost = await repository.getPostWithUserAndFields(post.id)
 
     await createDiscordMessage({
-      heading: 'New Activity Created (Manual)',
+      heading: `New Activity Created (${source})`,
       name: `${post.text}`,
       description: `
       ID: ${post.id} / Strava ID: ${activityId}
