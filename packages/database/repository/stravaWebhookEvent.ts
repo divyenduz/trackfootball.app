@@ -37,6 +37,13 @@ export async function updateStravaWebhookEventStatus(
   `
 }
 
+export async function deleteStravaWebhookEvent(id: number): Promise<void> {
+  await sql`
+    DELETE FROM "StravaWebhookEvent" 
+    WHERE "id" = ${id}
+  `
+}
+
 export async function findStravaWebhookEventByActivityId(
   activityId: number,
 ): Promise<StravaWebhookEvent | null> {

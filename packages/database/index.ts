@@ -61,6 +61,7 @@ export const repository = {
   createStravaWebhookEvent: stravaWebhookEventRepo.createStravaWebhookEvent,
   updateStravaWebhookEventStatus:
     stravaWebhookEventRepo.updateStravaWebhookEventStatus,
+  deleteStravaWebhookEvent: stravaWebhookEventRepo.deleteStravaWebhookEvent,
   findStravaWebhookEventByActivityId:
     stravaWebhookEventRepo.findStravaWebhookEventByActivityId,
 

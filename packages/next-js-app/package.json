@@ -38,6 +38,7 @@
     "@trackfootball/database": "*",
     "@trackfootball/open-api": "*",
     "@trackfootball/sprint-detection": "*",
+    "@trackfootball/service": "*",
     "@trackfootball/utils": "*",
     "@turf/boolean-point-in-polygon": "6.5.0",
     "@turf/helpers": "6.5.0",

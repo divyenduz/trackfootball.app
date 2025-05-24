@@ -49,7 +49,9 @@ export async function postAddField({ postId }: PostAddFieldArgs) {
       return
     }
 
-    const fields: Field[] = await repository.getFieldsByName(matchingFullField!.name)
+    const fields: Field[] = await repository.getFieldsByName(
+      matchingFullField!.name,
+    )
 
     const fieldsWithIntersectionArea = fields.map((field) => {
       const fieldFeatures = featureCollection([
@@ -91,7 +93,10 @@ export async function postAddField({ postId }: PostAddFieldArgs) {
     ).field
 
     if (Boolean(matchingField)) {
-      const updatedPost = await repository.updatePostFieldId(post.id, matchingField!.id)
+      const updatedPost = await repository.updatePostFieldId(
+        post.id,
+        matchingField!.id,
+      )
 
       console.info(
         `info: post ${updatedPost.id} updated with a field named ${matchingField?.name} (${matchingField?.usage})`,
