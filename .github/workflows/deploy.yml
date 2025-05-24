@@ -15,6 +15,9 @@ env:
   CI: 1
   NEXT_TELEMETRY_DISABLED: 1
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  HOST_IP: ${{ secrets.HOST_IP }}
+  SSH_USER: ${{ secrets.SSH_USER }}
+  SSH_PORT: ${{ secrets.SSH_PORT }}
 
 jobs:
   build:
@@ -57,14 +60,6 @@ jobs:
         run: |
           mkdir -p .kamal
           echo "${{ secrets.ENV_BASE64 }}" | base64 -d > .kamal/secrets
-
-      - name: Import environment variables from a file
-        id: import-env
-        shell: bash
-        run: |
-          while read line; do
-            echo "$line" >> $GITHUB_ENV
-          done < .env
 
       - name: SSH Keyscan
         run: |
