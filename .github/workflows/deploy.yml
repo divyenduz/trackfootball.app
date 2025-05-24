@@ -31,6 +31,8 @@ jobs:
     runs-on: [ubuntu-latest]
     steps:
       - uses: actions/checkout@v4
+      - name: Dotenv Action
+        uses: falti/dotenv-action@v1.1.4
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -40,7 +42,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          gem install kamal -v 1.9.2
+          gem install kamal -v 2.6.1
 
       - name: Turnstyle
         uses: softprops/turnstyle@v1
@@ -56,8 +58,11 @@ jobs:
       - name: Write ENV
         run: |
           echo "${{ secrets.ENV_BASE64 }}" | base64 -d > .env
-          cat .env
 
+      - name: Write .kamal/secrets
+        run: |
+          mkdir -p .kamal
+          echo "${{ secrets.ENV_BASE64 }}" | base64 -d > .kamal/secrets
       - name: SSH Keyscan
         run: |
           mkdir -p ~/.ssh
@@ -75,5 +80,4 @@ jobs:
 
       - name: Kamal Deploy
         run: |
-          kamal env push
-          kamal deploy
+          dotenv kamal deploy
