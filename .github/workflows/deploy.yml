@@ -31,6 +31,8 @@ jobs:
     runs-on: [ubuntu-latest]
     steps:
       - uses: actions/checkout@v4
+      - name: Dotenv Action
+        uses: falti/dotenv-action@v1.1.4
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -40,7 +42,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          gem install kamal -v 1.9.2
+          gem install kamal -v 2.6.1
 
       - name: Turnstyle
         uses: softprops/turnstyle@v1
@@ -75,5 +77,4 @@ jobs:
 
       - name: Kamal Deploy
         run: |
-          kamal env push
-          kamal deploy
+          dotenv kamal deploy

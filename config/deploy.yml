@@ -29,7 +29,7 @@ env:
     - STRAVA_WEBHOOK_VERIFY_TOKEN
 
 builder:
-  multiarch: false
+  arch: amd64
   cache:
     type: gha
 
@@ -43,17 +43,18 @@ ssh:
   user: <%= ENV['SSH_USER'] %>
   port: <%= ENV['SSH_PORT'] %>
 
-traefik:
-  host_port: "<%= ENV['TRAEFIK_PORT'] %>"
-  args:
-    api.dashboard: true
-  labels:
-    traefik.enable: true
-    entryPoints.web.address: ":80"
-    traefik.http.routers.dashboard.rule: Host(`<%= ENV['TRAEFIK_HOST'] %>`)
-    traefik.http.routers.dashboard.service: api@internal
-    traefik.http.routers.dashboard.middlewares: auth
-    traefik.http.middlewares.auth.basicauth.users: <%= ENV['SSH_USER'] %>:$apr1$IGfJd4Fv$JWAY9EMWYvarLLIH4ebOY0
+
+proxy:
+  hosts:
+    - "trackfootball.app"
+  app_port: 6060
+  ssl: false
+  forward_headers: true
+  response_timeout: 60
+  healthcheck:
+    interval: 5
+    path: /api/healthcheck
+    timeout: 5
 
 registry:
   server: ghcr.io
@@ -61,9 +62,3 @@ registry:
     - KAMAL_REGISTRY_USERNAME
   password:
     - KAMAL_REGISTRY_PASSWORD
-
-healthcheck:
-  path: /api/healthcheck
-  port: "<%= ENV['APP_PORT'] %>"
-  max_attempts: 20
-  interval: 30s
