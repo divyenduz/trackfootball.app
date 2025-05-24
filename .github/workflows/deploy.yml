@@ -17,6 +17,7 @@ env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   SSH_KEY: ${{ secrets.SSH_KEY }}
   HOST_IP: ${{ secrets.HOST_IP }}
+  APP_PORT: ${{ secrets.APP_PORT }}
   SSH_USER: ${{ secrets.SSH_USER }}
   SSH_PORT: ${{ secrets.SSH_PORT }}
   KAMAL_REGISTRY_USERNAME: ${{ secrets.KAMAL_REGISTRY_USERNAME }}
