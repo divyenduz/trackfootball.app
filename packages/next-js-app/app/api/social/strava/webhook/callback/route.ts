@@ -94,7 +94,7 @@ async function processEvent(event: StravaWebhookEvent) {
         const activityType = activity.type
         if (!activityType) {
           await createDiscordMessage({
-            heading: 'New Activity Creation Failed - No Type (Update Webhook)',
+            heading: 'New Activity Update Failed - No Type (Update Webhook)',
             name: `${activityUpdateEvent.owner_id}/${activityUpdateEvent.object_id}`,
             description: `
         Strava ID: ${activityUpdateEvent.object_id}
