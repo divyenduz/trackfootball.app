@@ -61,6 +61,7 @@ jobs:
 
       - name: Write .kamal/secrets
         run: |
+          mkdir -p .kamal
           echo "${{ secrets.ENV_BASE64 }}" | base64 -d > .kamal/secrets
       - name: SSH Keyscan
         run: |
