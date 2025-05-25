@@ -1,14 +1,6 @@
 'use client'
 
-import {
-  Avatar,
-  Card,
-  CardContent,
-  CardHeader,
-  Paper,
-  Typography,
-  useTheme,
-} from '@mui/material'
+import { Card, CardContent, CardHeader, Paper, useTheme } from '@mui/material'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { Core } from '@trackfootball/sprint-detection'
 import { metersToKilometers, mpsToKmph } from '@trackfootball/utils'
@@ -16,7 +8,6 @@ import { deletePost } from 'app/actions/deletePost'
 import { refreshPost } from 'app/actions/refreshPost'
 import { AwaitedUser } from 'app/layout'
 import { formatDistance } from 'date-fns'
-import Image from 'next/image'
 import Link from 'next/link'
 import { getBoundsForPoints } from 'packages/utils/map'
 import React, { useEffect, useState } from 'react'
@@ -320,7 +311,6 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
             viewport={viewport}
             // @ts-expect-error unify viewport properties
             setViewport={setViewport}
-            topSprintOnly={false}
             showSprints={showPower}
             showRuns={showPower}
             showHeatmap={!showPower}

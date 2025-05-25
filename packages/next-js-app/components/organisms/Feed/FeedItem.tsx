@@ -113,7 +113,6 @@ export const FeedItem: React.FC<Props> = ({ post }) => {
               viewport={viewport}
               // @ts-expect-error unify viewport properties
               setViewport={setViewport}
-              topSprintOnly={false}
               showSprints={false}
               showRuns={false}
               showHeatmap={true}
