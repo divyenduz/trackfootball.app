@@ -45,10 +45,7 @@ export async function importStravaActivity(
         { status: 400 },
       )
     }
-    invariant(
-      user,
-      `invariant: failed to find user by strava owner_id ${ownerId}`,
-    )
+    invariant(user, `failed to find user by strava owner_id ${ownerId}`)
 
     const existingPostId = await repository.getPostIdBy(activityId)
     if (existingPostId) {
@@ -71,7 +68,7 @@ export async function importStravaActivity(
         )
       }
     }
-    invariant(!existingPostId, `invariant: post already exists`)
+    invariant(!existingPostId, `post already exists`)
 
     const activity = await fetchStravaActivity(activityId, user.id)
 
@@ -95,7 +92,7 @@ export async function importStravaActivity(
     }
     invariant(
       activityType,
-      `invariant: activity must have a type, found ${activity.name} ${activity.type}`,
+      `activity must have a type, found ${activity.name} ${activity.type}`,
     )
 
     const isGeoDataAvailable =
@@ -122,7 +119,7 @@ export async function importStravaActivity(
     }
     invariant(
       isGeoDataAvailable,
-      `invariant: activity must geo data, found ${activity.start_latlng} ${activity.end_latlng}`,
+      `activity must geo data, found ${activity.start_latlng} ${activity.end_latlng}`,
     )
 
     if (!['Run', 'Soccer'].includes(activityType)) {
@@ -149,7 +146,7 @@ export async function importStravaActivity(
     }
 
     const activityName = activity.name
-    invariant(activityName, 'invariant: activity must have a name')
+    invariant(activityName, 'activity must have a name')
 
     const data = {
       type: 'STRAVA_ACTIVITY' as PostType,
@@ -244,8 +241,8 @@ export async function tokenExchange(
   const link = 'https://www.strava.com/api/v3/oauth/token'
 
   const form = new FormData()
-  invariant(stravaClientId, `invariant: stravaClientId not set`)
-  invariant(stravaClientSecret, `invariant: stravaClientSecret not set`)
+  invariant(stravaClientId, `stravaClientId not set`)
+  invariant(stravaClientSecret, `stravaClientSecret not set`)
   form.append('client_id', stravaClientId)
   form.append('client_secret', stravaClientSecret)
   form.append('code', code)
@@ -264,8 +261,8 @@ export async function tokenRefresh(
 ): Promise<Omit<TokenExchangeResponse, 'athlete'>> {
   const link = 'https://www.strava.com/api/v3/oauth/token'
 
-  invariant(stravaClientId, `invariant: stravaClientId not set`)
-  invariant(stravaClientSecret, `invariant: stravaClientSecret not set`)
+  invariant(stravaClientId, `stravaClientId not set`)
+  invariant(stravaClientSecret, `stravaClientSecret not set`)
 
   const form = new FormData()
   form.append('client_id', stravaClientId)
@@ -404,9 +401,9 @@ export async function fetchStravaActivityGeoJson(
 
   const activity = await fetchStravaActivity(activityId, userId)
   const activityName = activity.name
-  invariant(activityName, 'invariant: activity must have a name')
+  invariant(activityName, 'activity must have a name')
   const activityStartDate = activity.start_date
-  invariant(activityStartDate, 'invariant: activity must have a start date')
+  invariant(activityStartDate, 'activity must have a start date')
   const geoJson = match(Boolean(activityStreams))
     .with(true, () =>
       new GeoData(

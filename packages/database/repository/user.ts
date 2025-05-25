@@ -1,6 +1,7 @@
 import { SocialLogin, User } from '@prisma/client'
 import { sql } from '../index'
 import { getSocialLoginsByUserId } from './socialLogin'
+import invariant from 'tiny-invariant'
 
 export async function getUser(id: number): Promise<User | null> {
   const users: User[] = await sql`SELECT * FROM "User" WHERE "id" = ${id}`
@@ -29,7 +30,7 @@ export async function getUserBy(stravaId: string): Promise<User | null> {
     INNER JOIN "SocialLogin" ON "User"."id" = "SocialLogin"."userId"
   WHERE
     "SocialLogin"."platformId" = ${stravaId}`
-  return users[0]
+  return users[0] || null
 }
 
 export async function getUserByAuth0Sub(
@@ -39,7 +40,7 @@ export async function getUserByAuth0Sub(
   SELECT * FROM "User"
   WHERE "User"."auth0Sub" = ${auth0Sub}
   `
-  return users[0]
+  return users[0] || null
 }
 
 export async function deleteStravaSocialLogin(platformId: number) {
@@ -80,5 +81,7 @@ export async function upsertUserByAuth0Sub(userData: {
     SET ${sql(userData)}
     RETURNING *
   `
-  return users[0]
+  const user = users[0]
+  invariant(user, `expected user to exist`)
+  return user
 }

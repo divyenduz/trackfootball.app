@@ -25,7 +25,7 @@ export const FeedItemAction = ({ postId }: FeedItemActionProps) => {
             return
           }
           try {
-            const r = await deletePost(postId)
+            await deletePost(postId)
             router.replace('/dashboard')
           } catch (e) {
             console.error(e)

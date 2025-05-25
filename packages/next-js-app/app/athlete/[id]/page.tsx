@@ -1,10 +1,4 @@
-import {
-  Avatar,
-  Card,
-  CardContent,
-  CardHeader,
-  Typography,
-} from '@mui/material'
+import { Card, CardContent, CardHeader, Typography } from '@mui/material'
 import { checkStravaToken } from 'app/actions/checkStravaToken'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
@@ -72,7 +66,7 @@ export default async function Profile({ params }: Props) {
     athleteWithSocialLogin,
   )) as CheckStravaState
 
-  const { totalActivities, totalDistance, totalSprints, maxSpeed } =
+  const { totalActivities, totalDistance, totalSprints, totalRuns } =
     await repository.getAthleteStats(athlete.id)
 
   const athletePosts = await repository.getAthleteActivities(athlete.id, 5)
@@ -210,12 +204,11 @@ export default async function Profile({ params }: Props) {
                   />
                 </svg>
                 <Typography className="text-red-600 text-sm font-medium">
-                  Max Speed
+                  Total Runs
                 </Typography>
               </div>
               <Typography className="text-2xl font-bold text-gray-800">
-                {maxSpeed && !isNaN(maxSpeed) ? maxSpeed.toFixed(1) : '0.0'}{' '}
-                km/h
+                {totalRuns}
               </Typography>
             </div>
           </div>

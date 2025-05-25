@@ -1,5 +1,5 @@
 import type { Platform } from '@prisma/client'
-import { sql, repository } from '@trackfootball/database'
+import { repository } from '@trackfootball/database'
 import { tokenExchange } from '@trackfootball/service'
 import { redirect } from 'next/navigation'
 import { MESSAGE_UNAUTHORIZED } from 'packages/auth/utils'
@@ -32,8 +32,6 @@ export async function GET(req: Request) {
       status: 403,
     })
   } else {
-    // Update
-
     const data = {
       userId: user.id,
       platform: 'STRAVA' as Platform,
@@ -43,7 +41,6 @@ export async function GET(req: Request) {
       accessToken: tokenExchangeResponse.access_token,
       refreshToken: tokenExchangeResponse.refresh_token,
       expiresAt,
-      // TODO: use database's now()
       updatedAt: new Date(),
     }
 

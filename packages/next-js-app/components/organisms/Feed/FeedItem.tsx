@@ -1,16 +1,8 @@
 'use client'
 
-import {
-  Avatar,
-  Card,
-  CardContent,
-  CardHeader,
-  Paper,
-  Typography,
-} from '@mui/material'
+import { Card, CardContent, CardHeader, Paper } from '@mui/material'
 import { FeedItemType } from 'app/actions/getFeed'
 import { formatDistance } from 'date-fns'
-import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { match } from 'ts-pattern'

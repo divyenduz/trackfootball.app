@@ -11,7 +11,7 @@ describe('core tests - sprint', () => {
   it('should test sprint data', () => {
     const gpx = fs.readFileSync(
       path.join(cwd, './__tests__/fixtures/jammu-bridge-sprint.gpx'),
-      'utf-8'
+      'utf-8',
     )
     const geoData = new GeoData('jammu-bridge-sprint', gpx, 'gpx')
     const core = new Core(geoData.toGeoJson())

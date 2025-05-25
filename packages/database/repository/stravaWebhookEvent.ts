@@ -1,5 +1,6 @@
 import { StravaWebhookEvent, StravaWebhookEventStatus } from '@prisma/client'
 import { sql } from '../index'
+import invariant from 'tiny-invariant'
 
 interface CreateStravaWebhookEventInput {
   status: StravaWebhookEventStatus
@@ -22,8 +23,9 @@ export async function createStravaWebhookEvent(
     }
     RETURNING *
   `
-
-  return stravaWebhookEvents[0]
+  const stravaWebhookEvent = stravaWebhookEvents[0]
+  invariant(stravaWebhookEvent, 'expected createStravaWebhookEvent to exist')
+  return stravaWebhookEvent
 }
 
 export async function updateStravaWebhookEventStatus(

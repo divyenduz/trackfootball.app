@@ -26,7 +26,6 @@ export const GET = auth0.handleAuth({
       picture: session?.user.picture,
       auth0Sub: session?.user.sub!,
       emailVerified: session?.user.email_verified!,
-      // TODO: use database's now()
       updatedAt: new Date(),
     }
 

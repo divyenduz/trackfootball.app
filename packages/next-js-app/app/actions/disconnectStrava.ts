@@ -7,13 +7,10 @@ import invariant from 'tiny-invariant'
 
 export async function disconnectStrava() {
   const user = await auth()
-  invariant(user, 'invariant: disconnect strava called without user')
+  invariant(user, 'disconnect strava called without user')
 
   const stravaLogin = user.socialLogin.find((sl) => sl.platform === 'STRAVA')
-  invariant(
-    user,
-    'invariant: disconnect strava called without strava connection',
-  )
+  invariant(user, 'disconnect strava called without strava connection')
   await deleteSocialLoginById(stravaLogin!.id)
   revalidatePath(`/athlete/${user.id}`)
   return true

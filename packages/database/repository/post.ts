@@ -2,6 +2,7 @@ import { Field, Post, PostType, User } from '@prisma/client'
 import { stringify } from '../../next-js-app/packages/utils/utils'
 import { FeatureCollection, LineString } from '@turf/helpers'
 import { sql } from '../index'
+import invariant from 'tiny-invariant'
 
 interface CreatePostInput {
   type: PostType
@@ -102,6 +103,7 @@ export async function getPostWithUserAndFields(id: number) {
     WHERE "id" = ${post.userId}
     `
   const user = users[0]
+  invariant(user, `expected post to have a user`)
 
   const fields: Field[] = await sql`
     SELECT * from "Field"
@@ -158,8 +160,13 @@ export async function deletePost(id: number): Promise<Post | null> {
     WHERE "id" = ${id}
     RETURNING *
     `
-  const post = posts[0]
-  return post
+  if (posts.length > 0) {
+    const post = posts[0]
+    invariant(post, 'expected post to exist')
+    return post
+  } else {
+    return null
+  }
 }
 
 export async function deletePostBy(stravaId: number): Promise<Post | null> {
@@ -169,9 +176,13 @@ export async function deletePostBy(stravaId: number): Promise<Post | null> {
     WHERE "key" = ${key}
     RETURNING *
     `
-  const post = posts[0]
-
-  return post
+  if (posts.length > 0) {
+    const post = posts[0]
+    invariant(post, 'expected post to exist')
+    return post
+  } else {
+    return null
+  }
 }
 
 interface UpdatePostWithSprintDataInput {
@@ -190,7 +201,7 @@ interface UpdatePostWithSprintDataInput {
 
 export async function updatePostWithSprintData(
   input: UpdatePostWithSprintDataInput,
-): Promise<Post> {
+): Promise<Post | null> {
   const posts: Post[] = await sql`
     UPDATE "Post"
     SET "geoJson" = ${input.geoJson},
@@ -206,20 +217,32 @@ export async function updatePostWithSprintData(
     WHERE "id" = ${input.id}
     RETURNING *
     `
-  return posts[0]
+  if (posts.length > 0) {
+    const post = posts[0]
+    invariant(post, 'expected post to exist')
+    return post
+  } else {
+    return null
+  }
 }
 
 export async function updatePostFieldId(
   postId: number,
   fieldId: number,
-): Promise<Post> {
+): Promise<Post | null> {
   const posts: Post[] = await sql`
     UPDATE "Post"
     SET "fieldId" = ${fieldId}
     WHERE "id" = ${postId}
     RETURNING *
   `
-  return posts[0]
+  if (posts.length > 0) {
+    const post = posts[0]
+    invariant(post, 'expected post to exist')
+    return post
+  } else {
+    return null
+  }
 }
 
 export async function getPostByIdWithoutField(
@@ -258,7 +281,7 @@ interface UpdatePostCompleteInput {
 
 export async function updatePostComplete(
   input: UpdatePostCompleteInput,
-): Promise<Post> {
+): Promise<Post | null> {
   const posts: Post[] = await sql`
     WITH PostModified AS (
       UPDATE "Post"
@@ -277,7 +300,13 @@ export async function updatePostComplete(
     )
     SELECT * FROM "Post"
   `
-  return posts[0]
+  if (posts.length > 0) {
+    const post = posts[0]
+    invariant(post, 'expected post to exist')
+    return post
+  } else {
+    return null
+  }
 }
 
 export type FeedItemType = Post & {
@@ -289,14 +318,16 @@ export type FeedItemType = Post & {
 }
 
 export async function getFeed(cursor: number = 0, limit: number = 3) {
-  const maxPostIdQ: { max: number }[] = await sql`SELECT MAX("id") FROM "Post"`
-  const maxPostId = maxPostIdQ[0].max
+  const maxPostIds: { max: number }[] = await sql`SELECT MAX("id") FROM "Post"`
+  const maxPostId = maxPostIds[0]
+  invariant(maxPostId, `expected maxPostId to exist`)
+  const maxPostIdValue = maxPostId.max
 
   const posts: FeedItemType[] = await sql`
     SELECT row_to_json("Field".*::"Field") as "Field", row_to_json("User".*::"User") as "User", "Post".* FROM "Post"
     LEFT JOIN "Field" ON "Post"."fieldId" = "Field"."id"
     INNER JOIN "User" ON "Post"."userId" = "User"."id"
-    WHERE "Post"."id" <= ${cursor || maxPostId}
+    WHERE "Post"."id" <= ${cursor || maxPostIdValue}
     ORDER BY "Post"."startTime" DESC
     LIMIT ${limit + 1}
     `

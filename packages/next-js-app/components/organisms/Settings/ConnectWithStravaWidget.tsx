@@ -1,11 +1,10 @@
 'use client'
 
-import { Button, Card, CardContent, CardHeader } from '@mui/material'
+import { Button } from '@mui/material'
 import { disconnectStrava } from 'app/actions/disconnectStrava'
 import { CheckStravaState } from 'app/athlete/[id]/page'
 import { match } from 'ts-pattern'
 
-import { Space } from '../../../components/atoms/Space'
 import ConnectWithStrava from '../../../components/atoms/brand/strava/ConnectWithStrava'
 
 interface Props {

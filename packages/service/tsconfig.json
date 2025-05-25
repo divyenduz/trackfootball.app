@@ -5,8 +5,8 @@
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
-    "noUnusedLocals": false,
-    "noUncheckedIndexedAccess": false, // TODO: make true
+    "noUnusedLocals": true,
+    "noUncheckedIndexedAccess": true,
     "allowImportingTsExtensions": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
@@ -19,11 +19,6 @@
     "incremental": true,
     "baseUrl": "."
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "../sprint-detection/geoData.ts"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules", "**/*.test.ts"]
 }

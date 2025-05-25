@@ -1,18 +1,24 @@
 import { WebMercatorViewport } from '@math.gl/web-mercator'
 import type { Field, Post } from '@prisma/client'
 import { FeatureCollection, LineString } from '@turf/helpers'
+import invariant from 'tiny-invariant'
 import { match } from 'ts-pattern'
 
 export function getNthCoord(geoJson: FeatureCollection<LineString>, n: number) {
-  const coords = geoJson.features[0].geometry.coordinates
+  const feature = geoJson.features[0]
+  invariant(feature, `expected feature to exist`)
+  const coords = feature.geometry.coordinates
   if (n >= coords.length) {
-    const [longitude, latitude] = coords[coords.length - 1]
-    return {
-      latitude,
-      longitude,
-    }
+    invariant(
+      false,
+      `getNthCoord called with n (${n}) > coords.length (${coords.length})`,
+    )
   }
-  const [longitude, latitude] = coords[n]
+  const nthCoord = coords[n]
+  invariant(nthCoord, `expected nthCoord to exist`)
+  const [longitude, latitude] = nthCoord
+  invariant(longitude, `expected longitude to exist`)
+  invariant(latitude, `expected longitude to exist`)
   return {
     latitude,
     longitude,
@@ -47,7 +53,7 @@ export const getBoundsForPoints = (post: PostWithField) => {
 
   const findMinMax = (
     boundPoint: { min: number; max: number },
-    point: number
+    point: number,
   ) => {
     return {
       min: point <= boundPoint.min ? point : boundPoint.min,

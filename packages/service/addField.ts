@@ -10,6 +10,7 @@ import {
   point,
 } from '@turf/helpers'
 import intersect from '@turf/intersect'
+import invariant from 'tiny-invariant'
 import { match } from 'ts-pattern'
 
 interface PostAddFieldArgs {
@@ -78,6 +79,12 @@ export async function postAddField({ postId }: PostAddFieldArgs) {
       }
     })
 
+    const firstFieldWithIntersectionArea = fieldsWithIntersectionArea[0]
+    invariant(
+      firstFieldWithIntersectionArea,
+      `expected one field with matching intersection area to exist`,
+    )
+
     const matchingField = fieldsWithIntersectionArea.reduce(
       (maxAreaField, currentField) => {
         if (
@@ -89,7 +96,7 @@ export async function postAddField({ postId }: PostAddFieldArgs) {
           return maxAreaField
         }
       },
-      fieldsWithIntersectionArea[0],
+      firstFieldWithIntersectionArea,
     ).field
 
     if (Boolean(matchingField)) {
@@ -98,9 +105,15 @@ export async function postAddField({ postId }: PostAddFieldArgs) {
         matchingField!.id,
       )
 
-      console.info(
-        `info: post ${updatedPost.id} updated with a field named ${matchingField?.name} (${matchingField?.usage})`,
-      )
+      if (updatedPost) {
+        console.info(
+          `info: post ${updatedPost.id} updated with a field named ${matchingField?.name} (${matchingField?.usage})`,
+        )
+      } else {
+        console.error(
+          `error: failed to updte post ${post.id} with field ${matchingField.id} ${matchingField.name}`,
+        )
+      }
     } else {
       console.info(`info: post ${post.id} unable to find matching field`)
     }

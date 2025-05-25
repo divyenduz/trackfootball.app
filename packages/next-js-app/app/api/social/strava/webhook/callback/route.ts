@@ -84,7 +84,7 @@ async function processEvent(event: StravaWebhookEvent) {
         }
         invariant(
           user,
-          `invariant: failed to find user by strava owner_id ${activityUpdateEvent.owner_id}`,
+          `failed to find user by strava owner_id ${activityUpdateEvent.owner_id}`,
         )
 
         const activity = await fetchStravaActivity(
@@ -107,7 +107,7 @@ async function processEvent(event: StravaWebhookEvent) {
         }
         invariant(
           activityType,
-          `invariant: activity must have a type, found ${activity.name} ${activity.type}`,
+          `activity must have a type, found ${activity.name} ${activity.type}`,
         )
 
         const isGeoDataAvailable =
@@ -128,7 +128,7 @@ async function processEvent(event: StravaWebhookEvent) {
         }
         invariant(
           isGeoDataAvailable,
-          `invariant: activity must geo data, found ${activity.start_latlng} ${activity.end_latlng}`,
+          `activity must geo data, found ${activity.start_latlng} ${activity.end_latlng}`,
         )
 
         if (!['Run', 'Soccer'].includes(activityType)) {
@@ -152,7 +152,7 @@ async function processEvent(event: StravaWebhookEvent) {
           }
         } else {
           const activityName = activity.name
-          invariant(activityName, 'invariant: activity must have a name')
+          invariant(activityName, 'activity must have a name')
           const data = {
             type: 'STRAVA_ACTIVITY' as PostType,
             key: stringify(activityUpdateEvent.object_id),
@@ -208,7 +208,7 @@ async function processEvent(event: StravaWebhookEvent) {
         }
         invariant(
           user,
-          `invariant: failed to find user by strava owner_id ${activityDeleteEvent.owner_id}`,
+          `failed to find user by strava owner_id ${activityDeleteEvent.owner_id}`,
         )
 
         const post = await repository.deletePostBy(
@@ -256,10 +256,7 @@ export async function GET(req: Request) {
   const hubMode = searchParams.get('hub.mode')
 
   const expectedVerifyToken = process.env.STRAVA_WEBHOOK_VERIFY_TOKEN
-  invariant(
-    expectedVerifyToken,
-    'invariant: STRAVA_WEBHOOK_VERIFY_TOKEN is required',
-  )
+  invariant(expectedVerifyToken, 'STRAVA_WEBHOOK_VERIFY_TOKEN is required')
 
   if (
     hubMode === 'subscribe' &&

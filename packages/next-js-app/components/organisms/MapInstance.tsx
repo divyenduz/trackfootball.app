@@ -13,6 +13,7 @@ import { namedComponent } from '../../packages/utils/utils'
 import { ConditionalDisplay } from '../atoms/ConditionalDisplay'
 import { AwaitedPost } from './Activity/ActivityItem'
 import 'mapbox-gl/dist/mapbox-gl.css'
+import invariant from 'tiny-invariant'
 
 const MAP_HEIGHT = 400
 
@@ -304,8 +305,9 @@ export const MapInstance: React.FC<MapInstanceProps> = ({
 
           <ConditionalDisplay visible={showSprints && Boolean(taggedPowerRuns)}>
             {taggedPowerRuns.map((powerRun, index) => {
-              const numberOfCoordinates =
-                powerRun.features[0].geometry.coordinates.length
+              const feature = powerRun.features[0]
+              invariant(feature, `expected feature to exist`)
+              const numberOfCoordinates = feature.geometry.coordinates.length
               const start = getNthCoord(powerRun, numberOfCoordinates - 2)
               const end = getNthCoord(powerRun, numberOfCoordinates - 1)
               const bearingValue =
