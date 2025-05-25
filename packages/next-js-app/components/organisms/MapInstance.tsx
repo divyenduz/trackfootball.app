@@ -78,12 +78,9 @@ const ArrowIcon: React.FC<ArrowIconProps> = ({ color, bearingValue }) => {
   return (
     <ArrowUpward
       style={{
-        position: 'relative',
         color,
         fontSize: '30px',
         transform: 'rotate(' + bearingValue + 'deg)',
-        left: -0,
-        top: -MAP_HEIGHT,
       }}
     />
   )
