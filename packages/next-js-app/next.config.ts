@@ -1,8 +1,7 @@
-/** @type {import('next').NextConfig} */
+import type { NextConfig } from 'next'
 
-const config = {
+const config: NextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
   images: {
     remotePatterns: [
       { hostname: 'lh3.googleusercontent.com' },
@@ -15,4 +14,4 @@ const config = {
   transpilePackages: ['@trackfootball/*'],
 }
 
-module.exports = config
+export default config
