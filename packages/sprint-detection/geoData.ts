@@ -1,10 +1,10 @@
 import * as tj from '@tmcw/togeojson'
-import {
+import type {
   FeatureCollection,
   LineString,
   Position,
-  Properties,
-} from '@turf/helpers'
+  GeoJsonProperties,
+} from 'geojson'
 import { DOMParser } from '@xmldom/xmldom'
 import { match } from 'ts-pattern'
 
@@ -85,7 +85,7 @@ export class GeoData {
     return geoJson
   }
 
-  toGeoJson(): FeatureCollection<LineString, Properties> {
+  toGeoJson(): FeatureCollection<LineString, GeoJsonProperties> {
     const geoJson = match(this.type)
       .with('geoJson', () => JSON.parse(this.data))
       .with('StravaActivityStream', () => this.stravaActivityStreamToGeoJson())

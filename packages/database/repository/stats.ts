@@ -1,5 +1,5 @@
 import { Field, PostType, User } from '@prisma/client'
-import { FeatureCollection, LineString } from '@turf/helpers'
+import type { FeatureCollection, LineString } from 'geojson'
 import { sql } from '../'
 import invariant from 'tiny-invariant'
 
