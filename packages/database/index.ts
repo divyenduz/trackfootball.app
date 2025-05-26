@@ -37,6 +37,7 @@ export const repository = {
   updatePostStatus: postRepo.updatePostStatus,
   updatePostComplete: postRepo.updatePostComplete,
   getFeed: postRepo.getFeed,
+  getAthleteFeed: postRepo.getAthleteFeed,
 
   getFieldsByUsage: fieldRepo.getFieldsByUsage,
   getFieldsByName: fieldRepo.getFieldsByName,

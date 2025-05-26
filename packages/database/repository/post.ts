@@ -340,3 +340,27 @@ export async function getFeed(cursor: number = 0, limit: number = 3) {
 
   return { posts, nextCursor }
 }
+
+export async function getAthleteFeed(athleteId: number, cursor: number = 0, limit: number = 3) {
+  const maxPostIds: { max: number }[] = await sql`SELECT MAX("id") FROM "Post" WHERE "userId" = ${athleteId}`
+  const maxPostId = maxPostIds[0]
+  invariant(maxPostId, `expected maxPostId to exist`)
+  const maxPostIdValue = maxPostId.max || 0
+
+  const posts: FeedItemType[] = await sql`
+    SELECT row_to_json("Field".*::"Field") as "Field", row_to_json("User".*::"User") as "User", "Post".* FROM "Post"
+    LEFT JOIN "Field" ON "Post"."fieldId" = "Field"."id"
+    INNER JOIN "User" ON "Post"."userId" = "User"."id"
+    WHERE "Post"."userId" = ${athleteId} AND "Post"."id" <= ${cursor || maxPostIdValue}
+    ORDER BY "Post"."startTime" DESC
+    LIMIT ${limit + 1}
+    `
+
+  let nextCursor: typeof cursor | null = null
+  if (posts.length > limit) {
+    const nextItem = posts.pop()
+    nextCursor = nextItem!.id
+  }
+
+  return { posts, nextCursor }
+}

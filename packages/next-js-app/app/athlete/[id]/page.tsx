@@ -8,6 +8,7 @@ import { ConnectWithStravaWidget } from '../../../components/organisms/Settings/
 import ShowToOwner from '../../../components/user/role-based-access/ShowToOwner'
 import { repository } from '@trackfootball/database'
 import { Photo } from 'components/atoms/Photo'
+import Feed from '../../dashboard/Feed'
 
 export type CheckStravaState =
   | 'LOADING'
@@ -69,7 +70,7 @@ export default async function Profile({ params }: Props) {
   const { totalActivities, totalDistance, totalSprints, totalRuns } =
     await repository.getAthleteStats(athlete.id)
 
-  const athletePosts = await repository.getAthleteActivities(athlete.id, 5)
+  const athleteFeed = await repository.getAthleteFeed(athlete.id, 0, 3)
 
   return (
     <div className="w-full max-w-4xl">
@@ -235,86 +236,11 @@ export default async function Profile({ params }: Props) {
             </div>
 
             {totalActivities > 0 ? (
-              <div className="space-y-4">
-                {athletePosts.slice(0, 5).map((post) => (
-                  <Card
-                    key={post.id}
-                    className="bg-gray-50 hover:bg-gray-100 transition-colors border border-gray-200 hover:border-blue-300 overflow-hidden"
-                  >
-                    <CardContent className="p-0">
-                      <div className="p-4">
-                        <div className="flex justify-between items-center">
-                          <Typography className="font-medium text-blue-700">
-                            {post.text}
-                          </Typography>
-                          <div className="flex items-center">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="h-4 w-4 text-gray-400 mr-1"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                              />
-                            </svg>
-                            <Typography className="text-gray-500 text-sm">
-                              {post.startTime
-                                ? new Date(post.startTime).toLocaleDateString()
-                                : 'No date'}
-                            </Typography>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="grid grid-cols-3 gap-4 bg-gray-100 p-3 border-t border-gray-200 text-sm">
-                        <div className="flex flex-col items-center">
-                          <span className="text-gray-500 mb-1">Distance</span>
-                          <span className="font-medium">
-                            {(post.totalDistance / 1000).toFixed(2)} km
-                          </span>
-                        </div>
-                        <div className="flex flex-col items-center border-l border-r border-gray-200">
-                          <span className="text-gray-500 mb-1">Duration</span>
-                          <span className="font-medium">
-                            {Math.floor(post.elapsedTime / 60)} min
-                          </span>
-                        </div>
-                        <div className="flex flex-col items-center">
-                          <span className="text-gray-500 mb-1">Max Speed</span>
-                          <span className="font-medium">
-                            {post.maxSpeed.toFixed(1)} km/h
-                          </span>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-                {athletePosts.length > 5 && (
-                  <div className="flex justify-center mt-4">
-                    <button className="text-blue-600 hover:text-blue-800 font-medium text-sm flex items-center">
-                      View all activities
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-4 w-4 ml-1"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M9 5l7 7-7 7"
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                )}
-              </div>
+              <Feed 
+                athleteId={athlete.id}
+                initialFeed={athleteFeed.posts} 
+                initialNextCursor={athleteFeed.nextCursor}
+              />
             ) : (
               <div className="bg-gray-50 border border-gray-200 rounded-lg p-8 text-center">
                 <svg
