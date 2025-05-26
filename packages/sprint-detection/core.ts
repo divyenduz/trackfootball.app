@@ -1,7 +1,7 @@
 import { kmphToMps } from '@trackfootball/utils'
 import { addDurations, durationToSeconds } from '@trackfootball/utils'
 import distance from '@turf/distance'
-import { FeatureCollection, LineString } from '@turf/helpers'
+import type { FeatureCollection, LineString } from 'geojson'
 import length from '@turf/length'
 import {
   differenceInHours,

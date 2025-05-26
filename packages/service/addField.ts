@@ -3,12 +3,8 @@ import area from '@turf/area'
 import booleanPointInPolygon from '@turf/boolean-point-in-polygon'
 import center from '@turf/center'
 import envelope from '@turf/envelope'
-import {
-  FeatureCollection,
-  LineString,
-  featureCollection,
-  point,
-} from '@turf/helpers'
+import type { FeatureCollection, LineString } from 'geojson'
+import { featureCollection, point } from '@turf/helpers'
 import intersect from '@turf/intersect'
 import invariant from 'tiny-invariant'
 import { match } from 'ts-pattern'
@@ -63,7 +59,10 @@ export async function postAddField({ postId }: PostAddFieldArgs) {
       ])
       const fieldCover = envelope(fieldFeatures)
       const totalFieldArea = area(fieldCover)
-      const intersection = intersect(geoJsonCover, fieldCover)
+
+      const intersection = intersect(
+        featureCollection([geoJsonCover, fieldCover]),
+      )
       const intersectionArea = match(Boolean(intersection))
         .with(true, () => area(intersection!))
         .with(false, () => 0)

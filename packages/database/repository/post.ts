@@ -1,6 +1,6 @@
 import { Field, Post, PostType, User } from '@prisma/client'
 import { stringify } from '../../next-js-app/packages/utils/utils'
-import { FeatureCollection, LineString } from '@turf/helpers'
+import type { FeatureCollection, LineString } from 'geojson'
 import { sql } from '../index'
 import invariant from 'tiny-invariant'
 

@@ -1,6 +1,6 @@
 import { WebMercatorViewport } from '@math.gl/web-mercator'
 import type { Field, Post } from '@prisma/client'
-import { FeatureCollection, LineString } from '@turf/helpers'
+import type { FeatureCollection, LineString } from 'geojson'
 import invariant from 'tiny-invariant'
 import { match } from 'ts-pattern'
 
