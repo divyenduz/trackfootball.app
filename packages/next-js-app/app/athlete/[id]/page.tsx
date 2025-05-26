@@ -16,7 +16,8 @@ export type CheckStravaState =
   | 'WORKING'
   | 'NOT_WORKING'
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const params = await props.params
   const userId = parseInt(params.id, 10)
   const user = await repository.getUser(userId)
 
@@ -38,12 +39,13 @@ export async function getBackendApiUrl() {
 }
 
 interface Props {
-  params: {
+  params: Promise<{
     id: string
-  }
+  }>
 }
 
-export default async function Profile({ params }: Props) {
+export default async function Profile(props: Props) {
+  const params = await props.params
   const userId = parseInt(params.id, 10)
   if (isNaN(userId)) {
     return notFound()

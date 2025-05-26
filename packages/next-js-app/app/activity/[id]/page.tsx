@@ -6,9 +6,9 @@ import ActivityItem from '../../../components/organisms/Activity/ActivityItem'
 import { repository } from '@trackfootball/database'
 
 type Props = {
-  params: {
+  params: Promise<{
     id: string
-  }
+  }>
 }
 
 export async function getHomepageUrl() {
@@ -16,7 +16,8 @@ export async function getHomepageUrl() {
   return url
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const params = await props.params;
   const id = params.id
 
   const post = await repository.getPostWithUserAndFields(parseInt(id))
@@ -50,7 +51,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default async function Activity({ params: { id } }: Props) {
+export default async function Activity(props: Props) {
+  const params = await props.params;
+
+  const {
+    id
+  } = params;
+
   const post = await repository.getPostWithUserAndFields(parseInt(id))
 
   if (!post) {
