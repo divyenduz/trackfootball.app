@@ -69,7 +69,7 @@
         "@trivago/prettier-plugin-sort-imports": "5.2.2",
         "@types/bun": "1.2.14",
         "@types/dotenv": "8.2.3",
-        "@types/react": "19.1.5",
+        "@types/react": "19.1.6",
         "@types/react-map-gl": "6.1.7",
         "arg": "5.0.2",
         "eslint": "^9.27.0",
@@ -741,7 +741,7 @@
 
     "@types/prop-types": ["@types/prop-types@15.7.14", "", {}, "sha512-gNMvNH49DJ7OJYv+KAKn0Xp45p8PLl6zo2YnvDIbTd4J6MER2BmWN49TG7n9LvkyihINxeKW8+3bfS2yDC9dzQ=="],
 
-    "@types/react": ["@types/react@19.1.5", "", { "dependencies": { "csstype": "^3.0.2" } }, "sha512-piErsCVVbpMMT2r7wbawdZsq4xMvIAhQuac2gedQHysu1TZYEigE6pnFfgZT+/jQnrRuF5r+SHzuehFjfRjr4g=="],
+    "@types/react": ["@types/react@19.1.6", "", { "dependencies": { "csstype": "^3.0.2" } }, "sha512-JeG0rEWak0N6Itr6QUx+X60uQmN+5t3j9r/OVDtWzFXKaj6kD1BwJzOksD0FF6iWxZlbE1kB0q9vtnU2ekqa1Q=="],
 
     "@types/react-map-gl": ["@types/react-map-gl@6.1.7", "", { "dependencies": { "@types/geojson": "*", "@types/mapbox-gl": "*", "@types/react": "*", "@types/viewport-mercator-project": "*" } }, "sha512-szkfkWd3FbySDkxyn0MDj9yzD8XYk+RIi4od6sGb3lVHNBGcW20G2v2vcq2N5k18UYAdqAoKGSYuHkGV4JOCrA=="],
 
