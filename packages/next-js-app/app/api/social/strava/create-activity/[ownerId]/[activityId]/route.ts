@@ -2,9 +2,9 @@ import { importStravaActivity } from '@trackfootball/service'
 
 export async function GET(
   req: Request,
-  props: { params: Promise<{ ownerId: string; activityId: string }> }
+  props: { params: Promise<{ ownerId: string; activityId: string }> },
 ) {
-  const params = await props.params;
+  const params = await props.params
   const { ownerId: ownerIdParam, activityId: activityIdParam } = params
 
   const ownerId = parseInt(ownerIdParam)

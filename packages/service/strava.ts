@@ -95,8 +95,7 @@ export async function importStravaActivity(
       `activity must have a type, found ${activity.name} ${activity.type}`,
     )
 
-    const isGeoDataAvailable =
-      activity.start_latlng && activity.start_latlng.length > 0
+    const isGeoDataAvailable = Boolean(activity.map?.polyline)
     if (!isGeoDataAvailable) {
       await createDiscordMessage({
         heading: `New Activity Creation Failed - No Geo Data (${source})`,
