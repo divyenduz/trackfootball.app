@@ -8,6 +8,7 @@ import {
   differenceInMinutes,
   differenceInSeconds,
   intervalToDuration,
+  Duration,
 } from 'date-fns'
 
 import { buildGeoJson } from './gj'
