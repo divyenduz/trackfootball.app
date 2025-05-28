@@ -438,6 +438,17 @@ export class Core {
 
   // Total time of movements
   private totalTime(geoJsons: Array<FeatureCollection<LineString>>): Duration {
+    if (geoJsons.length === 0) {
+      return {
+        days: 0,
+        hours: 0,
+        minutes: 0,
+        months: 0,
+        seconds: 0,
+        years: 0,
+      }
+    }
+    
     const movementTimes = geoJsons.map((movement) => {
       const core = new Core(movement)
       const time = core.elapsedTime()
