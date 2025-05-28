@@ -12,7 +12,7 @@
     "@kubb/cli": "3.10.12",
     "@kubb/plugin-client": "3.10.12",
     "@kubb/plugin-oas": "3.10.12",
-    "@prisma/client": "5.22.0",
+    "@prisma/client": "6.8.2",
     "@types/bun": "1.2.15",
     "typescript": "5.8.3"
   }
