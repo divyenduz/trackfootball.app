@@ -1,4 +1,4 @@
-import { formatDuration } from 'date-fns'
+import { formatDuration, Duration } from 'date-fns'
 
 export const prettySecondsToString = (seconds: number) => {
   if (!Boolean(seconds)) {
