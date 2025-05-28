@@ -1,9 +1,9 @@
 import type { Platform } from '@prisma/client'
-import { sql } from '@trackfootball/database'
+import { repository } from '@trackfootball/database'
+import { tokenExchange } from '@trackfootball/service'
 import { redirect } from 'next/navigation'
 import { MESSAGE_UNAUTHORIZED } from 'packages/auth/utils'
 import { ensureUser } from 'packages/utils/utils'
-import { tokenExchange } from 'services/strava/token'
 import { getCurrentUser } from 'utils/getCurrentUser'
 
 export async function GET(req: Request) {
@@ -19,7 +19,7 @@ export async function GET(req: Request) {
       'Invalid code, maybe the Strava code expired. Please try again.',
       {
         status: 400,
-      }
+      },
     )
   }
   const userStravaId = tokenExchangeResponse.athlete.id.toString()
@@ -32,8 +32,6 @@ export async function GET(req: Request) {
       status: 403,
     })
   } else {
-    // Update
-
     const data = {
       userId: user.id,
       platform: 'STRAVA' as Platform,
@@ -43,15 +41,10 @@ export async function GET(req: Request) {
       accessToken: tokenExchangeResponse.access_token,
       refreshToken: tokenExchangeResponse.refresh_token,
       expiresAt,
-      // TODO: use database's now()
       updatedAt: new Date(),
     }
 
-    await sql`
-    INSERT INTO "SocialLogin" ${sql(data)}
-    ON CONFLICT ("platformId") DO UPDATE
-    SET ${sql(data)}
-    `
+    await repository.upsertSocialLogin(data)
   }
 
   if (redirectTo === 'athlete') {

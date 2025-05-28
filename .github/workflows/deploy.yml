@@ -15,12 +15,10 @@ env:
   CI: 1
   NEXT_TELEMETRY_DISABLED: 1
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  SSH_KEY: ${{ secrets.SSH_KEY }}
   HOST_IP: ${{ secrets.HOST_IP }}
   SSH_USER: ${{ secrets.SSH_USER }}
   SSH_PORT: ${{ secrets.SSH_PORT }}
-  KAMAL_REGISTRY_USERNAME: ${{ secrets.KAMAL_REGISTRY_USERNAME }}
-  KAMAL_REGISTRY_PASSWORD: ${{ secrets.KAMAL_REGISTRY_PASSWORD }}
+  SSH_KEY: ${{ secrets.SSH_KEY }}
 
 jobs:
   build:
@@ -39,23 +37,30 @@ jobs:
 
       - name: Install dependencies
         run: |
-          gem install kamal -v 1.8.1
+          gem install kamal -v 2.6.1
 
       - name: Turnstyle
-        uses: softprops/turnstyle@v1
+        uses: softprops/turnstyle@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # - name: Set up Docker Buildx for cache
-      #   uses: docker/setup-buildx-action@v3
+      - name: Set up Docker Buildx for cache
+        uses: docker/setup-buildx-action@v3
 
-      # - name: Expose GitHub Runtime for cache
-      #   uses: crazy-max/ghaction-github-runtime@v3
+      - name: Expose GitHub Runtime for cache
+        uses: crazy-max/ghaction-github-runtime@v3
 
       - name: Write ENV
         run: |
           echo "${{ secrets.ENV_BASE64 }}" | base64 -d > .env
-          cat .env
+
+      - name: Dotenv Action
+        uses: falti/dotenv-action@v1.1.4
+
+      - name: Write .kamal/secrets
+        run: |
+          mkdir -p .kamal
+          echo "${{ secrets.ENV_BASE64 }}" | base64 -d > .kamal/secrets
 
       - name: SSH Keyscan
         run: |
@@ -74,5 +79,4 @@ jobs:
 
       - name: Kamal Deploy
         run: |
-          kamal env push
-          kamal deploy
+          dotenv kamal deploy

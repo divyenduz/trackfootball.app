@@ -1,33 +1,24 @@
 'use client'
 
-import {
-  Avatar,
-  Card,
-  CardContent,
-  CardHeader,
-  Paper,
-  Typography,
-  useTheme,
-} from '@mui/material'
+import { Card, CardContent, CardHeader, Paper, useTheme } from '@mui/material'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { Core } from '@trackfootball/sprint-detection'
 import { metersToKilometers, mpsToKmph } from '@trackfootball/utils'
 import { deletePost } from 'app/actions/deletePost'
 import { refreshPost } from 'app/actions/refreshPost'
 import { AwaitedUser } from 'app/layout'
-import Button from 'components/atoms/Button'
 import { formatDistance } from 'date-fns'
-import Image from 'next/image'
 import Link from 'next/link'
 import { getBoundsForPoints } from 'packages/utils/map'
 import React, { useEffect, useState } from 'react'
-import { getPost } from 'repository/post'
+import { repository } from '@trackfootball/database'
 import { match } from 'ts-pattern'
 
 import { ConditionalDisplay } from '../../atoms/ConditionalDisplay'
 import ShowToOwner from '../../user/role-based-access/ShowToOwner'
 import { FeedItemAction } from '../Feed/FeedItemAction'
 import { MapInstance } from '../MapInstance'
+import { Photo } from 'components/atoms/Photo'
 
 const prettyRunMetricDistance = (hasSprints: boolean, distance: number) => {
   if (!hasSprints) {
@@ -42,7 +33,9 @@ const prettyRunMetricSpeed = (hasSprints: boolean, speed: number) => {
   return mpsToKmph(speed)
 }
 
-export type AwaitedPost = NonNullable<Awaited<ReturnType<typeof getPost>>>
+export type AwaitedPost = NonNullable<
+  Awaited<ReturnType<typeof repository.getPostWithUserAndFields>>
+>
 
 export interface Props {
   post: AwaitedPost
@@ -65,7 +58,7 @@ const AdminControls: React.FC<AdminControlsProps> = ({ post, userIsAdmin }) => {
           className="px-3 py-1.5 text-xs rounded-md bg-blue-100 text-blue-700 border border-blue-300 hover:bg-blue-200 transition-colors"
           onClick={async () => {
             const r = confirm(
-              'Are you sure that you want to refresh the statistics of this post?'
+              'Are you sure that you want to refresh the statistics of this post?',
             )
             if (r) {
               await refreshPost(post.id)
@@ -78,7 +71,7 @@ const AdminControls: React.FC<AdminControlsProps> = ({ post, userIsAdmin }) => {
           className="px-3 py-1.5 text-xs rounded-md bg-red-100 text-red-700 border border-red-300 hover:bg-red-200 transition-colors"
           onClick={async () => {
             const rc = confirm(
-              'Are you sure that you want to delete this activity? This cannot be undone.'
+              'Are you sure that you want to delete this activity? This cannot be undone.',
             )
             if (!rc) return
             try {
@@ -88,7 +81,7 @@ const AdminControls: React.FC<AdminControlsProps> = ({ post, userIsAdmin }) => {
               console.error(e)
               alert(
                 `Something went wrong, please contact singh@trackfootball.app` +
-                  e
+                  e,
               )
             }
           }}
@@ -125,6 +118,7 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
         return
       }
 
+      //@ts-expect-error post has field now
       const bounds = await getBoundsForPoints(post)
 
       const newViewport = {
@@ -141,103 +135,13 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
   const hasSprints = Boolean(post.sprints) && post.sprints!.length > 0
-  // const hasRuns = Boolean(post.runs) && post.runs!.length > 0
 
   if (!Boolean(post.geoJson)) {
-    return (
-      <Card
-        raised={false}
-        key={post.id}
-        id={`activity-item-${post.id}`}
-        className={'w-full mb-5'}
-      >
-        {user?.type === 'ADMIN' && (
-          <AdminControls post={post} userIsAdmin={user?.type === 'ADMIN'} />
-        )}
-        <CardHeader
-          className="p-2"
-          avatar={
-            <Link href={`/athlete/${post.userId}`}>
-              <Avatar className="w-10 h-10">
-                <Image
-                  alt="User's display picture"
-                  width={40}
-                  height={40}
-                  src={
-                    post.User?.picture ||
-                    'https://trackfootball-public.s3.ap-southeast-1.amazonaws.com/prod/user.svg'
-                  }
-                ></Image>
-              </Avatar>
-            </Link>
-          }
-          title={
-            <>
-              <Link href={`/athlete/${post.userId}`}>
-                <Typography
-                  component="strong"
-                  className="font-medium text-left text-gray-900 cursor-pointer"
-                >
-                  {post.User?.firstName || ''} {post.User?.lastName || ''}
-                </Typography>
-              </Link>
-              <Typography className="text-xs font-normal text-gray-500">
-                {formatDistance(
-                  match(Boolean(post.startTime))
-                    .with(true, () => new Date(post.startTime!))
-                    .with(false, () => new Date())
-                    .exhaustive(),
-                  new Date(),
-                  {
-                    addSuffix: true,
-                  }
-                )}
-              </Typography>
-            </>
-          }
-        ></CardHeader>
-        <Paper
-          elevation={0}
-          key={post.id}
-          id={`activity-item-${post.id}`}
-          className="w-full mb-5"
-        >
-          <CardHeader
-            className="flex flex-wrap gap-4 p-1"
-            title={
-              <Link href={`/activity/${post.id}`}>
-                <Typography
-                  component="h2"
-                  className="text-base font-medium text-left cursor-pointer"
-                >
-                  {post.text}
-                </Typography>
-              </Link>
-            }
-            action={
-              <div className="md:w-full">
-                <ShowToOwner
-                  ownerId={post.userId}
-                  userId={user?.id || -1}
-                  userIsAdmin={user?.type === 'ADMIN'}
-                >
-                  <FeedItemAction postId={post.id} />
-                </ShowToOwner>
-              </div>
-            }
-          ></CardHeader>
-          <CardContent>
-            <>
-              Activity is processing, please refresh the page in a few
-              seconds...
-            </>
-          </CardContent>
-        </Paper>
-      </Card>
-    )
+    console.log(`Note: post ${post.id} without geoJson found on feed`)
+    return null
   }
 
-  const core = new Core(post.geoJson as any)
+  const core = new Core(post.geoJson)
 
   const isMapMovable = match(isMobile)
     .with(false, () => true)
@@ -259,37 +163,25 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
         className="p-1"
         avatar={
           <Link href={`/athlete/${post.userId}`}>
-            <Avatar className="w-10 h-10">
-              <Image
-                alt="User's display picture"
-                width={40}
-                height={40}
-                className="object-cover"
-                src={
-                  post.User?.picture ||
-                  'https://trackfootball-public.s3.ap-southeast-1.amazonaws.com/prod/user.svg'
-                }
-              ></Image>
-            </Avatar>
+            <Photo photo={post.User.picture}></Photo>
           </Link>
         }
         title={
           <>
             <Link href={`/athlete/${post.userId}`}>
               <div className="text-base font-bold text-left text-gray-900 cursor-pointer">
-                {post.User?.firstName || ''} {post.User?.lastName || ''}
+                {post.User.firstName} {post.User.lastName}
               </div>
             </Link>
             <div className="text-xs font-normal text-gray-500">
               {formatDistance(
-                match(Boolean(post.startTime))
-                  .with(true, () => new Date(post.startTime!))
-                  .with(false, () => new Date())
-                  .exhaustive(),
+                match(post.startTime)
+                  .with(null, () => new Date())
+                  .otherwise((startTime) => new Date(startTime)),
                 new Date(),
                 {
                   addSuffix: true,
-                }
+                },
               )}
             </div>
           </>
@@ -312,11 +204,7 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
           }
           action={
             <div className="flex space-x-2 md:w-full">
-              <ShowToOwner
-                ownerId={post.userId}
-                userId={user?.id || -1}
-                userIsAdmin={user?.type === 'ADMIN'}
-              >
+              <ShowToOwner ownerId={post.userId} userId={user?.id}>
                 <FeedItemAction postId={post.id} />
               </ShowToOwner>
             </div>
@@ -334,8 +222,7 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
             <ShowToOwner
               className={classes.paper}
               ownerId={post.userId}
-              userId={user?.id || -1}
-              userIsAdmin={user?.type === 'ADMIN'}
+              userId={user?.id}
             >
               <div className={classes.title}>❤️ Max Heart Rate</div>
               <div className={classes.value}>{post.maxHeartRate}</div>
@@ -344,8 +231,7 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
             <ShowToOwner
               className={classes.paper}
               ownerId={post.userId}
-              userId={user?.id || -1}
-              userIsAdmin={user?.type === 'ADMIN'}
+              userId={user?.id}
             >
               <div className={classes.title}>❤️ Average Heart Rate</div>
               <div className={classes.value}>{post.averageHeartRate}</div>
@@ -403,14 +289,14 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
                     <div>
                       {prettyRunMetricDistance(
                         hasSprints,
-                        core.longestSprintDistance()
+                        core.longestSprintDistance(),
                       )}{' '}
                       <span className="text-sm font-medium">m,</span>{' '}
                     </div>
                     <div>
                       {prettyRunMetricSpeed(
                         hasSprints,
-                        core.longestSprintSpeed()
+                        core.longestSprintSpeed(),
                       )}{' '}
                       <span className="text-sm font-medium">Km/h</span>
                     </div>
@@ -426,7 +312,6 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
             viewport={viewport}
             // @ts-expect-error unify viewport properties
             setViewport={setViewport}
-            topSprintOnly={false}
             showSprints={showPower}
             showRuns={showPower}
             showHeatmap={!showPower}

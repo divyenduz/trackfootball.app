@@ -19,18 +19,19 @@ export const FeedItemAction = ({ postId }: FeedItemActionProps) => {
         variant="outlined"
         onClick={async () => {
           const rc = confirm(
-            'Are you sure that you want to delete this activity? This cannot be undone.'
+            'Are you sure that you want to delete this activity? This cannot be undone.',
           )
           if (!rc) {
             return
           }
           try {
-            const r = await deletePost(postId)
+            await deletePost(postId)
             router.replace('/dashboard')
           } catch (e) {
             console.error(e)
             alert(
-              `Something went wrong, please contact singh@trackfootball.app` + e
+              `Something went wrong, please contact singh@trackfootball.app` +
+                e,
             )
           }
         }}

@@ -1,7 +1,7 @@
 import { kmphToMps } from '@trackfootball/utils'
 import { addDurations, durationToSeconds } from '@trackfootball/utils'
 import distance from '@turf/distance'
-import { FeatureCollection, LineString } from '@turf/helpers'
+import type { FeatureCollection, LineString } from 'geojson'
 import length from '@turf/length'
 import {
   differenceInHours,
@@ -11,6 +11,7 @@ import {
 } from 'date-fns'
 
 import { buildGeoJson } from './gj'
+import invariant from 'tiny-invariant'
 
 type CustomPropertyTypes = 'speeds' | 'averageSpeed'
 type GivenPropertyTypes = 'heartRates' | 'coordTimes'
@@ -26,10 +27,8 @@ interface PluckSegmentsArgs {
 export class Core {
   geoJson: FeatureCollection<LineString>
 
-  // Cache
   private cachedSprints: Array<FeatureCollection<LineString>> | null = null
   private cachedRuns: Array<FeatureCollection<LineString>> | null = null
-  private cachedMovements: Array<FeatureCollection<LineString>> | null = null
 
   constructor(data: FeatureCollection<LineString>) {
     this.geoJson = data
@@ -50,6 +49,7 @@ export class Core {
             return speeds.concat(0)
           }
           const nextCoordinate = coordinates[index + 1]
+          invariant(nextCoordinate, `expected next coordinate to exist`)
           const distanceValue = distance(nextCoordinate, coordinate, {
             units: 'meters',
           })
@@ -107,7 +107,9 @@ export class Core {
       return core.averageSpeed()
     })
     const index = speeds.indexOf(Math.max(...speeds))
-    return sprints[index]
+    const fastestSprint = sprints[index]
+    invariant(fastestSprint, `expected fastest sprint to exist`)
+    return fastestSprint
   }
 
   fastestSprintDistance(): number {
@@ -138,7 +140,9 @@ export class Core {
       return core.totalDistance()
     })
     const index = distances.indexOf(Math.max(...distances))
-    return sprints[index]
+    const longestSprint = sprints[index]
+    invariant(longestSprint, `expected longest sprint to exist`)
+    return longestSprint
   }
 
   longestSprintDistance(): number {
@@ -192,7 +196,9 @@ export class Core {
       return core.averageSpeed()
     })
     const index = speeds.indexOf(Math.max(...speeds))
-    return runs[index]
+    const fastestRun = runs[index]
+    invariant(fastestRun, `expected fastest run to exist`)
+    return fastestRun
   }
 
   fastestRunDistance(): number {
@@ -291,7 +297,9 @@ export class Core {
     let startSlice = 0
     for (let i = 0; i < speeds.length; i++) {
       const speed = speeds[i]
+      invariant(speed !== undefined, `expected speed to exist`)
       const nextSpeed = i + 1 < speeds.length ? speeds[i + 1] : 0
+      invariant(nextSpeed !== undefined, `expected next speed to exist`)
 
       // Note: Start a new slice if current speed is < mimumum speed (for say, run) and next speed is greater than or equal to the threshold
       if (speed < minSpeed && nextSpeed >= minSpeed) {
@@ -335,23 +343,27 @@ export class Core {
       .map((segmentSlice, index) => {
         const coordTimes = this.getProperty('coordTimes').slice(
           segmentSlice[0],
-          segmentSlice[1]
+          segmentSlice[1],
         )
         const heartRates = this.getProperty('heartRates').slice(
           segmentSlice[0],
-          segmentSlice[1]
+          segmentSlice[1],
         )
         const speeds = this.getProperty('speeds').slice(
           segmentSlice[0],
-          segmentSlice[1]
+          segmentSlice[1],
         )
         const coordinates = this.getCoordinates().slice(
           segmentSlice[0],
-          segmentSlice[1]
+          segmentSlice[1],
         )
 
         const averageSpeed = this.calculateAverage(speeds)
 
+        const startCoordinate = coordinates[0]
+        const endCoordinate = coordinates[coordinates.length - 1]
+        invariant(startCoordinate, `expected start coordinates to exist`)
+        invariant(endCoordinate, `expected end coordinates to exist`)
         const geoJson = buildGeoJson({
           name: `${type} ${index}`,
           time: coordTimes[0],
@@ -360,7 +372,7 @@ export class Core {
             heartRates: [heartRates[0], heartRates[heartRates.length - 1]],
             averageSpeed,
           },
-          coordinates: [coordinates[0], coordinates[coordinates.length - 1]],
+          coordinates: [startCoordinate, endCoordinate],
         })
         const core = new Core(geoJson)
 
@@ -376,7 +388,7 @@ export class Core {
         }
       })
       .filter((segment): segment is ReturnType<typeof buildGeoJson> =>
-        Boolean(segment)
+        Boolean(segment),
       )
 
     return segments
@@ -418,7 +430,9 @@ export class Core {
   }
 
   getCoordinates() {
-    return this.geoJson?.features[0]?.geometry.coordinates
+    const coordinates = this.geoJson?.features[0]?.geometry.coordinates
+    invariant(coordinates, `expected geojson coordinates to exist`)
+    return coordinates
   }
 
   // Total time of movements
@@ -436,7 +450,7 @@ export class Core {
         hours: 0,
         minutes: 0,
         seconds: 0,
-      }
+      },
     )
     const movingTimeInSeconds = durationToSeconds(movingTime)
     const duration = intervalToDuration({

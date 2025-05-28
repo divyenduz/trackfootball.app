@@ -24,5 +24,7 @@ declare namespace NodeJS {
     AUTH0_CLIENT_ID: string
     AUTH0_CLIENT_SECRET: string
     DISCORD_TRACKFOOTBALL_APPLICATION_EVENTS_WEBHOOK: string
+    UNSAFE_AUTH_BYPASS_USER: string
+    STRAVA_WEBHOOK_VERIFY_TOKEN: string
   }
 }

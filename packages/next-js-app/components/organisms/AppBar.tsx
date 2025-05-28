@@ -11,18 +11,17 @@ import {
   Typography,
 } from '@mui/material'
 import { AwaitedUser } from 'app/layout'
-import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
 import { match } from 'ts-pattern'
 
 import Button from '../atoms/Button'
-import { ConditionalDisplay } from '../atoms/ConditionalDisplay'
 import Logo from '../atoms/brand/core/Logo'
+import { Photo } from 'components/atoms/Photo'
 
 interface Props {
   user: AwaitedUser | null
-  pageName?: string
+  pageName: string
 }
 
 export const AppBar: React.FC<Props> = ({
@@ -37,7 +36,7 @@ export const AppBar: React.FC<Props> = ({
       <MaterialAppBar position="fixed" color="default">
         <Toolbar className="p-3">
           <Link href="/home">
-            <div className="flex flex-row flex-wrap items-center justify-center flex-none gap-2 cursor-pointer">
+            <div className="flex flex-row items-center flex-none gap-2 cursor-pointer">
               <Logo size={'xs'} />
               <Typography
                 className="text-gray-900 hidden md:block"
@@ -49,9 +48,16 @@ export const AppBar: React.FC<Props> = ({
             </div>
           </Link>
 
-          <div className="flex justify-end flex-1">
-            {match(Boolean(user))
-              .with(true, () => {
+          <div className="flex justify-end items-center flex-1 gap-2">
+            {match(user)
+              .with(null, () => {
+                return (
+                  <Link href="/api/auth/login">
+                    <Button variant="contained">Login</Button>
+                  </Link>
+                )
+              })
+              .otherwise((user) => {
                 return (
                   <>
                     <Link href={`/dashboard`}>
@@ -68,24 +74,7 @@ export const AppBar: React.FC<Props> = ({
                       color="inherit"
                       size="large"
                     >
-                      <ConditionalDisplay visible={Boolean(user?.picture)}>
-                        <div className="rounded-full w-7 h-7">
-                          <Image
-                            alt="User's display picture"
-                            width={30}
-                            height={30}
-                            className="object-cover rounded-full"
-                            src={
-                              user?.picture ||
-                              'https://trackfootball-public.s3.ap-southeast-1.amazonaws.com/prod/user.svg'
-                            }
-                          ></Image>
-                        </div>
-                      </ConditionalDisplay>
-
-                      <ConditionalDisplay visible={!Boolean(user?.picture)}>
-                        👤
-                      </ConditionalDisplay>
+                      <Photo photo={user.picture}></Photo>
                     </IconButton>
                     <Menu
                       id="menu-appbar"
@@ -131,15 +120,7 @@ export const AppBar: React.FC<Props> = ({
                     </Menu>
                   </>
                 )
-              })
-              .with(false, () => {
-                return (
-                  <Link href="/api/auth/login">
-                    <Button variant="contained">Login</Button>
-                  </Link>
-                )
-              })
-              .exhaustive()}
+              })}
           </div>
         </Toolbar>
       </MaterialAppBar>

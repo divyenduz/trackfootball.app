@@ -1,7 +1,9 @@
-import {
+import type {
   FeatureCollection,
   LineString,
   Position,
+} from 'geojson'
+import {
   feature,
   featureCollection,
   geometry,

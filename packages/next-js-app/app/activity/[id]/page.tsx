@@ -3,12 +3,12 @@ import { notFound } from 'next/navigation'
 import { auth } from 'utils/auth'
 
 import ActivityItem from '../../../components/organisms/Activity/ActivityItem'
-import { getPost } from '../../../repository/post'
+import { repository } from '@trackfootball/database'
 
 type Props = {
-  params: {
+  params: Promise<{
     id: string
-  }
+  }>
 }
 
 export async function getHomepageUrl() {
@@ -16,10 +16,11 @@ export async function getHomepageUrl() {
   return url
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const params = await props.params;
   const id = params.id
 
-  const post = await getPost(parseInt(id))
+  const post = await repository.getPostWithUserAndFields(parseInt(id))
 
   const homepageUrl = await getHomepageUrl()
 
@@ -50,18 +51,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default async function Activity({ params: { id } }: Props) {
-  const post = await getPost(parseInt(id))
+export default async function Activity(props: Props) {
+  const params = await props.params;
+
+  const {
+    id
+  } = params;
+
+  const post = await repository.getPostWithUserAndFields(parseInt(id))
 
   if (!post) {
     return notFound()
   }
 
-  let user = null
-  try {
-    user = await auth()
-  } catch (e) {}
-
+  const user = await auth()
   return (
     <>
       <div className="w-full max-w-4xl p-3 sm:p-5">
