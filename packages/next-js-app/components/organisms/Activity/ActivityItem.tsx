@@ -19,6 +19,7 @@ import ShowToOwner from '../../user/role-based-access/ShowToOwner'
 import { FeedItemAction } from '../Feed/FeedItemAction'
 import { MapInstance } from '../MapInstance'
 import { Photo } from 'components/atoms/Photo'
+import { FieldSelector } from './FieldSelector'
 
 const prettyRunMetricDistance = (hasSprints: boolean, distance: number) => {
   if (!hasSprints) {
@@ -51,43 +52,49 @@ const AdminControls: React.FC<AdminControlsProps> = ({ post, userIsAdmin }) => {
   if (!userIsAdmin) return null
 
   return (
-    <div className="flex justify-between items-center p-2 mb-3 bg-gray-50 border border-gray-200 rounded-md">
-      <div className="text-sm font-medium text-gray-700">Admin Controls</div>
-      <div className="flex space-x-2">
-        <button
-          className="px-3 py-1.5 text-xs rounded-md bg-blue-100 text-blue-700 border border-blue-300 hover:bg-blue-200 transition-colors"
-          onClick={async () => {
-            const r = confirm(
-              'Are you sure that you want to refresh the statistics of this post?',
-            )
-            if (r) {
-              await refreshPost(post.id)
-            }
-          }}
-        >
-          🔄 Refresh
-        </button>
-        <button
-          className="px-3 py-1.5 text-xs rounded-md bg-red-100 text-red-700 border border-red-300 hover:bg-red-200 transition-colors"
-          onClick={async () => {
-            const rc = confirm(
-              'Are you sure that you want to delete this activity? This cannot be undone.',
-            )
-            if (!rc) return
-            try {
-              await deletePost(post.id)
-              window.location.href = '/dashboard'
-            } catch (e) {
-              console.error(e)
-              alert(
-                `Something went wrong, please contact singh@trackfootball.app` +
-                  e,
+    <div className="flex flex-col gap-3 p-2 mb-3 bg-gray-50 border border-gray-200 rounded-md">
+      <div className="flex justify-between items-center">
+        <div className="text-sm font-medium text-gray-700">Admin Controls</div>
+        <div className="flex space-x-2">
+          <button
+            className="px-3 py-1.5 text-xs rounded-md bg-blue-100 text-blue-700 border border-blue-300 hover:bg-blue-200 transition-colors"
+            onClick={async () => {
+              const r = confirm(
+                'Are you sure that you want to refresh the statistics of this post?',
               )
-            }
-          }}
-        >
-          🗑️ Delete
-        </button>
+              if (r) {
+                await refreshPost(post.id)
+              }
+            }}
+          >
+            🔄 Refresh
+          </button>
+          <button
+            className="px-3 py-1.5 text-xs rounded-md bg-red-100 text-red-700 border border-red-300 hover:bg-red-200 transition-colors"
+            onClick={async () => {
+              const rc = confirm(
+                'Are you sure that you want to delete this activity? This cannot be undone.',
+              )
+              if (!rc) return
+              try {
+                await deletePost(post.id)
+                window.location.href = '/dashboard'
+              } catch (e) {
+                console.error(e)
+                alert(
+                  `Something went wrong, please contact singh@trackfootball.app` +
+                    e,
+                )
+              }
+            }}
+          >
+            🗑️ Delete
+          </button>
+        </div>
+      </div>
+      <div className="flex items-center gap-2">
+        <span className="text-xs text-gray-600">Field Assignment:</span>
+        <FieldSelector post={post} />
       </div>
     </div>
   )
