@@ -1,5 +1,4 @@
-import { SocialLogin, User } from '@prisma/client'
-import { sql } from '@trackfootball/database'
+import { getCurrentUserByAuth0Sub } from '@trackfootball/database/repository/currentUser'
 
 import auth0 from './auth0'
 
@@ -9,19 +8,5 @@ export async function getCurrentUser() {
     return null
   }
 
-  const user = (
-    await sql<User[]>`
-  SELECT * FROM "User"
-  WHERE "User"."auth0Sub" = ${session.user.sub}
-  `
-  )[0]
-
-  const socialLogin = await sql<SocialLogin[]>`
-  SELECT * FROM "SocialLogin"
-  WHERE "SocialLogin"."userId" = ${user.id}
-  `
-  return {
-    ...user,
-    socialLogin,
-  }
+  return await getCurrentUserByAuth0Sub(session.user.sub)
 }

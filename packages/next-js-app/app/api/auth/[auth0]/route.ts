@@ -1,6 +1,6 @@
-import { User, sql } from '@trackfootball/database'
+import { repository } from '@trackfootball/database'
+import { createDiscordMessage } from '@trackfootball/service'
 import { NextApiRequest, NextApiResponse } from 'next'
-import { createDiscordMessage } from 'packages/services/discord'
 import auth0 from 'utils/auth0'
 
 // https://github.com/auth0/nextjs-auth0/blob/main/EXAMPLES.md
@@ -16,33 +16,20 @@ export const GET = auth0.handleAuth({
     const r = await auth0.handleCallback(req, res)
     const session = await auth0.getSession(req, res)
 
-    const existingUser = (
-      await sql<User[]>`
-  SELECT * FROM "User"
-  WHERE "auth0Sub" = ${session?.user.sub}
-  `
-    )[0]
+    const existingUser = await repository.getUserByAuth0Sub(session?.user.sub!)
 
     const data = {
       firstName: session?.user.given_name ?? session?.user.nickname,
       lastName: session?.user.family_name ?? '',
-      email: session?.user.email!,
+      email: session?.user.email,
       locale: session?.user.locale ?? 'en',
-      picture: session?.user.picture!,
+      picture: session?.user.picture,
       auth0Sub: session?.user.sub!,
       emailVerified: session?.user.email_verified!,
-      // TODO: use database's now()
       updatedAt: new Date(),
     }
 
-    const user = (
-      await sql`
-  INSERT INTO "User" ${sql(data)}
-  ON CONFLICT ("auth0Sub") DO UPDATE
-  SET ${sql(data)}
-  RETURNING *
-  `
-    )[0]
+    const user = await repository.upsertUserByAuth0Sub(data)
 
     if (!existingUser) {
       if (user) {

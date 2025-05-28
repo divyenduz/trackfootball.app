@@ -3,7 +3,13 @@ export type RequestConfig<TData = unknown> = {
   method: 'GET' | 'PUT' | 'PATCH' | 'POST' | 'DELETE'
   params?: object
   data?: TData | FormData
-  responseType?: 'arraybuffer' | 'blob' | 'document' | 'json' | 'text' | 'stream'
+  responseType?:
+    | 'arraybuffer'
+    | 'blob'
+    | 'document'
+    | 'json'
+    | 'text'
+    | 'stream'
   signal?: AbortSignal
   headers?: HeadersInit
 }
@@ -20,7 +26,9 @@ export type ResponseErrorConfig<TError = unknown> = {
   statusText: string
 }
 
-export const client = async <TData, TError = unknown, TVariables = unknown>(config: RequestConfig<TVariables>): Promise<ResponseConfig<TData>> => {
+export const client = async <TData, TError = unknown, TVariables = unknown>(
+  config: RequestConfig<TVariables>,
+): Promise<ResponseConfig<TData>> => {
   // Build URL with query params if present
   const url = new URL(config.url || '')
   if (config.params) {
@@ -44,7 +52,7 @@ export const client = async <TData, TError = unknown, TVariables = unknown>(conf
       options.body = config.data
     } else {
       options.body = JSON.stringify(config.data)
-      
+
       // Create a proper Headers object to handle types safely
       const headers = new Headers(options.headers)
       if (!headers.has('Content-Type')) {
@@ -56,18 +64,18 @@ export const client = async <TData, TError = unknown, TVariables = unknown>(conf
 
   // Use Bun's native fetch
   const response = await fetch(url.toString(), options)
-  
+
   // Parse response based on responseType
   let data: TData
   if (config.responseType === 'blob') {
-    data = await response.blob() as unknown as TData
+    data = (await response.blob()) as unknown as TData
   } else if (config.responseType === 'text') {
-    data = await response.text() as unknown as TData
+    data = (await response.text()) as unknown as TData
   } else if (config.responseType === 'arraybuffer') {
-    data = await response.arrayBuffer() as unknown as TData
+    data = (await response.arrayBuffer()) as unknown as TData
   } else {
     // Default to JSON
-    data = await response.json() as TData
+    data = (await response.json()) as TData
   }
 
   return {

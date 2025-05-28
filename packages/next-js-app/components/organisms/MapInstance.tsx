@@ -1,8 +1,7 @@
 import { ArrowUpward, Layers, Terrain } from '@mui/icons-material'
-import { Core } from '@trackfootball/sprint-detection'
 import { FieldSpace } from '@trackfootball/sprint-detection'
 import bearing from '@turf/bearing'
-import { FeatureCollection, LineString, bearingToAzimuth } from '@turf/helpers'
+import { bearingToAzimuth } from '@turf/helpers'
 import { FeedItemType } from 'app/actions/getFeed'
 import dynamic from 'next/dynamic'
 import React, { useEffect, useRef, useState } from 'react'
@@ -13,6 +12,10 @@ import { getNthCoord } from '../../packages/utils/map'
 import { namedComponent } from '../../packages/utils/utils'
 import { ConditionalDisplay } from '../atoms/ConditionalDisplay'
 import { AwaitedPost } from './Activity/ActivityItem'
+import 'mapbox-gl/dist/mapbox-gl.css'
+import invariant from 'tiny-invariant'
+
+const MAP_HEIGHT = 400
 
 type MapInstancePost = FeedItemType | AwaitedPost
 
@@ -21,7 +24,7 @@ const ReactMapGL = dynamic(() => import('react-map-gl/mapbox'), {
   loading: () => (
     <div
       className="flex items-center justify-center bg-gray-100 rounded-md"
-      style={{ height: '400px' }}
+      style={{ height: `${MAP_HEIGHT}px` }}
     >
       <div className="text-gray-500 flex flex-col items-center">
         <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-purple-500 mb-2"></div>
@@ -32,16 +35,16 @@ const ReactMapGL = dynamic(() => import('react-map-gl/mapbox'), {
 })
 
 const Layer = dynamic(() =>
-  namedComponent(import('react-map-gl/mapbox'), 'Layer')
+  namedComponent(import('react-map-gl/mapbox'), 'Layer'),
 )
 const Marker = dynamic(() =>
-  namedComponent(import('react-map-gl/mapbox'), 'Marker')
+  namedComponent(import('react-map-gl/mapbox'), 'Marker'),
 )
 const NavigationControl = dynamic(() =>
-  namedComponent(import('react-map-gl/mapbox'), 'NavigationControl')
+  namedComponent(import('react-map-gl/mapbox'), 'NavigationControl'),
 )
 const Source = dynamic(() =>
-  namedComponent(import('react-map-gl/mapbox'), 'Source')
+  namedComponent(import('react-map-gl/mapbox'), 'Source'),
 )
 
 type ViewPort = ViewState & {
@@ -53,7 +56,6 @@ interface MapInstanceProps {
   isMapMovable: boolean
   viewport: ViewPort
   setViewport: React.Dispatch<React.SetStateAction<ViewPort>>
-  topSprintOnly: boolean
   showSprints: boolean
   showRuns: boolean
   showHeatmap: boolean
@@ -77,12 +79,9 @@ const ArrowIcon: React.FC<ArrowIconProps> = ({ color, bearingValue }) => {
   return (
     <ArrowUpward
       style={{
-        position: 'relative',
         color,
         fontSize: '30px',
         transform: 'rotate(' + bearingValue + 'deg)',
-        left: -15,
-        top: -15,
       }}
     />
   )
@@ -107,25 +106,26 @@ export const MapInstance: React.FC<MapInstanceProps> = ({
   isMapMovable,
   viewport,
   setViewport,
-  topSprintOnly,
   showSprints,
   showRuns,
   showHeatmap,
   post,
   page,
 }) => {
-  const [mapStyle, setMapStyle] = useState('mapbox://styles/mapbox/streets-v11')
+  const [mapStyle, setMapStyle] = useState(
+    'mapbox://styles/mapbox/outdoors-v12',
+  )
   const [mapLoaded, setMapLoaded] = useState(false)
   const mapRef = useRef(null)
 
   const mapStyles = [
     {
-      id: 'mapbox://styles/mapbox/streets-v11',
+      id: 'mapbox://styles/mapbox/outdoors-v12',
       name: 'Streets',
       icon: <Layers fontSize="small" />,
     },
     {
-      id: 'mapbox://styles/mapbox/satellite-v9',
+      id: 'mapbox://styles/mapbox/satellite-streets-v12',
       name: 'Satellite',
       icon: <Terrain fontSize="small" />,
     },
@@ -174,9 +174,19 @@ export const MapInstance: React.FC<MapInstanceProps> = ({
     }
   }, [mapLoaded, viewport, setViewport])
 
-  const core = new Core(
-    post.geoJson! as unknown as FeatureCollection<LineString>
-  )
+  const taggedSprints = post.sprints.map((sprint) => {
+    return {
+      tag: 'sprint',
+      ...sprint,
+    }
+  })
+  const taggedRuns = post.runs.map((sprint) => {
+    return {
+      tag: 'run',
+      ...sprint,
+    }
+  })
+  const taggedPowerRuns = taggedSprints.concat(taggedRuns)
 
   return (
     <>
@@ -214,7 +224,7 @@ export const MapInstance: React.FC<MapInstanceProps> = ({
         </div>
       )}
 
-      <div className="rounded-lg overflow-hidden shadow-md border border-gray-200 mb-4">
+      <div className="rounded-lg overflow-hidden shadow-md border border-gray-200 mb-2 sm:mb-4">
         <ReactMapGL
           ref={mapRef}
           scrollZoom={false}
@@ -229,20 +239,15 @@ export const MapInstance: React.FC<MapInstanceProps> = ({
             setMapLoaded(true)
           }}
           mapStyle={mapStyle}
-          style={{ height: 400, touchAction: 'pan-y' }}
+          style={{ height: MAP_HEIGHT, touchAction: 'pan-y' }}
           mapboxAccessToken="pk.eyJ1IjoiZGl2eWVuZHV6IiwiYSI6ImNqeTRvc212NzEzdXczY2syam92YnBwY3AifQ.40p53nLBipgbxUpfz5VKfw"
           {...viewport}
         >
           {match(isMapMovable)
-            .with(true, () => (
-              <div style={{ position: 'absolute', right: '10px', top: '10px' }}>
-                <NavigationControl showCompass={true} />
-              </div>
-            ))
+            .with(true, () => <NavigationControl showCompass={false} />)
             .with(false, () => null)
             .exhaustive()}
 
-          {/* Production */}
           {Boolean(fieldData?.fieldEnvelope) && (
             <Source
               id="field-boundary-layer"
@@ -256,7 +261,7 @@ export const MapInstance: React.FC<MapInstanceProps> = ({
                 paint={{
                   'line-color': '#FF8F4C',
                   'line-width': 3,
-                  'line-opacity': 0.8,
+                  'line-opacity': 1,
                   'line-dasharray': [2, 1],
                 }}
               ></Layer>
@@ -298,81 +303,29 @@ export const MapInstance: React.FC<MapInstanceProps> = ({
             />
           </Source>
 
-          <ConditionalDisplay
-            visible={showSprints && topSprintOnly && Boolean(post.sprints)}
-          >
-            {[core.fastestSprint(), core.fastestRun()]
-              .filter((sprint) => Boolean(sprint))
-              .slice(0, 1)
-              .map((sprint, index) => {
-                if (!sprint) {
-                  return null
-                }
-                const numberOfCoordinates =
-                  sprint.features[0].geometry.coordinates.length
-                const start = getNthCoord(sprint, numberOfCoordinates - 2)
-                const end = getNthCoord(sprint, numberOfCoordinates - 1)
-                const bearingValue =
-                  bearingToAzimuth(
-                    bearing(
-                      [start.longitude, start.latitude],
-                      [end.longitude, end.latitude]
-                    )
-                  ) - (fieldData?.fieldBearing || 0)
-
-                return (
-                  <Source
-                    key={`sprint-layer-${index}`}
-                    id={`sprint-layer-${index}`}
-                    type="geojson"
-                    data={sprint}
-                  >
-                    <Layer
-                      id={`sprint-${index}`}
-                      type="line"
-                      layout={{
-                        visibility: 'visible',
-                      }}
-                      paint={{
-                        'line-color': 'red',
-                        'line-width': 4,
-                        'line-opacity': 0.8,
-                        'line-blur': 1,
-                      }}
-                    ></Layer>
-                    <Marker latitude={end.latitude} longitude={end.longitude}>
-                      <ArrowIcon
-                        color="red"
-                        bearingValue={bearingValue}
-                      ></ArrowIcon>
-                    </Marker>
-                  </Source>
-                )
-              })}
-          </ConditionalDisplay>
-
-          <ConditionalDisplay
-            visible={showSprints && !topSprintOnly && Boolean(post.sprints)}
-          >
-            {post.sprints?.map((sprint, index) => {
-              const numberOfCoordinates =
-                sprint.features[0].geometry.coordinates.length
-              const start = getNthCoord(sprint, numberOfCoordinates - 2)
-              const end = getNthCoord(sprint, numberOfCoordinates - 1)
+          <ConditionalDisplay visible={showSprints && Boolean(taggedPowerRuns)}>
+            {taggedPowerRuns.map((powerRun, index) => {
+              const feature = powerRun.features[0]
+              invariant(feature, `expected feature to exist`)
+              const numberOfCoordinates = feature.geometry.coordinates.length
+              const start = getNthCoord(powerRun, numberOfCoordinates - 2)
+              const end = getNthCoord(powerRun, numberOfCoordinates - 1)
               const bearingValue =
                 bearingToAzimuth(
                   bearing(
                     [start.longitude, start.latitude],
-                    [end.longitude, end.latitude]
-                  )
+                    [end.longitude, end.latitude],
+                  ),
                 ) - (fieldData?.fieldBearing || 0)
+
+              const lineColor = powerRun.tag === 'sprint' ? 'red' : 'yellow'
 
               return (
                 <Source
                   key={`sprint-layer-${index}`}
                   id={`sprint-layer-${index}`}
                   type="geojson"
-                  data={sprint}
+                  data={powerRun}
                 >
                   <Layer
                     id={`sprint-${index}`}
@@ -381,61 +334,19 @@ export const MapInstance: React.FC<MapInstanceProps> = ({
                       visibility: 'visible',
                     }}
                     paint={{
-                      'line-color': 'red',
-                      'line-width': 4,
-                      'line-opacity': 0.8,
-                      'line-blur': 1,
+                      'line-color': lineColor,
+                      'line-width': 3,
+                      'line-opacity': 1,
+                      'line-blur': 0,
                     }}
                   ></Layer>
-                  <Marker latitude={end.latitude} longitude={end.longitude}>
+                  <Marker
+                    className="absolute"
+                    latitude={end.latitude}
+                    longitude={end.longitude}
+                  >
                     <ArrowIcon
-                      color="red"
-                      bearingValue={bearingValue}
-                    ></ArrowIcon>
-                  </Marker>
-                </Source>
-              )
-            })}
-          </ConditionalDisplay>
-
-          <ConditionalDisplay
-            visible={showRuns && !topSprintOnly && Boolean(post.runs)}
-          >
-            {post.runs?.map((run, index) => {
-              const numberOfCoordinates =
-                run.features[0].geometry.coordinates.length
-              const start = getNthCoord(run, numberOfCoordinates - 2)
-              const end = getNthCoord(run, numberOfCoordinates - 1)
-              const bearingValue =
-                bearingToAzimuth(
-                  bearing(
-                    [start.longitude, start.latitude],
-                    [end.longitude, end.latitude]
-                  )
-                ) - (fieldData?.fieldBearing || 0)
-              return (
-                <Source
-                  key={`run-layer-${index}`}
-                  id={`run-layer-${index}`}
-                  type="geojson"
-                  data={run}
-                >
-                  <Layer
-                    id={`run-${index}`}
-                    type="line"
-                    layout={{
-                      visibility: 'visible',
-                    }}
-                    paint={{
-                      'line-color': '#FFD700',
-                      'line-width': 4,
-                      'line-opacity': 0.8,
-                      'line-blur': 1,
-                    }}
-                  />
-                  <Marker latitude={end.latitude} longitude={end.longitude}>
-                    <ArrowIcon
-                      color="yellow"
+                      color={lineColor}
                       bearingValue={bearingValue}
                     ></ArrowIcon>
                   </Marker>

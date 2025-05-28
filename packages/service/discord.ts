@@ -9,10 +9,6 @@ export async function createDiscordMessage({
   name,
   description,
 }: CreateDiscordMessageArgs) {
-  if (process.env.NODE_ENV !== 'production') {
-    return
-  }
-
   const content = `
       ## ${heading}
       
@@ -25,7 +21,7 @@ export async function createDiscordMessage({
   form.append('content', content)
 
   try {
-    await fetch(process.env.DISCORD_TRACKFOOTBALL_APPLICATION_EVENTS_WEBHOOK, {
+    await fetch(Bun.env.DISCORD_TRACKFOOTBALL_APPLICATION_EVENTS_WEBHOOK, {
       method: 'POST',
       body: form,
     })

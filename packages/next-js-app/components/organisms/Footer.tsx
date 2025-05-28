@@ -1,4 +1,4 @@
-import { Hidden, Typography } from '@mui/material'
+import { Typography } from '@mui/material'
 import Logo from 'components/atoms/brand/core/Logo'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -10,20 +10,18 @@ export function Footer() {
         <div className="mb-8 cursor-pointer ">
           <div className="flex items-center justify-center">
             <Logo size={'xs'} />
-            {/* @ts-ignore */}
-            <Hidden mdDown>
-              <Typography
-                variant="h6"
-                component={'h5'}
-                style={{
-                  color: '#fff',
-                  fontWeight: 300,
-                  position: 'relative',
-                }}
-              >
-                TrackFootball
-              </Typography>
-            </Hidden>
+            <Typography
+              variant="h6"
+              component={'h5'}
+              className="hidden md:block"
+              style={{
+                color: '#fff',
+                fontWeight: 300,
+                position: 'relative',
+              }}
+            >
+              TrackFootball
+            </Typography>
           </div>
           <span className="flex items-center justify-center text-sm font-light text-center text-gray-300">
             Made for players looking to improve their games

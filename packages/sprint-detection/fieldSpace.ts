@@ -30,14 +30,14 @@ export class FieldSpace {
       {
         name: 'Right Line',
         color: '#FF8F4C',
-      }
+      },
     )
     const bottomLine = lineString(
       [this.field.bottomLeft, this.field.bottomRight],
       {
         name: 'Bottom Line',
         color: '#FF8F4C',
-      }
+      },
     )
     const fieldEnvelope = featureCollection([
       leftLine,
