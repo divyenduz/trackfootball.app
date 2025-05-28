@@ -83,7 +83,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>`,
 
         <div className="flex items-center justify-center min-h-[600px]">
           <div
-            className={`flex flex-col items-center justify-center w-full mt-24`}
+            className={`flex flex-col items-center justify-center w-full mt-16 sm:mt-24`}
           >
             {children}
           </div>

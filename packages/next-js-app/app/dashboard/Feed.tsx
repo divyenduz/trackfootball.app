@@ -25,7 +25,7 @@ export default function Feed({ initialFeed, initialNextCursor, athleteId }: Prop
   return (
     <>
       {feed.length > 0 && (
-        <div className="w-full px-3 sm:px-5">
+        <div className="w-full">
           {feed.map((post) => {
             return <FeedItem key={post.id} post={post}></FeedItem>
           })}

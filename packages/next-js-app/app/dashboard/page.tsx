@@ -63,7 +63,7 @@ export default async function Home() {
       </>
 
       {feed.length > 0 && (
-        <div className="w-full px-3 sm:px-5">
+        <div className="w-full px-1 sm:px-3">
           <Feed initialFeed={feed} initialNextCursor={nextCursor} />
         </div>
       )}
