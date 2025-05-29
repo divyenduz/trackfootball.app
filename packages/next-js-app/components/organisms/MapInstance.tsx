@@ -224,7 +224,7 @@ export const MapInstance: React.FC<MapInstanceProps> = ({
         </div>
       )}
 
-      <div className="rounded-lg overflow-hidden shadow-md border border-gray-200 mb-4">
+      <div className="rounded-lg overflow-hidden shadow-md border border-gray-200 mb-2 sm:mb-4">
         <ReactMapGL
           ref={mapRef}
           scrollZoom={false}

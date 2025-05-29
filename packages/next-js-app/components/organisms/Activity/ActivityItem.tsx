@@ -117,9 +117,6 @@ const ActivityItem: React.FC<Props> = ({ post, user }) => {
       if (!post) {
         return
       }
-      if (!post.Field) {
-        return
-      }
 
       //@ts-expect-error post has field now
       const bounds = await getBoundsForPoints(post)

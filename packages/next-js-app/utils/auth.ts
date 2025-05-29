@@ -16,7 +16,10 @@ export class NotLoggedInError extends Error {
 
 async function authenticate() {
   // For AI agents to access the server without login
-  if (Bun.env.UNSAFE_AUTH_BYPASS_USER) {
+  if (
+    Bun.env.UNSAFE_AUTH_BYPASS_USER === '1' ||
+    Bun.env.UNSAFE_AUTH_BYPASS_USER === 'true'
+  ) {
     const cwd = process.cwd()
     const userFile = Bun.file(path.join(cwd, 'unsafe_user.json'))
     const user = userFile.json()

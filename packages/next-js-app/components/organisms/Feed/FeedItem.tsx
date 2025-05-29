@@ -51,10 +51,10 @@ export const FeedItem: React.FC<Props> = ({ post }) => {
       raised={false}
       key={post.id}
       id={`feed-item-${post.id}`}
-      className="w-full mb-5"
+      className="w-full mb-3 sm:mb-5"
     >
       <CardHeader
-        className="p-1"
+        className="p-1 sm:p-2"
         avatar={
           <Link href={`/athlete/${post.userId}`}>
             <Photo photo={post.User.picture}></Photo>
@@ -85,10 +85,10 @@ export const FeedItem: React.FC<Props> = ({ post }) => {
         elevation={0}
         key={post.id}
         id={`feed-item-${post.id}`}
-        className="w-full mb-5"
+        className="w-full"
       >
         <CardHeader
-          className="flex flex-wrap p-1"
+          className="flex flex-wrap p-1 sm:p-2"
           title={
             <Link href={`/activity/${post.id}`}>
               <div className="text-2xl font-semibold text-left text-gray-900 cursor-pointer">
@@ -97,7 +97,7 @@ export const FeedItem: React.FC<Props> = ({ post }) => {
             </Link>
           }
         ></CardHeader>
-        <CardContent>
+        <CardContent className="p-2 sm:p-4">
           <Link href={`/activity/${post.id}`}>
             <MapInstance
               isMapMovable={false}
