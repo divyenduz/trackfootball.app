@@ -80,10 +80,7 @@ export class GeoData {
   }
 
   private gpxToGeoJson() {
-    const gpx = new DOMParser().parseFromString(
-      this.data,
-      'application/gpx+xml',
-    )
+    const gpx = new DOMParser().parseFromString(this.data, 'text/xml')
     const geoJson = tj.gpx(gpx)
     return geoJson
   }
