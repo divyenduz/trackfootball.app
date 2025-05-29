@@ -1,9 +1,9 @@
 import { AppBar } from 'components/organisms/AppBar'
 import { Footer } from 'components/organisms/Footer'
 import Script from 'next/script'
-import 'tailwindcss/tailwind.css'
 import { auth } from 'utils/auth'
 
+import './globals.css'
 import './styles.css'
 
 export const metadata = {
