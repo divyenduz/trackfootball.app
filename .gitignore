@@ -24,3 +24,4 @@ scripts/pg.ts
 unsafe_user.json
 
 samples/
+.kamal/
