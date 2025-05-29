@@ -12,5 +12,8 @@
     "test": "bun --bun run --filter @trackfootball/* test",
     "lint": "bun --bun run --filter @trackfootball/* lint",
     "migrate": "bun --bun run --filter @trackfootball/database migrate"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.8"
   }
 }
