@@ -34,7 +34,6 @@
     "@mui/lab": "5.0.0-alpha.176",
     "@mui/material": "7.1.0",
     "@mui/styles": "6.4.8",
-    "@mui/x-data-grid": "8.4.0",
     "@tailwindcss/postcss": "^4.1.8",
     "@tmcw/togeojson": "7.1.1",
     "@trackfootball/database": "*",
