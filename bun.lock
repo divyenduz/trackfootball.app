@@ -32,7 +32,7 @@
         "@mui/material": "7.1.0",
         "@mui/styles": "6.4.8",
         "@tailwindcss/postcss": "^4.1.8",
-        "@tmcw/togeojson": "7.1.1",
+        "@tmcw/togeojson": "7.1.2",
         "@trackfootball/database": "*",
         "@trackfootball/open-api": "*",
         "@trackfootball/service": "*",
@@ -487,7 +487,7 @@
 
     "@tailwindcss/postcss": ["@tailwindcss/postcss@4.1.8", "", { "dependencies": { "@alloc/quick-lru": "^5.2.0", "@tailwindcss/node": "4.1.8", "@tailwindcss/oxide": "4.1.8", "postcss": "^8.4.41", "tailwindcss": "4.1.8" } }, "sha512-vB/vlf7rIky+w94aWMw34bWW1ka6g6C3xIOdICKX2GC0VcLtL6fhlLiafF0DVIwa9V6EHz8kbWMkS2s2QvvNlw=="],
 
-    "@tmcw/togeojson": ["@tmcw/togeojson@7.1.1", "", {}, "sha512-Acs7XtT/oP2koW041R3K1dGiBKAcVEO44GnZIJoVwgtrbCsG5blaEpzJeUEK72wU0KZCKAljD/XUjIPlhfRebg=="],
+    "@tmcw/togeojson": ["@tmcw/togeojson@7.1.2", "", {}, "sha512-QKnFs9DAuqqBVj4d6c69tV1Dj2TspSBTqffivoN0YoBCVdP/JY1+WaYCJbzU49RkoU5NOSOJ3jtFHCdEUVh21A=="],
 
     "@trackfootball/database": ["@trackfootball/database@workspace:packages/database"],
 
