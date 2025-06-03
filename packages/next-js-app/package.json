@@ -35,7 +35,7 @@
     "@mui/material": "7.1.1",
     "@mui/styles": "6.4.8",
     "@tailwindcss/postcss": "^4.1.8",
-    "@tmcw/togeojson": "7.1.1",
+    "@tmcw/togeojson": "7.1.2",
     "@trackfootball/database": "*",
     "@trackfootball/open-api": "*",
     "@trackfootball/service": "*",
