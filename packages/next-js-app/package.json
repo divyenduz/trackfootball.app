@@ -26,7 +26,7 @@
     "prettier": "3.5.3"
   },
   "dependencies": {
-    "@auth0/nextjs-auth0": "3.7.0",
+    "@auth0/nextjs-auth0": "3.8.0",
     "@emotion/react": "11.14.0",
     "@emotion/styled": "11.14.0",
     "@math.gl/web-mercator": "^4.1.0",
