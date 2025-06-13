@@ -3,6 +3,8 @@
 _.env.development
 *.envrc
 
+.dburl
+
 node_modules
 .next
 

@@ -1,0 +1,174 @@
+transformations:
+  validation_mode: strict
+  table_transformers:
+    - schema: public
+      table: StravaWebhookEvent
+      column_transformers:
+        id:
+          name: noop
+        body:
+          name: noop
+        errors:
+          name: noop
+        status:
+          name: noop
+        createdAt:
+          name: noop
+        updatedAt:
+          name: noop
+    - schema: public
+      table: _prisma_migrations
+      column_transformers:
+        id:
+          name: noop
+        logs:
+          name: noop
+        checksum:
+          name: noop
+        started_at:
+          name: noop
+        finished_at:
+          name: noop
+        migration_name:
+          name: noop
+        rolled_back_at:
+          name: noop
+        applied_steps_count:
+          name: noop
+    - schema: public
+      table: Field
+      column_transformers:
+        id:
+          name: noop
+        city:
+          name: noop
+        name:
+          name: noop
+        zoom:
+          name: noop
+        usage:
+          name: noop
+        address:
+          name: noop
+        topLeft:
+          name: noop
+        topRight:
+          name: noop
+        bottomLeft:
+          name: noop
+        bottomRight:
+          name: noop
+    - schema: public
+      table: Post
+      column_transformers:
+        id:
+          name: noop
+        key:
+          name: noop
+        runs:
+          name: noop
+        text:
+          name: noop
+        type:
+          name: noop
+        image:
+          name: masking
+          parameters:
+            type: default
+        status:
+          name: noop
+        userId:
+          name: noop
+        fieldId:
+          name: noop
+        geoJson:
+          name: noop
+        sprints:
+          name: noop
+        halfTime:
+          name: noop
+        maxSpeed:
+          name: noop
+        createdAt:
+          name: noop
+        startTime:
+          name: noop
+        updatedAt:
+          name: noop
+        statusInfo:
+          name: noop
+        elapsedTime:
+          name: noop
+        averageSpeed:
+          name: noop
+        totalDistance:
+          name: noop
+        totalSprintTime:
+          name: noop
+    - schema: public
+      table: User
+      column_transformers:
+        id:
+          name: noop
+        type:
+          name: noop
+        email:
+          name: neosync_email
+          parameters:
+            seed: 99
+            preserve_length: true
+            preserve_domain: true
+        locale:
+          name: noop
+        picture:
+          name: masking
+          parameters:
+            type: default
+        auth0Sub:
+          name: greenmask_string
+          parameters:
+            generator: random
+            min_length: 16
+            max_length: 32
+            symbols: abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()
+        lastName:
+          name: neosync_lastname
+          parameters:
+            preserve_length: true
+            seed: 99
+        createdAt:
+          name: noop
+        firstName:
+          name: neosync_firstname
+          parameters:
+            preserve_length: true
+            seed: 99
+        updatedAt:
+          name: noop
+        emailVerified:
+          name: noop
+    - schema: public
+      table: SocialLogin
+      column_transformers:
+        id:
+          name: noop
+        userId:
+          name: noop
+        platform:
+          name: noop
+        createdAt:
+          name: noop
+        expiresAt:
+          name: noop
+        updatedAt:
+          name: noop
+        platformId:
+          name: noop
+        accessToken:
+          name: noop
+        platformMeta:
+          name: noop
+        refreshToken:
+          name: noop
+        platformScope:
+          name: noop

@@ -1,0 +1,36 @@
+name: Xata clone (daily, on-demand)
+
+on:
+  schedule:
+    - cron: '0 8 * * *'
+  workflow_dispatch:
+
+env:
+  FORCE_COLOR: 3
+  XATA_API_KEY: ${{ secrets.XATA_API_KEY }}
+  XATA_API_ENVIRONMENT: staging
+  XATA_ORGANIZATIONID: xata
+  XATA_PROJECTID: prj_9lg00njeo55nh9ep4nfd4gnmck
+  XATA_BRANCHID: fr6deppfg90h13esp3ovbigpqo
+  XATA_BRANCHNAME: main
+  XATA_DATABASENAME: app
+  XATA_CLI_SOURCE_POSTGRES_URL: ${{ secrets.XATA_CLI_SOURCE_POSTGRES_URL }}
+  PGSTREAM_POSTGRES_SNAPSHOT_ROLE: postgres
+
+jobs:
+  clone:
+    name: Xata dev branch
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Xata CLI
+        run: |
+          curl -fsSL https://xata.io/install.sh | bash
+
+      - name: Check Xata status
+        run: |
+          xata status
+          xata branch describe
+
+      - name: Xata clone
+        run: |
+          xata clone start --source-url ${{ env.XATA_CLI_SOURCE_POSTGRES_URL }}
