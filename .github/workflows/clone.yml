@@ -19,12 +19,13 @@ env:
 
 jobs:
   clone:
-    name: Xata dev branch
+    name: Xata Clone
     runs-on: ubuntu-latest
     steps:
       - name: Install Xata CLI
         run: |
           curl -fsSL https://xata.io/install.sh | bash
+          echo "/home/runner/.config/xata/bin" >> $GITHUB_PATH
 
       - name: Check Xata status
         run: |
