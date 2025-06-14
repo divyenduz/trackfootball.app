@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "@kubb/cli": "3.10.15",
-    "@kubb/plugin-client": "3.10.12",
+    "@kubb/plugin-client": "3.10.15",
     "@kubb/plugin-oas": "3.10.15",
     "@prisma/client": "6.9.0",
     "@types/bun": "1.2.16",
