@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-import { describe, expect, it } from 'bun:test'
+import { describe, expect, it } from 'vitest'
 
 import { Core } from '../core'
 import { GeoData } from '../geoData'
