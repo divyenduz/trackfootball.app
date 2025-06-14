@@ -1,5 +1,5 @@
-import { Core } from '@trackfootball/sprint-detection'
-import { describe, expect, it } from 'bun:test'
+import { Core } from '../core'
+import { describe, expect, it } from 'vitest'
 
 describe('core - empty data tests', () => {
   const geoJson = require('./fixtures/empty.json')

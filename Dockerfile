@@ -1,18 +1,18 @@
-FROM oven/bun:latest
+FROM node:22-alpine
 RUN mkdir -p /app
 WORKDIR /app
 COPY . /app
 
-RUN apt-get update && \
-    apt-get install -y curl openssl && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+RUN apk update && \
+    apk add --no-cache curl openssl && \
+    apk del --purge
 
-RUN bun install --frozen-lockfile && \
-  bun --bun run build && \
+RUN npm install -g pnpm && \
+  pnpm install --frozen-lockfile && \
+  pnpm run build && \
   rm -rf /usr/local/share/.cache && \
   rm -rf /usr/local/share/.config && \
   rm -rf /tmp && rm -rf /root/.cache
 
 EXPOSE 6060
-CMD ["bun", "run", "start"]
+CMD ["pnpm", "run", "start"]

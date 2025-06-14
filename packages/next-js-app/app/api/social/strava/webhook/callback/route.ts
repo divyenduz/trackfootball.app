@@ -2,7 +2,7 @@ import {
   PostType,
   StravaWebhookEvent,
   StravaWebhookEventStatus,
-} from '@prisma/client'
+} from '@trackfootball/database'
 import { stringify } from 'packages/utils/utils'
 import { repository } from '@trackfootball/database'
 import invariant from 'tiny-invariant'

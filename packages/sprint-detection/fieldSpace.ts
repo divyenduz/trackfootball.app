@@ -1,4 +1,4 @@
-import type { Field } from '@prisma/client'
+import type { Field } from '@trackfootball/database'
 import bearing from '@turf/bearing'
 import { bearingToAzimuth, featureCollection, lineString } from '@turf/helpers'
 import { match } from 'ts-pattern'
@@ -30,14 +30,14 @@ export class FieldSpace {
       {
         name: 'Right Line',
         color: '#FF8F4C',
-      },
+      }
     )
     const bottomLine = lineString(
       [this.field.bottomLeft, this.field.bottomRight],
       {
         name: 'Bottom Line',
         color: '#FF8F4C',
-      },
+      }
     )
     const fieldEnvelope = featureCollection([
       leftLine,

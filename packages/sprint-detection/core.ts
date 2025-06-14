@@ -344,19 +344,19 @@ export class Core {
       .map((segmentSlice, index) => {
         const coordTimes = this.getProperty('coordTimes').slice(
           segmentSlice[0],
-          segmentSlice[1],
+          segmentSlice[1]
         )
         const heartRates = this.getProperty('heartRates').slice(
           segmentSlice[0],
-          segmentSlice[1],
+          segmentSlice[1]
         )
         const speeds = this.getProperty('speeds').slice(
           segmentSlice[0],
-          segmentSlice[1],
+          segmentSlice[1]
         )
         const coordinates = this.getCoordinates().slice(
           segmentSlice[0],
-          segmentSlice[1],
+          segmentSlice[1]
         )
 
         const averageSpeed = this.calculateAverage(speeds)
@@ -389,7 +389,7 @@ export class Core {
         }
       })
       .filter((segment): segment is ReturnType<typeof buildGeoJson> =>
-        Boolean(segment),
+        Boolean(segment)
       )
 
     return segments
@@ -448,7 +448,7 @@ export class Core {
         years: 0,
       }
     }
-    
+
     const movementTimes = geoJsons.map((movement) => {
       const core = new Core(movement)
       const time = core.elapsedTime()
@@ -462,7 +462,7 @@ export class Core {
         hours: 0,
         minutes: 0,
         seconds: 0,
-      },
+      }
     )
     const movingTimeInSeconds = durationToSeconds(movingTime)
     const duration = intervalToDuration({

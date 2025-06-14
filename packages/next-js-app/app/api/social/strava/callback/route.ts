@@ -1,4 +1,4 @@
-import type { Platform } from '@prisma/client'
+import type { Platform } from '@trackfootball/database'
 import { repository } from '@trackfootball/database'
 import { tokenExchange } from '@trackfootball/service'
 import { redirect } from 'next/navigation'

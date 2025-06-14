@@ -21,7 +21,7 @@ export async function createDiscordMessage({
   form.append('content', content)
 
   try {
-    await fetch(Bun.env.DISCORD_TRACKFOOTBALL_APPLICATION_EVENTS_WEBHOOK, {
+    await fetch(process.env.DISCORD_TRACKFOOTBALL_APPLICATION_EVENTS_WEBHOOK, {
       method: 'POST',
       body: form,
     })
