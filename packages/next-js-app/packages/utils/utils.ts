@@ -1,4 +1,4 @@
-import type { Post, User } from '@prisma/client'
+import type { Post, User } from '@trackfootball/database'
 
 export function ensureUser(user: User | null | undefined): user is User {
   if (Boolean(user)) {
@@ -19,7 +19,7 @@ export function ensurePost(post: Post | null | undefined): post is Post {
 // https://github.com/vercel/next.js/issues/22278#issuecomment-1009865850
 export const namedComponent = async <T, N extends keyof T>(
   modPromise: Promise<T>,
-  exportName: N
+  exportName: N,
 ) => {
   const mod = await modPromise
   return mod[exportName]

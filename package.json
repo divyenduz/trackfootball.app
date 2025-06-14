@@ -12,7 +12,8 @@
     "release": "pnpm --filter @trackfootball/rw-app release"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.1.8"
+    "@tailwindcss/postcss": "^4.1.8",
+    "typescript": "^5.8.3"
   },
   "pnpm": {
     "onlyBuiltDependencies": [

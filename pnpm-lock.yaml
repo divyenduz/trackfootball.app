@@ -11,6 +11,9 @@ importers:
       '@tailwindcss/postcss':
         specifier: ^4.1.8
         version: 4.1.10
+      typescript:
+        specifier: ^5.8.3
+        version: 5.8.3
 
   packages/database:
     dependencies:
@@ -30,6 +33,9 @@ importers:
       '@types/geojson':
         specifier: ^7946.0.16
         version: 7946.0.16
+      '@types/node':
+        specifier: ^22.15.31
+        version: 22.15.31
       prisma:
         specifier: 6.9.0
         version: 6.9.0(typescript@5.8.3)
@@ -81,6 +87,9 @@ importers:
       '@trackfootball/utils':
         specifier: workspace:*
         version: link:../unit-utils
+      '@turf/bearing':
+        specifier: ^7.2.0
+        version: 7.2.0
       '@turf/boolean-point-in-polygon':
         specifier: 7.2.0
         version: 7.2.0
@@ -184,12 +193,18 @@ importers:
       '@kubb/cli':
         specifier: 3.10.12
         version: 3.10.12(typescript@5.8.3)
+      '@kubb/core':
+        specifier: ^3.10.15
+        version: 3.10.15
       '@kubb/plugin-client':
         specifier: 3.10.12
         version: 3.10.12(@kubb/react@3.10.15)
       '@kubb/plugin-oas':
         specifier: 3.10.12
         version: 3.10.12(@kubb/react@3.10.15)
+      '@kubb/plugin-ts':
+        specifier: ^3.10.15
+        version: 3.10.15(@kubb/react@3.10.15)
       '@prisma/client':
         specifier: 6.9.0
         version: 6.9.0(prisma@6.9.0(typescript@5.8.3))(typescript@5.8.3)
@@ -248,18 +263,64 @@ importers:
       '@trackfootball/database':
         specifier: workspace:*
         version: link:../database
+      '@trackfootball/open-api':
+        specifier: workspace:*
+        version: link:../open-api
       '@trackfootball/sprint-detection':
         specifier: workspace:*
         version: link:../sprint-detection
       '@trackfootball/utils':
         specifier: workspace:*
         version: link:../unit-utils
+      '@turf/area':
+        specifier: ^7.2.0
+        version: 7.2.0
+      '@turf/boolean-point-in-polygon':
+        specifier: 7.2.0
+        version: 7.2.0
+      '@turf/center':
+        specifier: ^7.2.0
+        version: 7.2.0
+      '@turf/envelope':
+        specifier: ^7.2.0
+        version: 7.2.0
+      '@turf/helpers':
+        specifier: 7.2.0
+        version: 7.2.0
+      '@turf/intersect':
+        specifier: ^7.2.0
+        version: 7.2.0
+      geojson:
+        specifier: ^0.5.0
+        version: 0.5.0
+      tiny-invariant:
+        specifier: 1.3.3
+        version: 1.3.3
+      ts-pattern:
+        specifier: 5.7.1
+        version: 5.7.1
+    devDependencies:
+      '@types/geojson':
+        specifier: ^7946.0.16
+        version: 7946.0.16
+      '@types/node':
+        specifier: ^24.0.1
+        version: 24.0.1
 
   packages/sprint-detection:
     dependencies:
+      '@tmcw/togeojson':
+        specifier: 7.1.2
+        version: 7.1.2
+      '@trackfootball/database':
+        specifier: workspace:*
+        version: link:../database
       '@trackfootball/utils':
         specifier: workspace:*
         version: link:../unit-utils
+      '@turf/bearing':
+        specifier: ^7.2.0
+        version: 7.2.0
       '@turf/distance':
         specifier: 7.2.0
         version: 7.2.0
@@ -269,9 +330,28 @@ importers:
       '@turf/length':
         specifier: 7.2.0
         version: 7.2.0
+      '@types/node':
+        specifier: ^24.0.1
+        version: 24.0.1
+      '@xmldom/xmldom':
+        specifier: 0.9.8
+        version: 0.9.8
       date-fns:
         specifier: 4.1.0
         version: 4.1.0
+      geojson:
+        specifier: ^0.5.0
+        version: 0.5.0
+      tiny-invariant:
+        specifier: 1.3.3
+        version: 1.3.3
+      ts-pattern:
+        specifier: 5.7.1
+        version: 5.7.1
+    devDependencies:
+      '@types/geojson':
+        specifier: ^7946.0.16
+        version: 7946.0.16
 
   packages/unit-utils:
     dependencies:
@@ -1248,6 +1328,10 @@ packages:
     resolution: {integrity: sha512-DbFVTY7lA48ZzL8n5LFB7uy0ie+qU5yWCADmQ71AjMYFQGoly4HRPtJ0xAItZo9a6msQdSB9rQhiBlvL3VRwUw==}
     engines: {node: '>=20'}
 
+  '@kubb/oas@3.10.15':
+    resolution: {integrity: sha512-CADhgjxoopToCUs19/ivF/jzY49MToMcfo4oP69Kd7v/MnMB/YU1PEYhUl6k700hmGwBhYL9ESQzuSYRT2Xf/g==}
+    engines: {node: '>=20'}
+
   '@kubb/parser-ts@3.10.12':
     resolution: {integrity: sha512-hp2dFVmWuNJxvemBDR4C2uTFgYGegd1QHOxsL8gyQ4aI6g6v/CUd2AH0wiDI04tBnRy/VqVEHW6ESJNn17m3GA==}
     engines: {node: '>=20'}
@@ -1272,8 +1356,20 @@ packages:
     peerDependencies:
       '@kubb/react': ^3.0.0
 
+  '@kubb/plugin-oas@3.10.15':
+    resolution: {integrity: sha512-jcqdTdKMdHqqQ/wkzcxM0I1xHz1FE5UHzYmRyTZ7p3/soHHb5pCpz2OeX7PycJ3LRd2o73QcDBMH0b6GqUGrUw==}
+    engines: {node: '>=20'}
+    peerDependencies:
+      '@kubb/react': ^3.0.0
+
   '@kubb/plugin-ts@3.10.12':
     resolution: {integrity: sha512-8wyPgrhNLOlioUlLcpPfwwsulhVcv8pSBy43CU3HjbCTSoMKHFNQnJV0l9VXDRED6bEwH6mcmeoJh/pFk5sgDg==}
+    engines: {node: '>=20'}
+    peerDependencies:
+      '@kubb/react': ^3.0.0
+
+  '@kubb/plugin-ts@3.10.15':
+    resolution: {integrity: sha512-t4b67d0ksKljNA351/SH5BcViHh0slQ5ugPbP6yPx+4r7JhpBU0X/tw3EkRKqSNeRJ5ZmEY8q2yh4QwrfLjYEA==}
     engines: {node: '>=20'}
     peerDependencies:
       '@kubb/react': ^3.0.0
@@ -2407,6 +2503,9 @@ packages:
 
   '@types/node@22.15.31':
     resolution: {integrity: sha512-jnVe5ULKl6tijxUhvQeNbQG/84fHfg+yMak02cT8QVhBx/F05rAVxCGBYYTh2EKz22D6JF5ktXuNwdx7b9iEGw==}
+
+  '@types/node@24.0.1':
+    resolution: {integrity: sha512-MX4Zioh39chHlDJbKmEgydJDS3tspMP/lnQC67G3SWsTnb9NeYVWOjkxpOSy4oMfPs4StcWHwBrvUb4ybfnuaw==}
 
   '@types/parse-json@4.0.2':
     resolution: {integrity: sha512-dISoDXWWQwUquiKsyZ4Ng+HX2KsPL7LyHKHQwgGFEA3IaKac4Obd+h2a/a6waisAoepJlBcx9paWqjA8/HVjCw==}
@@ -5397,6 +5496,9 @@ packages:
   undici-types@6.21.0:
     resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
 
+  undici-types@7.8.0:
+    resolution: {integrity: sha512-9UJ2xGDvQ43tYyVMpuHlsgApydB8ZKfVYTsLDhXkFL/6gfkp+U8xTGdh8pMJv1SpZna0zxG1DwsKZsreLbXBxw==}
+
   undici@5.29.0:
     resolution: {integrity: sha512-raqeBD6NQK4SkWhQzeYKd1KmIG6dllBOTt55Rmkt4HtI9mwdWtJljnrXjAFUBLTSN67HWrOIZ3EPF4kjUw80Bg==}
     engines: {node: '>=14.0'}
@@ -6536,6 +6638,22 @@ snapshots:
       - encoding
       - supports-color
 
+  '@kubb/oas@3.10.15':
+    dependencies:
+      '@redocly/openapi-core': 1.34.3
+      hotscript: 1.0.13
+      json-schema-to-ts: 3.1.1
+      jsonpointer: 5.0.1
+      oas: 27.1.0
+      oas-normalize: 14.1.0
+      openapi-types: 12.1.3
+      remeda: 2.23.0
+      swagger2openapi: 7.0.8
+      ts-toolbelt: 9.6.0
+    transitivePeerDependencies:
+      - encoding
+      - supports-color
+
   '@kubb/parser-ts@3.10.12':
     dependencies:
       prettier: 3.5.3
@@ -6571,12 +6689,34 @@ snapshots:
       - encoding
       - supports-color
 
+  '@kubb/plugin-oas@3.10.15(@kubb/react@3.10.15)':
+    dependencies:
+      '@kubb/core': 3.10.15
+      '@kubb/oas': 3.10.15
+      '@kubb/react': 3.10.15
+      '@stoplight/yaml': 4.3.0
+      remeda: 2.23.0
+    transitivePeerDependencies:
+      - encoding
+      - supports-color
+
   '@kubb/plugin-ts@3.10.12(@kubb/react@3.10.15)':
     dependencies:
       '@kubb/core': 3.10.12
       '@kubb/oas': 3.10.12
       '@kubb/parser-ts': 3.10.12
       '@kubb/plugin-oas': 3.10.12(@kubb/react@3.10.15)
+      '@kubb/react': 3.10.15
+    transitivePeerDependencies:
+      - encoding
+      - supports-color
+
+  '@kubb/plugin-ts@3.10.15(@kubb/react@3.10.15)':
+    dependencies:
+      '@kubb/core': 3.10.15
+      '@kubb/oas': 3.10.15
+      '@kubb/parser-ts': 3.10.15
+      '@kubb/plugin-oas': 3.10.15(@kubb/react@3.10.15)
       '@kubb/react': 3.10.15
     transitivePeerDependencies:
       - encoding
@@ -8471,6 +8611,10 @@ snapshots:
   '@types/node@22.15.31':
     dependencies:
       undici-types: 6.21.0
+
+  '@types/node@24.0.1':
+    dependencies:
+      undici-types: 7.8.0
 
   '@types/parse-json@4.0.2': {}
 
@@ -11895,6 +12039,8 @@ snapshots:
       through: 2.3.8
 
   undici-types@6.21.0: {}
+
+  undici-types@7.8.0: {}
 
   undici@5.29.0:
     dependencies:

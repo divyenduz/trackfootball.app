@@ -41,6 +41,7 @@
     "@trackfootball/service": "workspace:*",
     "@trackfootball/sprint-detection": "workspace:*",
     "@trackfootball/utils": "workspace:*",
+    "@turf/bearing": "^7.2.0",
     "@turf/boolean-point-in-polygon": "7.2.0",
     "@turf/helpers": "7.2.0",
     "@turf/invariant": "7.2.0",
