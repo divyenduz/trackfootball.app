@@ -5,15 +5,14 @@
   "main": "index.ts",
   "scripts": {
     "test": "echo 'No tests' && exit 0",
-    "lint": "bun tsc --noEmit",
-    "generate:strava": "bun run kubb --config kubb.config.ts"
+    "lint": "tsc --noEmit",
+    "generate:strava": "kubb --config kubb.config.ts"
   },
   "devDependencies": {
     "@kubb/cli": "3.10.12",
     "@kubb/plugin-client": "3.10.12",
     "@kubb/plugin-oas": "3.10.12",
     "@prisma/client": "6.9.0",
-    "@types/bun": "1.2.15",
     "typescript": "5.8.3"
   }
 }

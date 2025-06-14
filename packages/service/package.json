@@ -4,15 +4,13 @@
   "private": true,
   "main": "index.ts",
   "scripts": {
-    "test": "bun test",
-    "lint": "bun tsc --noEmit"
+    "test": "test",
+    "lint": "tsc --noEmit"
   },
-  "devDependencies": {
-    "@types/bun": "1.2.15"
-  },
+  "devDependencies": {},
   "dependencies": {
-    "@trackfootball/database": "*",
-    "@trackfootball/utils": "*",
-    "@trackfootball/sprint-detection": "*"
+    "@trackfootball/database": "workspace:*",
+    "@trackfootball/utils": "workspace:*",
+    "@trackfootball/sprint-detection": "workspace:*"
   }
 }

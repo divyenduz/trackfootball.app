@@ -20,16 +20,22 @@ jobs:
       fail-fast: false
     steps:
       - uses: actions/checkout@v4
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
         with:
-          bun-version: latest
+          version: latest
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
 
       - name: Install Dependencies
-        run: bun install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - name: Generate Prisma Client
-        run: bun --bun run --filter @trackfootball/database build
+        run: pnpm run --filter @trackfootball/database build
 
       - name: Run ${{ matrix.task }}
-        run: bun --bun run ${{ matrix.task }}
+        run: pnpm run ${{ matrix.task }}

@@ -5,8 +5,8 @@ Repository for code of TrackFootball.app
 # Contributing
 
 1. Copy `.env-sample` to `.env`
-2. `bun install`
-3. `bun run dev`
+2. `pnpm install`
+3. `pnpm run dev`
    (and more)
 
 # Specification

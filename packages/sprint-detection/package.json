@@ -4,14 +4,12 @@
   "private": true,
   "main": "index.ts",
   "scripts": {
-    "test": "bun test",
-    "lint": "bun tsc --noEmit"
+    "test": "pnpm run test",
+    "lint": "tsc --noEmit"
   },
-  "devDependencies": {
-    "@types/bun": "1.2.15"
-  },
+  "devDependencies": {},
   "dependencies": {
-    "@trackfootball/utils": "*",
+    "@trackfootball/utils": "workspace:*",
     "@turf/distance": "7.2.0",
     "@turf/helpers": "7.2.0",
     "@turf/length": "7.2.0",

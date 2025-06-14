@@ -14,7 +14,7 @@ const globalSQL = globalThis as unknown as {
   sql: ReturnType<typeof postgres> | undefined
 }
 
-const sql = globalSQL.sql ?? postgres(Bun.env.DATABASE_URL)
+const sql = globalSQL.sql ?? postgres(process.env.DATABASE_URL)
 
 if (process.env.NODE_ENV !== 'production') {
   globalSQL.sql = sql

@@ -2,18 +2,23 @@
   "name": "trackfootball",
   "version": "2.0.0",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
   "scripts": {
-    "dev": "bun --bun run --filter @trackfootball/next-js-app dev",
-    "build": "bun --bun run --filter @trackfootball/* build",
-    "start": "bun --bun run --filter @trackfootball/next-js-app start",
-    "test": "bun --bun run --filter @trackfootball/* test",
-    "lint": "bun --bun run --filter @trackfootball/* lint",
-    "migrate": "bun --bun run --filter @trackfootball/database migrate"
+    "dev": "pnpm --filter @trackfootball/next-js-app dev",
+    "build": "pnpm --filter @trackfootball/* build",
+    "start": "pnpm --filter @trackfootball/next-js-app start",
+    "test": "pnpm --filter @trackfootball/* test",
+    "lint": "pnpm --filter @trackfootball/* lint",
+    "migrate": "pnpm --filter @trackfootball/database migrate",
+    "release": "pnpm --filter @trackfootball/rw-app release"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.8"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp",
+      "workerd"
+    ]
   }
 }
