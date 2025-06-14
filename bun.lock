@@ -80,7 +80,7 @@
       "devDependencies": {
         "@kubb/cli": "3.10.15",
         "@kubb/plugin-client": "3.10.12",
-        "@kubb/plugin-oas": "3.10.12",
+        "@kubb/plugin-oas": "3.10.15",
         "@prisma/client": "6.9.0",
         "@types/bun": "1.2.15",
         "typescript": "5.8.3",
@@ -307,7 +307,7 @@
 
     "@kubb/plugin-client": ["@kubb/plugin-client@3.10.12", "", { "dependencies": { "@kubb/core": "3.10.12", "@kubb/oas": "3.10.12", "@kubb/plugin-oas": "3.10.12", "@kubb/plugin-ts": "3.10.12", "@kubb/plugin-zod": "3.10.12", "@kubb/react": "3.10.12" }, "peerDependencies": { "axios": "^1.7.2" }, "optionalPeers": ["axios"] }, "sha512-yPVcNYLZ0gVCMzYHXndPF8dWshAuHvKXvusP1aZvgckdVLQaxZgW1BnuRWHO31cdDjXk5KCNfuQ6JO/SotBH+Q=="],
 
-    "@kubb/plugin-oas": ["@kubb/plugin-oas@3.10.12", "", { "dependencies": { "@kubb/core": "3.10.12", "@kubb/oas": "3.10.12", "@kubb/react": "3.10.12", "@stoplight/yaml": "^4.3.0", "remeda": "^2.21.6" } }, "sha512-N/oVfxkRo1E3vuG/EFwjRQ4kF91eBtxc2vYnk6g5DZZy1qVAq4fq+lm2JzzPoqrEinZmtQ4To9mzPHUpLsbzVg=="],
+    "@kubb/plugin-oas": ["@kubb/plugin-oas@3.10.15", "", { "dependencies": { "@kubb/core": "3.10.15", "@kubb/oas": "3.10.15", "@kubb/react": "3.10.15", "@stoplight/yaml": "^4.3.0", "remeda": "^2.23.0" } }, "sha512-jcqdTdKMdHqqQ/wkzcxM0I1xHz1FE5UHzYmRyTZ7p3/soHHb5pCpz2OeX7PycJ3LRd2o73QcDBMH0b6GqUGrUw=="],
 
     "@kubb/plugin-ts": ["@kubb/plugin-ts@3.10.12", "", { "dependencies": { "@kubb/core": "3.10.12", "@kubb/oas": "3.10.12", "@kubb/parser-ts": "3.10.12", "@kubb/plugin-oas": "3.10.12", "@kubb/react": "3.10.12" } }, "sha512-8wyPgrhNLOlioUlLcpPfwwsulhVcv8pSBy43CU3HjbCTSoMKHFNQnJV0l9VXDRED6bEwH6mcmeoJh/pFk5sgDg=="],
 
@@ -1659,7 +1659,7 @@
 
     "registry-url": ["registry-url@6.0.1", "", { "dependencies": { "rc": "1.2.8" } }, "sha512-+crtS5QjFRqFCoQmvGduwYWEBng99ZvmFvF+cUJkGYF1L1BfU8C6Zp9T7f5vPAwyLkUExpvK+ANVZmGU49qi4Q=="],
 
-    "remeda": ["remeda@2.22.3", "", { "dependencies": { "type-fest": "^4.40.1" } }, "sha512-Ka6965m9Zu9OLsysWxVf3jdJKmp6+PKzDv7HWHinEevf0JOJ9y02YpjiC/sKxRpCqGhVyvm1U+0YIj+E6DMgKw=="],
+    "remeda": ["remeda@2.23.0", "", { "dependencies": { "type-fest": "^4.41.0" } }, "sha512-0mPy6q4ZMkAyrmucV6U6RaQ4GaJ7PLy9kTCNzC4k99DY6kQZXQIU8lxUVV4ocCWcjPvl7PSpOa42oPJWQiGouA=="],
 
     "remove-undefined-objects": ["remove-undefined-objects@6.0.0", "", {}, "sha512-8fR4QQFV2xMKTYXazi1944rpr1f+JOzQu58TgUFi3xDu41fDon5qMXtjJ1/nhquOouTtJ621bKDrhE1IlOSP+A=="],
 
@@ -1943,21 +1943,27 @@
 
     "@kubb/core/object-hash": ["object-hash@3.0.0", "", {}, "sha512-RSn9F68PjH9HqtltsSnqYC1XXoWe9Bju5+213R98cNGttag9q9yAOTzdbsqvIa7aNm5WffBZFpWYr2aWrklWAw=="],
 
-    "@kubb/core/remeda": ["remeda@2.23.0", "", { "dependencies": { "type-fest": "^4.41.0" } }, "sha512-0mPy6q4ZMkAyrmucV6U6RaQ4GaJ7PLy9kTCNzC4k99DY6kQZXQIU8lxUVV4ocCWcjPvl7PSpOa42oPJWQiGouA=="],
-
-    "@kubb/parser-ts/remeda": ["remeda@2.23.0", "", { "dependencies": { "type-fest": "^4.41.0" } }, "sha512-0mPy6q4ZMkAyrmucV6U6RaQ4GaJ7PLy9kTCNzC4k99DY6kQZXQIU8lxUVV4ocCWcjPvl7PSpOa42oPJWQiGouA=="],
+    "@kubb/oas/remeda": ["remeda@2.22.3", "", { "dependencies": { "type-fest": "^4.40.1" } }, "sha512-Ka6965m9Zu9OLsysWxVf3jdJKmp6+PKzDv7HWHinEevf0JOJ9y02YpjiC/sKxRpCqGhVyvm1U+0YIj+E6DMgKw=="],
 
     "@kubb/plugin-client/@kubb/core": ["@kubb/core@3.10.12", "", { "dependencies": { "@kubb/parser-ts": "3.10.12", "camelcase": "^8.0.0", "find-up": "^7.0.0", "fs-extra": "^11.3.0", "js-runtime": "^0.0.8", "natural-orderby": "^5.0.0", "object-hash": "^3.0.0", "p-queue": "^8.1.0", "remeda": "^2.21.6", "seedrandom": "^3.0.5", "semver": "^7.7.2" } }, "sha512-AK8oTLIAqUjotyv18luekMy2wRn+31K9gp6HmZsMnkLUvQjYCULLA5FraO71VY6kd6Otou5+PI+kR4J3CrgNaw=="],
 
-    "@kubb/plugin-oas/@kubb/core": ["@kubb/core@3.10.12", "", { "dependencies": { "@kubb/parser-ts": "3.10.12", "camelcase": "^8.0.0", "find-up": "^7.0.0", "fs-extra": "^11.3.0", "js-runtime": "^0.0.8", "natural-orderby": "^5.0.0", "object-hash": "^3.0.0", "p-queue": "^8.1.0", "remeda": "^2.21.6", "seedrandom": "^3.0.5", "semver": "^7.7.2" } }, "sha512-AK8oTLIAqUjotyv18luekMy2wRn+31K9gp6HmZsMnkLUvQjYCULLA5FraO71VY6kd6Otou5+PI+kR4J3CrgNaw=="],
+    "@kubb/plugin-client/@kubb/plugin-oas": ["@kubb/plugin-oas@3.10.12", "", { "dependencies": { "@kubb/core": "3.10.12", "@kubb/oas": "3.10.12", "@kubb/react": "3.10.12", "@stoplight/yaml": "^4.3.0", "remeda": "^2.21.6" } }, "sha512-N/oVfxkRo1E3vuG/EFwjRQ4kF91eBtxc2vYnk6g5DZZy1qVAq4fq+lm2JzzPoqrEinZmtQ4To9mzPHUpLsbzVg=="],
+
+    "@kubb/plugin-oas/@kubb/oas": ["@kubb/oas@3.10.15", "", { "dependencies": { "@redocly/openapi-core": "^1.34.3", "hotscript": "^1.0.13", "json-schema-to-ts": "^3.1.1", "jsonpointer": "^5.0.1", "oas": "^27.1.0", "oas-normalize": "^14.1.0", "openapi-types": "^12.1.3", "remeda": "^2.23.0", "swagger2openapi": "^7.0.8", "ts-toolbelt": "^9.6.0" } }, "sha512-CADhgjxoopToCUs19/ivF/jzY49MToMcfo4oP69Kd7v/MnMB/YU1PEYhUl6k700hmGwBhYL9ESQzuSYRT2Xf/g=="],
+
+    "@kubb/plugin-oas/@kubb/react": ["@kubb/react@3.10.15", "", { "dependencies": { "@kubb/core": "3.10.15", "@kubb/parser-ts": "3.10.15", "execa": "^9.6.0", "natural-orderby": "^5.0.0", "react": "^19.1.0", "react-devtools-core": "^5.3.2", "react-reconciler": "0.32.0", "signal-exit": "^4.1.0", "ws": "^8.18.2" } }, "sha512-gWH5pDQ3kpZCeymVSk7f1ijp3z/dGQESeXr75yscEUGoVAks6RqbLpcgObNRa8CW4X9MN9Ixkzzwbxpvxpxezg=="],
 
     "@kubb/plugin-ts/@kubb/core": ["@kubb/core@3.10.12", "", { "dependencies": { "@kubb/parser-ts": "3.10.12", "camelcase": "^8.0.0", "find-up": "^7.0.0", "fs-extra": "^11.3.0", "js-runtime": "^0.0.8", "natural-orderby": "^5.0.0", "object-hash": "^3.0.0", "p-queue": "^8.1.0", "remeda": "^2.21.6", "seedrandom": "^3.0.5", "semver": "^7.7.2" } }, "sha512-AK8oTLIAqUjotyv18luekMy2wRn+31K9gp6HmZsMnkLUvQjYCULLA5FraO71VY6kd6Otou5+PI+kR4J3CrgNaw=="],
 
     "@kubb/plugin-ts/@kubb/parser-ts": ["@kubb/parser-ts@3.10.12", "", { "dependencies": { "prettier": "^3.5.3", "remeda": "^2.21.6", "typescript": "^5.8.3" } }, "sha512-hp2dFVmWuNJxvemBDR4C2uTFgYGegd1QHOxsL8gyQ4aI6g6v/CUd2AH0wiDI04tBnRy/VqVEHW6ESJNn17m3GA=="],
 
+    "@kubb/plugin-ts/@kubb/plugin-oas": ["@kubb/plugin-oas@3.10.12", "", { "dependencies": { "@kubb/core": "3.10.12", "@kubb/oas": "3.10.12", "@kubb/react": "3.10.12", "@stoplight/yaml": "^4.3.0", "remeda": "^2.21.6" } }, "sha512-N/oVfxkRo1E3vuG/EFwjRQ4kF91eBtxc2vYnk6g5DZZy1qVAq4fq+lm2JzzPoqrEinZmtQ4To9mzPHUpLsbzVg=="],
+
     "@kubb/plugin-zod/@kubb/core": ["@kubb/core@3.10.12", "", { "dependencies": { "@kubb/parser-ts": "3.10.12", "camelcase": "^8.0.0", "find-up": "^7.0.0", "fs-extra": "^11.3.0", "js-runtime": "^0.0.8", "natural-orderby": "^5.0.0", "object-hash": "^3.0.0", "p-queue": "^8.1.0", "remeda": "^2.21.6", "seedrandom": "^3.0.5", "semver": "^7.7.2" } }, "sha512-AK8oTLIAqUjotyv18luekMy2wRn+31K9gp6HmZsMnkLUvQjYCULLA5FraO71VY6kd6Otou5+PI+kR4J3CrgNaw=="],
 
     "@kubb/plugin-zod/@kubb/parser-ts": ["@kubb/parser-ts@3.10.12", "", { "dependencies": { "prettier": "^3.5.3", "remeda": "^2.21.6", "typescript": "^5.8.3" } }, "sha512-hp2dFVmWuNJxvemBDR4C2uTFgYGegd1QHOxsL8gyQ4aI6g6v/CUd2AH0wiDI04tBnRy/VqVEHW6ESJNn17m3GA=="],
+
+    "@kubb/plugin-zod/@kubb/plugin-oas": ["@kubb/plugin-oas@3.10.12", "", { "dependencies": { "@kubb/core": "3.10.12", "@kubb/oas": "3.10.12", "@kubb/react": "3.10.12", "@stoplight/yaml": "^4.3.0", "remeda": "^2.21.6" } }, "sha512-N/oVfxkRo1E3vuG/EFwjRQ4kF91eBtxc2vYnk6g5DZZy1qVAq4fq+lm2JzzPoqrEinZmtQ4To9mzPHUpLsbzVg=="],
 
     "@kubb/react/@kubb/core": ["@kubb/core@3.10.12", "", { "dependencies": { "@kubb/parser-ts": "3.10.12", "camelcase": "^8.0.0", "find-up": "^7.0.0", "fs-extra": "^11.3.0", "js-runtime": "^0.0.8", "natural-orderby": "^5.0.0", "object-hash": "^3.0.0", "p-queue": "^8.1.0", "remeda": "^2.21.6", "seedrandom": "^3.0.5", "semver": "^7.7.2" } }, "sha512-AK8oTLIAqUjotyv18luekMy2wRn+31K9gp6HmZsMnkLUvQjYCULLA5FraO71VY6kd6Otou5+PI+kR4J3CrgNaw=="],
 
@@ -2073,23 +2079,41 @@
 
     "@kubb/plugin-client/@kubb/core/object-hash": ["object-hash@3.0.0", "", {}, "sha512-RSn9F68PjH9HqtltsSnqYC1XXoWe9Bju5+213R98cNGttag9q9yAOTzdbsqvIa7aNm5WffBZFpWYr2aWrklWAw=="],
 
-    "@kubb/plugin-oas/@kubb/core/@kubb/parser-ts": ["@kubb/parser-ts@3.10.12", "", { "dependencies": { "prettier": "^3.5.3", "remeda": "^2.21.6", "typescript": "^5.8.3" } }, "sha512-hp2dFVmWuNJxvemBDR4C2uTFgYGegd1QHOxsL8gyQ4aI6g6v/CUd2AH0wiDI04tBnRy/VqVEHW6ESJNn17m3GA=="],
+    "@kubb/plugin-client/@kubb/core/remeda": ["remeda@2.22.3", "", { "dependencies": { "type-fest": "^4.40.1" } }, "sha512-Ka6965m9Zu9OLsysWxVf3jdJKmp6+PKzDv7HWHinEevf0JOJ9y02YpjiC/sKxRpCqGhVyvm1U+0YIj+E6DMgKw=="],
 
-    "@kubb/plugin-oas/@kubb/core/find-up": ["find-up@7.0.0", "", { "dependencies": { "locate-path": "^7.2.0", "path-exists": "^5.0.0", "unicorn-magic": "^0.1.0" } }, "sha512-YyZM99iHrqLKjmt4LJDj58KI+fYyufRLBSYcqycxf//KpBk9FoewoGX0450m9nB44qrZnovzC2oeP5hUibxc/g=="],
+    "@kubb/plugin-client/@kubb/plugin-oas/remeda": ["remeda@2.22.3", "", { "dependencies": { "type-fest": "^4.40.1" } }, "sha512-Ka6965m9Zu9OLsysWxVf3jdJKmp6+PKzDv7HWHinEevf0JOJ9y02YpjiC/sKxRpCqGhVyvm1U+0YIj+E6DMgKw=="],
 
-    "@kubb/plugin-oas/@kubb/core/object-hash": ["object-hash@3.0.0", "", {}, "sha512-RSn9F68PjH9HqtltsSnqYC1XXoWe9Bju5+213R98cNGttag9q9yAOTzdbsqvIa7aNm5WffBZFpWYr2aWrklWAw=="],
+    "@kubb/plugin-oas/@kubb/oas/oas": ["oas@27.1.0", "", { "dependencies": { "@readme/openapi-parser": "^4.1.0", "@types/json-schema": "^7.0.11", "json-schema-merge-allof": "^0.8.1", "jsonpath-plus": "^10.0.0", "jsonpointer": "^5.0.0", "memoizee": "^0.4.16", "openapi-types": "^12.1.1", "path-to-regexp": "^8.1.0", "remove-undefined-objects": "^6.0.0" } }, "sha512-K1qOiNguPMTRG52pboD1xyNPvdg1DImxjKXDjSTXe/4NVzXosYrLsDw9T3N82HFSlsGqOyXNAfPpZ80VYcDedw=="],
+
+    "@kubb/plugin-oas/@kubb/oas/oas-normalize": ["oas-normalize@14.1.0", "", { "dependencies": { "@readme/openapi-parser": "^4.1.0", "@readme/postman-to-openapi": "^4.1.0", "js-yaml": "^4.1.0", "openapi-types": "^12.1.3", "swagger2openapi": "^7.0.8" } }, "sha512-gZQkDU54QJnj8Sf7wXgeGfKT9S+Hz1DV849T+SuQMo0Wdz3/NKuaY1zXALopvbQ0nB8zGnR+yrLNKyoa5wvxCA=="],
 
     "@kubb/plugin-ts/@kubb/core/find-up": ["find-up@7.0.0", "", { "dependencies": { "locate-path": "^7.2.0", "path-exists": "^5.0.0", "unicorn-magic": "^0.1.0" } }, "sha512-YyZM99iHrqLKjmt4LJDj58KI+fYyufRLBSYcqycxf//KpBk9FoewoGX0450m9nB44qrZnovzC2oeP5hUibxc/g=="],
 
     "@kubb/plugin-ts/@kubb/core/object-hash": ["object-hash@3.0.0", "", {}, "sha512-RSn9F68PjH9HqtltsSnqYC1XXoWe9Bju5+213R98cNGttag9q9yAOTzdbsqvIa7aNm5WffBZFpWYr2aWrklWAw=="],
 
+    "@kubb/plugin-ts/@kubb/core/remeda": ["remeda@2.22.3", "", { "dependencies": { "type-fest": "^4.40.1" } }, "sha512-Ka6965m9Zu9OLsysWxVf3jdJKmp6+PKzDv7HWHinEevf0JOJ9y02YpjiC/sKxRpCqGhVyvm1U+0YIj+E6DMgKw=="],
+
+    "@kubb/plugin-ts/@kubb/parser-ts/remeda": ["remeda@2.22.3", "", { "dependencies": { "type-fest": "^4.40.1" } }, "sha512-Ka6965m9Zu9OLsysWxVf3jdJKmp6+PKzDv7HWHinEevf0JOJ9y02YpjiC/sKxRpCqGhVyvm1U+0YIj+E6DMgKw=="],
+
+    "@kubb/plugin-ts/@kubb/plugin-oas/remeda": ["remeda@2.22.3", "", { "dependencies": { "type-fest": "^4.40.1" } }, "sha512-Ka6965m9Zu9OLsysWxVf3jdJKmp6+PKzDv7HWHinEevf0JOJ9y02YpjiC/sKxRpCqGhVyvm1U+0YIj+E6DMgKw=="],
+
     "@kubb/plugin-zod/@kubb/core/find-up": ["find-up@7.0.0", "", { "dependencies": { "locate-path": "^7.2.0", "path-exists": "^5.0.0", "unicorn-magic": "^0.1.0" } }, "sha512-YyZM99iHrqLKjmt4LJDj58KI+fYyufRLBSYcqycxf//KpBk9FoewoGX0450m9nB44qrZnovzC2oeP5hUibxc/g=="],
 
     "@kubb/plugin-zod/@kubb/core/object-hash": ["object-hash@3.0.0", "", {}, "sha512-RSn9F68PjH9HqtltsSnqYC1XXoWe9Bju5+213R98cNGttag9q9yAOTzdbsqvIa7aNm5WffBZFpWYr2aWrklWAw=="],
 
+    "@kubb/plugin-zod/@kubb/core/remeda": ["remeda@2.22.3", "", { "dependencies": { "type-fest": "^4.40.1" } }, "sha512-Ka6965m9Zu9OLsysWxVf3jdJKmp6+PKzDv7HWHinEevf0JOJ9y02YpjiC/sKxRpCqGhVyvm1U+0YIj+E6DMgKw=="],
+
+    "@kubb/plugin-zod/@kubb/parser-ts/remeda": ["remeda@2.22.3", "", { "dependencies": { "type-fest": "^4.40.1" } }, "sha512-Ka6965m9Zu9OLsysWxVf3jdJKmp6+PKzDv7HWHinEevf0JOJ9y02YpjiC/sKxRpCqGhVyvm1U+0YIj+E6DMgKw=="],
+
+    "@kubb/plugin-zod/@kubb/plugin-oas/remeda": ["remeda@2.22.3", "", { "dependencies": { "type-fest": "^4.40.1" } }, "sha512-Ka6965m9Zu9OLsysWxVf3jdJKmp6+PKzDv7HWHinEevf0JOJ9y02YpjiC/sKxRpCqGhVyvm1U+0YIj+E6DMgKw=="],
+
     "@kubb/react/@kubb/core/find-up": ["find-up@7.0.0", "", { "dependencies": { "locate-path": "^7.2.0", "path-exists": "^5.0.0", "unicorn-magic": "^0.1.0" } }, "sha512-YyZM99iHrqLKjmt4LJDj58KI+fYyufRLBSYcqycxf//KpBk9FoewoGX0450m9nB44qrZnovzC2oeP5hUibxc/g=="],
 
     "@kubb/react/@kubb/core/object-hash": ["object-hash@3.0.0", "", {}, "sha512-RSn9F68PjH9HqtltsSnqYC1XXoWe9Bju5+213R98cNGttag9q9yAOTzdbsqvIa7aNm5WffBZFpWYr2aWrklWAw=="],
+
+    "@kubb/react/@kubb/core/remeda": ["remeda@2.22.3", "", { "dependencies": { "type-fest": "^4.40.1" } }, "sha512-Ka6965m9Zu9OLsysWxVf3jdJKmp6+PKzDv7HWHinEevf0JOJ9y02YpjiC/sKxRpCqGhVyvm1U+0YIj+E6DMgKw=="],
+
+    "@kubb/react/@kubb/parser-ts/remeda": ["remeda@2.22.3", "", { "dependencies": { "type-fest": "^4.40.1" } }, "sha512-Ka6965m9Zu9OLsysWxVf3jdJKmp6+PKzDv7HWHinEevf0JOJ9y02YpjiC/sKxRpCqGhVyvm1U+0YIj+E6DMgKw=="],
 
     "@mui/material/@mui/system/@mui/private-theming": ["@mui/private-theming@7.1.1", "", { "dependencies": { "@babel/runtime": "^7.27.1", "@mui/utils": "^7.1.1", "prop-types": "^15.8.1" }, "peerDependencies": { "@types/react": "^17.0.0 || ^18.0.0 || ^19.0.0", "react": "^17.0.0 || ^18.0.0 || ^19.0.0" }, "optionalPeers": ["@types/react"] }, "sha512-M8NbLUx+armk2ZuaxBkkMk11ultnWmrPlN0Xe3jUEaBChg/mcxa5HWIWS1EE4DF36WRACaAHVAvyekWlDQf0PQ=="],
 
@@ -2113,9 +2137,9 @@
 
     "@kubb/plugin-client/@kubb/core/find-up/path-exists": ["path-exists@5.0.0", "", {}, "sha512-RjhtfwJOxzcFmNOi6ltcbcu4Iu+FL3zEj83dk4kAS+fVpTxXLO1b38RvJgT/0QwvV/L3aY9TAnyv0EOqW4GoMQ=="],
 
-    "@kubb/plugin-oas/@kubb/core/find-up/locate-path": ["locate-path@7.2.0", "", { "dependencies": { "p-locate": "^6.0.0" } }, "sha512-gvVijfZvn7R+2qyPX8mAuKcFGDf6Nc61GdvGafQsHL0sBIxfKzA+usWn4GFC/bk+QdwPUD4kWFJLhElipq+0VA=="],
+    "@kubb/plugin-oas/@kubb/oas/oas/@readme/openapi-parser": ["@readme/openapi-parser@4.1.0", "", { "dependencies": { "@apidevtools/json-schema-ref-parser": "^13.0.1", "@readme/better-ajv-errors": "^2.3.2", "@readme/openapi-schemas": "^3.1.0", "@types/json-schema": "^7.0.15", "ajv": "^8.12.0", "ajv-draft-04": "^1.0.0" }, "peerDependencies": { "openapi-types": ">=7" } }, "sha512-zZaGaOJ+0bYPGkPK4ekspE1BoO1iifxe5d3rsAE6AqFCoyHCjt/xMDtmJpy4slFdd1YtEv/VHhBpB1FlNClCNw=="],
 
-    "@kubb/plugin-oas/@kubb/core/find-up/path-exists": ["path-exists@5.0.0", "", {}, "sha512-RjhtfwJOxzcFmNOi6ltcbcu4Iu+FL3zEj83dk4kAS+fVpTxXLO1b38RvJgT/0QwvV/L3aY9TAnyv0EOqW4GoMQ=="],
+    "@kubb/plugin-oas/@kubb/oas/oas-normalize/@readme/openapi-parser": ["@readme/openapi-parser@4.1.0", "", { "dependencies": { "@apidevtools/json-schema-ref-parser": "^13.0.1", "@readme/better-ajv-errors": "^2.3.2", "@readme/openapi-schemas": "^3.1.0", "@types/json-schema": "^7.0.15", "ajv": "^8.12.0", "ajv-draft-04": "^1.0.0" }, "peerDependencies": { "openapi-types": ">=7" } }, "sha512-zZaGaOJ+0bYPGkPK4ekspE1BoO1iifxe5d3rsAE6AqFCoyHCjt/xMDtmJpy4slFdd1YtEv/VHhBpB1FlNClCNw=="],
 
     "@kubb/plugin-ts/@kubb/core/find-up/locate-path": ["locate-path@7.2.0", "", { "dependencies": { "p-locate": "^6.0.0" } }, "sha512-gvVijfZvn7R+2qyPX8mAuKcFGDf6Nc61GdvGafQsHL0sBIxfKzA+usWn4GFC/bk+QdwPUD4kWFJLhElipq+0VA=="],
 
@@ -2133,7 +2157,13 @@
 
     "@kubb/plugin-client/@kubb/core/find-up/locate-path/p-locate": ["p-locate@6.0.0", "", { "dependencies": { "p-limit": "^4.0.0" } }, "sha512-wPrq66Llhl7/4AGC6I+cqxT07LhXvWL08LNXz1fENOw0Ap4sRZZ/gZpTTJ5jpurzzzfS2W/Ge9BY3LgLjCShcw=="],
 
-    "@kubb/plugin-oas/@kubb/core/find-up/locate-path/p-locate": ["p-locate@6.0.0", "", { "dependencies": { "p-limit": "^4.0.0" } }, "sha512-wPrq66Llhl7/4AGC6I+cqxT07LhXvWL08LNXz1fENOw0Ap4sRZZ/gZpTTJ5jpurzzzfS2W/Ge9BY3LgLjCShcw=="],
+    "@kubb/plugin-oas/@kubb/oas/oas-normalize/@readme/openapi-parser/@apidevtools/json-schema-ref-parser": ["@apidevtools/json-schema-ref-parser@13.0.5", "", { "dependencies": { "@types/json-schema": "^7.0.15", "js-yaml": "^4.1.0" } }, "sha512-xfh4xVJD62gG6spIc7lwxoWT+l16nZu1ELyU8FkjaP/oD2yP09EvLAU6KhtudN9aML2Khhs9pY6Slr7KGTES3w=="],
+
+    "@kubb/plugin-oas/@kubb/oas/oas-normalize/@readme/openapi-parser/ajv": ["ajv@8.17.1", "", { "dependencies": { "fast-deep-equal": "^3.1.3", "fast-uri": "^3.0.1", "json-schema-traverse": "^1.0.0", "require-from-string": "^2.0.2" } }, "sha512-B/gBuNg5SiMTrPkC+A2+cW0RszwxYmn6VYxB/inlBStS5nx6xHIt/ehKRhIMhqusl7a8LjQoZnjCs5vhwxOQ1g=="],
+
+    "@kubb/plugin-oas/@kubb/oas/oas/@readme/openapi-parser/@apidevtools/json-schema-ref-parser": ["@apidevtools/json-schema-ref-parser@13.0.5", "", { "dependencies": { "@types/json-schema": "^7.0.15", "js-yaml": "^4.1.0" } }, "sha512-xfh4xVJD62gG6spIc7lwxoWT+l16nZu1ELyU8FkjaP/oD2yP09EvLAU6KhtudN9aML2Khhs9pY6Slr7KGTES3w=="],
+
+    "@kubb/plugin-oas/@kubb/oas/oas/@readme/openapi-parser/ajv": ["ajv@8.17.1", "", { "dependencies": { "fast-deep-equal": "^3.1.3", "fast-uri": "^3.0.1", "json-schema-traverse": "^1.0.0", "require-from-string": "^2.0.2" } }, "sha512-B/gBuNg5SiMTrPkC+A2+cW0RszwxYmn6VYxB/inlBStS5nx6xHIt/ehKRhIMhqusl7a8LjQoZnjCs5vhwxOQ1g=="],
 
     "@kubb/plugin-ts/@kubb/core/find-up/locate-path/p-locate": ["p-locate@6.0.0", "", { "dependencies": { "p-limit": "^4.0.0" } }, "sha512-wPrq66Llhl7/4AGC6I+cqxT07LhXvWL08LNXz1fENOw0Ap4sRZZ/gZpTTJ5jpurzzzfS2W/Ge9BY3LgLjCShcw=="],
 
@@ -2145,7 +2175,9 @@
 
     "@kubb/plugin-client/@kubb/core/find-up/locate-path/p-locate/p-limit": ["p-limit@4.0.0", "", { "dependencies": { "yocto-queue": "^1.0.0" } }, "sha512-5b0R4txpzjPWVw/cXXUResoD4hb6U/x9BH08L7nw+GN1sezDzPdxeRvpc9c433fZhBan/wusjbCsqwqm4EIBIQ=="],
 
-    "@kubb/plugin-oas/@kubb/core/find-up/locate-path/p-locate/p-limit": ["p-limit@4.0.0", "", { "dependencies": { "yocto-queue": "^1.0.0" } }, "sha512-5b0R4txpzjPWVw/cXXUResoD4hb6U/x9BH08L7nw+GN1sezDzPdxeRvpc9c433fZhBan/wusjbCsqwqm4EIBIQ=="],
+    "@kubb/plugin-oas/@kubb/oas/oas-normalize/@readme/openapi-parser/ajv/json-schema-traverse": ["json-schema-traverse@1.0.0", "", {}, "sha512-NM8/P9n3XjXhIZn1lLhkFaACTOURQXjWhV4BA/RnOv8xvgqtqpAX9IO4mRQxSx1Rlo4tqzeqb0sOlruaOy3dug=="],
+
+    "@kubb/plugin-oas/@kubb/oas/oas/@readme/openapi-parser/ajv/json-schema-traverse": ["json-schema-traverse@1.0.0", "", {}, "sha512-NM8/P9n3XjXhIZn1lLhkFaACTOURQXjWhV4BA/RnOv8xvgqtqpAX9IO4mRQxSx1Rlo4tqzeqb0sOlruaOy3dug=="],
 
     "@kubb/plugin-ts/@kubb/core/find-up/locate-path/p-locate/p-limit": ["p-limit@4.0.0", "", { "dependencies": { "yocto-queue": "^1.0.0" } }, "sha512-5b0R4txpzjPWVw/cXXUResoD4hb6U/x9BH08L7nw+GN1sezDzPdxeRvpc9c433fZhBan/wusjbCsqwqm4EIBIQ=="],
 
@@ -2154,8 +2186,6 @@
     "@kubb/react/@kubb/core/find-up/locate-path/p-locate/p-limit": ["p-limit@4.0.0", "", { "dependencies": { "yocto-queue": "^1.0.0" } }, "sha512-5b0R4txpzjPWVw/cXXUResoD4hb6U/x9BH08L7nw+GN1sezDzPdxeRvpc9c433fZhBan/wusjbCsqwqm4EIBIQ=="],
 
     "@kubb/plugin-client/@kubb/core/find-up/locate-path/p-locate/p-limit/yocto-queue": ["yocto-queue@1.2.1", "", {}, "sha512-AyeEbWOu/TAXdxlV9wmGcR0+yh2j3vYPGOECcIj2S7MkrLyC7ne+oye2BKTItt0ii2PHk4cDy+95+LshzbXnGg=="],
-
-    "@kubb/plugin-oas/@kubb/core/find-up/locate-path/p-locate/p-limit/yocto-queue": ["yocto-queue@1.2.1", "", {}, "sha512-AyeEbWOu/TAXdxlV9wmGcR0+yh2j3vYPGOECcIj2S7MkrLyC7ne+oye2BKTItt0ii2PHk4cDy+95+LshzbXnGg=="],
 
     "@kubb/plugin-ts/@kubb/core/find-up/locate-path/p-locate/p-limit/yocto-queue": ["yocto-queue@1.2.1", "", {}, "sha512-AyeEbWOu/TAXdxlV9wmGcR0+yh2j3vYPGOECcIj2S7MkrLyC7ne+oye2BKTItt0ii2PHk4cDy+95+LshzbXnGg=="],
 
