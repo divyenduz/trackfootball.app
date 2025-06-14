@@ -72,9 +72,7 @@ transformations:
         type:
           name: noop
         image:
-          name: masking
-          parameters:
-            type: default
+          name: noop
         status:
           name: noop
         userId:
@@ -121,9 +119,7 @@ transformations:
         locale:
           name: noop
         picture:
-          name: masking
-          parameters:
-            type: default
+          name: noop
         auth0Sub:
           name: greenmask_string
           parameters:
