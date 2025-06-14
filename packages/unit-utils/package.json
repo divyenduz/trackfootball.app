@@ -5,11 +5,9 @@
   "main": "index.ts",
   "scripts": {
     "test": "echo 'No tests' && exit 0",
-    "lint": "bun tsc --noEmit"
+    "lint": "tsc --noEmit"
   },
-  "devDependencies": {
-    "@types/bun": "1.2.16"
-  },
+  "devDependencies": {},
   "dependencies": {
     "@turf/distance": "7.2.0",
     "@turf/helpers": "7.2.0",

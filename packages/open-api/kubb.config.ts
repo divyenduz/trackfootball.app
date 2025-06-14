@@ -38,9 +38,9 @@ export default defineConfig({
       baseURL: 'https://www.strava.com/api/v3',
       output: {
         path: './generated/client.ts',
-        barrelType: false
+        barrelType: false,
       },
-      importPath: '../../../fetch.ts'
+      importPath: '../../../fetch.ts',
     }),
   ],
 })

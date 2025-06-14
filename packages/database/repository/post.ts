@@ -341,8 +341,13 @@ export async function getFeed(cursor: number = 0, limit: number = 3) {
   return { posts, nextCursor }
 }
 
-export async function getAthleteFeed(athleteId: number, cursor: number = 0, limit: number = 3) {
-  const maxPostIds: { max: number }[] = await sql`SELECT MAX("id") FROM "Post" WHERE "userId" = ${athleteId}`
+export async function getAthleteFeed(
+  athleteId: number,
+  cursor: number = 0,
+  limit: number = 3,
+) {
+  const maxPostIds: { max: number }[] =
+    await sql`SELECT MAX("id") FROM "Post" WHERE "userId" = ${athleteId}`
   const maxPostId = maxPostIds[0]
   invariant(maxPostId, `expected maxPostId to exist`)
   const maxPostIdValue = maxPostId.max || 0

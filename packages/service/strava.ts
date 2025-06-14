@@ -201,8 +201,8 @@ export async function importStravaActivity(
   }
 }
 
-const stravaClientId = Bun.env.STRAVA_CLIENT_ID
-const stravaClientSecret = Bun.env.STRAVA_CLIENT_SECRET
+const stravaClientId = process.env.STRAVA_CLIENT_ID
+const stravaClientSecret = process.env.STRAVA_CLIENT_SECRET
 
 type Athlete = {
   id: number

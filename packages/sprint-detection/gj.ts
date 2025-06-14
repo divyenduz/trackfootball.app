@@ -1,13 +1,5 @@
-import type {
-  FeatureCollection,
-  LineString,
-  Position,
-} from 'geojson'
-import {
-  feature,
-  featureCollection,
-  geometry,
-} from '@turf/helpers'
+import type { FeatureCollection, LineString, Position } from 'geojson'
+import { feature, featureCollection, geometry } from '@turf/helpers'
 
 interface KVObject {
   [index: string]: number[] | string[]
