@@ -121,12 +121,7 @@ transformations:
         picture:
           name: noop
         auth0Sub:
-          name: greenmask_string
-          parameters:
-            generator: random
-            min_length: 16
-            max_length: 32
-            symbols: abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()
+          name: noop
         lastName:
           name: neosync_lastname
           parameters:
