@@ -23,7 +23,7 @@
       "name": "@trackfootball/next-js-app",
       "version": "0.0.0",
       "dependencies": {
-        "@auth0/nextjs-auth0": "3.7.0",
+        "@auth0/nextjs-auth0": "3.8.0",
         "@emotion/react": "11.14.0",
         "@emotion/styled": "11.14.0",
         "@math.gl/web-mercator": "^4.1.0",
@@ -135,7 +135,7 @@
 
     "@asteasolutions/zod-to-openapi": ["@asteasolutions/zod-to-openapi@7.3.2", "", { "dependencies": { "openapi3-ts": "^4.1.2" }, "peerDependencies": { "zod": "^3.20.2" } }, "sha512-Wvl+jHwSgYrRc3tQLMG7Qxq6wn0WjDk8E9ZA0lAyW73FqK18XPHVIKpk0lA6L0S+zmzzNKTndeV2v/Or0LyfHQ=="],
 
-    "@auth0/nextjs-auth0": ["@auth0/nextjs-auth0@3.7.0", "", { "dependencies": { "@panva/hkdf": "^1.0.2", "cookie": "^0.7.1", "debug": "^4.3.4", "joi": "^17.6.0", "jose": "^4.9.2", "oauth4webapi": "^2.3.0", "openid-client": "^5.2.1", "tslib": "^2.4.0", "url-join": "^4.0.1" }, "peerDependencies": { "next": "^10.0.0 || ^11.0.0 || ^12.3.5 || ^13.5.9 || ^14.2.25 || ^15.2.3" } }, "sha512-MxJl2rf3j09bwugggVBmrzOhO8H4yv7lZbXe7xPuQSYTuk1jJjjofHEQrZiOJnYV9dZbjYvNhEunFRFJM1PyVw=="],
+    "@auth0/nextjs-auth0": ["@auth0/nextjs-auth0@3.8.0", "", { "dependencies": { "@panva/hkdf": "^1.0.2", "cookie": "^0.7.1", "debug": "^4.3.4", "joi": "^17.6.0", "jose": "^4.15.5", "oauth4webapi": "^2.17.0", "openid-client": "^5.7.1", "tslib": "^2.4.0", "url-join": "^4.0.1" }, "peerDependencies": { "next": "^10.0.0 || ^11.0.0 || ^12.3.5 || ^13.5.9 || ^14.2.25 || ^15.2.3" } }, "sha512-xMzpkCuJAZ7tquJOZr7W4Jm9155EDotAACtdd9R9t4ATZgNGUzDQfPMogYJ2O14WB86sZSrp3rpJo4cspQYcSA=="],
 
     "@babel/code-frame": ["@babel/code-frame@7.27.1", "", { "dependencies": { "@babel/helper-validator-identifier": "^7.27.1", "js-tokens": "^4.0.0", "picocolors": "^1.1.1" } }, "sha512-cjQ7ZlQ0Mv3b47hABuTevyTuYN4i+loJKGeV9flcCgIK37cCXRh+L1bd3iBHlynerhQ7BhCkn2BPbQUL+rGqFg=="],
 
