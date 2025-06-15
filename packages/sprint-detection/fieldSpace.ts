@@ -1,4 +1,4 @@
-import type { Field } from '@trackfootball/database'
+import type { Field } from '@trackfootball/kanel'
 import bearing from '@turf/bearing'
 import { bearingToAzimuth, featureCollection, lineString } from '@turf/helpers'
 import { match } from 'ts-pattern'
@@ -26,7 +26,7 @@ export class FieldSpace {
       color: '#FF8F4C',
     })
     const rightLine = lineString(
-      [this.field.topRight, this.field.bottomRight],
+      [this.field.topRight!, this.field.bottomRight!],
       {
         name: 'Right Line',
         color: '#FF8F4C',

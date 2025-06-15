@@ -34,8 +34,5 @@ jobs:
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Generate Prisma Client
-        run: pnpm run --filter @trackfootball/database build
-
       - name: Run ${{ matrix.task }}
         run: pnpm run ${{ matrix.task }}

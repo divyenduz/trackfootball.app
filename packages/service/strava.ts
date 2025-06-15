@@ -1,9 +1,5 @@
-import {
-  PostType,
-  repository,
-  StravaWebhookEventStatus,
-} from '@trackfootball/database'
-import { stringify } from '../next-js-app/packages/utils/utils'
+import { type PostType } from '@trackfootball/kanel'
+
 import invariant from 'tiny-invariant'
 import { createDiscordMessage } from './discord'
 import {
@@ -13,19 +9,23 @@ import {
 } from '@trackfootball/open-api'
 import { match } from 'ts-pattern'
 import { GeoData } from '@trackfootball/sprint-detection/geoData'
-import {
-  getPostByIdWithoutField,
-  updatePostComplete,
-  updatePostStatus,
-} from '@trackfootball/database/repository/post'
 import { durationToSeconds } from '../unit-utils'
 import { postAddField } from './addField'
 import { Core } from '@trackfootball/sprint-detection'
+import { createRepository } from '@trackfootball/postgres'
+
+export const stringify = (value: number | string): string => {
+  if (typeof value === 'number') {
+    return value.toString()
+  }
+  return value
+}
 
 export async function importStravaActivity(
+  repository: ReturnType<typeof createRepository>,
   ownerId: number,
   activityId: number,
-  source: 'WEBHOOK' | 'MANUAL',
+  source: 'WEBHOOK' | 'MANUAL'
 ) {
   try {
     const user = await repository.getUserBy(stringify(ownerId))
@@ -42,7 +42,7 @@ export async function importStravaActivity(
       })
       return Response.json(
         { error: 'User has no Strava social login configured' },
-        { status: 400 },
+        { status: 400 }
       )
     }
     invariant(user, `failed to find user by strava owner_id ${ownerId}`)
@@ -64,13 +64,13 @@ export async function importStravaActivity(
       if (existingWebhookEvent) {
         await repository.updateStravaWebhookEventStatus(
           existingWebhookEvent.id,
-          StravaWebhookEventStatus.COMPLETED,
+          'COMPLETED'
         )
       }
     }
     invariant(!existingPostId, `post already exists`)
 
-    const activity = await fetchStravaActivity(activityId, user.id)
+    const activity = await fetchStravaActivity(repository, activityId, user.id)
 
     const activityType = activity.type
     if (!activityType) {
@@ -92,7 +92,7 @@ export async function importStravaActivity(
     }
     invariant(
       activityType,
-      `activity must have a type, found ${activity.name} ${activity.type}`,
+      `activity must have a type, found ${activity.name} ${activity.type}`
     )
 
     const isGeoDataAvailable = Boolean(activity.map?.polyline)
@@ -113,12 +113,12 @@ export async function importStravaActivity(
       }
       return Response.json(
         { error: 'Activity has no geo data' },
-        { status: 400 },
+        { status: 400 }
       )
     }
     invariant(
       isGeoDataAvailable,
-      `activity must geo data, found ${activity.start_latlng} ${activity.end_latlng}`,
+      `activity must geo data, found ${activity.start_latlng} ${activity.end_latlng}`
     )
 
     if (!['Run', 'Soccer'].includes(activityType)) {
@@ -140,7 +140,7 @@ export async function importStravaActivity(
 
       return Response.json(
         { error: `Activity type ${activity.type} not supported` },
-        { status: 400 },
+        { status: 400 }
       )
     }
 
@@ -159,11 +159,11 @@ export async function importStravaActivity(
     if (!post) {
       return Response.json(
         { error: `Failed to create post for activity ${activityId}` },
-        { status: 500 },
+        { status: 500 }
       )
     }
 
-    await fetchCompletePost({
+    await fetchCompletePost(repository, {
       postId: post.id,
     })
     const updatedPost = await repository.getPostWithUserAndFields(post.id)
@@ -183,7 +183,7 @@ export async function importStravaActivity(
     if (existingWebhookEvent) {
       await repository.updateStravaWebhookEventStatus(
         existingWebhookEvent.id,
-        StravaWebhookEventStatus.COMPLETED,
+        'COMPLETED'
       )
     }
 
@@ -235,7 +235,7 @@ type TokenExchangeResponse = {
 }
 
 export async function tokenExchange(
-  code: string,
+  code: string
 ): Promise<TokenExchangeResponse> {
   const link = 'https://www.strava.com/api/v3/oauth/token'
 
@@ -256,7 +256,7 @@ export async function tokenExchange(
 }
 
 export async function tokenRefresh(
-  refreshToken: string,
+  refreshToken: string
 ): Promise<Omit<TokenExchangeResponse, 'athlete'>> {
   const link = 'https://www.strava.com/api/v3/oauth/token'
 
@@ -284,7 +284,10 @@ export type Maybe<T = string, E = null> = T | E
  * @param userId user id in our database
  * @returns Strava access token, refreshed if needed
  */
-export async function getStravaToken(userId: number): Promise<Maybe> {
+export async function getStravaToken(
+  repository: ReturnType<typeof createRepository>,
+  userId: number
+): Promise<Maybe> {
   const now = new Date()
 
   const user = await repository.getUser(userId)
@@ -296,7 +299,7 @@ export async function getStravaToken(userId: number): Promise<Maybe> {
   const stravaSocialLogin = await repository.getUserStravaSocialLogin(userId)
   if (!stravaSocialLogin) {
     console.error(
-      `getStravaToken: Strava social login with user id ${userId} not found`,
+      `getStravaToken: Strava social login with user id ${userId} not found`
     )
     return null
   }
@@ -318,7 +321,7 @@ export async function getStravaToken(userId: number): Promise<Maybe> {
           tokenRefreshResponse.message,
           ` Errors: `,
           //@ts-expect-error
-          tokenRefreshResponse.errors,
+          tokenRefreshResponse.errors
         )
         return null
       }
@@ -329,7 +332,7 @@ export async function getStravaToken(userId: number): Promise<Maybe> {
         userStravaId!.toString(),
         tokenRefreshResponse.access_token,
         tokenRefreshResponse.refresh_token,
-        expiresAt,
+        expiresAt
       )
 
       return tokenRefreshResponse.access_token
@@ -342,15 +345,24 @@ export async function getStravaToken(userId: number): Promise<Maybe> {
   }
 }
 
-async function getStravaAccessTokenHeaders(userId: number) {
-  const stravaAccessToken = await getStravaToken(userId)
+async function getStravaAccessTokenHeaders(
+  repository: ReturnType<typeof createRepository>,
+  userId: number
+) {
+  const stravaAccessToken = await getStravaToken(repository, userId)
   return {
     Authorization: `Bearer ${stravaAccessToken}`,
   }
 }
 
-export async function checkStravaAccessToken(userId: number) {
-  const stravaAccessTokenHeaders = await getStravaAccessTokenHeaders(userId)
+export async function checkStravaAccessToken(
+  repository: ReturnType<typeof createRepository>,
+  userId: number
+) {
+  const stravaAccessTokenHeaders = await getStravaAccessTokenHeaders(
+    repository,
+    userId
+  )
   try {
     await getLoggedInAthleteActivities(
       {
@@ -358,7 +370,7 @@ export async function checkStravaAccessToken(userId: number) {
       },
       {
         headers: stravaAccessTokenHeaders,
-      },
+      }
     )
     return true
   } catch (e) {
@@ -368,8 +380,15 @@ export async function checkStravaAccessToken(userId: number) {
   }
 }
 
-export async function fetchStravaActivity(activityId: number, userId: number) {
-  const stravaAccessTokenHeaders = await getStravaAccessTokenHeaders(userId)
+export async function fetchStravaActivity(
+  repository: ReturnType<typeof createRepository>,
+  activityId: number,
+  userId: number
+) {
+  const stravaAccessTokenHeaders = await getStravaAccessTokenHeaders(
+    repository,
+    userId
+  )
   const activity = await getActivityById(
     activityId,
     {
@@ -377,16 +396,20 @@ export async function fetchStravaActivity(activityId: number, userId: number) {
     },
     {
       headers: stravaAccessTokenHeaders,
-    },
+    }
   )
   return activity
 }
 
 export async function fetchStravaActivityGeoJson(
+  repository: ReturnType<typeof createRepository>,
   activityId: number,
-  userId: number,
+  userId: number
 ) {
-  const stravaAccessTokenHeaders = await getStravaAccessTokenHeaders(userId)
+  const stravaAccessTokenHeaders = await getStravaAccessTokenHeaders(
+    repository,
+    userId
+  )
   const activityStreams = await getActivityStreams(
     activityId,
     {
@@ -395,10 +418,10 @@ export async function fetchStravaActivityGeoJson(
     },
     {
       headers: stravaAccessTokenHeaders,
-    },
+    }
   )
 
-  const activity = await fetchStravaActivity(activityId, userId)
+  const activity = await fetchStravaActivity(repository, activityId, userId)
   const activityName = activity.name
   invariant(activityName, 'activity must have a name')
   const activityStartDate = activity.start_date
@@ -409,8 +432,8 @@ export async function fetchStravaActivityGeoJson(
         activityName,
         JSON.stringify(activityStreams),
         'StravaActivityStream',
-        new Date(activityStartDate),
-      ).toGeoJson(),
+        new Date(activityStartDate)
+      ).toGeoJson()
     )
     .otherwise(() => null)
 
@@ -421,20 +444,24 @@ interface FetchCompletePostArgs {
   postId: number
 }
 
-export async function fetchCompletePost({ postId }: FetchCompletePostArgs) {
+export async function fetchCompletePost(
+  repository: ReturnType<typeof createRepository>,
+  { postId }: FetchCompletePostArgs
+) {
   {
-    const post = await getPostByIdWithoutField(postId)
+    const post = await repository.getPostByIdWithoutField(postId)
 
     if (!post) {
       console.error(`post.fetchComplete: post ${postId} not found`)
       return
     }
 
-    await updatePostStatus(post.id, 'PROCESSING')
+    await repository.updatePostStatus(post.id, 'PROCESSING')
 
     const geoJson = await fetchStravaActivityGeoJson(
+      repository,
       parseInt(post.key),
-      post.userId,
+      post.userId
     )
 
     if (geoJson instanceof Error) {
@@ -447,7 +474,7 @@ export async function fetchCompletePost({ postId }: FetchCompletePostArgs) {
 
     const core = new Core(geoJson)
 
-    const updatedPost = await updatePostComplete({
+    const updatedPost = await repository.updatePostComplete({
       id: post.id,
       geoJson: geoJson as any,
       totalDistance: core.totalDistance(),
@@ -460,7 +487,7 @@ export async function fetchCompletePost({ postId }: FetchCompletePostArgs) {
       averageSpeed: core.averageSpeed(),
     })
 
-    await postAddField({
+    await postAddField(repository, {
       postId: post.id,
     })
 

@@ -1,8 +1,0 @@
-/*
-  Warnings:
-
-  - A unique constraint covering the columns `[userId,followerId]` on the table `UserFollow` will be added. If there are existing duplicate values, this will fail.
-
-*/
--- CreateIndex
-CREATE UNIQUE INDEX "UserFollow_userId_followerId_key" ON "UserFollow"("userId", "followerId");

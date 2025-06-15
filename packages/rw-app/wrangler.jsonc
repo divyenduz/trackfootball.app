@@ -1,0 +1,32 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "trackfootball",
+  "main": "src/worker.tsx",
+  "compatibility_date": "2024-09-23",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "binding": "ASSETS"
+  },
+  "observability": {
+    "enabled": true
+  },
+  "vars": {
+    "BACKEND_API": "https://trackfootball.app/api",
+    "COOKIE_DOMAIN": ".trackfootball.app",
+    "HOMEPAGE_URL": "https://trackfootball.app",
+    "AUTH0_BASE_URL": "https://trackfootball.app"
+  },
+  "routes": [
+    {
+      "pattern": "trackfootball.app",
+      "custom_domain": true
+    }
+  ],
+  "hyperdrive": [
+    {
+      "id": "feb7289f5167443787e9824c72354002",
+      "binding": "HYPERDRIVE",
+      "localConnectionString": "postgresql://postgres:postgres@localhost:5432/trackfootball"
+    }
+  ]
+}
