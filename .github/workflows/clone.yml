@@ -10,7 +10,7 @@ env:
   XATA_API_KEY: ${{ secrets.XATA_API_KEY }}
   XATA_ORGANIZATIONID: xata
   XATA_PROJECTID: prj_9lg00njeo55nh9ep4nfd4gnmck
-  XATA_BRANCHID: fr6deppfg90h13esp3ovbigpqo
+  XATA_BRANCHID: gk22igetg11bb046kpjlp1nddg
   XATA_BRANCHNAME: main
   XATA_DATABASENAME: app
   XATA_CLI_SOURCE_POSTGRES_URL: ${{ secrets.XATA_CLI_SOURCE_POSTGRES_URL }}
