@@ -194,8 +194,8 @@ importers:
         specifier: 3.10.15
         version: 3.10.15(typescript@5.8.3)
       '@kubb/core':
-        specifier: 3.10.15
-        version: 3.10.15
+        specifier: 3.11.1
+        version: 3.11.1
       '@kubb/plugin-client':
         specifier: 3.10.15
         version: 3.10.15(@kubb/react@3.10.15)
@@ -878,12 +878,20 @@ packages:
     resolution: {integrity: sha512-OQj08QVMDp1pI2xs/wjcw+wGagOj4B/0+4Omqp2yS2pY63oiIxBf8u7xn+VYUAMKyZvTlkKk8wUmYp/KZPdv3A==}
     engines: {node: '>=20'}
 
+  '@kubb/core@3.11.1':
+    resolution: {integrity: sha512-H9ClwMnGxADwZ//o3Ww2ZzIaKq2S/6xMjIYOB57oxHTKEBTotBYyJuqTFXVvHn0FUP2A1h4y3S1uull7gigMDw==}
+    engines: {node: '>=20'}
+
   '@kubb/oas@3.10.15':
     resolution: {integrity: sha512-CADhgjxoopToCUs19/ivF/jzY49MToMcfo4oP69Kd7v/MnMB/YU1PEYhUl6k700hmGwBhYL9ESQzuSYRT2Xf/g==}
     engines: {node: '>=20'}
 
   '@kubb/parser-ts@3.10.15':
     resolution: {integrity: sha512-5FqtVBQp/059/+2fUR/WvsHG9hp2XBmnvZJI/Rc4SsM3s0GPWRotm+qP19Z7dTjLkh6Mqml/fBZQlOtCxqOEuw==}
+    engines: {node: '>=20'}
+
+  '@kubb/parser-ts@3.11.1':
+    resolution: {integrity: sha512-k7pniw2Yzh+Y8AB+AItyDvQkm/FsWULBcxuKWQqWC/l50kvPWwpNLgM7TsdpcdFezGoj1r4RoAG5qYZb+hqICQ==}
     engines: {node: '>=20'}
 
   '@kubb/plugin-client@3.10.15':
@@ -5242,6 +5250,20 @@ snapshots:
       seedrandom: 3.0.5
       semver: 7.7.2
 
+  '@kubb/core@3.11.1':
+    dependencies:
+      '@kubb/parser-ts': 3.11.1
+      camelcase: 8.0.0
+      find-up: 7.0.0
+      fs-extra: 11.3.0
+      js-runtime: 0.0.8
+      natural-orderby: 5.0.0
+      object-hash: 3.0.0
+      p-queue: 8.1.0
+      remeda: 2.23.0
+      seedrandom: 3.0.5
+      semver: 7.7.2
+
   '@kubb/oas@3.10.15':
     dependencies:
       '@redocly/openapi-core': 1.34.3
@@ -5259,6 +5281,12 @@ snapshots:
       - supports-color
 
   '@kubb/parser-ts@3.10.15':
+    dependencies:
+      prettier: 3.5.3
+      remeda: 2.23.0
+      typescript: 5.8.3
+
+  '@kubb/parser-ts@3.11.1':
     dependencies:
       prettier: 3.5.3
       remeda: 2.23.0
