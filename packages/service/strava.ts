@@ -13,6 +13,8 @@ import { durationToSeconds } from '../unit-utils'
 import { postAddField } from './addField'
 import { Core } from '@trackfootball/sprint-detection'
 import { createRepository } from '@trackfootball/postgres'
+
+//@ts-ignore fix types
 import { env } from 'cloudflare:workers'
 
 export const stringify = (value: number | string): string => {
