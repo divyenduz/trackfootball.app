@@ -1,3 +1,6 @@
+// @ts-ignore fix cloudflare:workers import in monorepo
+import { env } from 'cloudflare:workers'
+
 interface CreateDiscordMessageArgs {
   heading?: string
   name: string
@@ -21,7 +24,7 @@ export async function createDiscordMessage({
   form.append('content', content)
 
   try {
-    await fetch(process.env.DISCORD_TRACKFOOTBALL_APPLICATION_EVENTS_WEBHOOK, {
+    await fetch(env.DISCORD_TRACKFOOTBALL_APPLICATION_EVENTS_WEBHOOK, {
       method: 'POST',
       body: form,
     })

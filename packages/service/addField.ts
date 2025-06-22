@@ -1,4 +1,4 @@
-import { Field, repository } from '@trackfootball/database'
+import { type Field } from '@trackfootball/kanel'
 import area from '@turf/area'
 import booleanPointInPolygon from '@turf/boolean-point-in-polygon'
 import center from '@turf/center'
@@ -8,12 +8,16 @@ import { featureCollection, point } from '@turf/helpers'
 import intersect from '@turf/intersect'
 import invariant from 'tiny-invariant'
 import { match } from 'ts-pattern'
+import { createRepository } from '@trackfootball/postgres'
 
 interface PostAddFieldArgs {
   postId: number
 }
 
-export async function postAddField({ postId }: PostAddFieldArgs) {
+export async function postAddField(
+  repository: ReturnType<typeof createRepository>,
+  { postId }: PostAddFieldArgs
+) {
   {
     const post = await repository.getPostById(postId)
 

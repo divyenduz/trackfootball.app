@@ -3,8 +3,7 @@
 ## Project Structure
 
 This is a monorepo using Bun workspace with the following packages:
-- `packages/next-js-app/` - Main Next.js application (runs on port 6060)
-- `packages/database/` - Database utilities and Prisma client
+
 - `packages/open-api/` - OpenAPI specifications
 - `packages/sprint-detection/` - Sprint analysis algorithms
 - `packages/unit-utils/` - Utility functions
@@ -40,12 +39,11 @@ This is a monorepo using Bun workspace with the following packages:
 - **Framework**: Next.js 14 app router with TypeScript, Tailwind CSS
 - **State Management**: React hooks with TypeScript
 - **Pattern Matching**: Use `ts-pattern` for complex conditional logic
-- **Database**: Uses Prisma with PostgreSQL
 
 ## Key Dependencies
 
 - **UI**: MUI (Material-UI) components, Tailwind CSS
-- **Database**: Prisma, PostgreSQL (via `postgres` package)
+- **Database**: PostgreSQL (via `postgres` package)
 - **Auth**: Auth0 NextJS SDK
 - **Maps**: Mapbox GL, react-map-gl
 - **Utils**: date-fns, zod for validation, tiny-invariant
@@ -58,4 +56,4 @@ This is a monorepo using Bun workspace with the following packages:
 - Components: `components/` directory
 - Services: `services/` directory for business logic
 - Utils: `utils/` directory for shared utilities
-- Database functions: imported from `@trackfootball/database`
+- Database functions: imported from `@trackfootball/postgres`
