@@ -13,6 +13,8 @@ import { durationToSeconds } from '../unit-utils'
 import { postAddField } from './addField'
 import { Core } from '@trackfootball/sprint-detection'
 import { createRepository } from '@trackfootball/postgres'
+// @ts-expect-error fix import types
+import { env } from 'cloudflare:workers'
 
 export const stringify = (value: number | string): string => {
   if (typeof value === 'number') {
@@ -57,7 +59,7 @@ export async function importStravaActivity(
       Strava Owner: ${ownerId}
       Athlete Link: https://strava.com/athletes/${ownerId}
       Activity Link: https://strava.com/activities/${activityId}
-      Link: ${process.env.HOMEPAGE_URL}/activity/${existingPostId}`,
+      Link: ${env.HOMEPAGE_URL}/activity/${existingPostId}`,
       })
       const existingWebhookEvent =
         await repository.findStravaWebhookEventByActivityId(activityId)
@@ -175,7 +177,7 @@ export async function importStravaActivity(
       ID: ${post.id} / Strava ID: ${activityId}
       Activity Time: ${updatedPost?.startTime}
       User: ${user.firstName} ${user.lastName}
-      Link: ${process.env.HOMEPAGE_URL}/activity/${post.id}`,
+      Link: ${env.HOMEPAGE_URL}/activity/${post.id}`,
     })
 
     const existingWebhookEvent =
@@ -201,8 +203,8 @@ export async function importStravaActivity(
   }
 }
 
-const stravaClientId = process.env.STRAVA_CLIENT_ID
-const stravaClientSecret = process.env.STRAVA_CLIENT_SECRET
+const stravaClientId = env.STRAVA_CLIENT_ID
+const stravaClientSecret = env.STRAVA_CLIENT_SECRET
 
 type Athlete = {
   id: number

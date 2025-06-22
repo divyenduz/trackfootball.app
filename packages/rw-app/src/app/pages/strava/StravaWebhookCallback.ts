@@ -245,7 +245,7 @@ async function processEvent(event: StravaWebhookEvent) {
         ID: ${post.id} / Strava ID: ${activityUpdateEvent.object_id}
         Activity Time: ${updatedPost?.startTime}
         User: ${user.firstName} ${user.lastName}
-        Link: ${process.env.HOMEPAGE_URL}/activity/${post.id}`,
+        Link: ${env.HOMEPAGE_URL}/activity/${post.id}`,
           })
         }
       }
@@ -296,7 +296,7 @@ async function processEvent(event: StravaWebhookEvent) {
       ID: ${post.id} / Strava ID: ${activityDeleteEvent.object_id}
       Activity Time: ${post?.startTime}
       User: ${user.firstName} ${user.lastName}
-      Link: ${process.env.HOMEPAGE_URL}/activity/${post.id}`,
+      Link: ${env.HOMEPAGE_URL}/activity/${post.id}`,
         })
       }
     )
