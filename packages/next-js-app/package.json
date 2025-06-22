@@ -21,7 +21,7 @@
     "@types/react-map-gl": "6.1.7",
     "arg": "5.0.2",
     "eslint": "9.29.0",
-    "eslint-config-next": "15.4.0-canary.51",
+    "eslint-config-next": "15.4.0-canary.91",
     "postcss": "8.5.5",
     "prettier": "3.5.3"
   },
