@@ -28,6 +28,8 @@ export async function createPost(sql: Sql, input: CreatePostInput) {
         //@ts-expect-error
         sql(data)
       }
+      ON CONFLICT ("key", "type") DO UPDATE SET
+        "geoJson" = EXCLUDED."geoJson"
       RETURNING *
       `
 
@@ -75,14 +77,7 @@ type TypedPost = Post & {
   runs: Array<FeatureCollection<LineString>>
 }
 
-export async function getPost(sql: Sql, id: number) {
-  const posts: Post[] = await sql`
-    SELECT * FROM "Post"
-    WHERE "id" = ${id}
-    `
-  const post = posts[0]
-  return post
-}
+
 
 export async function getPostById(sql: Sql, id: number): Promise<Post | null> {
   const posts: Post[] = await sql`
@@ -134,7 +129,7 @@ export async function getPostWithUserAndFields(sql: Sql, id: number) {
   }
 }
 
-export async function getPostIdBy(sql: Sql, stravaId: number) {
+export async function getPostByStravaId(sql: Sql, stravaId: number) {
   const posts: TypedPost[] = await sql`
     SELECT * from "Post"
     WHERE "key" = ${stringify(stravaId)}
@@ -145,7 +140,7 @@ export async function getPostIdBy(sql: Sql, stravaId: number) {
     return null
   }
 
-  return post.id
+  return post
 }
 
 export async function updatePostTitle(
@@ -162,21 +157,6 @@ export async function updatePostTitle(
   const post = posts[0]
 
   return post
-}
-
-export async function deletePost(sql: Sql, id: number): Promise<Post | null> {
-  const posts: Post[] = await sql`
-    DELETE FROM "Post"
-    WHERE "id" = ${id}
-    RETURNING *
-    `
-  if (posts.length > 0) {
-    const post = posts[0]
-    invariant(post, 'expected post to exist')
-    return post
-  } else {
-    return null
-  }
 }
 
 export async function deletePostBy(
@@ -198,47 +178,39 @@ export async function deletePostBy(
   }
 }
 
-interface UpdatePostWithSprintDataInput {
-  id: number
-  geoJson: any
-  totalDistance: number
-  startTime: Date
-  elapsedTime: number
-  totalSprintTime: number
-  sprints: any
-  runs: any
-  maxSpeed: number
-  averageSpeed: number
-  status: string
+export type FeedItemType = Post & {
+  geoJson: FeatureCollection<LineString>
+  sprints: Array<FeatureCollection<LineString>>
+  runs: Array<FeatureCollection<LineString>>
+  Field: Field
+  User: User
 }
 
-export async function updatePostWithSprintData(
-  sql: Sql,
-  input: UpdatePostWithSprintDataInput
-): Promise<Post | null> {
-  const posts: Post[] = await sql`
-    UPDATE "Post"
-    SET "geoJson" = ${input.geoJson},
-    "totalDistance" = ${input.totalDistance},
-    "startTime" = ${input.startTime},
-    "elapsedTime" = ${input.elapsedTime},
-    "totalSprintTime" = ${input.totalSprintTime},
-    "sprints" = ${input.sprints},
-    "runs" = ${input.runs},
-    "maxSpeed" = ${input.maxSpeed},
-    "averageSpeed" = ${input.averageSpeed},
-    "status" = ${input.status}
-    WHERE "id" = ${input.id}
-    RETURNING *
+export async function getFeed(sql: Sql, cursor: number = 0, limit: number = 3) {
+  const maxPostIds: { max: number }[] = await sql`SELECT MAX("id") FROM "Post"`
+  const maxPostId = maxPostIds[0]
+  invariant(maxPostId, `expected maxPostId to exist`)
+  const maxPostIdValue = maxPostId.max
+
+  const posts: FeedItemType[] = await sql`
+    SELECT row_to_json("Field".*::"Field") as "Field", row_to_json("User".*::"User") as "User", "Post".* FROM "Post"
+    LEFT JOIN "Field" ON "Post"."fieldId" = "Field"."id"
+    INNER JOIN "User" ON "Post"."userId" = "User"."id"
+    WHERE "Post"."id" <= ${cursor || maxPostIdValue}
+    ORDER BY "Post"."startTime" DESC
+    LIMIT ${limit + 1}
     `
-  if (posts.length > 0) {
-    const post = posts[0]
-    invariant(post, 'expected post to exist')
-    return post
-  } else {
-    return null
+
+  let nextCursor: typeof cursor | null = null
+  if (posts.length > limit) {
+    const nextItem = posts.pop()
+    nextCursor = nextItem!.id
   }
+
+  return { posts, nextCursor }
 }
+
+
 
 export async function updatePostFieldId(
   sql: Sql,
@@ -327,66 +299,4 @@ export async function updatePostComplete(
   }
 }
 
-export type FeedItemType = Post & {
-  geoJson: FeatureCollection<LineString>
-  sprints: Array<FeatureCollection<LineString>>
-  runs: Array<FeatureCollection<LineString>>
-  Field: Field
-  User: User
-}
 
-export async function getFeed(sql: Sql, cursor: number = 0, limit: number = 3) {
-  const maxPostIds: { max: number }[] = await sql`SELECT MAX("id") FROM "Post"`
-  const maxPostId = maxPostIds[0]
-  invariant(maxPostId, `expected maxPostId to exist`)
-  const maxPostIdValue = maxPostId.max
-
-  const posts: FeedItemType[] = await sql`
-    SELECT row_to_json("Field".*::"Field") as "Field", row_to_json("User".*::"User") as "User", "Post".* FROM "Post"
-    LEFT JOIN "Field" ON "Post"."fieldId" = "Field"."id"
-    INNER JOIN "User" ON "Post"."userId" = "User"."id"
-    WHERE "Post"."id" <= ${cursor || maxPostIdValue}
-    ORDER BY "Post"."startTime" DESC
-    LIMIT ${limit + 1}
-    `
-
-  let nextCursor: typeof cursor | null = null
-  if (posts.length > limit) {
-    const nextItem = posts.pop()
-    nextCursor = nextItem!.id
-  }
-
-  return { posts, nextCursor }
-}
-
-export async function getAthleteFeed(
-  sql: Sql,
-  athleteId: number,
-  cursor: number = 0,
-  limit: number = 3
-) {
-  const maxPostIds: { max: number }[] =
-    await sql`SELECT MAX("id") FROM "Post" WHERE "userId" = ${athleteId}`
-  const maxPostId = maxPostIds[0]
-  invariant(maxPostId, `expected maxPostId to exist`)
-  const maxPostIdValue = maxPostId.max || 0
-
-  const posts: FeedItemType[] = await sql`
-    SELECT row_to_json("Field".*::"Field") as "Field", row_to_json("User".*::"User") as "User", "Post".* FROM "Post"
-    LEFT JOIN "Field" ON "Post"."fieldId" = "Field"."id"
-    INNER JOIN "User" ON "Post"."userId" = "User"."id"
-    WHERE "Post"."userId" = ${athleteId} AND "Post"."id" <= ${
-    cursor || maxPostIdValue
-  }
-    ORDER BY "Post"."startTime" DESC
-    LIMIT ${limit + 1}
-    `
-
-  let nextCursor: typeof cursor | null = null
-  if (posts.length > limit) {
-    const nextItem = posts.pop()
-    nextCursor = nextItem!.id
-  }
-
-  return { posts, nextCursor }
-}

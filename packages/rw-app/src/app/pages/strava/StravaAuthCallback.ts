@@ -1,9 +1,10 @@
 import { tokenExchange } from '@trackfootball/service'
 import { DefaultAppContext } from 'rwsdk/worker'
 import type { Platform } from '@trackfootball/kanel'
+import { env } from 'cloudflare:workers'
 
 export const MESSAGE_UNAUTHORIZED =
-  'Unauthorized, are you logged in? Please login at ' + process.env.HOMEPAGE_URL
+  'Unauthorized, are you logged in? Please login at ' + env.HOMEPAGE_URL
 
 export async function StravaAuthCallback({
   request,

@@ -1,6 +1,4 @@
 import type { SocialLogin, User } from '@trackfootball/kanel'
-import { getSocialLoginsByUserId } from './socialLogin'
-import invariant from 'tiny-invariant'
 import { Sql } from 'postgres'
 
 export async function getUser(sql: Sql, id: number): Promise<User | null> {
@@ -8,10 +6,7 @@ export async function getUser(sql: Sql, id: number): Promise<User | null> {
   return users[0] || null
 }
 
-export async function getUserById(sql: Sql, id: number): Promise<User | null> {
-  const users: User[] = await sql`SELECT * FROM "User" WHERE "id" = ${id}`
-  return users[0] || null
-}
+
 
 export async function getUserStravaSocialLogin(
   sql: Sql,
@@ -54,43 +49,8 @@ export async function deleteStravaSocialLogin(sql: Sql, platformId: number) {
   return socialLogins
 }
 
-export async function getUserWithSocialLoginsByAuth0Sub(
-  sql: Sql,
-  auth0Sub: string
-): Promise<(User & { socialLogin: SocialLogin[] }) | null> {
-  const user = await getUserByAuth0Sub(sql, auth0Sub)
-  if (!user) {
-    return null
-  }
 
-  const socialLogin = await getSocialLoginsByUserId(sql, user.id)
 
-  return {
-    ...user,
-    socialLogin,
-  }
-}
 
-export async function upsertUserByAuth0Sub(
-  sql: Sql,
-  userData: {
-    firstName: string
-    lastName: string
-    email: string
-    locale: string
-    picture: string
-    auth0Sub: string
-    emailVerified: boolean
-    updatedAt: Date
-  }
-): Promise<User> {
-  const users: User[] = await sql`
-    INSERT INTO "User" ${sql(userData)}
-    ON CONFLICT ("auth0Sub") DO UPDATE
-    SET ${sql(userData)}
-    RETURNING *
-  `
-  const user = users[0]
-  invariant(user, `expected user to exist`)
-  return user
-}
+
+

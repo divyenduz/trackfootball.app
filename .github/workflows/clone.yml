@@ -23,6 +23,7 @@ jobs:
   clone:
     name: Xata Clone
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - name: Install Xata CLI
@@ -33,6 +34,7 @@ jobs:
       - name: Check Xata status
         run: |
           xata status
+          xata version
           xata branch describe
 
       - name: Xata clone

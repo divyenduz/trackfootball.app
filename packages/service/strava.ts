@@ -14,6 +14,9 @@ import { postAddField } from './addField'
 import { Core } from '@trackfootball/sprint-detection'
 import { createRepository } from '@trackfootball/postgres'
 
+//@ts-ignore fix types
+import { env } from 'cloudflare:workers'
+
 export const stringify = (value: number | string): string => {
   if (typeof value === 'number') {
     return value.toString()
@@ -47,8 +50,8 @@ export async function importStravaActivity(
     }
     invariant(user, `failed to find user by strava owner_id ${ownerId}`)
 
-    const existingPostId = await repository.getPostIdBy(activityId)
-    if (existingPostId) {
+    const existingPost = await repository.getPostByStravaId(activityId)
+    if (existingPost?.geoJson) {
       await createDiscordMessage({
         heading: `New Activity Creation Failed - Post Already Exists (${source})`,
         name: `${ownerId}/${activityId}`,
@@ -57,7 +60,7 @@ export async function importStravaActivity(
       Strava Owner: ${ownerId}
       Athlete Link: https://strava.com/athletes/${ownerId}
       Activity Link: https://strava.com/activities/${activityId}
-      Link: ${process.env.HOMEPAGE_URL}/activity/${existingPostId}`,
+      Link: ${env.HOMEPAGE_URL}/activity/${existingPost.id}`,
       })
       const existingWebhookEvent =
         await repository.findStravaWebhookEventByActivityId(activityId)
@@ -68,7 +71,7 @@ export async function importStravaActivity(
         )
       }
     }
-    invariant(!existingPostId, `post already exists`)
+    invariant(!existingPost?.geoJson, `post already exists`)
 
     const activity = await fetchStravaActivity(repository, activityId, user.id)
 
@@ -175,7 +178,7 @@ export async function importStravaActivity(
       ID: ${post.id} / Strava ID: ${activityId}
       Activity Time: ${updatedPost?.startTime}
       User: ${user.firstName} ${user.lastName}
-      Link: ${process.env.HOMEPAGE_URL}/activity/${post.id}`,
+      Link: ${env.HOMEPAGE_URL}/activity/${post.id}`,
     })
 
     const existingWebhookEvent =
@@ -201,8 +204,8 @@ export async function importStravaActivity(
   }
 }
 
-const stravaClientId = process.env.STRAVA_CLIENT_ID
-const stravaClientSecret = process.env.STRAVA_CLIENT_SECRET
+const stravaClientId = env.STRAVA_CLIENT_ID
+const stravaClientSecret = env.STRAVA_CLIENT_SECRET
 
 type Athlete = {
   id: number

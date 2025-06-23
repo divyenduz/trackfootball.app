@@ -75,7 +75,6 @@ export const Map: React.FC<MapProps> = ({
   post,
   page,
 }) => {
-  invariant(post.geoJson, `expected post.geoJson to exist`)
   const [mapStyle] = useState('mapbox://styles/mapbox/outdoors-v12')
   const [mapLoaded, setMapLoaded] = useState(false)
   const mapRef = useRef(null)
@@ -123,12 +122,13 @@ export const Map: React.FC<MapProps> = ({
     }
   }, [mapLoaded, viewport, setViewport])
 
-  const taggedSprints = post.sprints?.map((sprint) => {
-    return {
-      tag: 'sprint',
-      ...sprint,
-    }
-  })
+  const taggedSprints =
+    post.sprints?.map((sprint) => {
+      return {
+        tag: 'sprint',
+        ...sprint,
+      }
+    }) || []
 
   const taggedRuns = post.runs?.map((sprint) => {
     return {
@@ -136,7 +136,11 @@ export const Map: React.FC<MapProps> = ({
       ...sprint,
     }
   })
-  const taggedPowerRuns = taggedSprints.concat(taggedRuns)
+  const taggedPowerRuns = taggedSprints.concat(taggedRuns) || []
+
+  if (!post.geoJson) {
+    return <>Post is still processing...</>
+  }
 
   return (
     <ReactMapGL

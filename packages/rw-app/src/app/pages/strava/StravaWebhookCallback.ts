@@ -54,10 +54,6 @@ export async function StravaWebhookCallback({
     }
 
     return Response.json({ ok: true })
-
-    return new Response('OK', {
-      status: 200,
-    })
   }
   return new Response('Method Not Allowed', {
     status: 405,
@@ -97,7 +93,7 @@ type StravaEventAthlete = StravaEventBase & {
   }
 }
 
-type StravaEvent = StravaEventActivity | StravaEventAthlete
+export type StravaEvent = StravaEventActivity | StravaEventAthlete
 
 async function processEvent(event: StravaWebhookEvent) {
   const ctx = requestInfo.ctx
@@ -203,10 +199,10 @@ async function processEvent(event: StravaWebhookEvent) {
           return
         }
 
-        const postId = await ctx.repository.getPostIdBy(
+        const post = await ctx.repository.getPostByStravaId(
           activityUpdateEvent.object_id
         )
-        if (postId) {
+        if (post?.id) {
           try {
             await ctx.repository.updatePostTitle(
               activityUpdateEvent.object_id,
@@ -245,7 +241,7 @@ async function processEvent(event: StravaWebhookEvent) {
         ID: ${post.id} / Strava ID: ${activityUpdateEvent.object_id}
         Activity Time: ${updatedPost?.startTime}
         User: ${user.firstName} ${user.lastName}
-        Link: ${process.env.HOMEPAGE_URL}/activity/${post.id}`,
+        Link: ${env.HOMEPAGE_URL}/activity/${post.id}`,
           })
         }
       }
@@ -296,7 +292,7 @@ async function processEvent(event: StravaWebhookEvent) {
       ID: ${post.id} / Strava ID: ${activityDeleteEvent.object_id}
       Activity Time: ${post?.startTime}
       User: ${user.firstName} ${user.lastName}
-      Link: ${process.env.HOMEPAGE_URL}/activity/${post.id}`,
+      Link: ${env.HOMEPAGE_URL}/activity/${post.id}`,
         })
       }
     )

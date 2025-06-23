@@ -33,7 +33,6 @@ export function ActivityClient({ post }: { post: any }) {
         ...bounds,
       }
       setViewport(newViewport)
-      console.log({ newViewport })
     }
     effect()
   }, [post])

@@ -1,8 +1,6 @@
-import { WebMercatorViewport } from '@math.gl/web-mercator'
 import type { Field, Post } from '@trackfootball/kanel'
 import type { FeatureCollection, LineString, Position } from 'geojson'
 import invariant from 'tiny-invariant'
-import { match } from 'ts-pattern'
 
 import { center } from '@turf/center'
 
@@ -32,17 +30,15 @@ type PostWithField = Post & {
 }
 
 export const getBoundsForPoints = (post: PostWithField) => {
-  const coordinates = post.geoJson?.features[0].geometry.coordinates
-  invariant(
-    coordinates,
-    `expected post.geoJson.features[0].geometry.coordinates to exist`
-  )
-
-  invariant(post.geoJson, `expected post.geoJson to exist`)
+  if (!post.geoJson) {
+    const fallbackCoords = {
+      latitude: 52.520008,
+      longitude: 13.404954,
+      zoom: 15,
+    }
+    return fallbackCoords
+  }
   const centerCoord = center(post.geoJson).geometry.coordinates
-
-  const firstCoord = coordinates[0]
-  console.log(firstCoord)
   return {
     latitude: centerCoord[1],
     longitude: centerCoord[0],

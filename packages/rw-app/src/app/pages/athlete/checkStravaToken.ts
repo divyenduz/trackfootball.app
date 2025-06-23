@@ -95,7 +95,6 @@ export async function getStravaToken(userId: number): Promise<Maybe> {
   if (new Date(expiresAt!).getTime() < now.getTime()) {
     try {
       const tokenRefreshResponse = await tokenRefresh(refreshToken!)
-      console.log({ tokenRefreshResponse })
 
       //@ts-expect-error
       if (tokenRefreshResponse.errors?.length > 0) {

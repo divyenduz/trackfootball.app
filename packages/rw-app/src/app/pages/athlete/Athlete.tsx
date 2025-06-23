@@ -8,7 +8,7 @@ import { env } from 'cloudflare:workers'
 import { checkStravaToken } from './checkStravaToken'
 
 export async function Athlete({ ctx, params }: RequestInfo) {
-  const athlete = await ctx.repository.getUserById(parseInt(params.id, 10))
+  const athlete = await ctx.repository.getUser(parseInt(params.id, 10))
 
   if (!athlete) {
     return <div className="p-4">Athlete not found</div>
@@ -28,12 +28,6 @@ export async function Athlete({ ctx, params }: RequestInfo) {
       <h1 className="text-2xl font-bold">
         {athlete.firstName} {athlete.lastName}
       </h1>
-
-      <p>
-        Work in progress, doing a large update and temporarily removed some
-        features and it looks a bit bad. Don't worry all of the data is coming
-        in and all the features will be back soon.
-      </p>
 
       <ShowToOwner ownerId={athlete.id} userId={ctx.user?.id}>
         <div className="bg-gray-50 border-b border-gray-200 px-6 py-3 flex justify-end">
