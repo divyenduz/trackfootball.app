@@ -54,10 +54,6 @@ export async function StravaWebhookCallback({
     }
 
     return Response.json({ ok: true })
-
-    return new Response('OK', {
-      status: 200,
-    })
   }
   return new Response('Method Not Allowed', {
     status: 405,

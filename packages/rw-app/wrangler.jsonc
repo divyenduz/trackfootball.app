@@ -16,6 +16,9 @@
     "HOMEPAGE_URL": "https://trackfootball.app",
     "AUTH0_BASE_URL": "https://trackfootball.app"
   },
+  "limits": {
+    "cpu_ms": 1000
+  },
   "routes": [
     {
       "pattern": "trackfootball.app",
