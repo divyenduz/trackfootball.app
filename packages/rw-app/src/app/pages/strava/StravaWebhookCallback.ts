@@ -97,7 +97,7 @@ type StravaEventAthlete = StravaEventBase & {
   }
 }
 
-type StravaEvent = StravaEventActivity | StravaEventAthlete
+export type StravaEvent = StravaEventActivity | StravaEventAthlete
 
 async function processEvent(event: StravaWebhookEvent) {
   const ctx = requestInfo.ctx
@@ -203,10 +203,10 @@ async function processEvent(event: StravaWebhookEvent) {
           return
         }
 
-        const postId = await ctx.repository.getPostIdBy(
+        const post = await ctx.repository.getPostByStravaId(
           activityUpdateEvent.object_id
         )
-        if (postId) {
+        if (post?.id) {
           try {
             await ctx.repository.updatePostTitle(
               activityUpdateEvent.object_id,
