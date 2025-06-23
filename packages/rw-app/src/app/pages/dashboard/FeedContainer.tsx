@@ -4,7 +4,9 @@ import { Post, User } from '@trackfootball/kanel'
 import { useState } from 'react'
 import { getFeed } from './feed'
 
-interface FeedWithUser extends Post {
+type FeedPost = Awaited<ReturnType<typeof getFeed>>['posts'][number]
+
+interface FeedWithUser extends FeedPost {
   User: User
 }
 
