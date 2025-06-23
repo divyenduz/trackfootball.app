@@ -42,7 +42,6 @@ export class StravaWebhookCallbackWorkflow extends WorkflowEntrypoint<
       const repository = createRepository(sql)
 
       const stravaEvent: StravaEvent = JSON.parse(stravaWebhookEvent.body)
-      console.log(stravaEvent)
 
       const source = 'WEBHOOK'
       const objectType = stravaEvent.object_type
