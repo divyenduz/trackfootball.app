@@ -33,7 +33,7 @@ export const setCommonHeaders =
         `style-src 'self' 'unsafe-inline';`,
         `frame-src https://challenges.cloudflare.com;`,
         `object-src 'none';`,
-        `img-src 'self' https://lh3.googleusercontent.com data:;`,
+        `img-src 'self' https://lh3.googleusercontent.com https://i.pravatar.cc data:;`,
         `worker-src 'self' blob:;`,
         `connect-src 'self' https://api.mapbox.com https://events.mapbox.com;`,
       ].join('')

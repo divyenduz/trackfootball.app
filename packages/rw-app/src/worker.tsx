@@ -66,6 +66,21 @@ export default defineApp([
       const user = await repository.getUserByAuth0Sub(session.sub)
       ctx.user = user
     }
+    if (env.UNSAFE_AUTH_BYPASS_USER) {
+      ctx.user = {
+        id: 1,
+        createdAt: new Date('2021-05-05T12:41:06.248Z'),
+        updatedAt: new Date('2025-06-14T19:07:43.754Z'),
+        email: 'john.doe@mail.com',
+        firstName: 'John',
+        lastName: 'Doe',
+        locale: 'en',
+        picture: 'https://i.pravatar.cc/150?u=jd@mail.com',
+        auth0Sub: 'google-oauth2|104619003144932489723',
+        emailVerified: true,
+        type: 'ADMIN',
+      } as User
+    }
   },
   // @ts-expect-error fix document types
   render(Document, [
