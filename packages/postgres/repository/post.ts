@@ -28,6 +28,8 @@ export async function createPost(sql: Sql, input: CreatePostInput) {
         //@ts-expect-error
         sql(data)
       }
+      ON CONFLICT ("key", "type") DO UPDATE SET
+        "geoJson" = EXCLUDED."geoJson"
       RETURNING *
       `
 
@@ -134,7 +136,7 @@ export async function getPostWithUserAndFields(sql: Sql, id: number) {
   }
 }
 
-export async function getPostIdBy(sql: Sql, stravaId: number) {
+export async function getPostByStravaId(sql: Sql, stravaId: number) {
   const posts: TypedPost[] = await sql`
     SELECT * from "Post"
     WHERE "key" = ${stringify(stravaId)}
@@ -145,7 +147,7 @@ export async function getPostIdBy(sql: Sql, stravaId: number) {
     return null
   }
 
-  return post.id
+  return post
 }
 
 export async function updatePostTitle(

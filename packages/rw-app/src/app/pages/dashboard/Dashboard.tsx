@@ -5,12 +5,6 @@ export async function Dashboard({ ctx }: RequestInfo) {
 
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-6">
-      <p>
-        Work in progress, doing a large update and temporarily removed some
-        features and it looks a bit bad. Don't worry all of the data is coming
-        in and all the features will be back soon.
-      </p>
-
       {feed.posts.map((post) => {
         const formatTime = (seconds: number) => {
           const mins = Math.floor(seconds / 60)

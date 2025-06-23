@@ -29,12 +29,6 @@ export async function Athlete({ ctx, params }: RequestInfo) {
         {athlete.firstName} {athlete.lastName}
       </h1>
 
-      <p>
-        Work in progress, doing a large update and temporarily removed some
-        features and it looks a bit bad. Don't worry all of the data is coming
-        in and all the features will be back soon.
-      </p>
-
       <ShowToOwner ownerId={athlete.id} userId={ctx.user?.id}>
         <div className="bg-gray-50 border-b border-gray-200 px-6 py-3 flex justify-end">
           <ConnectWithStravaWidget

@@ -55,8 +55,8 @@ async function getSecret() {
 export default defineApp([
   setCommonHeaders(),
   async ({ ctx, request }) => {
-    invariant(env.HYPERDRIVE.connectionString, 'DATABASE_URL is required')
-    const sql = getSql(env.HYPERDRIVE.connectionString)
+    invariant(env.DATABASE_URL, 'DATABASE_URL is required')
+    const sql = getSql(env.DATABASE_URL)
     const repository = createRepository(sql)
     ctx.repository = repository
 

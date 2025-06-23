@@ -4,12 +4,13 @@ import * as postRepo from './repository/post'
 import * as fieldRepo from './repository/field'
 import * as statsRepo from './repository/stats'
 import * as userRepo from './repository/user'
-import * as currentUserRepo from './repository/currentUser'
 import * as stravaWebhookEventRepo from './repository/stravaWebhookEvent'
 import * as socialLoginRepo from './repository/socialLogin'
 
 export function getSql(connectionString: string) {
-  const sql = postgres(connectionString)
+  const sql = postgres(connectionString, {
+    max: 5,
+  })
   return sql
 }
 
@@ -24,8 +25,9 @@ export function createRepository(sql: ReturnType<typeof postgres>) {
     getPostWithUserAndFields: (
       id: Parameters<typeof postRepo.getPostWithUserAndFields>[1]
     ) => postRepo.getPostWithUserAndFields(sql, id),
-    getPostIdBy: (stravaId: Parameters<typeof postRepo.getPostIdBy>[1]) =>
-      postRepo.getPostIdBy(sql, stravaId),
+    getPostByStravaId: (
+      stravaId: Parameters<typeof postRepo.getPostByStravaId>[1]
+    ) => postRepo.getPostByStravaId(sql, stravaId),
     updatePostTitle: (
       stravaId: Parameters<typeof postRepo.updatePostTitle>[1],
       title: Parameters<typeof postRepo.updatePostTitle>[2]
@@ -99,10 +101,6 @@ export function createRepository(sql: ReturnType<typeof postgres>) {
     upsertUserByAuth0Sub: (
       input: Parameters<typeof userRepo.upsertUserByAuth0Sub>[1]
     ) => userRepo.upsertUserByAuth0Sub(sql, input),
-
-    getCurrentUserByAuth0Sub: (
-      auth0Sub: Parameters<typeof currentUserRepo.getCurrentUserByAuth0Sub>[1]
-    ) => currentUserRepo.getCurrentUserByAuth0Sub(sql, auth0Sub),
 
     createStravaWebhookEvent: (
       input: Parameters<
