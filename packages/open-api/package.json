@@ -9,7 +9,7 @@
     "generate:strava": "kubb --config kubb.config.ts"
   },
   "devDependencies": {
-    "@kubb/core": "3.10.15",
+    "@kubb/core": "3.11.1",
     "@kubb/plugin-client": "3.10.15",
     "@kubb/plugin-oas": "3.11.1",
     "@kubb/plugin-ts": "3.10.15",
