@@ -50,8 +50,8 @@ export async function importStravaActivity(
     }
     invariant(user, `failed to find user by strava owner_id ${ownerId}`)
 
-    const existingPostId = await repository.getPostIdBy(activityId)
-    if (existingPostId) {
+    const existingPost = await repository.getPostByStravaId(activityId)
+    if (existingPost?.geoJson) {
       await createDiscordMessage({
         heading: `New Activity Creation Failed - Post Already Exists (${source})`,
         name: `${ownerId}/${activityId}`,
@@ -60,7 +60,7 @@ export async function importStravaActivity(
       Strava Owner: ${ownerId}
       Athlete Link: https://strava.com/athletes/${ownerId}
       Activity Link: https://strava.com/activities/${activityId}
-      Link: ${env.HOMEPAGE_URL}/activity/${existingPostId}`,
+      Link: ${env.HOMEPAGE_URL}/activity/${existingPost.id}`,
       })
       const existingWebhookEvent =
         await repository.findStravaWebhookEventByActivityId(activityId)
@@ -71,7 +71,7 @@ export async function importStravaActivity(
         )
       }
     }
-    invariant(!existingPostId, `post already exists`)
+    invariant(!existingPost?.geoJson, `post already exists`)
 
     const activity = await fetchStravaActivity(repository, activityId, user.id)
 
