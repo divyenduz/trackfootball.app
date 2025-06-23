@@ -46,8 +46,8 @@ importers:
         specifier: 3.11.1
         version: 3.11.1(@kubb/react@3.10.15)
       '@kubb/plugin-ts':
-        specifier: 3.10.15
-        version: 3.10.15(@kubb/react@3.10.15)
+        specifier: 3.11.1
+        version: 3.11.1(@kubb/react@3.10.15)
       '@types/bun':
         specifier: 1.2.16
         version: 1.2.16
@@ -1089,6 +1089,12 @@ packages:
 
   '@kubb/plugin-ts@3.10.15':
     resolution: {integrity: sha512-t4b67d0ksKljNA351/SH5BcViHh0slQ5ugPbP6yPx+4r7JhpBU0X/tw3EkRKqSNeRJ5ZmEY8q2yh4QwrfLjYEA==}
+    engines: {node: '>=20'}
+    peerDependencies:
+      '@kubb/react': ^3.0.0
+
+  '@kubb/plugin-ts@3.11.1':
+    resolution: {integrity: sha512-FEpeN/kpa4lsj/urIkE4Omwxqz3vkO+ovPdPye4PLnbPO3wX/frhHZ6sTeLVrLrdjO9Ah6g2bgvhkqFi7HqVww==}
     engines: {node: '>=20'}
     peerDependencies:
       '@kubb/react': ^3.0.0
@@ -4860,6 +4866,17 @@ snapshots:
       '@kubb/oas': 3.10.15
       '@kubb/parser-ts': 3.10.15
       '@kubb/plugin-oas': 3.10.15(@kubb/react@3.10.15)
+      '@kubb/react': 3.10.15
+    transitivePeerDependencies:
+      - encoding
+      - supports-color
+
+  '@kubb/plugin-ts@3.11.1(@kubb/react@3.10.15)':
+    dependencies:
+      '@kubb/core': 3.11.1
+      '@kubb/oas': 3.11.1
+      '@kubb/parser-ts': 3.11.1
+      '@kubb/plugin-oas': 3.11.1(@kubb/react@3.10.15)
       '@kubb/react': 3.10.15
     transitivePeerDependencies:
       - encoding
