@@ -77,8 +77,6 @@ type TypedPost = Post & {
   runs: Array<FeatureCollection<LineString>>
 }
 
-
-
 export async function getPostById(sql: Sql, id: number): Promise<Post | null> {
   const posts: Post[] = await sql`
     SELECT * FROM "Post"
@@ -186,7 +184,11 @@ export type FeedItemType = Post & {
   User: User
 }
 
-export async function getFeed(sql: Sql, cursor: number = 0, limit: number = 3) {
+export async function getFeed(
+  sql: Sql,
+  cursor: number = 0,
+  limit: number = 20
+) {
   const maxPostIds: { max: number }[] = await sql`SELECT MAX("id") FROM "Post"`
   const maxPostId = maxPostIds[0]
   invariant(maxPostId, `expected maxPostId to exist`)
@@ -209,8 +211,6 @@ export async function getFeed(sql: Sql, cursor: number = 0, limit: number = 3) {
 
   return { posts, nextCursor }
 }
-
-
 
 export async function updatePostFieldId(
   sql: Sql,
@@ -298,5 +298,3 @@ export async function updatePostComplete(
     return null
   }
 }
-
-
