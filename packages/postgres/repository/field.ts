@@ -23,13 +23,4 @@ export async function getFieldsByName(
   return fields
 }
 
-export async function getFieldById(
-  sql: Sql,
-  id: number
-): Promise<Field | null> {
-  const fields: Field[] = await sql`
-    SELECT * FROM "Field" 
-    WHERE id = ${id}
-  `
-  return fields[0] || null
-}
+

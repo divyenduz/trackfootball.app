@@ -8,7 +8,7 @@ import { env } from 'cloudflare:workers'
 import { checkStravaToken } from './checkStravaToken'
 
 export async function Athlete({ ctx, params }: RequestInfo) {
-  const athlete = await ctx.repository.getUserById(parseInt(params.id, 10))
+  const athlete = await ctx.repository.getUser(parseInt(params.id, 10))
 
   if (!athlete) {
     return <div className="p-4">Athlete not found</div>
