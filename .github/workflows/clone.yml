@@ -34,6 +34,7 @@ jobs:
       - name: Check Xata status
         run: |
           xata status
+          xata version
           xata branch describe
 
       - name: Xata clone
