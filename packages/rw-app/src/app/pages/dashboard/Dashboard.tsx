@@ -91,9 +91,6 @@ export async function Dashboard({ ctx }: RequestInfo) {
                         {new Date(post.startTime).toLocaleDateString()}
                       </span>
                     )}
-                    {post.type && (
-                      <span>{post.type.toLowerCase().replace('_', ' ')}</span>
-                    )}
                   </div>
                   <span>{new Date(post.createdAt).toLocaleTimeString()}</span>
                 </div>
