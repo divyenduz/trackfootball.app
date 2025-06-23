@@ -1,11 +1,15 @@
 'use client'
 
-import { Post } from '@trackfootball/kanel'
+import { Post, User } from '@trackfootball/kanel'
 import { useState } from 'react'
 import { getFeed } from './feed'
 
+interface FeedWithUser extends Post {
+  User: User
+}
+
 interface FeedContainerProps {
-  initialPosts: Post[]
+  initialPosts: FeedWithUser[]
   initialNextCursor: number | null
 }
 
@@ -56,9 +60,14 @@ export function FeedContainer({
           <a href={`/activity/${post.id}`} className="block">
             <div className="p-4">
               <div className="flex items-center justify-between mb-3">
-                <h3 className="text-base font-medium text-black">
-                  {post.text}
-                </h3>
+                <div>
+                  <div className="text-xs text-gray-500 mb-1">
+                    {post.User.firstName} {post.User.lastName}
+                  </div>
+                  <h3 className="text-base font-medium text-black">
+                    {post.text}
+                  </h3>
+                </div>
                 {post.status !== 'COMPLETED' && (
                   <span className="px-2 py-1 text-xs border border-black text-black">
                     {post.status.toLowerCase()}
