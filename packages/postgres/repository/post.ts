@@ -176,10 +176,7 @@ export async function deletePostBy(
   }
 }
 
-export type FeedItemType = Post & {
-  geoJson: FeatureCollection<LineString>
-  sprints: Array<FeatureCollection<LineString>>
-  runs: Array<FeatureCollection<LineString>>
+export type FeedItemType = Omit<Post, 'geoJson' | 'sprints' | 'runs'> & {
   Field: Field
   User: User
 }
@@ -195,7 +192,8 @@ export async function getFeed(
   const maxPostIdValue = maxPostId.max
 
   const posts: FeedItemType[] = await sql`
-    SELECT row_to_json("Field".*::"Field") as "Field", row_to_json("User".*::"User") as "User", "Post".* FROM "Post"
+    SELECT row_to_json("Field".*::"Field") as "Field", row_to_json("User".*::"User") as "User", 
+    "Post"."id", "Post"."createdAt", "Post"."updatedAt", "Post"."type", "Post"."text", "Post"."key", "Post"."totalDistance", "Post"."elapsedTime", "Post"."totalSprintTime", "Post"."maxSpeed", "Post"."averageSpeed", "Post"."userId", "Post"."startTime", "Post"."fieldId", "Post"."image", "Post"."halfTime", "Post"."status", "Post"."statusInfo" FROM "Post"
     LEFT JOIN "Field" ON "Post"."fieldId" = "Field"."id"
     INNER JOIN "User" ON "Post"."userId" = "User"."id"
     WHERE "Post"."id" <= ${cursor || maxPostIdValue}

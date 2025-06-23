@@ -52,15 +52,11 @@ export function createRepository(sql: ReturnType<typeof postgres>) {
       input: Parameters<typeof postRepo.updatePostComplete>[1]
     ) => postRepo.updatePostComplete(sql, input),
 
-
     getFieldsByUsage: (
       usage: Parameters<typeof fieldRepo.getFieldsByUsage>[1]
     ) => fieldRepo.getFieldsByUsage(sql, usage),
     getFieldsByName: (name: Parameters<typeof fieldRepo.getFieldsByName>[1]) =>
       fieldRepo.getFieldsByName(sql, name),
-
-
-
 
     getUser: (id: Parameters<typeof userRepo.getUser>[1]) =>
       userRepo.getUser(sql, id),
@@ -102,7 +98,6 @@ export function createRepository(sql: ReturnType<typeof postgres>) {
         sql,
         activityId
       ),
-
 
     updateSocialLoginTokens: (
       platformId: Parameters<typeof socialLoginRepo.updateSocialLoginTokens>[1],
