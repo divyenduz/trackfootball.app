@@ -34,8 +34,8 @@ importers:
   packages/open-api:
     devDependencies:
       '@kubb/cli':
-        specifier: 3.10.15
-        version: 3.10.15(typescript@5.8.3)
+        specifier: 3.14.0
+        version: 3.14.0(typescript@5.8.3)
       '@kubb/core':
         specifier: 3.11.1
         version: 3.11.1
@@ -853,8 +853,8 @@ packages:
     resolution: {integrity: sha512-vBZP4NlzfOlerQTnba4aqZoMhE/a9HY7HRqoOPaETQcSQuWEIyZMHGfVu6w9wGtGK5fED5qRs2DteVCjOH60sA==}
     engines: {node: '>=14'}
 
-  '@hono/node-server@1.14.4':
-    resolution: {integrity: sha512-DnxpshhYewr2q9ZN8ez/M5mmc3sucr8CT1sIgIy1bkeUXut9XWDkqHoFHRhWIQgkYnKpVRxunyhK7WzpJeJ6qQ==}
+  '@hono/node-server@1.15.0':
+    resolution: {integrity: sha512-MjmK4l5N4dQpZ9OSWN0tCj7ejuc7WvuWMzSKtc89bnknJykAeHxzRigXBTYZk85H6Awrii6RM59iUiUluApu2A==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
       hono: ^4
@@ -1036,8 +1036,8 @@ packages:
   '@kristiandupont/recase@1.4.1':
     resolution: {integrity: sha512-e5t4YqhnRGbS9sU4N52cQgTn37qKwTsxDDcIuIkgPvX0UmnL+7eoOR6oFXeCib5zYuw03vYKpR55NBq+W43j1A==}
 
-  '@kubb/cli@3.10.15':
-    resolution: {integrity: sha512-USM82gohsu9gBFTcsS62drDdCb4pKiNmOWP2jTTag0sDtg5spvtcr4hoMDC3B5Bg1Wlh4in+dm1zqoMehXH2bA==}
+  '@kubb/cli@3.14.0':
+    resolution: {integrity: sha512-FIryvM37El7+TTq+IWKzDU8giz1c2gbbHmEj1GNxM/FEIvVu0QX+iUeX6GI/76Rv2C4qf/5V7pzsPrplpzexcg==}
     engines: {node: '>=20'}
     hasBin: true
 
@@ -1047,6 +1047,10 @@ packages:
 
   '@kubb/core@3.11.1':
     resolution: {integrity: sha512-H9ClwMnGxADwZ//o3Ww2ZzIaKq2S/6xMjIYOB57oxHTKEBTotBYyJuqTFXVvHn0FUP2A1h4y3S1uull7gigMDw==}
+    engines: {node: '>=20'}
+
+  '@kubb/core@3.14.0':
+    resolution: {integrity: sha512-yO0qfPoprH4WG7ie69l4ZHCO4npf4/Br9PsE/wfBKu3xdgINNA823jh950hZEgfD/ZNboy7Leo8YVkpLRXi2ow==}
     engines: {node: '>=20'}
 
   '@kubb/oas@3.10.15':
@@ -1063,6 +1067,10 @@ packages:
 
   '@kubb/parser-ts@3.11.1':
     resolution: {integrity: sha512-k7pniw2Yzh+Y8AB+AItyDvQkm/FsWULBcxuKWQqWC/l50kvPWwpNLgM7TsdpcdFezGoj1r4RoAG5qYZb+hqICQ==}
+    engines: {node: '>=20'}
+
+  '@kubb/parser-ts@3.14.0':
+    resolution: {integrity: sha512-fVoPr4u+s2YcdLmprpLN7QfGPOFUAQaUGeSrMMBlER27kQCvdXiklItxwj6YsQzAQnxQ3OItGTNhtG6AJlOoIQ==}
     engines: {node: '>=20'}
 
   '@kubb/plugin-client@3.10.15':
@@ -1109,8 +1117,8 @@ packages:
     resolution: {integrity: sha512-gWH5pDQ3kpZCeymVSk7f1ijp3z/dGQESeXr75yscEUGoVAks6RqbLpcgObNRa8CW4X9MN9Ixkzzwbxpvxpxezg==}
     engines: {node: '>=20'}
 
-  '@kubb/ui@3.10.15':
-    resolution: {integrity: sha512-kaxQwNQXlJLVObVL9Z2q5v9l1M6knA20PrByiy7d5SmRXf4fc6kxn/Y33lxksjJY07QETfSAXJPVBTtkyn1liA==}
+  '@kubb/ui@3.14.0':
+    resolution: {integrity: sha512-1rew31eOEgld5KLheX1koON3wJPZPS7/f+K13aBhVYdsc3aeOeSiWqdIUNsI2I9VItm15YX0OauAvYn85cl5Mw==}
     engines: {node: '>=20'}
 
   '@mapbox/jsonlint-lines-primitives@2.0.2':
@@ -2506,8 +2514,8 @@ packages:
   hoist-non-react-statics@3.3.2:
     resolution: {integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==}
 
-  hono@4.7.11:
-    resolution: {integrity: sha512-rv0JMwC0KALbbmwJDEnxvQCeJh+xbS3KEWW5PC9cMJ08Ur9xgatI0HmtgYZfOdOSOeYsp5LO2cOhdI8cLEbDEQ==}
+  hono@4.8.4:
+    resolution: {integrity: sha512-KOIBp1+iUs0HrKztM4EHiB2UtzZDTBihDtOF5K6+WaJjCPeaW4Q92R8j63jOhvJI5+tZSMuKD9REVEXXY9illg==}
     engines: {node: '>=16.9.0'}
 
   hotscript@1.0.13:
@@ -3256,6 +3264,11 @@ packages:
     engines: {node: '>=14'}
     hasBin: true
 
+  prettier@3.6.2:
+    resolution: {integrity: sha512-I7AIg5boAr5R0FFtJ6rCfD+LFsWHp81dolrFD8S79U9tb8Az2nGrJncnMSnys+bpQJfRUzqs9hnA81OAA3hCuQ==}
+    engines: {node: '>=14'}
+    hasBin: true
+
   pretty-ms@9.2.0:
     resolution: {integrity: sha512-4yf0QO/sllf/1zbZWYnvWw3NxCQwLXKzIj0G849LSufP15BXKM0rbD2Z3wVnkMfjdn/CB0Dpp444gYAACdsplg==}
     engines: {node: '>=18'}
@@ -3386,6 +3399,9 @@ packages:
 
   remeda@2.23.0:
     resolution: {integrity: sha512-0mPy6q4ZMkAyrmucV6U6RaQ4GaJ7PLy9kTCNzC4k99DY6kQZXQIU8lxUVV4ocCWcjPvl7PSpOa42oPJWQiGouA==}
+
+  remeda@2.24.0:
+    resolution: {integrity: sha512-EGC3ZG304e3S1ZMdkhBjIPFn0NdI6d/NWqcxe34+TfG+c3cv6TcVavn/z17am8aQsrGZPX+fx4U6mTQvNRv4MQ==}
 
   remove-undefined-objects@6.0.0:
     resolution: {integrity: sha512-8fR4QQFV2xMKTYXazi1944rpr1f+JOzQu58TgUFi3xDu41fDon5qMXtjJ1/nhquOouTtJ621bKDrhE1IlOSP+A==}
@@ -4131,8 +4147,8 @@ packages:
   zod@3.23.8:
     resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
 
-  zod@3.25.64:
-    resolution: {integrity: sha512-hbP9FpSZf7pkS7hRVUrOjhwKJNyampPgtXKc3AN6DsWtoHsg2Sb4SQaS4Tcay380zSwd2VPo9G9180emBACp5g==}
+  zod@3.25.73:
+    resolution: {integrity: sha512-fuIKbQAWQl22Ba5d1quwEETQYjqnpKVyZIWAhbnnHgnDd3a+z4YgEfkI5SZ2xMELnLAXo/Flk2uXgysZNf0uaA==}
 
 snapshots:
 
@@ -4146,10 +4162,10 @@ snapshots:
       '@types/json-schema': 7.0.15
       js-yaml: 4.1.0
 
-  '@asteasolutions/zod-to-openapi@7.3.4(zod@3.25.64)':
+  '@asteasolutions/zod-to-openapi@7.3.4(zod@3.25.73)':
     dependencies:
       openapi3-ts: 4.4.0
-      zod: 3.25.64
+      zod: 3.25.73
 
   '@babel/code-frame@7.27.1':
     dependencies:
@@ -4583,21 +4599,21 @@ snapshots:
 
   '@fastify/busboy@2.1.1': {}
 
-  '@hono/node-server@1.14.4(hono@4.7.11)':
+  '@hono/node-server@1.15.0(hono@4.8.4)':
     dependencies:
-      hono: 4.7.11
+      hono: 4.8.4
 
-  '@hono/zod-openapi@0.19.2(hono@4.7.11)(zod@3.25.64)':
+  '@hono/zod-openapi@0.19.2(hono@4.8.4)(zod@3.25.73)':
     dependencies:
-      '@asteasolutions/zod-to-openapi': 7.3.4(zod@3.25.64)
-      '@hono/zod-validator': 0.4.3(hono@4.7.11)(zod@3.25.64)
-      hono: 4.7.11
-      zod: 3.25.64
+      '@asteasolutions/zod-to-openapi': 7.3.4(zod@3.25.73)
+      '@hono/zod-validator': 0.4.3(hono@4.8.4)(zod@3.25.73)
+      hono: 4.8.4
+      zod: 3.25.73
 
-  '@hono/zod-validator@0.4.3(hono@4.7.11)(zod@3.25.64)':
+  '@hono/zod-validator@0.4.3(hono@4.8.4)(zod@3.25.73)':
     dependencies:
-      hono: 4.7.11
-      zod: 3.25.64
+      hono: 4.8.4
+      zod: 3.25.73
 
   '@humanwhocodes/momoa@2.0.4': {}
 
@@ -4734,10 +4750,10 @@ snapshots:
     dependencies:
       ramda: 0.30.1
 
-  '@kubb/cli@3.10.15(typescript@5.8.3)':
+  '@kubb/cli@3.14.0(typescript@5.8.3)':
     dependencies:
-      '@kubb/core': 3.10.15
-      '@kubb/ui': 3.10.15
+      '@kubb/core': 3.14.0
+      '@kubb/ui': 3.14.0
       chokidar: 4.0.3
       citty: 0.1.6
       cli-progress: 3.12.0
@@ -4779,6 +4795,20 @@ snapshots:
       object-hash: 3.0.0
       p-queue: 8.1.0
       remeda: 2.23.0
+      seedrandom: 3.0.5
+      semver: 7.7.2
+
+  '@kubb/core@3.14.0':
+    dependencies:
+      '@kubb/parser-ts': 3.14.0
+      camelcase: 8.0.0
+      find-up: 7.0.0
+      fs-extra: 11.3.0
+      js-runtime: 0.0.8
+      natural-orderby: 5.0.0
+      object-hash: 3.0.0
+      p-queue: 8.1.0
+      remeda: 2.24.0
       seedrandom: 3.0.5
       semver: 7.7.2
 
@@ -4824,6 +4854,12 @@ snapshots:
     dependencies:
       prettier: 3.5.3
       remeda: 2.23.0
+      typescript: 5.8.3
+
+  '@kubb/parser-ts@3.14.0':
+    dependencies:
+      prettier: 3.6.2
+      remeda: 2.24.0
       typescript: 5.8.3
 
   '@kubb/plugin-client@3.10.15(@kubb/react@3.10.15)':
@@ -4909,12 +4945,12 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@kubb/ui@3.10.15':
+  '@kubb/ui@3.14.0':
     dependencies:
-      '@hono/node-server': 1.14.4(hono@4.7.11)
-      '@hono/zod-openapi': 0.19.2(hono@4.7.11)(zod@3.25.64)
-      hono: 4.7.11
-      zod: 3.25.64
+      '@hono/node-server': 1.15.0(hono@4.8.4)
+      '@hono/zod-openapi': 0.19.2(hono@4.8.4)(zod@3.25.73)
+      hono: 4.8.4
+      zod: 3.25.73
 
   '@mapbox/jsonlint-lines-primitives@2.0.2': {}
 
@@ -6403,7 +6439,7 @@ snapshots:
       react-is: 16.13.1
     optional: true
 
-  hono@4.7.11: {}
+  hono@4.8.4: {}
 
   hotscript@1.0.13: {}
 
@@ -7153,6 +7189,8 @@ snapshots:
 
   prettier@3.5.3: {}
 
+  prettier@3.6.2: {}
+
   pretty-ms@9.2.0:
     dependencies:
       parse-ms: 4.0.0
@@ -7295,6 +7333,10 @@ snapshots:
       rc: 1.2.8
 
   remeda@2.23.0:
+    dependencies:
+      type-fest: 4.41.0
+
+  remeda@2.24.0:
     dependencies:
       type-fest: 4.41.0
 
@@ -8108,4 +8150,4 @@ snapshots:
 
   zod@3.23.8: {}
 
-  zod@3.25.64: {}
+  zod@3.25.73: {}
