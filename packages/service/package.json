@@ -9,7 +9,7 @@
   },
   "devDependencies": {
     "@types/geojson": "7946.0.16",
-    "@types/node": "24.0.1"
+    "@types/node": "24.1.0"
   },
   "dependencies": {
     "@trackfootball/postgres": "workspace:*",
