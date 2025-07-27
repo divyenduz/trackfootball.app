@@ -34,8 +34,8 @@ importers:
   packages/open-api:
     devDependencies:
       '@kubb/cli':
-        specifier: 3.10.15
-        version: 3.10.15(typescript@5.8.3)
+        specifier: 3.16.1
+        version: 3.16.1(typescript@5.8.3)
       '@kubb/core':
         specifier: 3.11.1
         version: 3.11.1
@@ -853,8 +853,8 @@ packages:
     resolution: {integrity: sha512-vBZP4NlzfOlerQTnba4aqZoMhE/a9HY7HRqoOPaETQcSQuWEIyZMHGfVu6w9wGtGK5fED5qRs2DteVCjOH60sA==}
     engines: {node: '>=14'}
 
-  '@hono/node-server@1.14.4':
-    resolution: {integrity: sha512-DnxpshhYewr2q9ZN8ez/M5mmc3sucr8CT1sIgIy1bkeUXut9XWDkqHoFHRhWIQgkYnKpVRxunyhK7WzpJeJ6qQ==}
+  '@hono/node-server@1.17.1':
+    resolution: {integrity: sha512-SY79W/C+2b1MyAzmIcV32Q47vO1b5XwLRwj8S9N6Jr5n1QCkIfAIH6umOSgqWZ4/v67hg6qq8Ha5vZonVidGsg==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
       hono: ^4
@@ -1036,8 +1036,8 @@ packages:
   '@kristiandupont/recase@1.4.1':
     resolution: {integrity: sha512-e5t4YqhnRGbS9sU4N52cQgTn37qKwTsxDDcIuIkgPvX0UmnL+7eoOR6oFXeCib5zYuw03vYKpR55NBq+W43j1A==}
 
-  '@kubb/cli@3.10.15':
-    resolution: {integrity: sha512-USM82gohsu9gBFTcsS62drDdCb4pKiNmOWP2jTTag0sDtg5spvtcr4hoMDC3B5Bg1Wlh4in+dm1zqoMehXH2bA==}
+  '@kubb/cli@3.16.1':
+    resolution: {integrity: sha512-6icBuu8we4QmI/hZWGob82g7IPQj3guUJHicdm0Hw5BIiVvpb669ZkeSSlKyWhGLn5BCu0xxWMCxA6n8erJc4w==}
     engines: {node: '>=20'}
     hasBin: true
 
@@ -1047,6 +1047,10 @@ packages:
 
   '@kubb/core@3.11.1':
     resolution: {integrity: sha512-H9ClwMnGxADwZ//o3Ww2ZzIaKq2S/6xMjIYOB57oxHTKEBTotBYyJuqTFXVvHn0FUP2A1h4y3S1uull7gigMDw==}
+    engines: {node: '>=20'}
+
+  '@kubb/core@3.16.1':
+    resolution: {integrity: sha512-Jx4QlofG8M21VkpiTfHAkwxiiYIte9Bs5eWd5GQhGB8ukoCwOIGi38qbYCUjqtiO/72uuUXdii1uaqLyiDePmg==}
     engines: {node: '>=20'}
 
   '@kubb/oas@3.10.15':
@@ -1063,6 +1067,10 @@ packages:
 
   '@kubb/parser-ts@3.11.1':
     resolution: {integrity: sha512-k7pniw2Yzh+Y8AB+AItyDvQkm/FsWULBcxuKWQqWC/l50kvPWwpNLgM7TsdpcdFezGoj1r4RoAG5qYZb+hqICQ==}
+    engines: {node: '>=20'}
+
+  '@kubb/parser-ts@3.16.1':
+    resolution: {integrity: sha512-Ej/VLVJ1ysQP6IQW4oIFXlhvz1KgcA4KuRvlF7sDNw/XJEFXyT8H064s/XH65RKjmzOvsBJjYRuM/bKV8pb9pw==}
     engines: {node: '>=20'}
 
   '@kubb/plugin-client@3.10.15':
@@ -1109,8 +1117,8 @@ packages:
     resolution: {integrity: sha512-gWH5pDQ3kpZCeymVSk7f1ijp3z/dGQESeXr75yscEUGoVAks6RqbLpcgObNRa8CW4X9MN9Ixkzzwbxpvxpxezg==}
     engines: {node: '>=20'}
 
-  '@kubb/ui@3.10.15':
-    resolution: {integrity: sha512-kaxQwNQXlJLVObVL9Z2q5v9l1M6knA20PrByiy7d5SmRXf4fc6kxn/Y33lxksjJY07QETfSAXJPVBTtkyn1liA==}
+  '@kubb/ui@3.16.1':
+    resolution: {integrity: sha512-u/JiOY8pimPnANW0rST+tiHsifNf3ciSUNcW8gKNToLf8+VlFY7P16TMREjsdqJ8sKN4RJ+1vN5GpPw8OVE12g==}
     engines: {node: '>=20'}
 
   '@mapbox/jsonlint-lines-primitives@2.0.2':
@@ -2506,8 +2514,8 @@ packages:
   hoist-non-react-statics@3.3.2:
     resolution: {integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==}
 
-  hono@4.7.11:
-    resolution: {integrity: sha512-rv0JMwC0KALbbmwJDEnxvQCeJh+xbS3KEWW5PC9cMJ08Ur9xgatI0HmtgYZfOdOSOeYsp5LO2cOhdI8cLEbDEQ==}
+  hono@4.8.9:
+    resolution: {integrity: sha512-ERIxkXMRhUxGV7nS/Af52+j2KL60B1eg+k6cPtgzrGughS+espS9KQ7QO0SMnevtmRlBfAcN0mf1jKtO6j/doA==}
     engines: {node: '>=16.9.0'}
 
   hotscript@1.0.13:
@@ -3046,8 +3054,8 @@ packages:
   once@1.4.0:
     resolution: {integrity: sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==}
 
-  open@10.1.2:
-    resolution: {integrity: sha512-cxN6aIDPz6rm8hbebcP7vrQNhvRcveZoJU72Y7vskh4oIm+BZwBECnx5nTmrlres1Qapvx27Qo1Auukpf8PKXw==}
+  open@10.2.0:
+    resolution: {integrity: sha512-YgBpdJHPyQ2UE5x+hlSXcnejzAvD0b22U2OuAP+8OnlJT+PjWPxtgmGqKKc+RgTM63U9gN0YzrYc71R2WT/hTA==}
     engines: {node: '>=18'}
 
   openapi-types@12.1.3:
@@ -3063,6 +3071,10 @@ packages:
   p-limit@4.0.0:
     resolution: {integrity: sha512-5b0R4txpzjPWVw/cXXUResoD4hb6U/x9BH08L7nw+GN1sezDzPdxeRvpc9c433fZhBan/wusjbCsqwqm4EIBIQ==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
+
+  p-limit@6.2.0:
+    resolution: {integrity: sha512-kuUqqHNUqoIWp/c467RI4X6mmyuojY5jGutNU0wVTmEOOfcuwLqyMVoAi9MKi2Ak+5i9+nhmrK4ufZE8069kHA==}
+    engines: {node: '>=18'}
 
   p-locate@6.0.0:
     resolution: {integrity: sha512-wPrq66Llhl7/4AGC6I+cqxT07LhXvWL08LNXz1fENOw0Ap4sRZZ/gZpTTJ5jpurzzzfS2W/Ge9BY3LgLjCShcw==}
@@ -3256,6 +3268,11 @@ packages:
     engines: {node: '>=14'}
     hasBin: true
 
+  prettier@3.6.2:
+    resolution: {integrity: sha512-I7AIg5boAr5R0FFtJ6rCfD+LFsWHp81dolrFD8S79U9tb8Az2nGrJncnMSnys+bpQJfRUzqs9hnA81OAA3hCuQ==}
+    engines: {node: '>=14'}
+    hasBin: true
+
   pretty-ms@9.2.0:
     resolution: {integrity: sha512-4yf0QO/sllf/1zbZWYnvWw3NxCQwLXKzIj0G849LSufP15BXKM0rbD2Z3wVnkMfjdn/CB0Dpp444gYAACdsplg==}
     engines: {node: '>=18'}
@@ -3386,6 +3403,9 @@ packages:
 
   remeda@2.23.0:
     resolution: {integrity: sha512-0mPy6q4ZMkAyrmucV6U6RaQ4GaJ7PLy9kTCNzC4k99DY6kQZXQIU8lxUVV4ocCWcjPvl7PSpOa42oPJWQiGouA==}
+
+  remeda@2.26.1:
+    resolution: {integrity: sha512-hpiLfhUwkJhiMS3Z7dRrygcRdkMRZASw5qUdNdi33x1/Y9y/J5q5TyLyf8btDoVLIcsg/4fzPdaGXDTbnl+ixw==}
 
   remove-undefined-objects@6.0.0:
     resolution: {integrity: sha512-8fR4QQFV2xMKTYXazi1944rpr1f+JOzQu58TgUFi3xDu41fDon5qMXtjJ1/nhquOouTtJ621bKDrhE1IlOSP+A==}
@@ -4076,6 +4096,10 @@ packages:
       utf-8-validate:
         optional: true
 
+  wsl-utils@0.1.0:
+    resolution: {integrity: sha512-h3Fbisa2nKGPxCpm89Hk33lBLsnaGBvctQopaBSOW/uIs6FTe1ATyAnKFJrzVs9vpGdsTe73WF3V4lIsk4Gacw==}
+    engines: {node: '>=18'}
+
   xtend@4.0.2:
     resolution: {integrity: sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==}
     engines: {node: '>=0.4'}
@@ -4131,8 +4155,8 @@ packages:
   zod@3.23.8:
     resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
 
-  zod@3.25.64:
-    resolution: {integrity: sha512-hbP9FpSZf7pkS7hRVUrOjhwKJNyampPgtXKc3AN6DsWtoHsg2Sb4SQaS4Tcay380zSwd2VPo9G9180emBACp5g==}
+  zod@3.25.76:
+    resolution: {integrity: sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==}
 
 snapshots:
 
@@ -4146,10 +4170,10 @@ snapshots:
       '@types/json-schema': 7.0.15
       js-yaml: 4.1.0
 
-  '@asteasolutions/zod-to-openapi@7.3.4(zod@3.25.64)':
+  '@asteasolutions/zod-to-openapi@7.3.4(zod@3.25.76)':
     dependencies:
       openapi3-ts: 4.4.0
-      zod: 3.25.64
+      zod: 3.25.76
 
   '@babel/code-frame@7.27.1':
     dependencies:
@@ -4583,21 +4607,21 @@ snapshots:
 
   '@fastify/busboy@2.1.1': {}
 
-  '@hono/node-server@1.14.4(hono@4.7.11)':
+  '@hono/node-server@1.17.1(hono@4.8.9)':
     dependencies:
-      hono: 4.7.11
+      hono: 4.8.9
 
-  '@hono/zod-openapi@0.19.2(hono@4.7.11)(zod@3.25.64)':
+  '@hono/zod-openapi@0.19.2(hono@4.8.9)(zod@3.25.76)':
     dependencies:
-      '@asteasolutions/zod-to-openapi': 7.3.4(zod@3.25.64)
-      '@hono/zod-validator': 0.4.3(hono@4.7.11)(zod@3.25.64)
-      hono: 4.7.11
-      zod: 3.25.64
+      '@asteasolutions/zod-to-openapi': 7.3.4(zod@3.25.76)
+      '@hono/zod-validator': 0.4.3(hono@4.8.9)(zod@3.25.76)
+      hono: 4.8.9
+      zod: 3.25.76
 
-  '@hono/zod-validator@0.4.3(hono@4.7.11)(zod@3.25.64)':
+  '@hono/zod-validator@0.4.3(hono@4.8.9)(zod@3.25.76)':
     dependencies:
-      hono: 4.7.11
-      zod: 3.25.64
+      hono: 4.8.9
+      zod: 3.25.76
 
   '@humanwhocodes/momoa@2.0.4': {}
 
@@ -4734,10 +4758,10 @@ snapshots:
     dependencies:
       ramda: 0.30.1
 
-  '@kubb/cli@3.10.15(typescript@5.8.3)':
+  '@kubb/cli@3.16.1(typescript@5.8.3)':
     dependencies:
-      '@kubb/core': 3.10.15
-      '@kubb/ui': 3.10.15
+      '@kubb/core': 3.16.1
+      '@kubb/ui': 3.16.1
       chokidar: 4.0.3
       citty: 0.1.6
       cli-progress: 3.12.0
@@ -4747,8 +4771,7 @@ snapshots:
       gradient-string: 3.0.0
       jiti: 2.4.2
       latest-version: 9.0.0
-      open: 10.1.2
-      p-queue: 8.1.0
+      open: 10.2.0
       semver: 7.7.2
       string-argv: 0.3.2
     transitivePeerDependencies:
@@ -4779,6 +4802,20 @@ snapshots:
       object-hash: 3.0.0
       p-queue: 8.1.0
       remeda: 2.23.0
+      seedrandom: 3.0.5
+      semver: 7.7.2
+
+  '@kubb/core@3.16.1':
+    dependencies:
+      '@kubb/parser-ts': 3.16.1
+      camelcase: 8.0.0
+      find-up: 7.0.0
+      fs-extra: 11.3.0
+      js-runtime: 0.0.8
+      natural-orderby: 5.0.0
+      object-hash: 3.0.0
+      p-limit: 6.2.0
+      remeda: 2.26.1
       seedrandom: 3.0.5
       semver: 7.7.2
 
@@ -4824,6 +4861,12 @@ snapshots:
     dependencies:
       prettier: 3.5.3
       remeda: 2.23.0
+      typescript: 5.8.3
+
+  '@kubb/parser-ts@3.16.1':
+    dependencies:
+      prettier: 3.6.2
+      remeda: 2.26.1
       typescript: 5.8.3
 
   '@kubb/plugin-client@3.10.15(@kubb/react@3.10.15)':
@@ -4909,12 +4952,12 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@kubb/ui@3.10.15':
+  '@kubb/ui@3.16.1':
     dependencies:
-      '@hono/node-server': 1.14.4(hono@4.7.11)
-      '@hono/zod-openapi': 0.19.2(hono@4.7.11)(zod@3.25.64)
-      hono: 4.7.11
-      zod: 3.25.64
+      '@hono/node-server': 1.17.1(hono@4.8.9)
+      '@hono/zod-openapi': 0.19.2(hono@4.8.9)(zod@3.25.76)
+      hono: 4.8.9
+      zod: 3.25.76
 
   '@mapbox/jsonlint-lines-primitives@2.0.2': {}
 
@@ -6403,7 +6446,7 @@ snapshots:
       react-is: 16.13.1
     optional: true
 
-  hono@4.7.11: {}
+  hono@4.8.9: {}
 
   hotscript@1.0.13: {}
 
@@ -6947,12 +6990,12 @@ snapshots:
     dependencies:
       wrappy: 1.0.2
 
-  open@10.1.2:
+  open@10.2.0:
     dependencies:
       default-browser: 5.2.1
       define-lazy-prop: 3.0.0
       is-inside-container: 1.0.0
-      is-wsl: 3.1.0
+      wsl-utils: 0.1.0
 
   openapi-types@12.1.3: {}
 
@@ -6970,6 +7013,10 @@ snapshots:
       word-wrap: 1.2.5
 
   p-limit@4.0.0:
+    dependencies:
+      yocto-queue: 1.2.1
+
+  p-limit@6.2.0:
     dependencies:
       yocto-queue: 1.2.1
 
@@ -7153,6 +7200,8 @@ snapshots:
 
   prettier@3.5.3: {}
 
+  prettier@3.6.2: {}
+
   pretty-ms@9.2.0:
     dependencies:
       parse-ms: 4.0.0
@@ -7295,6 +7344,10 @@ snapshots:
       rc: 1.2.8
 
   remeda@2.23.0:
+    dependencies:
+      type-fest: 4.41.0
+
+  remeda@2.26.1:
     dependencies:
       type-fest: 4.41.0
 
@@ -8063,6 +8116,10 @@ snapshots:
 
   ws@8.18.2: {}
 
+  wsl-utils@0.1.0:
+    dependencies:
+      is-wsl: 3.1.0
+
   xtend@4.0.2: {}
 
   y18n@5.0.8: {}
@@ -8108,4 +8165,4 @@ snapshots:
 
   zod@3.23.8: {}
 
-  zod@3.25.64: {}
+  zod@3.25.76: {}
