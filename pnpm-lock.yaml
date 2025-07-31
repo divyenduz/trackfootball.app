@@ -28,8 +28,8 @@ importers:
         specifier: 7946.0.16
         version: 7946.0.16
       kanel:
-        specifier: 3.14.1
-        version: 3.14.1
+        specifier: 3.14.2
+        version: 3.14.2
 
   packages/open-api:
     devDependencies:
@@ -2737,8 +2737,8 @@ packages:
     resolution: {integrity: sha512-p/nXbhSEcu3pZRdkW1OfJhpsVtW1gd4Wa1fnQc9YLiTfAjn0312eMKimbdIQzuZl9aa9xUGaRlP9T/CJE/ditQ==}
     engines: {node: '>=0.10.0'}
 
-  kanel@3.14.1:
-    resolution: {integrity: sha512-8CFMpZfsJ47zH9I/437bTSuMyGf+ZxuutbudrhY0RtmgeSLiIPr3sIuZ7hJ0TexUnhw1/J1CdepthsOi7zPEhA==}
+  kanel@3.14.2:
+    resolution: {integrity: sha512-wwF/YEx4RgBWjyb5K5kkX0xPG9UBxlXg4Vtit0sBdE/TX35/Wiw5qY2QM++of2AvVVLwGnNPXvSZtiOMdu583g==}
     engines: {node: '>=16.0.0'}
     hasBin: true
 
@@ -6671,7 +6671,7 @@ snapshots:
 
   jsonpointer@5.0.1: {}
 
-  kanel@3.14.1:
+  kanel@3.14.2:
     dependencies:
       '@kristiandupont/recase': 1.4.1
       chalk: 4.1.2
