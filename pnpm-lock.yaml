@@ -43,8 +43,8 @@ importers:
         specifier: 3.10.15
         version: 3.10.15(@kubb/react@3.10.15)
       '@kubb/plugin-oas':
-        specifier: 3.11.1
-        version: 3.11.1(@kubb/react@3.10.15)
+        specifier: 3.16.1
+        version: 3.16.1(@kubb/react@3.10.15)
       '@kubb/plugin-ts':
         specifier: 3.11.1
         version: 3.11.1(@kubb/react@3.10.15)
@@ -1061,6 +1061,10 @@ packages:
     resolution: {integrity: sha512-Ph/fSe/ry6b3WhJfExtvW1CXbTEjv8WHenjusPlGibHG74RiaosFFjDauXdPJfKMiDHJNhftwdeZwgw4Y+P+xw==}
     engines: {node: '>=20'}
 
+  '@kubb/oas@3.16.1':
+    resolution: {integrity: sha512-AbYCNlPTBwmYecBKe0r/Piusx8B9t3sV11jtyPv2fj73ipyq29KeP7D6gw/9kaqcPVTVi5z17hXUKnWxG7kX5A==}
+    engines: {node: '>=20'}
+
   '@kubb/parser-ts@3.10.15':
     resolution: {integrity: sha512-5FqtVBQp/059/+2fUR/WvsHG9hp2XBmnvZJI/Rc4SsM3s0GPWRotm+qP19Z7dTjLkh6Mqml/fBZQlOtCxqOEuw==}
     engines: {node: '>=20'}
@@ -1091,6 +1095,12 @@ packages:
 
   '@kubb/plugin-oas@3.11.1':
     resolution: {integrity: sha512-7Q+ViyxM0vAJdpb/J/Ao1WQny3tI3xEvUMeFCUXOW9Mw9Q1L4slg3ItzOPjKfbLjzZK4vyS+gKfcunhH3qzk/g==}
+    engines: {node: '>=20'}
+    peerDependencies:
+      '@kubb/react': ^3.0.0
+
+  '@kubb/plugin-oas@3.16.1':
+    resolution: {integrity: sha512-sw3kfa5JjeqXzRW0qQIIReUxRVPmrBfTDBDiDi/y2WrZame5HsrC9x9KgPa2DFGhwzvIjuQGcTzWyovVXyRTmw==}
     engines: {node: '>=20'}
     peerDependencies:
       '@kubb/react': ^3.0.0
@@ -1291,6 +1301,12 @@ packages:
 
   '@readme/openapi-parser@4.1.0':
     resolution: {integrity: sha512-zZaGaOJ+0bYPGkPK4ekspE1BoO1iifxe5d3rsAE6AqFCoyHCjt/xMDtmJpy4slFdd1YtEv/VHhBpB1FlNClCNw==}
+    engines: {node: '>=20'}
+    peerDependencies:
+      openapi-types: '>=7'
+
+  '@readme/openapi-parser@4.1.2':
+    resolution: {integrity: sha512-lAFH88r/CHs5VZDUocEda0OSMSQsr6801sziIjOKyVA+0hSFN+BPuelPF5XvkMROHecnPd+XEJN1iNQqCgER/g==}
     engines: {node: '>=20'}
     peerDependencies:
       openapi-types: '>=7'
@@ -3026,6 +3042,10 @@ packages:
     resolution: {integrity: sha512-gZQkDU54QJnj8Sf7wXgeGfKT9S+Hz1DV849T+SuQMo0Wdz3/NKuaY1zXALopvbQ0nB8zGnR+yrLNKyoa5wvxCA==}
     engines: {node: '>=20'}
 
+  oas-normalize@14.1.2:
+    resolution: {integrity: sha512-Ro8PQDA0iDeWakWqI1UIdq/0/zoZbIOPzprHbgCxGh4GcbO2WNvqJqvsuriVctzA0FdXXotuX6XDsJ4xkBxXEg==}
+    engines: {node: '>=20'}
+
   oas-resolver@2.5.6:
     resolution: {integrity: sha512-Yx5PWQNZomfEhPPOphFbZKi9W93CocQj18NlD2Pa4GWZzdZpSJvYwoiuurRI7m3SpcChrnO08hkuQDL3FGsVFQ==}
     hasBin: true
@@ -3038,6 +3058,10 @@ packages:
 
   oas@27.1.0:
     resolution: {integrity: sha512-K1qOiNguPMTRG52pboD1xyNPvdg1DImxjKXDjSTXe/4NVzXosYrLsDw9T3N82HFSlsGqOyXNAfPpZ80VYcDedw==}
+    engines: {node: '>=20'}
+
+  oas@27.2.1:
+    resolution: {integrity: sha512-W+j0KxKjIBVSixUA6halqnSRMNW5aydO9TwZinR8bLPejAY0au8JDBK97ZM3XKGL4JRqObu9mOB7Fy/GxAgAMQ==}
     engines: {node: '>=20'}
 
   object-assign@4.1.1:
@@ -4851,6 +4875,22 @@ snapshots:
       - encoding
       - supports-color
 
+  '@kubb/oas@3.16.1':
+    dependencies:
+      '@redocly/openapi-core': 1.34.3
+      hotscript: 1.0.13
+      json-schema-to-ts: 3.1.1
+      jsonpointer: 5.0.1
+      oas: 27.2.1
+      oas-normalize: 14.1.2
+      openapi-types: 12.1.3
+      remeda: 2.26.1
+      swagger2openapi: 7.0.8
+      ts-toolbelt: 9.6.0
+    transitivePeerDependencies:
+      - encoding
+      - supports-color
+
   '@kubb/parser-ts@3.10.15':
     dependencies:
       prettier: 3.5.3
@@ -4899,6 +4939,18 @@ snapshots:
       '@kubb/react': 3.10.15
       '@stoplight/yaml': 4.3.0
       remeda: 2.23.0
+    transitivePeerDependencies:
+      - encoding
+      - supports-color
+
+  '@kubb/plugin-oas@3.16.1(@kubb/react@3.10.15)':
+    dependencies:
+      '@kubb/core': 3.16.1
+      '@kubb/oas': 3.16.1
+      '@kubb/react': 3.10.15
+      '@stoplight/yaml': 4.3.0
+      p-limit: 6.2.0
+      remeda: 2.26.1
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -5148,6 +5200,16 @@ snapshots:
   '@readme/http-status-codes@7.2.0': {}
 
   '@readme/openapi-parser@4.1.0(openapi-types@12.1.3)':
+    dependencies:
+      '@apidevtools/json-schema-ref-parser': 13.0.5
+      '@readme/better-ajv-errors': 2.3.2(ajv@8.17.1)
+      '@readme/openapi-schemas': 3.1.0
+      '@types/json-schema': 7.0.15
+      ajv: 8.17.1
+      ajv-draft-04: 1.0.0(ajv@8.17.1)
+      openapi-types: 12.1.3
+
+  '@readme/openapi-parser@4.1.2(openapi-types@12.1.3)':
     dependencies:
       '@apidevtools/json-schema-ref-parser': 13.0.5
       '@readme/better-ajv-errors': 2.3.2(ajv@8.17.1)
@@ -6947,6 +7009,16 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
+  oas-normalize@14.1.2:
+    dependencies:
+      '@readme/openapi-parser': 4.1.2(openapi-types@12.1.3)
+      '@readme/postman-to-openapi': 4.1.0
+      js-yaml: 4.1.0
+      openapi-types: 12.1.3
+      swagger2openapi: 7.0.8
+    transitivePeerDependencies:
+      - encoding
+
   oas-resolver@2.5.6:
     dependencies:
       node-fetch-h2: 2.3.0
@@ -6971,6 +7043,18 @@ snapshots:
   oas@27.1.0:
     dependencies:
       '@readme/openapi-parser': 4.1.0(openapi-types@12.1.3)
+      '@types/json-schema': 7.0.15
+      json-schema-merge-allof: 0.8.1
+      jsonpath-plus: 10.3.0
+      jsonpointer: 5.0.1
+      memoizee: 0.4.17
+      openapi-types: 12.1.3
+      path-to-regexp: 8.2.0
+      remove-undefined-objects: 6.0.0
+
+  oas@27.2.1:
+    dependencies:
+      '@readme/openapi-parser': 4.1.2(openapi-types@12.1.3)
       '@types/json-schema': 7.0.15
       json-schema-merge-allof: 0.8.1
       jsonpath-plus: 10.3.0
