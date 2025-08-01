@@ -14,8 +14,7 @@ import { postAddField } from './addField'
 import { Core } from '@trackfootball/sprint-detection'
 import { createRepository } from '@trackfootball/postgres'
 
-//@ts-ignore fix types
-import { env } from 'cloudflare:workers'
+import { env } from '@trackfootball/rw-app/src/env'
 
 export const stringify = (value: number | string): string => {
   if (typeof value === 'number') {
@@ -204,9 +203,6 @@ export async function importStravaActivity(
   }
 }
 
-const stravaClientId = env.STRAVA_CLIENT_ID
-const stravaClientSecret = env.STRAVA_CLIENT_SECRET
-
 type Athlete = {
   id: number
   username: string
@@ -240,6 +236,8 @@ type TokenExchangeResponse = {
 export async function tokenExchange(
   code: string
 ): Promise<TokenExchangeResponse> {
+  const stravaClientId = env.STRAVA_CLIENT_ID
+  const stravaClientSecret = env.STRAVA_CLIENT_SECRET
   const link = 'https://www.strava.com/api/v3/oauth/token'
 
   const form = new FormData()
@@ -261,6 +259,8 @@ export async function tokenExchange(
 export async function tokenRefresh(
   refreshToken: string
 ): Promise<Omit<TokenExchangeResponse, 'athlete'>> {
+  const stravaClientId = env.STRAVA_CLIENT_ID
+  const stravaClientSecret = env.STRAVA_CLIENT_SECRET
   const link = 'https://www.strava.com/api/v3/oauth/token'
 
   invariant(stravaClientId, `stravaClientId not set`)

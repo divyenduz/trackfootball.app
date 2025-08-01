@@ -6,7 +6,8 @@
   "scripts": {
     "build": "echo 'No build step required' && exit 0",
     "test": "echo 'No tests' && exit 0",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "pg:dump": "command -v pg_dump && PGPASSWORD=postgres pg_dump -d `cat ../../.dburl` --schema-only --no-owner > ./schema.sql || echo 'pg_dump not found'"
   },
   "devDependencies": {
     "@types/geojson": "7946.0.16",

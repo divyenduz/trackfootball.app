@@ -1,11 +1,11 @@
 'use server'
 
-import { env } from 'cloudflare:workers'
 import { requestInfo } from 'rwsdk/worker'
 import invariant from 'tiny-invariant'
 import { match } from 'ts-pattern'
 import { getLoggedInAthleteActivities } from '@trackfootball/open-api'
 import { SocialLogin, User } from '@trackfootball/kanel'
+import { env } from '@/env'
 
 type Athlete = {
   id: number
@@ -38,7 +38,9 @@ type TokenExchangeResponse = {
 }
 
 const stravaClientId = env.STRAVA_CLIENT_ID
+invariant(stravaClientId, `stravaClientId not set`)
 const stravaClientSecret = env.STRAVA_CLIENT_SECRET
+invariant(stravaClientSecret, `stravaClientSecret not set`)
 
 export async function tokenRefresh(
   refreshToken: string

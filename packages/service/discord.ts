@@ -1,5 +1,4 @@
-// @ts-ignore fix cloudflare:workers import in monorepo
-import { env } from 'cloudflare:workers'
+import { env } from '@trackfootball/rw-app/src/env'
 
 interface CreateDiscordMessageArgs {
   heading?: string
