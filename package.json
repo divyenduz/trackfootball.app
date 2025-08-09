@@ -11,6 +11,7 @@
     "release": "pnpm --filter @trackfootball/rw-app release"
   },
   "devDependencies": {
+    "lefthook": "^1.12.2",
     "typescript": "5.8.3"
   },
   "pnpm": {

@@ -71,6 +71,7 @@ export async function cmd(
   
   for (let i = 0; i < activityIds.length; i++) {
     const activityId = activityIds[i]
+    invariant(activityId !== undefined, 'Activity ID should be defined')
     console.log(`\n[${i + 1}/${activityIds.length}] Processing activity ${activityId}...`)
     try {
       const activity = await repository.getPostById(activityId)
