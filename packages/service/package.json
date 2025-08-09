@@ -9,7 +9,7 @@
   },
   "devDependencies": {
     "@types/geojson": "7946.0.16",
-    "@types/node": "24.1.0"
+    "@types/node": "24.2.1"
   },
   "dependencies": {
     "@trackfootball/rw-app": "workspace:*",
