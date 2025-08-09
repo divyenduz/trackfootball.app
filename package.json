@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
-    "dev": "pnpm --filter @trackfootball/next-js-app dev",
+    "dev": "pnpm --filter @trackfootball/rw-app dev",
     "build": "pnpm --filter @trackfootball/* build",
     "start": "pnpm --filter @trackfootball/next-js-app start",
     "test": "pnpm --filter @trackfootball/* test",

@@ -66,7 +66,10 @@ export default defineApp([
       const user = await repository.getUserByAuth0Sub(session.sub)
       ctx.user = user
     }
-    if (env.UNSAFE_AUTH_BYPASS_USER) {
+    if (
+      env.UNSAFE_AUTH_BYPASS_USER === '1' ||
+      env.UNSAFE_AUTH_BYPASS_USER === 'true'
+    ) {
       ctx.user = {
         id: 1,
         createdAt: new Date('2021-05-05T12:41:06.248Z'),
