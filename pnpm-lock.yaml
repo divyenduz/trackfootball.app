@@ -10,7 +10,7 @@ importers:
     devDependencies:
       lefthook:
         specifier: ^1.12.2
-        version: 1.12.2
+        version: 1.12.3
       typescript:
         specifier: 5.9.2
         version: 5.9.2
@@ -1047,8 +1047,8 @@ packages:
     resolution: {integrity: sha512-wgm9Ehl2jpeqP3zw/7mo3kRHFp5MEDhqAdwy1fTGkHAwnkGOVsgpvQhL8B5n1qlb01jV3n/bI0ZfZp5lWA1k4w==}
     engines: {node: '>=18.0.0'}
 
-  '@jridgewell/gen-mapping@0.3.12':
-    resolution: {integrity: sha512-OuLGC46TjB5BbN1dH8JULVVZY4WTdkF7tV9Ys6wLL1rubZnCMstOhNHueU5bLCrnRuDhKPDM4g6sw4Bel5Gzqg==}
+  '@jridgewell/gen-mapping@0.3.13':
+    resolution: {integrity: sha512-2kkt/7niJ6MgEPxF0bYdQ6etZaA+fQvDcLKckhy1yIQOzaoKjBBjSj63/aLVjYE3qhRt5dvM+uUyfCg6UKCBbA==}
 
   '@jridgewell/gen-mapping@0.3.8':
     resolution: {integrity: sha512-imAbBGkb+ebQyxKgzv5Hu2nmROxoDOXHh80evxdoXNOrvAnVx7zimzc1Oo5h9RlfV4vPXaE2iM5pOFbvOCClWA==}
@@ -1062,20 +1062,20 @@ packages:
     resolution: {integrity: sha512-R8gLRTZeyp03ymzP/6Lil/28tGeGEzhx1q2k703KGWRAI1VdvPIXdG70VJc2pAMw3NA6JKL5hhFu1sJX0Mnn/A==}
     engines: {node: '>=6.0.0'}
 
-  '@jridgewell/source-map@0.3.10':
-    resolution: {integrity: sha512-0pPkgz9dY+bijgistcTTJ5mR+ocqRXLuhXHYdzoMmmoJ2C9S46RCm2GMUbatPEUK9Yjy26IrAy8D/M00lLkv+Q==}
+  '@jridgewell/source-map@0.3.11':
+    resolution: {integrity: sha512-ZMp1V8ZFcPG5dIWnQLr3NSI1MiCU7UETdS/A0G8V/XWHvJv3ZsFqutJn1Y5RPmAPX6F3BiE397OqveU/9NCuIA==}
 
   '@jridgewell/sourcemap-codec@1.5.0':
     resolution: {integrity: sha512-gv3ZRaISU3fjPAgNsriBRqGWQL6quFx04YMPW/zD8XMLsU32mhCCbfbO6KZFLjvYpCZ8zyDEgqsgf+PwPaM7GQ==}
 
-  '@jridgewell/sourcemap-codec@1.5.4':
-    resolution: {integrity: sha512-VT2+G1VQs/9oz078bLrYbecdZKs912zQlkelYpuf+SXF+QvZDYJlbx/LSx+meSAwdDFnF8FVXW92AVjjkVmgFw==}
+  '@jridgewell/sourcemap-codec@1.5.5':
+    resolution: {integrity: sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og==}
 
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@jridgewell/trace-mapping@0.3.29':
-    resolution: {integrity: sha512-uw6guiW/gcAGPDhLmd77/6lW8QLeiV5RUTsAX46Db6oLhGaVj4lhnPwb184s1bkc8kdVg/+h988dro8GRDpmYQ==}
+  '@jridgewell/trace-mapping@0.3.30':
+    resolution: {integrity: sha512-GQ7Nw5G2lTu/BtHTKfXhKHok2WGetd4XYcVKGx00SjAk8GMwgJM3zr6zORiPGuOE+/vkc90KtTosSSvaCjKb2Q==}
 
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
@@ -2037,8 +2037,8 @@ packages:
   caniuse-lite@1.0.30001723:
     resolution: {integrity: sha512-1R/elMjtehrFejxwmexeXAtae5UO9iSyFn6G/I806CYC/BLyyBk1EPhrKBkWhy6wM6Xnm47dSJQec+tLJ39WHw==}
 
-  caniuse-lite@1.0.30001733:
-    resolution: {integrity: sha512-e4QKw/O2Kavj2VQTKZWrwzkt3IxOmIlU6ajRb6LP64LHpBo1J67k2Hi4Vu/TgJWsNtynurfS0uK3MaUTCPfu5Q==}
+  caniuse-lite@1.0.30001734:
+    resolution: {integrity: sha512-uhE1Ye5vgqju6OI71HTQqcBCZrvHugk0MjLak7Q+HfoBgoq5Bi+5YnwjP4fjDgrtYr/l8MVRBvzz9dPD4KyK0A==}
 
   chai@5.2.0:
     resolution: {integrity: sha512-mCuXncKXk5iCLhfhwTc0izo0gtEmpz5CtG2y8GiOINBlMVS6v8TMRc5TaLWKS6692m9+dVVfzgeVxR5UxWHTYw==}
@@ -2260,8 +2260,8 @@ packages:
   electron-to-chromium@1.5.167:
     resolution: {integrity: sha512-LxcRvnYO5ez2bMOFpbuuVuAI5QNeY1ncVytE/KXaL6ZNfzX1yPlAO0nSOyIHx2fVAuUprMqPs/TdVhUFZy7SIQ==}
 
-  electron-to-chromium@1.5.199:
-    resolution: {integrity: sha512-3gl0S7zQd88kCAZRO/DnxtBKuhMO4h0EaQIN3YgZfV6+pW+5+bf2AdQeHNESCoaQqo/gjGVYEf2YM4O5HJQqpQ==}
+  electron-to-chromium@1.5.200:
+    resolution: {integrity: sha512-rFCxROw7aOe4uPTfIAx+rXv9cEcGx+buAF4npnhtTqCJk5KDFRnh3+KYj7rdVh6lsFt5/aPs+Irj9rZ33WMA7w==}
 
   emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
@@ -2779,6 +2779,9 @@ packages:
   jsonfile@6.1.0:
     resolution: {integrity: sha512-5dgndWOriYSm5cnYaJNhalLNDKOqFwyDB/rr1E9ZsGciGvKPs8R2xYGCacuf3z6K1YKDz182fd+fY3cn3pMqXQ==}
 
+  jsonfile@6.2.0:
+    resolution: {integrity: sha512-FGuPw30AdOIUTRMC2OMRtQV+jkVj2cfPqSeWXv1NEAJ1qZ5zb1X6z1mFhbfOB/iy3ssJCD+3KuZ8r8C3uVFlAg==}
+
   jsonpath-plus@10.3.0:
     resolution: {integrity: sha512-8TNmfeTCk2Le33A3vRRwtuworG/L5RrgMvdjhKZxvyShO+mBu2fP50OWUjRLNtvw344DdDarFh9buFAZs5ujeA==}
     engines: {node: '>=18.0.0'}
@@ -2835,58 +2838,58 @@ packages:
     resolution: {integrity: sha512-7W0vV3rqv5tokqkBAFV1LbR7HPOWzXQDpDgEuib/aJ1jsZZx6x3c2mBI+TJhJzOhkGeaLbCKEHXEXLfirtG2JA==}
     engines: {node: '>=18'}
 
-  lefthook-darwin-arm64@1.12.2:
-    resolution: {integrity: sha512-fTxeI9tEskrHjc3QyEO+AG7impBXY2Ed8V5aiRc3fw9POfYtVh9b5jRx90fjk2+ld5hf+Z1DsyyLq/vOHDFskQ==}
+  lefthook-darwin-arm64@1.12.3:
+    resolution: {integrity: sha512-j1lwaosWRy3vhz8oQgCS1M6EUFN95aIYeNuqkczsBoAA6BDNAmVP1ctYEIYUK4bYaIgENbqbA9prYMAhyzh6Og==}
     cpu: [arm64]
     os: [darwin]
 
-  lefthook-darwin-x64@1.12.2:
-    resolution: {integrity: sha512-T1dCDKAAfdHgYZ8qtrS02SJSHoR52RFcrGArFNll9Mu4ZSV19Sp8BO+kTwDUOcLYdcPGNaqOp9PkRBQGZWQC7g==}
+  lefthook-darwin-x64@1.12.3:
+    resolution: {integrity: sha512-x6aWFfLQX4m5zQ4X9zh5+hHOE5XTvNjz2zB9DI+xbIBLs2RRg0xJNT3OfgSrBU1QtEBneJ5dRQP5nl47td9GDQ==}
     cpu: [x64]
     os: [darwin]
 
-  lefthook-freebsd-arm64@1.12.2:
-    resolution: {integrity: sha512-2n9z7Q4BKeMBoB9cuEdv0UBQH82Z4GgBQpCrfjCtyzpDnYQwrH8Tkrlnlko4qPh9MM6nLLGIYMKsA5nltzo8Cg==}
+  lefthook-freebsd-arm64@1.12.3:
+    resolution: {integrity: sha512-41OmulLqVZ0EOHmmHouJrpL59SwDD7FLoso4RsQVIBPaf8fHacdLo07Ye28VWQ5XolZQvnWcr1YXKo4JhqQMyw==}
     cpu: [arm64]
     os: [freebsd]
 
-  lefthook-freebsd-x64@1.12.2:
-    resolution: {integrity: sha512-1hNY/irY+/3kjRzKoJYxG+m3BYI8QxopJUK1PQnknGo1Wy5u302SdX+tR7pnpz6JM5chrNw4ozSbKKOvdZ5VEw==}
+  lefthook-freebsd-x64@1.12.3:
+    resolution: {integrity: sha512-741/JRCJIS++hgYEH2uefN4FsH872V7gy2zDhcfQofiZnWP7+qhl4Wmwi8IpjIu4X7hLOC4cT18LOVU5L8KV9Q==}
     cpu: [x64]
     os: [freebsd]
 
-  lefthook-linux-arm64@1.12.2:
-    resolution: {integrity: sha512-1W4swYIVRkxq/LFTuuK4oVpd6NtTKY4E3VY2Uq2JDkIOJV46+8qGBF+C/QA9K3O9chLffgN7c+i+NhIuGiZ/Vw==}
+  lefthook-linux-arm64@1.12.3:
+    resolution: {integrity: sha512-BXIy1aDFZmFgmebJliNrEqZfX1lSOD4b/USvANv1UirFrNgTq5SRssd1CKfflT2PwKX6LsJTD4WabLLWZOxp9A==}
     cpu: [arm64]
     os: [linux]
 
-  lefthook-linux-x64@1.12.2:
-    resolution: {integrity: sha512-J6VGuMfhq5iCsg1Pv7xULbuXC63gP5LaikT0PhkyBNMi3HQneZFDJ8k/sp0Ue9HkQv6QfWIo3/FgB9gz38MCFw==}
+  lefthook-linux-x64@1.12.3:
+    resolution: {integrity: sha512-FRdwdj5jsQAP2eVrtkVUqMqYNCbQ2Ix84izy29/BvLlu/hVypAGbDfUkgFnsmAd6ZsCBeYCEtPuqyg3E3SO0Rg==}
     cpu: [x64]
     os: [linux]
 
-  lefthook-openbsd-arm64@1.12.2:
-    resolution: {integrity: sha512-wncDRW3ml24DaOyH22KINumjvCohswbQqbxyH2GORRCykSnE859cTjOrRIchTKBIARF7PSeGPUtS7EK0+oDbaw==}
+  lefthook-openbsd-arm64@1.12.3:
+    resolution: {integrity: sha512-tch5wXY4GOjKAYohH7OFoxNdVHuUSYt2Pulo2VTkMYEG8IrvJnRO5MkvgHtKDHzU5mfABQYv5+ccJykDx5hQWA==}
     cpu: [arm64]
     os: [openbsd]
 
-  lefthook-openbsd-x64@1.12.2:
-    resolution: {integrity: sha512-2jDOkCHNnc/oK/vR62hAf3vZb1EQ6Md2GjIlgZ/V7A3ztOsM8QZ5IxwYN3D1UOIR5ZnwMBy7PtmTJC/HJrig5w==}
+  lefthook-openbsd-x64@1.12.3:
+    resolution: {integrity: sha512-IHbHg/rUFXrAN7LnjcQEtutCHBaD49CZge96Hpk0GZ2eEG5GTCNRnUyEf+Kf3+RTqHFgwtADdpeDa/ZaGZTM4g==}
     cpu: [x64]
     os: [openbsd]
 
-  lefthook-windows-arm64@1.12.2:
-    resolution: {integrity: sha512-ZMH/q6UNSidhHEG/1QoqIl1n4yPTBWuVmKx5bONtKHicoz4QCQ+QEiNjKsG5OO4C62nfyHGThmweCzZVUQECJw==}
+  lefthook-windows-arm64@1.12.3:
+    resolution: {integrity: sha512-wghcE5TSpb+mbtemUV6uAo9hEK09kxRzhf2nPdeDX+fw42cL2TGZsbaCnDyzaY144C+L2/wEWrLIHJMnZYkuqA==}
     cpu: [arm64]
     os: [win32]
 
-  lefthook-windows-x64@1.12.2:
-    resolution: {integrity: sha512-TqT2jIPcTQ9uwaw+v+DTmvnUHM/p7bbsSrPoPX+fRXSGLzFjyiY+12C9dObSwfCQq6rT70xqQJ9AmftJQsa5/Q==}
+  lefthook-windows-x64@1.12.3:
+    resolution: {integrity: sha512-7Co/L8e2x2hGC1L33jDJ4ZlTkO3PJm25GOGpLfN1kqwhGB/uzMLeTI/PBczjlIN8isUv26ouNd9rVR7Bibrwyg==}
     cpu: [x64]
     os: [win32]
 
-  lefthook@1.12.2:
-    resolution: {integrity: sha512-2CeTu5NcmoT9YnqsHTq/TF36MlqlzHzhivGx3DrXHwcff4TdvrkIwUTA56huM3Nlo5ODAF/0hlPzaKLmNHCBnQ==}
+  lefthook@1.12.3:
+    resolution: {integrity: sha512-huMg+mGp6wHPjkaLdchuOvxVRMzvz6OVdhivatiH2Qn47O5Zm46jwzbVPYIanX6N/8ZTjGLBxv8tZ0KYmKt/Jg==}
     hasBin: true
 
   leven@3.1.0:
@@ -4874,10 +4877,10 @@ snapshots:
     dependencies:
       minipass: 7.1.2
 
-  '@jridgewell/gen-mapping@0.3.12':
+  '@jridgewell/gen-mapping@0.3.13':
     dependencies:
-      '@jridgewell/sourcemap-codec': 1.5.4
-      '@jridgewell/trace-mapping': 0.3.29
+      '@jridgewell/sourcemap-codec': 1.5.5
+      '@jridgewell/trace-mapping': 0.3.30
 
   '@jridgewell/gen-mapping@0.3.8':
     dependencies:
@@ -4889,24 +4892,24 @@ snapshots:
 
   '@jridgewell/set-array@1.2.1': {}
 
-  '@jridgewell/source-map@0.3.10':
+  '@jridgewell/source-map@0.3.11':
     dependencies:
-      '@jridgewell/gen-mapping': 0.3.12
-      '@jridgewell/trace-mapping': 0.3.29
+      '@jridgewell/gen-mapping': 0.3.13
+      '@jridgewell/trace-mapping': 0.3.30
 
   '@jridgewell/sourcemap-codec@1.5.0': {}
 
-  '@jridgewell/sourcemap-codec@1.5.4': {}
+  '@jridgewell/sourcemap-codec@1.5.5': {}
 
   '@jridgewell/trace-mapping@0.3.25':
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@jridgewell/trace-mapping@0.3.29':
+  '@jridgewell/trace-mapping@0.3.30':
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
-      '@jridgewell/sourcemap-codec': 1.5.4
+      '@jridgewell/sourcemap-codec': 1.5.5
 
   '@jridgewell/trace-mapping@0.3.9':
     dependencies:
@@ -5967,8 +5970,8 @@ snapshots:
 
   browserslist@4.25.2:
     dependencies:
-      caniuse-lite: 1.0.30001733
-      electron-to-chromium: 1.5.199
+      caniuse-lite: 1.0.30001734
+      electron-to-chromium: 1.5.200
       node-releases: 2.0.19
       update-browserslist-db: 1.1.3(browserslist@4.25.2)
 
@@ -6008,7 +6011,7 @@ snapshots:
 
   caniuse-lite@1.0.30001723: {}
 
-  caniuse-lite@1.0.30001733: {}
+  caniuse-lite@1.0.30001734: {}
 
   chai@5.2.0:
     dependencies:
@@ -6207,7 +6210,7 @@ snapshots:
 
   electron-to-chromium@1.5.167: {}
 
-  electron-to-chromium@1.5.199: {}
+  electron-to-chromium@1.5.200: {}
 
   emoji-regex@8.0.0: {}
 
@@ -6496,7 +6499,7 @@ snapshots:
   fs-extra@11.3.1:
     dependencies:
       graceful-fs: 4.2.11
-      jsonfile: 6.1.0
+      jsonfile: 6.2.0
       universalify: 2.0.1
 
   fsevents@2.3.3:
@@ -6745,6 +6748,12 @@ snapshots:
     optionalDependencies:
       graceful-fs: 4.2.11
 
+  jsonfile@6.2.0:
+    dependencies:
+      universalify: 2.0.1
+    optionalDependencies:
+      graceful-fs: 4.2.11
+
   jsonpath-plus@10.3.0:
     dependencies:
       '@jsep-plugin/assignment': 1.3.0(jsep@1.4.0)
@@ -6817,48 +6826,48 @@ snapshots:
     dependencies:
       package-json: 10.0.1
 
-  lefthook-darwin-arm64@1.12.2:
+  lefthook-darwin-arm64@1.12.3:
     optional: true
 
-  lefthook-darwin-x64@1.12.2:
+  lefthook-darwin-x64@1.12.3:
     optional: true
 
-  lefthook-freebsd-arm64@1.12.2:
+  lefthook-freebsd-arm64@1.12.3:
     optional: true
 
-  lefthook-freebsd-x64@1.12.2:
+  lefthook-freebsd-x64@1.12.3:
     optional: true
 
-  lefthook-linux-arm64@1.12.2:
+  lefthook-linux-arm64@1.12.3:
     optional: true
 
-  lefthook-linux-x64@1.12.2:
+  lefthook-linux-x64@1.12.3:
     optional: true
 
-  lefthook-openbsd-arm64@1.12.2:
+  lefthook-openbsd-arm64@1.12.3:
     optional: true
 
-  lefthook-openbsd-x64@1.12.2:
+  lefthook-openbsd-x64@1.12.3:
     optional: true
 
-  lefthook-windows-arm64@1.12.2:
+  lefthook-windows-arm64@1.12.3:
     optional: true
 
-  lefthook-windows-x64@1.12.2:
+  lefthook-windows-x64@1.12.3:
     optional: true
 
-  lefthook@1.12.2:
+  lefthook@1.12.3:
     optionalDependencies:
-      lefthook-darwin-arm64: 1.12.2
-      lefthook-darwin-x64: 1.12.2
-      lefthook-freebsd-arm64: 1.12.2
-      lefthook-freebsd-x64: 1.12.2
-      lefthook-linux-arm64: 1.12.2
-      lefthook-linux-x64: 1.12.2
-      lefthook-openbsd-arm64: 1.12.2
-      lefthook-openbsd-x64: 1.12.2
-      lefthook-windows-arm64: 1.12.2
-      lefthook-windows-x64: 1.12.2
+      lefthook-darwin-arm64: 1.12.3
+      lefthook-darwin-x64: 1.12.3
+      lefthook-freebsd-arm64: 1.12.3
+      lefthook-freebsd-x64: 1.12.3
+      lefthook-linux-arm64: 1.12.3
+      lefthook-linux-x64: 1.12.3
+      lefthook-openbsd-arm64: 1.12.3
+      lefthook-openbsd-x64: 1.12.3
+      lefthook-windows-arm64: 1.12.3
+      lefthook-windows-x64: 1.12.3
 
   leven@3.1.0: {}
 
@@ -7929,7 +7938,7 @@ snapshots:
 
   terser-webpack-plugin@5.3.14(webpack@5.99.9):
     dependencies:
-      '@jridgewell/trace-mapping': 0.3.29
+      '@jridgewell/trace-mapping': 0.3.30
       jest-worker: 27.5.1
       schema-utils: 4.3.2
       serialize-javascript: 6.0.2
@@ -7938,7 +7947,7 @@ snapshots:
 
   terser@5.43.1:
     dependencies:
-      '@jridgewell/source-map': 0.3.10
+      '@jridgewell/source-map': 0.3.11
       acorn: 8.15.0
       commander: 2.20.3
       source-map-support: 0.5.21
