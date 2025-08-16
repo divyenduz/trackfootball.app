@@ -6,10 +6,14 @@ export async function Dashboard({ ctx }: RequestInfo) {
   const currentUser = ctx.user
 
   return (
-    <FeedContainer
-      initialPosts={feed.posts}
-      initialNextCursor={feed.nextCursor}
-      currentUser={currentUser}
-    />
+    <>
+      <title>Dashboard - Your Football Activity Feed | TrackFootball.app</title>
+      <meta name="description" content="View your personalized football activity feed. Track your progress, see your friends' activities and discover new training insights on TrackFootball." />
+      <FeedContainer
+        initialPosts={feed.posts}
+        initialNextCursor={feed.nextCursor}
+        currentUser={currentUser}
+      />
+    </>
   )
 }

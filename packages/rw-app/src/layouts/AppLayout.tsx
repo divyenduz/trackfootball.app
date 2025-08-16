@@ -7,10 +7,10 @@ export function AppLayout({ children, requestInfo }: LayoutProps) {
 
   return (
     <div className="app">
-      <title>Home | TrackFootball</title>
+      <title>TrackFootball.app - Track, Analyse and Improve Your Football Game</title>
       <meta
         name="description"
-        content="Track, Analyse and Improve | Democratizing Football Science"
+        content="TrackFootball is a social network for casual Football players. Record your game with any GPS watch/phone and upload it to TrackFootball to track, analyse and improve your performance."
       />
       <header>
         <AppBar pageName={'TrackFootball'} user={user}></AppBar>
