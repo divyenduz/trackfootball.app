@@ -10,22 +10,30 @@ import invariant from 'tiny-invariant'
 import { getNthCoord } from '@/utils'
 import { ConditionalDisplay } from './atoms/ConditionalDisplay'
 
-const ReactMapGL = lazy(() => import('react-map-gl/mapbox'))
+const ReactMapGL = (lazy as any)(async () => {
+  const module = await import('react-map-gl/mapbox')
+  return module
+})
 
-const Layer = lazy(() =>
-  import('react-map-gl/mapbox').then(({ Layer }) => ({ default: Layer }))
-)
-const Marker = lazy(() =>
-  import('react-map-gl/mapbox').then(({ Marker }) => ({ default: Marker }))
-)
-const NavigationControl = lazy(() =>
-  import('react-map-gl/mapbox').then(({ NavigationControl }) => ({
-    default: NavigationControl,
-  }))
-)
-const Source = lazy(() =>
-  import('react-map-gl/mapbox').then(({ Source }) => ({ default: Source }))
-)
+const Layer = (lazy as any)(async () => {
+  const { Layer } = await import('react-map-gl/mapbox')
+  return { default: Layer }
+})
+
+const Marker = (lazy as any)(async () => {
+  const { Marker } = await import('react-map-gl/mapbox')
+  return { default: Marker }
+})
+
+const NavigationControl = (lazy as any)(async () => {
+  const { NavigationControl } = await import('react-map-gl/mapbox')
+  return { default: NavigationControl }
+})
+
+const Source = (lazy as any)(async () => {
+  const { Source } = await import('react-map-gl/mapbox')
+  return { default: Source }
+})
 
 type ViewPort = ViewState & {
   width?: number
