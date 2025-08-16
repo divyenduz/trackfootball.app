@@ -4,10 +4,12 @@
   "private": true,
   "main": "index.ts",
   "scripts": {
-    "test": "echo 'No tests' && exit 0",
+    "test": "vitest run",
     "lint": "tsc --noEmit"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "vitest": "3.2.4"
+  },
   "dependencies": {
     "@turf/distance": "7.2.0",
     "@turf/helpers": "7.2.0",
