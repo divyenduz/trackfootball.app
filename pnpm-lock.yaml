@@ -89,8 +89,8 @@ importers:
         specifier: 3.16.2
         version: 3.16.2(@kubb/react@3.10.15)
       '@kubb/plugin-ts':
-        specifier: 3.16.2
-        version: 3.16.2(@kubb/react@3.10.15)
+        specifier: 3.16.4
+        version: 3.16.4(@kubb/react@3.10.15)(ajv@8.17.1)
       '@types/bun':
         specifier: 1.2.20
         version: 1.2.20(@types/react@19.1.8)
@@ -1128,6 +1128,10 @@ packages:
     resolution: {integrity: sha512-5l8DMgdPL/3McMk8i7zUQya9EXbwWHV16rVkFmeBNT1rZ+L2dkE0COKgMf9ekSQsVzpizRhsMfG+8a3ULZmidQ==}
     engines: {node: '>=20'}
 
+  '@kubb/oas@3.16.4':
+    resolution: {integrity: sha512-vrZMYHZ5DKpypsMl3zwzUlhDvntAVbDIiAZNug+EoJFWVL6TRdENYQS3aDGBCsfEgBGRJxx7sTPamylm3Ygs0A==}
+    engines: {node: '>=20'}
+
   '@kubb/parser-ts@3.10.15':
     resolution: {integrity: sha512-5FqtVBQp/059/+2fUR/WvsHG9hp2XBmnvZJI/Rc4SsM3s0GPWRotm+qP19Z7dTjLkh6Mqml/fBZQlOtCxqOEuw==}
     engines: {node: '>=20'}
@@ -1166,14 +1170,20 @@ packages:
     peerDependencies:
       '@kubb/react': ^3.0.0
 
-  '@kubb/plugin-ts@3.16.2':
-    resolution: {integrity: sha512-L+sMfz3vW+6VXTknhmjy2xiRRa2XPa+YKBaE8um6+maCvGQPIcXc2nTw3Ri4NRjIWt+YnUV8PzXs0REPcBkCxQ==}
+  '@kubb/plugin-oas@3.16.4':
+    resolution: {integrity: sha512-1A/zX+Qt8uZ/zJfjBYDFcF/CBzlWieKOQfuEzOYKPBFOe3wWWlveCoxpTbysFh8HLeFF5zKUuslRA7xVZv7dCQ==}
     engines: {node: '>=20'}
     peerDependencies:
       '@kubb/react': ^3.0.0
 
   '@kubb/plugin-ts@3.16.3':
     resolution: {integrity: sha512-ERY3xdr16szwimwblCINRIE6HLV7RSA9AqeXcMyHvFi2cdCOL4r94UY8zqcg4va4TM8ai0Y+vwgkdQHYrQfogA==}
+    engines: {node: '>=20'}
+    peerDependencies:
+      '@kubb/react': ^3.0.0
+
+  '@kubb/plugin-ts@3.16.4':
+    resolution: {integrity: sha512-w3IoQAPZeh+L/YrPw3JYqnk4b7hP/udB1TyomJ3hkdx3HJs2umXGxdvVSPLB2UnZHkbUiRW3ZuQze63aIJ2KMQ==}
     engines: {node: '>=20'}
     peerDependencies:
       '@kubb/react': ^3.0.0
@@ -5092,6 +5102,22 @@ snapshots:
       - ajv
       - encoding
 
+  '@kubb/oas@3.16.4(ajv@8.17.1)':
+    dependencies:
+      '@redocly/openapi-core': 2.0.5(ajv@8.17.1)
+      hotscript: 1.0.13
+      json-schema-to-ts: 3.1.1
+      jsonpointer: 5.0.1
+      oas: 28.1.0
+      oas-normalize: 15.0.1
+      openapi-types: 12.1.3
+      remeda: 2.30.0
+      swagger2openapi: 7.0.8
+      ts-toolbelt: 9.6.0
+    transitivePeerDependencies:
+      - ajv
+      - encoding
+
   '@kubb/parser-ts@3.10.15':
     dependencies:
       prettier: 3.6.2
@@ -5152,16 +5178,17 @@ snapshots:
       - ajv
       - encoding
 
-  '@kubb/plugin-ts@3.16.2(@kubb/react@3.10.15)':
+  '@kubb/plugin-oas@3.16.4(@kubb/react@3.10.15)(ajv@8.17.1)':
     dependencies:
-      '@kubb/core': 3.16.2
-      '@kubb/oas': 3.16.2
-      '@kubb/parser-ts': 3.16.2
-      '@kubb/plugin-oas': 3.16.2(@kubb/react@3.10.15)
+      '@kubb/core': 3.16.4
+      '@kubb/oas': 3.16.4(ajv@8.17.1)
       '@kubb/react': 3.10.15
+      '@stoplight/yaml': 4.3.0
+      p-limit: 7.0.0
+      remeda: 2.30.0
     transitivePeerDependencies:
+      - ajv
       - encoding
-      - supports-color
 
   '@kubb/plugin-ts@3.16.3(@kubb/react@3.10.15)(ajv@8.17.1)':
     dependencies:
@@ -5169,6 +5196,17 @@ snapshots:
       '@kubb/oas': 3.16.3(ajv@8.17.1)
       '@kubb/parser-ts': 3.16.3
       '@kubb/plugin-oas': 3.16.3(@kubb/react@3.10.15)(ajv@8.17.1)
+      '@kubb/react': 3.10.15
+    transitivePeerDependencies:
+      - ajv
+      - encoding
+
+  '@kubb/plugin-ts@3.16.4(@kubb/react@3.10.15)(ajv@8.17.1)':
+    dependencies:
+      '@kubb/core': 3.16.4
+      '@kubb/oas': 3.16.4(ajv@8.17.1)
+      '@kubb/parser-ts': 3.16.4
+      '@kubb/plugin-oas': 3.16.4(@kubb/react@3.10.15)(ajv@8.17.1)
       '@kubb/react': 3.10.15
     transitivePeerDependencies:
       - ajv
