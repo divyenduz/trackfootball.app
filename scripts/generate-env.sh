@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Generate environment configuration file from environment variables
 # Usage: ./generate-env-config.sh
@@ -8,8 +8,8 @@ OUTPUT_FILE="packages/rw-app/.dev.vars"
 
 # Function to resolve environment variable or show placeholder
 resolve_env() {
-    local var_name="$1"
-    local value="${!var_name}"
+    var_name="$1"
+    value=$(eval echo "\$$var_name")
     if [ -n "$value" ]; then
         echo "$var_name=$value"
     else
