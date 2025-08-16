@@ -19,7 +19,7 @@ importers:
     dependencies:
       '@stricli/auto-complete':
         specifier: ^1.1.2
-        version: 1.1.2
+        version: 1.2.0
       '@stricli/core':
         specifier: ^1.1.2
         version: 1.2.0
@@ -1519,8 +1519,8 @@ packages:
     resolution: {integrity: sha512-JZlVFE6/dYpP9tQmV0/ADfn32L9uFarHWxfcRhReKUnljz1ZiUM5zpX+PH8h5CJs6lao3TuFqnPm9IJJCEkE2w==}
     engines: {node: '>=10.8'}
 
-  '@stricli/auto-complete@1.1.2':
-    resolution: {integrity: sha512-sTNMh2bOvGH4meWSm4QCjbOCT1+8VSDbOkiOB6nYLaJZOr4CnWbn1s8N5h1GI6gMosUNP7waRr6FJVBhn/JfsQ==}
+  '@stricli/auto-complete@1.2.0':
+    resolution: {integrity: sha512-r9/msiloVmTF95mdhe04Uzqei1B0ZofhYRLeiPqpJ1W1RMCC8p9iW7kqBZEbALl2aRL5ZK9OEW3Q1cIejH7KEQ==}
     hasBin: true
 
   '@stricli/core@1.2.0':
@@ -5494,7 +5494,7 @@ snapshots:
       '@stoplight/yaml-ast-parser': 0.0.50
       tslib: 2.8.1
 
-  '@stricli/auto-complete@1.1.2':
+  '@stricli/auto-complete@1.2.0':
     dependencies:
       '@stricli/core': 1.2.0
 
