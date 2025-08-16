@@ -3,6 +3,8 @@ import { RequestInfo } from 'rwsdk/worker'
 export async function Terms({ ctx }: RequestInfo) {
   return (
     <>
+      <title>Terms and Conditions | TrackFootball.app</title>
+      <meta name="description" content="Read TrackFootball.app's terms and conditions of use. Understand the rules and guidelines for using our football tracking platform." />
       <div className="w-full max-w-4xl">
         <h1>Website Terms and Conditions of Use</h1>
 

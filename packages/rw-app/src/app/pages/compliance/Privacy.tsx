@@ -3,6 +3,8 @@ import { RequestInfo } from 'rwsdk/worker'
 export async function Privacy({ ctx }: RequestInfo) {
   return (
     <>
+      <title>Privacy Policy | TrackFootball.app</title>
+      <meta name="description" content="Read TrackFootball.app's privacy policy. Learn how we collect, use, and protect your personal information and data." />
       <div className="w-full max-w-4xl">
         <h1>Privacy Policy for TrackFootball.app</h1>
         <p>
