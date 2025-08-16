@@ -6,3 +6,7 @@ pre-commit:
       tags:
         - linting
         - typescript
+    update-lockfile:
+      glob: '{**/package.json,pnpm-workspace.yaml}'
+      run: pnpm install
+      stage_fixed: true
