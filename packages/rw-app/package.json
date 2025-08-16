@@ -50,8 +50,8 @@
   "devDependencies": {
     "@types/geojson": "7946.0.16",
     "@types/node": "22.17.2",
-    "@types/react": "19.1.2",
-    "@types/react-dom": "19.1.2",
+    "@types/react": "19.1.10",
+    "@types/react-dom": "19.1.7",
     "typescript": "5.9.2",
     "vite": "6.2.6",
     "wrangler": "4.30.0"
