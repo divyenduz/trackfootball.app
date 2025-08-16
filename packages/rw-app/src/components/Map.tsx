@@ -10,19 +10,29 @@ import invariant from 'tiny-invariant'
 import { getNthCoord } from '@/utils'
 import { ConditionalDisplay } from './atoms/ConditionalDisplay'
 
+// React 19 compatibility issue with react-map-gl
+// The library's types are not yet compatible with React 19's new ReactNode type that includes Promises
+// Using @ts-expect-error to suppress the type errors until react-map-gl updates for React 19
+
+// @ts-expect-error - React 19 type compatibility issue
 const ReactMapGL = lazy(() => import('react-map-gl/mapbox'))
 
 const Layer = lazy(() =>
   import('react-map-gl/mapbox').then(({ Layer }) => ({ default: Layer }))
 )
+
 const Marker = lazy(() =>
+  // @ts-expect-error - React 19 type compatibility issue
   import('react-map-gl/mapbox').then(({ Marker }) => ({ default: Marker }))
 )
+
 const NavigationControl = lazy(() =>
+  // @ts-expect-error - React 19 type compatibility issue
   import('react-map-gl/mapbox').then(({ NavigationControl }) => ({
     default: NavigationControl,
   }))
 )
+
 const Source = lazy(() =>
   import('react-map-gl/mapbox').then(({ Source }) => ({ default: Source }))
 )
