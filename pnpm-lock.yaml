@@ -86,8 +86,8 @@ importers:
         specifier: 3.16.4
         version: 3.16.4(@kubb/react@3.10.15)(ajv@8.17.1)
       '@kubb/plugin-oas':
-        specifier: 3.16.2
-        version: 3.16.2(@kubb/react@3.10.15)
+        specifier: 3.16.4
+        version: 3.16.4(@kubb/react@3.10.15)(ajv@8.17.1)
       '@kubb/plugin-ts':
         specifier: 3.16.4
         version: 3.16.4(@kubb/react@3.10.15)(ajv@8.17.1)
@@ -344,10 +344,6 @@ packages:
   '@ampproject/remapping@2.3.0':
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
-
-  '@apidevtools/json-schema-ref-parser@13.0.5':
-    resolution: {integrity: sha512-xfh4xVJD62gG6spIc7lwxoWT+l16nZu1ELyU8FkjaP/oD2yP09EvLAU6KhtudN9aML2Khhs9pY6Slr7KGTES3w==}
-    engines: {node: '>= 16'}
 
   '@apidevtools/json-schema-ref-parser@14.1.1':
     resolution: {integrity: sha512-uGF1YGOzzD50L7HLNWclXmsEhQflw8/zZHIz0/AzkJrKL5r9PceUipZxR/cp/8veTk4TVfdDJLyIwXLjaP5ePg==}
@@ -1166,16 +1162,8 @@ packages:
     resolution: {integrity: sha512-OQj08QVMDp1pI2xs/wjcw+wGagOj4B/0+4Omqp2yS2pY63oiIxBf8u7xn+VYUAMKyZvTlkKk8wUmYp/KZPdv3A==}
     engines: {node: '>=20'}
 
-  '@kubb/core@3.16.2':
-    resolution: {integrity: sha512-PY3DYq93UskXZ9++waMYoT8Zvpy1QUFSs+k5/I/kGD7CNfci8jNgsB2vaWcCWQfUw+Gldxu4zg812uxTmS/3Mg==}
-    engines: {node: '>=20'}
-
   '@kubb/core@3.16.4':
     resolution: {integrity: sha512-eIZb0Bl5mXgzG4CF4aXIGGJcOY54yEjLpXbMHFjJO5Eoha89H5tClhZ6qH2JLtzmsFibr6fjc6ipiOcX1ezUHQ==}
-    engines: {node: '>=20'}
-
-  '@kubb/oas@3.16.2':
-    resolution: {integrity: sha512-xfTdU212eMb5QlFh9OfnUhhgT4WNGQc9hoTp6/YyCqmItHi47UVfWffCK3IkQqLRaIbngokES/BY0ZaenPsy1Q==}
     engines: {node: '>=20'}
 
   '@kubb/oas@3.16.4':
@@ -1184,10 +1172,6 @@ packages:
 
   '@kubb/parser-ts@3.10.15':
     resolution: {integrity: sha512-5FqtVBQp/059/+2fUR/WvsHG9hp2XBmnvZJI/Rc4SsM3s0GPWRotm+qP19Z7dTjLkh6Mqml/fBZQlOtCxqOEuw==}
-    engines: {node: '>=20'}
-
-  '@kubb/parser-ts@3.16.2':
-    resolution: {integrity: sha512-ZwN9p3rsTfsbHEdVlekeYrKjKS5JRiB/sgbeGh4BGafNf7Tu4wrCf5JWZannFtYjdY6Uis3Ud49p6cqViW28iQ==}
     engines: {node: '>=20'}
 
   '@kubb/parser-ts@3.16.4':
@@ -1203,12 +1187,6 @@ packages:
     peerDependenciesMeta:
       axios:
         optional: true
-
-  '@kubb/plugin-oas@3.16.2':
-    resolution: {integrity: sha512-8A+aYkmAjo3btJ7yh4blazMxlewJwyWCvzpghwHe3AlNyLYxNaqQI4qF5/jxoa5Pxrxf5bzKsQO6Dz0O+X4kvA==}
-    engines: {node: '>=20'}
-    peerDependencies:
-      '@kubb/react': ^3.0.0
 
   '@kubb/plugin-oas@3.16.4':
     resolution: {integrity: sha512-1A/zX+Qt8uZ/zJfjBYDFcF/CBzlWieKOQfuEzOYKPBFOe3wWWlveCoxpTbysFh8HLeFF5zKUuslRA7xVZv7dCQ==}
@@ -1413,12 +1391,6 @@ packages:
   '@readme/http-status-codes@7.2.0':
     resolution: {integrity: sha512-/dBh9qw3QhJYqlGwt2I+KUP/lQ6nytdCx3aq+GpMUhibLHF3O7fwoowNcTwlbnwtyJ+TJYTIIrp3oVUlRNx3fA==}
 
-  '@readme/openapi-parser@4.1.2':
-    resolution: {integrity: sha512-lAFH88r/CHs5VZDUocEda0OSMSQsr6801sziIjOKyVA+0hSFN+BPuelPF5XvkMROHecnPd+XEJN1iNQqCgER/g==}
-    engines: {node: '>=20'}
-    peerDependencies:
-      openapi-types: '>=7'
-
   '@readme/openapi-parser@5.0.1':
     resolution: {integrity: sha512-qLHoqkBcqHmCFqLNuK9vH2DiOg+RM4Jk4ncgm6BkW1h796NAPqY6i4ux90PsgM19c4LVcZKgrEp+/oEGAAmCmA==}
     engines: {node: '>=20'}
@@ -1436,15 +1408,8 @@ packages:
   '@redocly/ajv@8.11.2':
     resolution: {integrity: sha512-io1JpnwtIcvojV7QKDUSIuMN/ikdOUd1ReEnUnMKGfDVridQZ31J0MmIuqwuRjWDZfmvr+Q0MqCcfHM2gTivOg==}
 
-  '@redocly/config@0.22.2':
-    resolution: {integrity: sha512-roRDai8/zr2S9YfmzUfNhKjOF0NdcOIqF7bhf4MVC5UxpjIysDjyudvlAiVbpPHp3eDRWbdzUgtkK1a7YiDNyQ==}
-
   '@redocly/config@0.28.0':
     resolution: {integrity: sha512-IdY4bSX9bbjXkDX91oO1OVwCzB00UNF0ozoygacTpS5Exa3ewYCB/6BcbA0tGCAvKDIwSY9Jor2cWQ/ycQfBTg==}
-
-  '@redocly/openapi-core@1.34.5':
-    resolution: {integrity: sha512-0EbE8LRbkogtcCXU7liAyC00n9uNG9hJ+eMyHFdUsy9lB/WGqnEBgwjA9q2cyzAVcdTkQqTBBU1XePNnN3OijA==}
-    engines: {node: '>=18.17.0', npm: '>=9.5.0'}
 
   '@redocly/openapi-core@2.0.5':
     resolution: {integrity: sha512-p8e2MueEIutLoPUEuw9fYoBZPTQILkaE1vBu8KHByhl+QR4HF7fKUVhwcyZOpmj28Vrl+fxCwQ9T3LR79UPgiA==}
@@ -3201,10 +3166,6 @@ packages:
     resolution: {integrity: sha512-IPZ167aShDZZUMdRk66cyQAW3qr0WzbHkPdMYa8bzZhlHhO3jALbKdxcaak7W9FfT2rZNpQuUu4Od7ILEpXSaw==}
     engines: {node: 20 || >=22}
 
-  minimatch@5.1.6:
-    resolution: {integrity: sha512-lKwV/1brpG6mBUFHtb7NUmtABCb2WZZmm2wNiOA5hAb8VdCS4B3dtMWyvcoViccwAW/COERjXLt0zP1zXUN26g==}
-    engines: {node: '>=10'}
-
   minimatch@9.0.5:
     resolution: {integrity: sha512-G6T0ZX48xgozx7587koeX9Ys2NYy6Gmv//P89sEte9V9whIapMNF4idKxnW2QtCcLiTWlb/wfCabAtAFWhhBow==}
     engines: {node: '>=16 || 14 >=14.17'}
@@ -3293,10 +3254,6 @@ packages:
   oas-linter@3.2.2:
     resolution: {integrity: sha512-KEGjPDVoU5K6swgo9hJVA/qYGlwfbFx+Kg2QB/kd7rzV5N8N5Mg6PlsoCMohVnQmo+pzJap/F610qTodKzecGQ==}
 
-  oas-normalize@14.1.2:
-    resolution: {integrity: sha512-Ro8PQDA0iDeWakWqI1UIdq/0/zoZbIOPzprHbgCxGh4GcbO2WNvqJqvsuriVctzA0FdXXotuX6XDsJ4xkBxXEg==}
-    engines: {node: '>=20'}
-
   oas-normalize@15.0.1:
     resolution: {integrity: sha512-SbRa4yM5mwoaLzkL1cTqZcRnVGZIN7WsfjXGx/ZJaL19CKrzJie5P58y35+uWyLMY02nRzSwOwt8xlxsaxGKcQ==}
     engines: {node: '>=20'}
@@ -3310,10 +3267,6 @@ packages:
 
   oas-validator@5.0.8:
     resolution: {integrity: sha512-cu20/HE5N5HKqVygs3dt94eYJfBi0TsZvPVXDhbXQHiEityDN+RROTleefoKRKKJ9dFAF2JBkDHgvWj0sjKGmw==}
-
-  oas@27.2.1:
-    resolution: {integrity: sha512-W+j0KxKjIBVSixUA6halqnSRMNW5aydO9TwZinR8bLPejAY0au8JDBK97ZM3XKGL4JRqObu9mOB7Fy/GxAgAMQ==}
-    engines: {node: '>=20'}
 
   oas@28.1.0:
     resolution: {integrity: sha512-W9Gu512dmOtcq0f3E3kN47UYVJDmKSoy51UIGGxC3f/QyhEMOMsGVlKkckDvhZKa4L5NrLmSUcne2S1JiKRc9Q==}
@@ -3350,10 +3303,6 @@ packages:
   p-limit@4.0.0:
     resolution: {integrity: sha512-5b0R4txpzjPWVw/cXXUResoD4hb6U/x9BH08L7nw+GN1sezDzPdxeRvpc9c433fZhBan/wusjbCsqwqm4EIBIQ==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
-
-  p-limit@6.2.0:
-    resolution: {integrity: sha512-kuUqqHNUqoIWp/c467RI4X6mmyuojY5jGutNU0wVTmEOOfcuwLqyMVoAi9MKi2Ak+5i9+nhmrK4ufZE8069kHA==}
-    engines: {node: '>=18'}
 
   p-limit@7.0.0:
     resolution: {integrity: sha512-WeCdPG5OjujcMWjSkOS0kt3bo+LmroXLmOnJ4SPhZfz5pffQxDUNcYscbZgyGwKf9r9z7gRfKjDNno5cZyQAZQ==}
@@ -4481,11 +4430,6 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.8
       '@jridgewell/trace-mapping': 0.3.25
 
-  '@apidevtools/json-schema-ref-parser@13.0.5':
-    dependencies:
-      '@types/json-schema': 7.0.15
-      js-yaml: 4.1.0
-
   '@apidevtools/json-schema-ref-parser@14.1.1':
     dependencies:
       '@types/json-schema': 7.0.15
@@ -5172,20 +5116,6 @@ snapshots:
       seedrandom: 3.0.5
       semver: 7.7.2
 
-  '@kubb/core@3.16.2':
-    dependencies:
-      '@kubb/parser-ts': 3.16.2
-      camelcase: 8.0.0
-      find-up: 7.0.0
-      fs-extra: 11.3.1
-      js-runtime: 0.0.8
-      natural-orderby: 5.0.0
-      object-hash: 3.0.0
-      p-limit: 6.2.0
-      remeda: 2.30.0
-      seedrandom: 3.0.5
-      semver: 7.7.2
-
   '@kubb/core@3.16.4':
     dependencies:
       '@kubb/parser-ts': 3.16.4
@@ -5200,22 +5130,6 @@ snapshots:
       remeda: 2.30.0
       seedrandom: 3.0.5
       semver: 7.7.2
-
-  '@kubb/oas@3.16.2':
-    dependencies:
-      '@redocly/openapi-core': 1.34.5
-      hotscript: 1.0.13
-      json-schema-to-ts: 3.1.1
-      jsonpointer: 5.0.1
-      oas: 27.2.1
-      oas-normalize: 14.1.2
-      openapi-types: 12.1.3
-      remeda: 2.30.0
-      swagger2openapi: 7.0.8
-      ts-toolbelt: 9.6.0
-    transitivePeerDependencies:
-      - encoding
-      - supports-color
 
   '@kubb/oas@3.16.4(ajv@8.17.1)':
     dependencies:
@@ -5239,12 +5153,6 @@ snapshots:
       remeda: 2.30.0
       typescript: 5.9.2
 
-  '@kubb/parser-ts@3.16.2':
-    dependencies:
-      prettier: 3.6.2
-      remeda: 2.30.0
-      typescript: 5.9.2
-
   '@kubb/parser-ts@3.16.4':
     dependencies:
       prettier: 3.6.2
@@ -5262,18 +5170,6 @@ snapshots:
     transitivePeerDependencies:
       - ajv
       - encoding
-
-  '@kubb/plugin-oas@3.16.2(@kubb/react@3.10.15)':
-    dependencies:
-      '@kubb/core': 3.16.2
-      '@kubb/oas': 3.16.2
-      '@kubb/react': 3.10.15
-      '@stoplight/yaml': 4.3.0
-      p-limit: 6.2.0
-      remeda: 2.30.0
-    transitivePeerDependencies:
-      - encoding
-      - supports-color
 
   '@kubb/plugin-oas@3.16.4(@kubb/react@3.10.15)(ajv@8.17.1)':
     dependencies:
@@ -5532,16 +5428,6 @@ snapshots:
 
   '@readme/http-status-codes@7.2.0': {}
 
-  '@readme/openapi-parser@4.1.2(openapi-types@12.1.3)':
-    dependencies:
-      '@apidevtools/json-schema-ref-parser': 13.0.5
-      '@readme/better-ajv-errors': 2.3.2(ajv@8.17.1)
-      '@readme/openapi-schemas': 3.1.0
-      '@types/json-schema': 7.0.15
-      ajv: 8.17.1
-      ajv-draft-04: 1.0.0(ajv@8.17.1)
-      openapi-types: 12.1.3
-
   '@readme/openapi-parser@5.0.1(openapi-types@12.1.3)':
     dependencies:
       '@apidevtools/json-schema-ref-parser': 14.1.1
@@ -5570,25 +5456,9 @@ snapshots:
       require-from-string: 2.0.2
       uri-js-replace: 1.0.1
 
-  '@redocly/config@0.22.2': {}
-
   '@redocly/config@0.28.0':
     dependencies:
       json-schema-to-ts: 2.7.2
-
-  '@redocly/openapi-core@1.34.5':
-    dependencies:
-      '@redocly/ajv': 8.11.2
-      '@redocly/config': 0.22.2
-      colorette: 1.4.0
-      https-proxy-agent: 7.0.6
-      js-levenshtein: 1.1.6
-      js-yaml: 4.1.0
-      minimatch: 5.1.6
-      pluralize: 8.0.0
-      yaml-ast-parser: 0.0.43
-    transitivePeerDependencies:
-      - supports-color
 
   '@redocly/openapi-core@2.0.5(ajv@8.17.1)':
     dependencies:
@@ -7399,10 +7269,6 @@ snapshots:
     dependencies:
       '@isaacs/brace-expansion': 5.0.0
 
-  minimatch@5.1.6:
-    dependencies:
-      brace-expansion: 2.0.2
-
   minimatch@9.0.5:
     dependencies:
       brace-expansion: 2.0.2
@@ -7469,16 +7335,6 @@ snapshots:
       should: 13.2.3
       yaml: 1.10.2
 
-  oas-normalize@14.1.2:
-    dependencies:
-      '@readme/openapi-parser': 4.1.2(openapi-types@12.1.3)
-      '@readme/postman-to-openapi': 4.1.0
-      js-yaml: 4.1.0
-      openapi-types: 12.1.3
-      swagger2openapi: 7.0.8
-    transitivePeerDependencies:
-      - encoding
-
   oas-normalize@15.0.1:
     dependencies:
       '@readme/openapi-parser': 5.0.1(openapi-types@12.1.3)
@@ -7509,18 +7365,6 @@ snapshots:
       reftools: 1.1.9
       should: 13.2.3
       yaml: 1.10.2
-
-  oas@27.2.1:
-    dependencies:
-      '@readme/openapi-parser': 4.1.2(openapi-types@12.1.3)
-      '@types/json-schema': 7.0.15
-      json-schema-merge-allof: 0.8.1
-      jsonpath-plus: 10.3.0
-      jsonpointer: 5.0.1
-      memoizee: 0.4.17
-      openapi-types: 12.1.3
-      path-to-regexp: 8.2.0
-      remove-undefined-objects: 6.0.0
 
   oas@28.1.0:
     dependencies:
@@ -7567,10 +7411,6 @@ snapshots:
       word-wrap: 1.2.5
 
   p-limit@4.0.0:
-    dependencies:
-      yocto-queue: 1.2.1
-
-  p-limit@6.2.0:
     dependencies:
       yocto-queue: 1.2.1
 
