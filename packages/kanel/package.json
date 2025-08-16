@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "@types/geojson": "7946.0.16",
-    "kanel": "3.14.3"
+    "kanel": "3.14.4"
   },
   "dependencies": {
     "dotenv": "17.2.1",
