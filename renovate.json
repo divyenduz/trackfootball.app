@@ -28,12 +28,6 @@
       "matchPackagePatterns": ["^@stricli/"],
       "groupName": "stricli monorepo",
       "groupSlug": "stricli-monorepo"
-    },
-    {
-      "description": "Group TypeScript type definitions",
-      "matchPackagePatterns": ["^@types/"],
-      "groupName": "definitelytyped",
-      "groupSlug": "definitelytyped"
     }
   ]
 }
