@@ -77,8 +77,8 @@ importers:
   packages/open-api:
     devDependencies:
       '@kubb/cli':
-        specifier: 3.16.2
-        version: 3.16.2(typescript@5.9.2)
+        specifier: 3.16.4
+        version: 3.16.4(typescript@5.9.2)
       '@kubb/core':
         specifier: 3.16.3
         version: 3.16.3
@@ -1099,8 +1099,8 @@ packages:
   '@kristiandupont/recase@1.4.1':
     resolution: {integrity: sha512-e5t4YqhnRGbS9sU4N52cQgTn37qKwTsxDDcIuIkgPvX0UmnL+7eoOR6oFXeCib5zYuw03vYKpR55NBq+W43j1A==}
 
-  '@kubb/cli@3.16.2':
-    resolution: {integrity: sha512-5eLxIichm7y+IxCtcQRVKeAl+DXMMJHTpYKkDzVt2yCHpPgel9G7fd9c8f1lMPvyj6HQ9ile+cRx7QqYD8yssw==}
+  '@kubb/cli@3.16.4':
+    resolution: {integrity: sha512-fBhDOFbY1qJUj4KH13ezz5wkMGAHbSImhcH41Z74U0diRJ8RVKU20IcaIhHvwHvdCZP0hjTFgkCNRHX1eEMjvg==}
     engines: {node: '>=20'}
     hasBin: true
 
@@ -1114,6 +1114,10 @@ packages:
 
   '@kubb/core@3.16.3':
     resolution: {integrity: sha512-WQo6nzDAWBQSs9cBEMU1whDSD46ZDsjhBOMUXoRxG9HASU4B0z/od6z5mS+Hgeyme+bEGf4DZUUTfApfVIsdOA==}
+    engines: {node: '>=20'}
+
+  '@kubb/core@3.16.4':
+    resolution: {integrity: sha512-eIZb0Bl5mXgzG4CF4aXIGGJcOY54yEjLpXbMHFjJO5Eoha89H5tClhZ6qH2JLtzmsFibr6fjc6ipiOcX1ezUHQ==}
     engines: {node: '>=20'}
 
   '@kubb/oas@3.16.2':
@@ -1134,6 +1138,10 @@ packages:
 
   '@kubb/parser-ts@3.16.3':
     resolution: {integrity: sha512-Jp5e+qyjaoQYyrpek8O/mnubAsm/lYKO8Q1W8fudXlrMoK1C0+QvWNZa4os3Uylba32SFUfo96oafl4LlVLPig==}
+    engines: {node: '>=20'}
+
+  '@kubb/parser-ts@3.16.4':
+    resolution: {integrity: sha512-VhMDuoupaY3ESA06YHShYjWxcTWF6mMl+j61RlZsBm//I6sRN5l6G7GJvB8lW85v8D8yOpwh5S6QjWmZTxgnuw==}
     engines: {node: '>=20'}
 
   '@kubb/plugin-client@3.16.3':
@@ -1180,8 +1188,8 @@ packages:
     resolution: {integrity: sha512-gWH5pDQ3kpZCeymVSk7f1ijp3z/dGQESeXr75yscEUGoVAks6RqbLpcgObNRa8CW4X9MN9Ixkzzwbxpvxpxezg==}
     engines: {node: '>=20'}
 
-  '@kubb/ui@3.16.2':
-    resolution: {integrity: sha512-E/qCdU/tIrPwpx8Z5xlCpmXfy45y3TVDGq0lP2aI+v9YKohfyWlXiYzHUg9hA9WxyV0hprQr2V+llpGcPgBDCA==}
+  '@kubb/ui@3.16.4':
+    resolution: {integrity: sha512-x5efjkRCCHyOeKbD3QuUyRrhfXpwdfhvQTL1iqJF90ZKQC1tlltPOUrqIFHSi7HjXhf46tFA/rqnJDeVXJPo6w==}
     engines: {node: '>=20'}
 
   '@mapbox/jsonlint-lines-primitives@2.0.2':
@@ -2750,10 +2758,6 @@ packages:
   jest-worker@27.5.1:
     resolution: {integrity: sha512-7vuh85V5cdDofPyxn58nrPjBktZo0u9x1g8WtjQol+jZDaE+fhN+cIvTj11GndBnMnyfrUOG1sZQxCdjKh+DKg==}
     engines: {node: '>= 10.13.0'}
-
-  jiti@2.4.2:
-    resolution: {integrity: sha512-rg9zJN+G4n2nfJl5MW3BMygZX56zKPNVEYYqq7adpmMh4Jn2QNEwhvQlFy6jPVdcod7txZtKHWnyZiA3a0zP7A==}
-    hasBin: true
 
   jiti@2.5.1:
     resolution: {integrity: sha512-twQoecYPiVA5K/h6SxtORw/Bs3ar+mLUtoPSc7iMXzQzK8d7eJ/R09wmTwAjiamETn1cXYPGfNnu7DMoHgu12w==}
@@ -4978,10 +4982,10 @@ snapshots:
     dependencies:
       ramda: 0.30.1
 
-  '@kubb/cli@3.16.2(typescript@5.9.2)':
+  '@kubb/cli@3.16.4(typescript@5.9.2)':
     dependencies:
-      '@kubb/core': 3.16.2
-      '@kubb/ui': 3.16.2
+      '@kubb/core': 3.16.4
+      '@kubb/ui': 3.16.4
       chokidar: 4.0.3
       citty: 0.1.6
       cli-progress: 3.12.0
@@ -4992,6 +4996,7 @@ snapshots:
       jiti: 2.5.1
       latest-version: 9.0.0
       open: 10.2.0
+      picocolors: 1.1.1
       semver: 7.7.2
       string-argv: 0.3.2
     transitivePeerDependencies:
@@ -5028,6 +5033,21 @@ snapshots:
   '@kubb/core@3.16.3':
     dependencies:
       '@kubb/parser-ts': 3.16.3
+      camelcase: 8.0.0
+      find-up: 7.0.0
+      fs-extra: 11.3.1
+      js-runtime: 0.0.8
+      natural-orderby: 5.0.0
+      object-hash: 3.0.0
+      p-limit: 7.0.0
+      picocolors: 1.1.1
+      remeda: 2.30.0
+      seedrandom: 3.0.5
+      semver: 7.7.2
+
+  '@kubb/core@3.16.4':
+    dependencies:
+      '@kubb/parser-ts': 3.16.4
       camelcase: 8.0.0
       find-up: 7.0.0
       fs-extra: 11.3.1
@@ -5085,6 +5105,12 @@ snapshots:
       typescript: 5.9.2
 
   '@kubb/parser-ts@3.16.3':
+    dependencies:
+      prettier: 3.6.2
+      remeda: 2.30.0
+      typescript: 5.9.2
+
+  '@kubb/parser-ts@3.16.4':
     dependencies:
       prettier: 3.6.2
       remeda: 2.30.0
@@ -5175,7 +5201,7 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@kubb/ui@3.16.2':
+  '@kubb/ui@3.16.4':
     dependencies:
       '@hono/node-server': 1.18.2(hono@4.9.2)
       '@hono/zod-openapi': 0.19.2(hono@4.9.2)(zod@3.25.76)
@@ -5549,7 +5575,7 @@ snapshots:
     dependencies:
       '@ampproject/remapping': 2.3.0
       enhanced-resolve: 5.18.1
-      jiti: 2.4.2
+      jiti: 2.5.1
       lightningcss: 1.30.1
       magic-string: 0.30.17
       source-map-js: 1.2.1
@@ -6834,8 +6860,6 @@ snapshots:
       '@types/node': 24.3.0
       merge-stream: 2.0.0
       supports-color: 8.1.1
-
-  jiti@2.4.2: {}
 
   jiti@2.5.1: {}
 
