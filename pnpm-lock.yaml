@@ -83,8 +83,8 @@ importers:
         specifier: 3.16.3
         version: 3.16.3
       '@kubb/plugin-client':
-        specifier: 3.16.2
-        version: 3.16.2(@kubb/react@3.10.15)
+        specifier: 3.16.3
+        version: 3.16.3(@kubb/react@3.10.15)(ajv@8.17.1)
       '@kubb/plugin-oas':
         specifier: 3.16.2
         version: 3.16.2(@kubb/react@3.10.15)
@@ -348,6 +348,10 @@ packages:
   '@apidevtools/json-schema-ref-parser@13.0.5':
     resolution: {integrity: sha512-xfh4xVJD62gG6spIc7lwxoWT+l16nZu1ELyU8FkjaP/oD2yP09EvLAU6KhtudN9aML2Khhs9pY6Slr7KGTES3w==}
     engines: {node: '>= 16'}
+
+  '@apidevtools/json-schema-ref-parser@14.1.1':
+    resolution: {integrity: sha512-uGF1YGOzzD50L7HLNWclXmsEhQflw8/zZHIz0/AzkJrKL5r9PceUipZxR/cp/8veTk4TVfdDJLyIwXLjaP5ePg==}
+    engines: {node: '>= 20'}
 
   '@asteasolutions/zod-to-openapi@7.3.4':
     resolution: {integrity: sha512-/2rThQ5zPi9OzVwes6U7lK1+Yvug0iXu25olp7S0XsYmOqnyMfxH7gdSQjn/+DSOHRg7wnotwGJSyL+fBKdnEA==}
@@ -1116,6 +1120,10 @@ packages:
     resolution: {integrity: sha512-xfTdU212eMb5QlFh9OfnUhhgT4WNGQc9hoTp6/YyCqmItHi47UVfWffCK3IkQqLRaIbngokES/BY0ZaenPsy1Q==}
     engines: {node: '>=20'}
 
+  '@kubb/oas@3.16.3':
+    resolution: {integrity: sha512-5l8DMgdPL/3McMk8i7zUQya9EXbwWHV16rVkFmeBNT1rZ+L2dkE0COKgMf9ekSQsVzpizRhsMfG+8a3ULZmidQ==}
+    engines: {node: '>=20'}
+
   '@kubb/parser-ts@3.10.15':
     resolution: {integrity: sha512-5FqtVBQp/059/+2fUR/WvsHG9hp2XBmnvZJI/Rc4SsM3s0GPWRotm+qP19Z7dTjLkh6Mqml/fBZQlOtCxqOEuw==}
     engines: {node: '>=20'}
@@ -1128,8 +1136,8 @@ packages:
     resolution: {integrity: sha512-Jp5e+qyjaoQYyrpek8O/mnubAsm/lYKO8Q1W8fudXlrMoK1C0+QvWNZa4os3Uylba32SFUfo96oafl4LlVLPig==}
     engines: {node: '>=20'}
 
-  '@kubb/plugin-client@3.16.2':
-    resolution: {integrity: sha512-Ti4oj1dSPbuC65WrOOCVRSktQxqy6sYxffRK0esFcW0PJyqy8BDLZmPr64gS1/Ppot5gLKar74wA3556rlcijA==}
+  '@kubb/plugin-client@3.16.3':
+    resolution: {integrity: sha512-YR8GPwIjmOBHQXYxeX4CL8dQ1+S8TEjrZTjHmgPLN5ALynVFheQt3h1zXEsxbojH//coH9PN12IvPc4qZ/HnjA==}
     engines: {node: '>=20'}
     peerDependencies:
       '@kubb/react': ^3.0.0
@@ -1144,14 +1152,26 @@ packages:
     peerDependencies:
       '@kubb/react': ^3.0.0
 
+  '@kubb/plugin-oas@3.16.3':
+    resolution: {integrity: sha512-JZkCxTAOSNeNfeHDRtvOBDzHLQbeK+bsbRJrAe4hWdEB5CiqVGMraIwQ3nkMS/CCI5lJLkvLLSIKHdDTWdhZLg==}
+    engines: {node: '>=20'}
+    peerDependencies:
+      '@kubb/react': ^3.0.0
+
   '@kubb/plugin-ts@3.16.2':
     resolution: {integrity: sha512-L+sMfz3vW+6VXTknhmjy2xiRRa2XPa+YKBaE8um6+maCvGQPIcXc2nTw3Ri4NRjIWt+YnUV8PzXs0REPcBkCxQ==}
     engines: {node: '>=20'}
     peerDependencies:
       '@kubb/react': ^3.0.0
 
-  '@kubb/plugin-zod@3.16.2':
-    resolution: {integrity: sha512-aaFTPdk8yHUkxKD0+p3NaUtnUPP8oy3b6hWNaH0TE+vDbFfb7h5OI971zb6ZF2V7hkpQcyTSFoIK3DyY322JZg==}
+  '@kubb/plugin-ts@3.16.3':
+    resolution: {integrity: sha512-ERY3xdr16szwimwblCINRIE6HLV7RSA9AqeXcMyHvFi2cdCOL4r94UY8zqcg4va4TM8ai0Y+vwgkdQHYrQfogA==}
+    engines: {node: '>=20'}
+    peerDependencies:
+      '@kubb/react': ^3.0.0
+
+  '@kubb/plugin-zod@3.16.3':
+    resolution: {integrity: sha512-erFmGimeGHS0iSdZGvSFsy7+i4n7MazFVGQkTVydULCVH++zwBZce/D8nz6bD6KiLDQf3X3v0E+SAhPxDBwTAw==}
     engines: {node: '>=20'}
     peerDependencies:
       '@kubb/react': ^3.0.0
@@ -1338,6 +1358,12 @@ packages:
     peerDependencies:
       openapi-types: '>=7'
 
+  '@readme/openapi-parser@5.0.1':
+    resolution: {integrity: sha512-qLHoqkBcqHmCFqLNuK9vH2DiOg+RM4Jk4ncgm6BkW1h796NAPqY6i4ux90PsgM19c4LVcZKgrEp+/oEGAAmCmA==}
+    engines: {node: '>=20'}
+    peerDependencies:
+      openapi-types: '>=7'
+
   '@readme/openapi-schemas@3.1.0':
     resolution: {integrity: sha512-9FC/6ho8uFa8fV50+FPy/ngWN53jaUu4GRXlAjcxIRrzhltJnpKkBG2Tp0IDraFJeWrOpk84RJ9EMEEYzaI1Bw==}
     engines: {node: '>=18'}
@@ -1352,9 +1378,16 @@ packages:
   '@redocly/config@0.22.2':
     resolution: {integrity: sha512-roRDai8/zr2S9YfmzUfNhKjOF0NdcOIqF7bhf4MVC5UxpjIysDjyudvlAiVbpPHp3eDRWbdzUgtkK1a7YiDNyQ==}
 
+  '@redocly/config@0.28.0':
+    resolution: {integrity: sha512-IdY4bSX9bbjXkDX91oO1OVwCzB00UNF0ozoygacTpS5Exa3ewYCB/6BcbA0tGCAvKDIwSY9Jor2cWQ/ycQfBTg==}
+
   '@redocly/openapi-core@1.34.5':
     resolution: {integrity: sha512-0EbE8LRbkogtcCXU7liAyC00n9uNG9hJ+eMyHFdUsy9lB/WGqnEBgwjA9q2cyzAVcdTkQqTBBU1XePNnN3OijA==}
     engines: {node: '>=18.17.0', npm: '>=9.5.0'}
+
+  '@redocly/openapi-core@2.0.5':
+    resolution: {integrity: sha512-p8e2MueEIutLoPUEuw9fYoBZPTQILkaE1vBu8KHByhl+QR4HF7fKUVhwcyZOpmj28Vrl+fxCwQ9T3LR79UPgiA==}
+    engines: {node: '>=22.12.0 || >=20.19.0 <21.0.0', npm: '>=10'}
 
   '@rolldown/pluginutils@1.0.0-beta.11':
     resolution: {integrity: sha512-L/gAA/hyCSuzTF1ftlzUSI/IKr2POHsv1Dd78GfqkR83KMNuswWD61JxGV2L7nRwBBBSDr6R1gCkdTmoN7W4ag==}
@@ -2767,6 +2800,10 @@ packages:
     resolution: {integrity: sha512-CTUKmIlPJbsWfzRRnOXz+0MjIqvnleIXwFTzz+t9T86HnYX/Rozria6ZVGLktAU9e+NygNljveP+yxqtQp/Q4w==}
     engines: {node: '>=12.0.0'}
 
+  json-schema-to-ts@2.7.2:
+    resolution: {integrity: sha512-R1JfqKqbBR4qE8UyBR56Ms30LL62/nlhoz+1UkfI/VE7p54Awu919FZ6ZUPG8zIa3XB65usPJgr1ONVncUGSaQ==}
+    engines: {node: '>=16'}
+
   json-schema-to-ts@3.1.1:
     resolution: {integrity: sha512-+DWg8jCJG2TEnpy7kOm/7/AxaYoaRbjVB4LFZLySZlWn8exGs3A4OLJR966cVvU26N7X9TWxl+Jsw7dzAqKT6g==}
     engines: {node: '>=16'}
@@ -3168,6 +3205,10 @@ packages:
     resolution: {integrity: sha512-Ro8PQDA0iDeWakWqI1UIdq/0/zoZbIOPzprHbgCxGh4GcbO2WNvqJqvsuriVctzA0FdXXotuX6XDsJ4xkBxXEg==}
     engines: {node: '>=20'}
 
+  oas-normalize@15.0.1:
+    resolution: {integrity: sha512-SbRa4yM5mwoaLzkL1cTqZcRnVGZIN7WsfjXGx/ZJaL19CKrzJie5P58y35+uWyLMY02nRzSwOwt8xlxsaxGKcQ==}
+    engines: {node: '>=20'}
+
   oas-resolver@2.5.6:
     resolution: {integrity: sha512-Yx5PWQNZomfEhPPOphFbZKi9W93CocQj18NlD2Pa4GWZzdZpSJvYwoiuurRI7m3SpcChrnO08hkuQDL3FGsVFQ==}
     hasBin: true
@@ -3180,6 +3221,10 @@ packages:
 
   oas@27.2.1:
     resolution: {integrity: sha512-W+j0KxKjIBVSixUA6halqnSRMNW5aydO9TwZinR8bLPejAY0au8JDBK97ZM3XKGL4JRqObu9mOB7Fy/GxAgAMQ==}
+    engines: {node: '>=20'}
+
+  oas@28.1.0:
+    resolution: {integrity: sha512-W9Gu512dmOtcq0f3E3kN47UYVJDmKSoy51UIGGxC3f/QyhEMOMsGVlKkckDvhZKa4L5NrLmSUcne2S1JiKRc9Q==}
     engines: {node: '>=20'}
 
   object-assign@4.1.1:
@@ -3921,6 +3966,9 @@ packages:
   tr46@0.0.3:
     resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
 
+  ts-algebra@1.2.2:
+    resolution: {integrity: sha512-kloPhf1hq3JbCPOTYoOWDKxebWjNb2o/LKnNfkWhxVVisFFmMJPPdJeGoGmM+iRLyoXAR61e08Pb+vUXINg8aA==}
+
   ts-algebra@2.0.0:
     resolution: {integrity: sha512-FPAhNPFMrkwz76P7cdjdmiShwMynZYN6SgOujD1urY4oNm80Ou9oMdmbR45LotcKOXoy7wSmHkRFE6Mxbrhefw==}
 
@@ -4317,6 +4365,11 @@ snapshots:
       '@jridgewell/trace-mapping': 0.3.25
 
   '@apidevtools/json-schema-ref-parser@13.0.5':
+    dependencies:
+      '@types/json-schema': 7.0.15
+      js-yaml: 4.1.0
+
+  '@apidevtools/json-schema-ref-parser@14.1.1':
     dependencies:
       '@types/json-schema': 7.0.15
       js-yaml: 4.1.0
@@ -5001,6 +5054,22 @@ snapshots:
       - encoding
       - supports-color
 
+  '@kubb/oas@3.16.3(ajv@8.17.1)':
+    dependencies:
+      '@redocly/openapi-core': 2.0.5(ajv@8.17.1)
+      hotscript: 1.0.13
+      json-schema-to-ts: 3.1.1
+      jsonpointer: 5.0.1
+      oas: 28.1.0
+      oas-normalize: 15.0.1
+      openapi-types: 12.1.3
+      remeda: 2.30.0
+      swagger2openapi: 7.0.8
+      ts-toolbelt: 9.6.0
+    transitivePeerDependencies:
+      - ajv
+      - encoding
+
   '@kubb/parser-ts@3.10.15':
     dependencies:
       prettier: 3.6.2
@@ -5019,17 +5088,17 @@ snapshots:
       remeda: 2.30.0
       typescript: 5.9.2
 
-  '@kubb/plugin-client@3.16.2(@kubb/react@3.10.15)':
+  '@kubb/plugin-client@3.16.3(@kubb/react@3.10.15)(ajv@8.17.1)':
     dependencies:
-      '@kubb/core': 3.16.2
-      '@kubb/oas': 3.16.2
-      '@kubb/plugin-oas': 3.16.2(@kubb/react@3.10.15)
-      '@kubb/plugin-ts': 3.16.2(@kubb/react@3.10.15)
-      '@kubb/plugin-zod': 3.16.2(@kubb/react@3.10.15)
+      '@kubb/core': 3.16.3
+      '@kubb/oas': 3.16.3(ajv@8.17.1)
+      '@kubb/plugin-oas': 3.16.3(@kubb/react@3.10.15)(ajv@8.17.1)
+      '@kubb/plugin-ts': 3.16.3(@kubb/react@3.10.15)(ajv@8.17.1)
+      '@kubb/plugin-zod': 3.16.3(@kubb/react@3.10.15)(ajv@8.17.1)
       '@kubb/react': 3.10.15
     transitivePeerDependencies:
+      - ajv
       - encoding
-      - supports-color
 
   '@kubb/plugin-oas@3.16.2(@kubb/react@3.10.15)':
     dependencies:
@@ -5043,6 +5112,18 @@ snapshots:
       - encoding
       - supports-color
 
+  '@kubb/plugin-oas@3.16.3(@kubb/react@3.10.15)(ajv@8.17.1)':
+    dependencies:
+      '@kubb/core': 3.16.3
+      '@kubb/oas': 3.16.3(ajv@8.17.1)
+      '@kubb/react': 3.10.15
+      '@stoplight/yaml': 4.3.0
+      p-limit: 7.0.0
+      remeda: 2.30.0
+    transitivePeerDependencies:
+      - ajv
+      - encoding
+
   '@kubb/plugin-ts@3.16.2(@kubb/react@3.10.15)':
     dependencies:
       '@kubb/core': 3.16.2
@@ -5054,17 +5135,28 @@ snapshots:
       - encoding
       - supports-color
 
-  '@kubb/plugin-zod@3.16.2(@kubb/react@3.10.15)':
+  '@kubb/plugin-ts@3.16.3(@kubb/react@3.10.15)(ajv@8.17.1)':
     dependencies:
-      '@kubb/core': 3.16.2
-      '@kubb/oas': 3.16.2
-      '@kubb/parser-ts': 3.16.2
-      '@kubb/plugin-oas': 3.16.2(@kubb/react@3.10.15)
-      '@kubb/plugin-ts': 3.16.2(@kubb/react@3.10.15)
+      '@kubb/core': 3.16.3
+      '@kubb/oas': 3.16.3(ajv@8.17.1)
+      '@kubb/parser-ts': 3.16.3
+      '@kubb/plugin-oas': 3.16.3(@kubb/react@3.10.15)(ajv@8.17.1)
       '@kubb/react': 3.10.15
     transitivePeerDependencies:
+      - ajv
       - encoding
-      - supports-color
+
+  '@kubb/plugin-zod@3.16.3(@kubb/react@3.10.15)(ajv@8.17.1)':
+    dependencies:
+      '@kubb/core': 3.16.3
+      '@kubb/oas': 3.16.3(ajv@8.17.1)
+      '@kubb/parser-ts': 3.16.3
+      '@kubb/plugin-oas': 3.16.3(@kubb/react@3.10.15)(ajv@8.17.1)
+      '@kubb/plugin-ts': 3.16.3(@kubb/react@3.10.15)(ajv@8.17.1)
+      '@kubb/react': 3.10.15
+    transitivePeerDependencies:
+      - ajv
+      - encoding
 
   '@kubb/react@3.10.15':
     dependencies:
@@ -5286,6 +5378,16 @@ snapshots:
       ajv-draft-04: 1.0.0(ajv@8.17.1)
       openapi-types: 12.1.3
 
+  '@readme/openapi-parser@5.0.1(openapi-types@12.1.3)':
+    dependencies:
+      '@apidevtools/json-schema-ref-parser': 14.1.1
+      '@readme/better-ajv-errors': 2.3.2(ajv@8.17.1)
+      '@readme/openapi-schemas': 3.1.0
+      '@types/json-schema': 7.0.15
+      ajv: 8.17.1
+      ajv-draft-04: 1.0.0(ajv@8.17.1)
+      openapi-types: 12.1.3
+
   '@readme/openapi-schemas@3.1.0': {}
 
   '@readme/postman-to-openapi@4.1.0':
@@ -5306,6 +5408,10 @@ snapshots:
 
   '@redocly/config@0.22.2': {}
 
+  '@redocly/config@0.28.0':
+    dependencies:
+      json-schema-to-ts: 2.7.2
+
   '@redocly/openapi-core@1.34.5':
     dependencies:
       '@redocly/ajv': 8.11.2
@@ -5319,6 +5425,20 @@ snapshots:
       yaml-ast-parser: 0.0.43
     transitivePeerDependencies:
       - supports-color
+
+  '@redocly/openapi-core@2.0.5(ajv@8.17.1)':
+    dependencies:
+      '@redocly/ajv': 8.11.2
+      '@redocly/config': 0.28.0
+      ajv-formats: 2.1.1(ajv@8.17.1)
+      colorette: 1.4.0
+      js-levenshtein: 1.1.6
+      js-yaml: 4.1.0
+      minimatch: 10.0.3
+      pluralize: 8.0.0
+      yaml-ast-parser: 0.0.43
+    transitivePeerDependencies:
+      - ajv
 
   '@rolldown/pluginutils@1.0.0-beta.11': {}
 
@@ -6746,6 +6866,12 @@ snapshots:
       json-schema-compare: 0.2.2
       lodash: 4.17.21
 
+  json-schema-to-ts@2.7.2:
+    dependencies:
+      '@babel/runtime': 7.28.2
+      '@types/json-schema': 7.0.15
+      ts-algebra: 1.2.2
+
   json-schema-to-ts@3.1.1:
     dependencies:
       '@babel/runtime': 7.28.2
@@ -7156,6 +7282,16 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
+  oas-normalize@15.0.1:
+    dependencies:
+      '@readme/openapi-parser': 5.0.1(openapi-types@12.1.3)
+      '@readme/postman-to-openapi': 4.1.0
+      js-yaml: 4.1.0
+      openapi-types: 12.1.3
+      swagger2openapi: 7.0.8
+    transitivePeerDependencies:
+      - encoding
+
   oas-resolver@2.5.6:
     dependencies:
       node-fetch-h2: 2.3.0
@@ -7180,6 +7316,18 @@ snapshots:
   oas@27.2.1:
     dependencies:
       '@readme/openapi-parser': 4.1.2(openapi-types@12.1.3)
+      '@types/json-schema': 7.0.15
+      json-schema-merge-allof: 0.8.1
+      jsonpath-plus: 10.3.0
+      jsonpointer: 5.0.1
+      memoizee: 0.4.17
+      openapi-types: 12.1.3
+      path-to-regexp: 8.2.0
+      remove-undefined-objects: 6.0.0
+
+  oas@28.1.0:
+    dependencies:
+      '@readme/openapi-parser': 5.0.1(openapi-types@12.1.3)
       '@types/json-schema': 7.0.15
       json-schema-merge-allof: 0.8.1
       jsonpath-plus: 10.3.0
@@ -7998,6 +8146,8 @@ snapshots:
       is-number: 7.0.0
 
   tr46@0.0.3: {}
+
+  ts-algebra@1.2.2: {}
 
   ts-algebra@2.0.0: {}
 
