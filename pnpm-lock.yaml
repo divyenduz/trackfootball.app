@@ -174,8 +174,8 @@ importers:
         specifier: 0.13.0
         version: 0.13.0
       jose:
-        specifier: 6.0.11
-        version: 6.0.11
+        specifier: 6.0.12
+        version: 6.0.12
       postgres:
         specifier: 3.4.7
         version: 3.4.7
@@ -2763,8 +2763,8 @@ packages:
     resolution: {integrity: sha512-twQoecYPiVA5K/h6SxtORw/Bs3ar+mLUtoPSc7iMXzQzK8d7eJ/R09wmTwAjiamETn1cXYPGfNnu7DMoHgu12w==}
     hasBin: true
 
-  jose@6.0.11:
-    resolution: {integrity: sha512-QxG7EaliDARm1O1S8BGakqncGT9s25bKL1WSf6/oa17Tkqwi8D2ZNglqCF+DsYF88/rV66Q/Q2mFAy697E1DUg==}
+  jose@6.0.12:
+    resolution: {integrity: sha512-T8xypXs8CpmiIi78k0E+Lk7T2zlK4zDyg+o1CZ4AkOHgDg98ogdP2BeZ61lTFKFyoEwJ9RgAgN+SdM3iPgNonQ==}
 
   js-levenshtein@1.1.6:
     resolution: {integrity: sha512-X2BB11YZtrRqY4EnQcLX5Rh373zbK4alC1FW7D7MBhL2gtcC17cTnr6DmfHZeS0s2rTHjUTMMHfG7gO8SSdw+g==}
@@ -6863,7 +6863,7 @@ snapshots:
 
   jiti@2.5.1: {}
 
-  jose@6.0.11: {}
+  jose@6.0.12: {}
 
   js-levenshtein@1.1.6: {}
 
