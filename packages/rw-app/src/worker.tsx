@@ -85,7 +85,6 @@ export default defineApp([
       } as User
     }
   },
-  // @ts-expect-error fix document types
   render(Document, [
     layout(AppLayout, [
       route('/', ({ ctx }) => {
