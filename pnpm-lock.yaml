@@ -86,8 +86,8 @@ importers:
         specifier: 3.16.1
         version: 3.16.1(@kubb/react@3.10.15)
       '@kubb/plugin-oas':
-        specifier: 3.16.1
-        version: 3.16.1(@kubb/react@3.10.15)
+        specifier: 3.16.2
+        version: 3.16.2(@kubb/react@3.10.15)
       '@kubb/plugin-ts':
         specifier: 3.16.2
         version: 3.16.2(@kubb/react@3.10.15)
