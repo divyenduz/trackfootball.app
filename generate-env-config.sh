@@ -3,8 +3,8 @@
 # Generate environment configuration file from environment variables
 # Usage: ./generate-env-config.sh
 
-# Output file (you can change this path as needed)
-OUTPUT_FILE="env-config.txt"
+# Output file
+OUTPUT_FILE="packages/rw-app/.dev.vars"
 
 # Function to resolve environment variable or show placeholder
 resolve_env() {
