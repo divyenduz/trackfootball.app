@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "@kubb/core": "3.16.2",
-    "@kubb/plugin-client": "3.16.1",
+    "@kubb/plugin-client": "3.16.2",
     "@kubb/plugin-oas": "3.16.2",
     "@kubb/plugin-ts": "3.16.2",
     "@kubb/cli": "3.16.1",
