@@ -10,9 +10,10 @@
     "pg:dump": "command -v pg_dump && PGPASSWORD=postgres pg_dump -d `cat ../../.dburl` --schema-only --no-owner > ./schema.sql || echo 'pg_dump not found'"
   },
   "devDependencies": {
+    "@trackfootball/kanel": "workspace:*",
     "@types/geojson": "7946.0.16",
     "@types/node": "22.17.2",
-    "@trackfootball/kanel": "workspace:*"
+    "typescript": "5.9.2"
   },
   "dependencies": {
     "geojson": "0.5.0",
