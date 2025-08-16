@@ -16,6 +16,24 @@
       "matchPackagePatterns": ["^@kubb/"],
       "groupName": "kubb monorepo",
       "groupSlug": "kubb-monorepo"
+    },
+    {
+      "description": "Group Turf.js monorepo packages",
+      "matchPackagePatterns": ["^@turf/"],
+      "groupName": "turf monorepo",
+      "groupSlug": "turf-monorepo"
+    },
+    {
+      "description": "Group Stricli monorepo packages",
+      "matchPackagePatterns": ["^@stricli/"],
+      "groupName": "stricli monorepo",
+      "groupSlug": "stricli-monorepo"
+    },
+    {
+      "description": "Group TypeScript type definitions",
+      "matchPackagePatterns": ["^@types/"],
+      "groupName": "definitelytyped",
+      "groupSlug": "definitelytyped"
     }
   ]
 }
