@@ -80,8 +80,8 @@ importers:
         specifier: 3.16.2
         version: 3.16.2(typescript@5.9.2)
       '@kubb/core':
-        specifier: 3.16.2
-        version: 3.16.2
+        specifier: 3.16.3
+        version: 3.16.3
       '@kubb/plugin-client':
         specifier: 3.16.2
         version: 3.16.2(@kubb/react@3.10.15)
@@ -1104,12 +1104,12 @@ packages:
     resolution: {integrity: sha512-OQj08QVMDp1pI2xs/wjcw+wGagOj4B/0+4Omqp2yS2pY63oiIxBf8u7xn+VYUAMKyZvTlkKk8wUmYp/KZPdv3A==}
     engines: {node: '>=20'}
 
-  '@kubb/core@3.16.1':
-    resolution: {integrity: sha512-Jx4QlofG8M21VkpiTfHAkwxiiYIte9Bs5eWd5GQhGB8ukoCwOIGi38qbYCUjqtiO/72uuUXdii1uaqLyiDePmg==}
-    engines: {node: '>=20'}
-
   '@kubb/core@3.16.2':
     resolution: {integrity: sha512-PY3DYq93UskXZ9++waMYoT8Zvpy1QUFSs+k5/I/kGD7CNfci8jNgsB2vaWcCWQfUw+Gldxu4zg812uxTmS/3Mg==}
+    engines: {node: '>=20'}
+
+  '@kubb/core@3.16.3':
+    resolution: {integrity: sha512-WQo6nzDAWBQSs9cBEMU1whDSD46ZDsjhBOMUXoRxG9HASU4B0z/od6z5mS+Hgeyme+bEGf4DZUUTfApfVIsdOA==}
     engines: {node: '>=20'}
 
   '@kubb/oas@3.16.2':
@@ -1120,12 +1120,12 @@ packages:
     resolution: {integrity: sha512-5FqtVBQp/059/+2fUR/WvsHG9hp2XBmnvZJI/Rc4SsM3s0GPWRotm+qP19Z7dTjLkh6Mqml/fBZQlOtCxqOEuw==}
     engines: {node: '>=20'}
 
-  '@kubb/parser-ts@3.16.1':
-    resolution: {integrity: sha512-Ej/VLVJ1ysQP6IQW4oIFXlhvz1KgcA4KuRvlF7sDNw/XJEFXyT8H064s/XH65RKjmzOvsBJjYRuM/bKV8pb9pw==}
-    engines: {node: '>=20'}
-
   '@kubb/parser-ts@3.16.2':
     resolution: {integrity: sha512-ZwN9p3rsTfsbHEdVlekeYrKjKS5JRiB/sgbeGh4BGafNf7Tu4wrCf5JWZannFtYjdY6Uis3Ud49p6cqViW28iQ==}
+    engines: {node: '>=20'}
+
+  '@kubb/parser-ts@3.16.3':
+    resolution: {integrity: sha512-Jp5e+qyjaoQYyrpek8O/mnubAsm/lYKO8Q1W8fudXlrMoK1C0+QvWNZa4os3Uylba32SFUfo96oafl4LlVLPig==}
     engines: {node: '>=20'}
 
   '@kubb/plugin-client@3.16.2':
@@ -3218,6 +3218,10 @@ packages:
     resolution: {integrity: sha512-kuUqqHNUqoIWp/c467RI4X6mmyuojY5jGutNU0wVTmEOOfcuwLqyMVoAi9MKi2Ak+5i9+nhmrK4ufZE8069kHA==}
     engines: {node: '>=18'}
 
+  p-limit@7.0.0:
+    resolution: {integrity: sha512-WeCdPG5OjujcMWjSkOS0kt3bo+LmroXLmOnJ4SPhZfz5pffQxDUNcYscbZgyGwKf9r9z7gRfKjDNno5cZyQAZQ==}
+    engines: {node: '>=20'}
+
   p-locate@6.0.0:
     resolution: {integrity: sha512-wPrq66Llhl7/4AGC6I+cqxT07LhXvWL08LNXz1fENOw0Ap4sRZZ/gZpTTJ5jpurzzzfS2W/Ge9BY3LgLjCShcw==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
@@ -3531,9 +3535,6 @@ packages:
   registry-url@6.0.1:
     resolution: {integrity: sha512-+crtS5QjFRqFCoQmvGduwYWEBng99ZvmFvF+cUJkGYF1L1BfU8C6Zp9T7f5vPAwyLkUExpvK+ANVZmGU49qi4Q==}
     engines: {node: '>=12'}
-
-  remeda@2.26.1:
-    resolution: {integrity: sha512-hpiLfhUwkJhiMS3Z7dRrygcRdkMRZASw5qUdNdi33x1/Y9y/J5q5TyLyf8btDoVLIcsg/4fzPdaGXDTbnl+ixw==}
 
   remeda@2.30.0:
     resolution: {integrity: sha512-TcRpI1ecqnMer3jHhFtMerGvHFCDlCHljUp0/9A4HxHOh5bSY3kP1l8nQDFMnWYJKl3MSarDNY1tb0Bs/bCmvw==}
@@ -3955,11 +3956,6 @@ packages:
 
   type@2.7.3:
     resolution: {integrity: sha512-8j+1QmAbPvLZow5Qpi6NCaN8FB60p/6x8/vfNqOk/hC+HuvFZhL4+WfekuhQLiqFZXOgQdrs3B+XxEmCc6b3FQ==}
-
-  typescript@5.8.3:
-    resolution: {integrity: sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ==}
-    engines: {node: '>=14.17'}
-    hasBin: true
 
   typescript@5.9.2:
     resolution: {integrity: sha512-CWBzXQrc/qOkhidw1OzBTQuYRbfyxDXJMVJ1XNwUHGROVmuaeiEm3OslpZ1RV96d7SKKjZKrSJu3+t/xlw3R9A==}
@@ -4960,20 +4956,6 @@ snapshots:
       seedrandom: 3.0.5
       semver: 7.7.2
 
-  '@kubb/core@3.16.1':
-    dependencies:
-      '@kubb/parser-ts': 3.16.1
-      camelcase: 8.0.0
-      find-up: 7.0.0
-      fs-extra: 11.3.0
-      js-runtime: 0.0.8
-      natural-orderby: 5.0.0
-      object-hash: 3.0.0
-      p-limit: 6.2.0
-      remeda: 2.26.1
-      seedrandom: 3.0.5
-      semver: 7.7.2
-
   '@kubb/core@3.16.2':
     dependencies:
       '@kubb/parser-ts': 3.16.2
@@ -4984,6 +4966,21 @@ snapshots:
       natural-orderby: 5.0.0
       object-hash: 3.0.0
       p-limit: 6.2.0
+      remeda: 2.30.0
+      seedrandom: 3.0.5
+      semver: 7.7.2
+
+  '@kubb/core@3.16.3':
+    dependencies:
+      '@kubb/parser-ts': 3.16.3
+      camelcase: 8.0.0
+      find-up: 7.0.0
+      fs-extra: 11.3.1
+      js-runtime: 0.0.8
+      natural-orderby: 5.0.0
+      object-hash: 3.0.0
+      p-limit: 7.0.0
+      picocolors: 1.1.1
       remeda: 2.30.0
       seedrandom: 3.0.5
       semver: 7.7.2
@@ -5010,13 +5007,13 @@ snapshots:
       remeda: 2.30.0
       typescript: 5.9.2
 
-  '@kubb/parser-ts@3.16.1':
+  '@kubb/parser-ts@3.16.2':
     dependencies:
       prettier: 3.6.2
-      remeda: 2.26.1
-      typescript: 5.8.3
+      remeda: 2.30.0
+      typescript: 5.9.2
 
-  '@kubb/parser-ts@3.16.2':
+  '@kubb/parser-ts@3.16.3':
     dependencies:
       prettier: 3.6.2
       remeda: 2.30.0
@@ -7232,6 +7229,10 @@ snapshots:
     dependencies:
       yocto-queue: 1.2.1
 
+  p-limit@7.0.0:
+    dependencies:
+      yocto-queue: 1.2.1
+
   p-locate@6.0.0:
     dependencies:
       p-limit: 4.0.0
@@ -7540,10 +7541,6 @@ snapshots:
   registry-url@6.0.1:
     dependencies:
       rc: 1.2.8
-
-  remeda@2.26.1:
-    dependencies:
-      type-fest: 4.41.0
 
   remeda@2.30.0:
     dependencies:
@@ -8026,8 +8023,6 @@ snapshots:
   type-fest@4.41.0: {}
 
   type@2.7.3: {}
-
-  typescript@5.8.3: {}
 
   typescript@5.9.2: {}
 
