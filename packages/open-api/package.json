@@ -13,7 +13,7 @@
     "@kubb/plugin-client": "3.16.1",
     "@kubb/plugin-oas": "3.16.1",
     "@kubb/plugin-ts": "3.16.2",
-    "@kubb/cli": "3.16.1",
+    "@kubb/cli": "3.16.2",
     "@types/bun": "1.2.16",
     "typescript": "5.9.2"
   }
