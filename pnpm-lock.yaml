@@ -80,20 +80,20 @@ importers:
   packages/open-api:
     devDependencies:
       '@kubb/cli':
-        specifier: 3.16.4
-        version: 3.16.4(typescript@5.9.2)
+        specifier: 3.18.0
+        version: 3.18.0(typescript@5.9.2)
       '@kubb/core':
-        specifier: 3.16.4
-        version: 3.16.4
+        specifier: 3.18.0
+        version: 3.18.0
       '@kubb/plugin-client':
-        specifier: 3.16.4
-        version: 3.16.4(@kubb/react@3.10.15)(ajv@8.17.1)
+        specifier: 3.18.0
+        version: 3.18.0(@kubb/react@3.10.15)(ajv@8.17.1)
       '@kubb/plugin-oas':
-        specifier: 3.16.4
-        version: 3.16.4(@kubb/react@3.10.15)(ajv@8.17.1)
+        specifier: 3.18.0
+        version: 3.18.0(@kubb/react@3.10.15)(ajv@8.17.1)
       '@kubb/plugin-ts':
-        specifier: 3.16.4
-        version: 3.16.4(@kubb/react@3.10.15)(ajv@8.17.1)
+        specifier: 3.18.0
+        version: 3.18.0(@kubb/react@3.10.15)(ajv@8.17.1)
       '@types/bun':
         specifier: 1.2.20
         version: 1.2.20(@types/react@19.1.10)
@@ -963,8 +963,8 @@ packages:
     resolution: {integrity: sha512-vBZP4NlzfOlerQTnba4aqZoMhE/a9HY7HRqoOPaETQcSQuWEIyZMHGfVu6w9wGtGK5fED5qRs2DteVCjOH60sA==}
     engines: {node: '>=14'}
 
-  '@hono/node-server@1.18.2':
-    resolution: {integrity: sha512-icgNvC0vRYivzyuSSaUv9ttcwtN8fDyd1k3AOIBDJgYd84tXRZSS6na8X54CY/oYoFTNhEmZraW/Rb9XYwX4KA==}
+  '@hono/node-server@1.19.0':
+    resolution: {integrity: sha512-1k8/8OHf5VIymJEcJyVksFpT+AQ5euY0VA5hUkCnlKpD4mr8FSbvXaHblxeTTEr90OaqWzAkQaqD80qHZQKxBA==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
       hono: ^4
@@ -1155,8 +1155,8 @@ packages:
   '@kristiandupont/recase@1.4.1':
     resolution: {integrity: sha512-e5t4YqhnRGbS9sU4N52cQgTn37qKwTsxDDcIuIkgPvX0UmnL+7eoOR6oFXeCib5zYuw03vYKpR55NBq+W43j1A==}
 
-  '@kubb/cli@3.16.4':
-    resolution: {integrity: sha512-fBhDOFbY1qJUj4KH13ezz5wkMGAHbSImhcH41Z74U0diRJ8RVKU20IcaIhHvwHvdCZP0hjTFgkCNRHX1eEMjvg==}
+  '@kubb/cli@3.18.0':
+    resolution: {integrity: sha512-8CkXS6kKMYY785w0xUuXDBG9xnsjF29LcUIx3028lEduU33XNGX1EvMRW7OtH0zhdiFnCVN5kNaTauHdmIj6wA==}
     engines: {node: '>=20'}
     hasBin: true
 
@@ -1164,24 +1164,24 @@ packages:
     resolution: {integrity: sha512-OQj08QVMDp1pI2xs/wjcw+wGagOj4B/0+4Omqp2yS2pY63oiIxBf8u7xn+VYUAMKyZvTlkKk8wUmYp/KZPdv3A==}
     engines: {node: '>=20'}
 
-  '@kubb/core@3.16.4':
-    resolution: {integrity: sha512-eIZb0Bl5mXgzG4CF4aXIGGJcOY54yEjLpXbMHFjJO5Eoha89H5tClhZ6qH2JLtzmsFibr6fjc6ipiOcX1ezUHQ==}
+  '@kubb/core@3.18.0':
+    resolution: {integrity: sha512-9fGvT8kCjZToxaLIAiZSRjifxeUMkuvjLi7Biide4ekt6YzzfmBd2ULrDHMsT49tNG48UMauj2j4f3A8hWiVTA==}
     engines: {node: '>=20'}
 
-  '@kubb/oas@3.16.4':
-    resolution: {integrity: sha512-vrZMYHZ5DKpypsMl3zwzUlhDvntAVbDIiAZNug+EoJFWVL6TRdENYQS3aDGBCsfEgBGRJxx7sTPamylm3Ygs0A==}
+  '@kubb/oas@3.18.0':
+    resolution: {integrity: sha512-vd5FLDkvfkJIX+EBz79d/USp8zPdyrF7GBpr7xGJ+uc/1cb5FPSZL15VdCacy5BCHTUeM+6gA8J4iOSXBx82Mg==}
     engines: {node: '>=20'}
 
   '@kubb/parser-ts@3.10.15':
     resolution: {integrity: sha512-5FqtVBQp/059/+2fUR/WvsHG9hp2XBmnvZJI/Rc4SsM3s0GPWRotm+qP19Z7dTjLkh6Mqml/fBZQlOtCxqOEuw==}
     engines: {node: '>=20'}
 
-  '@kubb/parser-ts@3.16.4':
-    resolution: {integrity: sha512-VhMDuoupaY3ESA06YHShYjWxcTWF6mMl+j61RlZsBm//I6sRN5l6G7GJvB8lW85v8D8yOpwh5S6QjWmZTxgnuw==}
+  '@kubb/parser-ts@3.18.0':
+    resolution: {integrity: sha512-yNxhLYWVvvSuh+M17fuuNwMe02YfH+CxTTEpRcf9MxfUfwI+Rb/DbgvC5Mh+z12vnZmfWyrhlgNiKyCZH2/s2Q==}
     engines: {node: '>=20'}
 
-  '@kubb/plugin-client@3.16.4':
-    resolution: {integrity: sha512-2RaVvp/1z14LpgvLyM3jzrCz7sdiuqk9uEeaGjZjZlsQ2S6Ad+GnvjHlisvFycuWSTiyfpmdRXHfevQx3NEq0A==}
+  '@kubb/plugin-client@3.18.0':
+    resolution: {integrity: sha512-TmPplJN4T2koHlJG0YEl4T8GlrfquUqH+h6Mse4xiRUSpJs2WjDCe19Xth5QV93uv1MKxMRPwlk1ePAUtrsUrA==}
     engines: {node: '>=20'}
     peerDependencies:
       '@kubb/react': ^3.0.0
@@ -1190,20 +1190,20 @@ packages:
       axios:
         optional: true
 
-  '@kubb/plugin-oas@3.16.4':
-    resolution: {integrity: sha512-1A/zX+Qt8uZ/zJfjBYDFcF/CBzlWieKOQfuEzOYKPBFOe3wWWlveCoxpTbysFh8HLeFF5zKUuslRA7xVZv7dCQ==}
+  '@kubb/plugin-oas@3.18.0':
+    resolution: {integrity: sha512-bGqXAmWmn8C8bMcFDy0Xyl/grbybl/6Db17NKN3RlQpVjLsOSMENeNfnASM5doCZYgegG69OxLPQQULmJKdYBA==}
     engines: {node: '>=20'}
     peerDependencies:
       '@kubb/react': ^3.0.0
 
-  '@kubb/plugin-ts@3.16.4':
-    resolution: {integrity: sha512-w3IoQAPZeh+L/YrPw3JYqnk4b7hP/udB1TyomJ3hkdx3HJs2umXGxdvVSPLB2UnZHkbUiRW3ZuQze63aIJ2KMQ==}
+  '@kubb/plugin-ts@3.18.0':
+    resolution: {integrity: sha512-cI0gdhs7AHGdQj56FA4tR2ml+RsgfzCNDQ9IBX6O91cwqb0zPCgpAhQPH3YJueBMKrZxJgFJXnKs0kpoqKyrZw==}
     engines: {node: '>=20'}
     peerDependencies:
       '@kubb/react': ^3.0.0
 
-  '@kubb/plugin-zod@3.16.4':
-    resolution: {integrity: sha512-kk1bR4v1YQiZX9uxERzWWQJAT3jE0SV/JD2M46qkcC2ghm/ek2/T2z2q8GHwV9xaMAYGCBfcTjEyyLg73TQrZA==}
+  '@kubb/plugin-zod@3.18.0':
+    resolution: {integrity: sha512-5T0isjVN7XX3XWmZ11jqI6HwpmCwPncmAhQzH4KHLsviRN3kJbNUNoGCdqFfBzxTUovtK7EDMGxEC6ko0mWjkQ==}
     engines: {node: '>=20'}
     peerDependencies:
       '@kubb/react': ^3.0.0
@@ -1212,8 +1212,8 @@ packages:
     resolution: {integrity: sha512-gWH5pDQ3kpZCeymVSk7f1ijp3z/dGQESeXr75yscEUGoVAks6RqbLpcgObNRa8CW4X9MN9Ixkzzwbxpvxpxezg==}
     engines: {node: '>=20'}
 
-  '@kubb/ui@3.16.4':
-    resolution: {integrity: sha512-x5efjkRCCHyOeKbD3QuUyRrhfXpwdfhvQTL1iqJF90ZKQC1tlltPOUrqIFHSi7HjXhf46tFA/rqnJDeVXJPo6w==}
+  '@kubb/ui@3.18.0':
+    resolution: {integrity: sha512-DfXgMtF0Cdi4ZB8oKFW8rCN0yRurufL5+KA7+0ZbTwgO4WziDPffECZCIFwgOUmlhQeUPINeBnndV8NvN+28jQ==}
     engines: {node: '>=20'}
 
   '@mapbox/jsonlint-lines-primitives@2.0.2':
@@ -4900,7 +4900,7 @@ snapshots:
 
   '@fastify/busboy@2.1.1': {}
 
-  '@hono/node-server@1.18.2(hono@4.9.2)':
+  '@hono/node-server@1.19.0(hono@4.9.2)':
     dependencies:
       hono: 4.9.2
 
@@ -5063,10 +5063,10 @@ snapshots:
     dependencies:
       ramda: 0.30.1
 
-  '@kubb/cli@3.16.4(typescript@5.9.2)':
+  '@kubb/cli@3.18.0(typescript@5.9.2)':
     dependencies:
-      '@kubb/core': 3.16.4
-      '@kubb/ui': 3.16.4
+      '@kubb/core': 3.18.0
+      '@kubb/ui': 3.18.0
       chokidar: 4.0.3
       citty: 0.1.6
       cli-progress: 3.12.0
@@ -5097,9 +5097,9 @@ snapshots:
       seedrandom: 3.0.5
       semver: 7.7.2
 
-  '@kubb/core@3.16.4':
+  '@kubb/core@3.18.0':
     dependencies:
-      '@kubb/parser-ts': 3.16.4
+      '@kubb/parser-ts': 3.18.0
       camelcase: 8.0.0
       find-up: 7.0.0
       fs-extra: 11.3.1
@@ -5112,7 +5112,7 @@ snapshots:
       seedrandom: 3.0.5
       semver: 7.7.2
 
-  '@kubb/oas@3.16.4(ajv@8.17.1)':
+  '@kubb/oas@3.18.0(ajv@8.17.1)':
     dependencies:
       '@redocly/openapi-core': 2.0.5(ajv@8.17.1)
       hotscript: 1.0.13
@@ -5134,28 +5134,27 @@ snapshots:
       remeda: 2.30.0
       typescript: 5.9.2
 
-  '@kubb/parser-ts@3.16.4':
+  '@kubb/parser-ts@3.18.0':
     dependencies:
-      prettier: 3.6.2
       remeda: 2.30.0
       typescript: 5.9.2
 
-  '@kubb/plugin-client@3.16.4(@kubb/react@3.10.15)(ajv@8.17.1)':
+  '@kubb/plugin-client@3.18.0(@kubb/react@3.10.15)(ajv@8.17.1)':
     dependencies:
-      '@kubb/core': 3.16.4
-      '@kubb/oas': 3.16.4(ajv@8.17.1)
-      '@kubb/plugin-oas': 3.16.4(@kubb/react@3.10.15)(ajv@8.17.1)
-      '@kubb/plugin-ts': 3.16.4(@kubb/react@3.10.15)(ajv@8.17.1)
-      '@kubb/plugin-zod': 3.16.4(@kubb/react@3.10.15)(ajv@8.17.1)
+      '@kubb/core': 3.18.0
+      '@kubb/oas': 3.18.0(ajv@8.17.1)
+      '@kubb/plugin-oas': 3.18.0(@kubb/react@3.10.15)(ajv@8.17.1)
+      '@kubb/plugin-ts': 3.18.0(@kubb/react@3.10.15)(ajv@8.17.1)
+      '@kubb/plugin-zod': 3.18.0(@kubb/react@3.10.15)(ajv@8.17.1)
       '@kubb/react': 3.10.15
     transitivePeerDependencies:
       - ajv
       - encoding
 
-  '@kubb/plugin-oas@3.16.4(@kubb/react@3.10.15)(ajv@8.17.1)':
+  '@kubb/plugin-oas@3.18.0(@kubb/react@3.10.15)(ajv@8.17.1)':
     dependencies:
-      '@kubb/core': 3.16.4
-      '@kubb/oas': 3.16.4(ajv@8.17.1)
+      '@kubb/core': 3.18.0
+      '@kubb/oas': 3.18.0(ajv@8.17.1)
       '@kubb/react': 3.10.15
       '@stoplight/yaml': 4.3.0
       p-limit: 7.0.0
@@ -5164,24 +5163,24 @@ snapshots:
       - ajv
       - encoding
 
-  '@kubb/plugin-ts@3.16.4(@kubb/react@3.10.15)(ajv@8.17.1)':
+  '@kubb/plugin-ts@3.18.0(@kubb/react@3.10.15)(ajv@8.17.1)':
     dependencies:
-      '@kubb/core': 3.16.4
-      '@kubb/oas': 3.16.4(ajv@8.17.1)
-      '@kubb/parser-ts': 3.16.4
-      '@kubb/plugin-oas': 3.16.4(@kubb/react@3.10.15)(ajv@8.17.1)
+      '@kubb/core': 3.18.0
+      '@kubb/oas': 3.18.0(ajv@8.17.1)
+      '@kubb/parser-ts': 3.18.0
+      '@kubb/plugin-oas': 3.18.0(@kubb/react@3.10.15)(ajv@8.17.1)
       '@kubb/react': 3.10.15
     transitivePeerDependencies:
       - ajv
       - encoding
 
-  '@kubb/plugin-zod@3.16.4(@kubb/react@3.10.15)(ajv@8.17.1)':
+  '@kubb/plugin-zod@3.18.0(@kubb/react@3.10.15)(ajv@8.17.1)':
     dependencies:
-      '@kubb/core': 3.16.4
-      '@kubb/oas': 3.16.4(ajv@8.17.1)
-      '@kubb/parser-ts': 3.16.4
-      '@kubb/plugin-oas': 3.16.4(@kubb/react@3.10.15)(ajv@8.17.1)
-      '@kubb/plugin-ts': 3.16.4(@kubb/react@3.10.15)(ajv@8.17.1)
+      '@kubb/core': 3.18.0
+      '@kubb/oas': 3.18.0(ajv@8.17.1)
+      '@kubb/parser-ts': 3.18.0
+      '@kubb/plugin-oas': 3.18.0(@kubb/react@3.10.15)(ajv@8.17.1)
+      '@kubb/plugin-ts': 3.18.0(@kubb/react@3.10.15)(ajv@8.17.1)
       '@kubb/react': 3.10.15
     transitivePeerDependencies:
       - ajv
@@ -5202,9 +5201,9 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@kubb/ui@3.16.4':
+  '@kubb/ui@3.18.0':
     dependencies:
-      '@hono/node-server': 1.18.2(hono@4.9.2)
+      '@hono/node-server': 1.19.0(hono@4.9.2)
       '@hono/zod-openapi': 0.19.2(hono@4.9.2)(zod@3.25.76)
       hono: 4.9.2
       zod: 3.25.76
