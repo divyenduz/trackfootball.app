@@ -14,7 +14,7 @@
     "@kubb/plugin-oas": "3.18.0",
     "@kubb/plugin-ts": "3.18.0",
     "@kubb/cli": "3.18.0",
-    "@types/bun": "1.2.20",
+    "@types/bun": "1.2.21",
     "typescript": "5.9.2"
   }
 }
