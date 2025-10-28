@@ -66,6 +66,22 @@ export default defineApp([
       const user = await repository.getUserByAuth0Sub(session.sub)
       ctx.user = user
     }
+
+    const url = new URL(request.url)
+    if (
+      !session &&
+      url.pathname.startsWith('/api') &&
+      !url.pathname.startsWith('/api/auth')
+    ) {
+      return new Response(JSON.stringify({ error: 'Unauthorized' }), {
+        status: 401,
+        headers: {
+          'Content-Type': 'application/json',
+          'WWW-Authenticate':
+            'Bearer error="invalid_token", error_description="expired or invalid session"',
+        },
+      })
+    }
     if (
       env.UNSAFE_AUTH_BYPASS_USER === '1' ||
       env.UNSAFE_AUTH_BYPASS_USER === 'true'

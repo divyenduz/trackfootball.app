@@ -57,7 +57,7 @@ export async function Callback({ request }: { request: Request }) {
       httpOnly: true,
       secure: true,
       sameSite: 'lax',
-      maxAge: 60 * 60 * 24 * 7 * 52, // 1 year
+      maxAge: 60 * 60 * 24 * 7, // 1 week
       domain: env.COOKIE_DOMAIN,
       path: '/',
     })

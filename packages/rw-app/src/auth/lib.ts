@@ -39,20 +39,23 @@ async function isValidJwt(headers: Headers) {
   if (!encodedToken) {
     return { isValid: false, session: null }
   }
-  invariant(encodedToken, 'JWT is required')
-  const token = await decodeJwt(encodedToken)
-
-  const idToken = token?.idToken as string
-  if (!idToken) {
-    return { isValid: false, session: null }
-  }
 
   try {
-    const decodedIdToken = decodeJwtIdToken(idToken as string)
+    const token = await decodeJwt(encodedToken)
+    const idToken = token?.idToken as string
+    if (!idToken) {
+      return { isValid: false, session: null }
+    }
+
+    const decodedIdToken = decodeJwtIdToken(idToken)
     const isValid = isValidJwtIdTokenSignature(decodedIdToken)
     return { isValid: await isValid, session: decodedIdToken.payload }
   } catch (err) {
-    console.error('JWT verification failed:', err)
+    if (err instanceof Error && err.message.includes("'exp' claim")) {
+      console.warn('Session token expired')
+    } else {
+      console.error('JWT decryption/verification failed:', err)
+    }
     return { isValid: false, session: null }
   }
 }
