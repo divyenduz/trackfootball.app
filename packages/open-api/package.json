@@ -9,11 +9,11 @@
     "generate:strava": "kubb --config kubb.config.ts"
   },
   "devDependencies": {
-    "@kubb/core": "3.18.0",
-    "@kubb/plugin-client": "3.18.0",
-    "@kubb/plugin-oas": "3.18.0",
-    "@kubb/plugin-ts": "3.18.0",
-    "@kubb/cli": "3.18.0",
+    "@kubb/core": "4.5.9",
+    "@kubb/plugin-client": "4.5.9",
+    "@kubb/plugin-oas": "4.5.9",
+    "@kubb/plugin-ts": "4.5.9",
+    "@kubb/cli": "4.5.9",
     "@types/bun": "1.2.20",
     "typescript": "5.9.2"
   }
