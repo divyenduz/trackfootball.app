@@ -6,11 +6,12 @@ import {
   WorkflowStep,
 } from 'cloudflare:workers'
 import postgres from 'postgres'
-import { StravaEvent, stringify } from './StravaWebhookCallback'
 import { match } from 'ts-pattern'
 import {
   createDiscordMessage,
   fetchStravaActivity,
+  StravaEvent,
+  stringify,
 } from '@trackfootball/service'
 import { PostType } from '@trackfootball/kanel'
 

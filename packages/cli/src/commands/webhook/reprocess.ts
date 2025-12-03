@@ -46,8 +46,7 @@ export async function cmd(
     console.log(`Found ${pendingEvents.length} PENDING webhook events:`)
     pendingEvents.forEach((event) => {
       const bodyPreview =
-        event.body.substring(0, 100) +
-        (event.body.length > 100 ? '...' : '')
+        event.body.substring(0, 100) + (event.body.length > 100 ? '...' : '')
       console.log(`  - ID: ${event.id}, Status: ${event.status}`)
       console.log(`    Body: ${bodyPreview}`)
     })
@@ -108,6 +107,7 @@ export async function cmd(
       const event = rows[0]
       invariant(event, 'Event should be defined')
 
+      //@ts-ignore FIXME
       await processStravaWebhookEvent(event, {
         repository,
         createDiscordMessage,
