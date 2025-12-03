@@ -58,8 +58,8 @@ importers:
   packages/kanel:
     dependencies:
       dotenv:
-        specifier: 17.2.1
-        version: 17.2.1
+        specifier: 17.2.3
+        version: 17.2.3
       geojson:
         specifier: 0.5.0
         version: 0.5.0
@@ -2326,8 +2326,8 @@ packages:
   dom-helpers@5.2.1:
     resolution: {integrity: sha512-nRCa7CK3VTrM2NmGkIy4cbK7IZlgBE/PYMn55rrXefr5xXDP0LdtfPnblFDoVdcAfslJ7or6iqAUnx0CCGIWQA==}
 
-  dotenv@17.2.1:
-    resolution: {integrity: sha512-kQhDYKZecqnM0fCnzI5eIv5L4cAe/iRI+HqMbO/hbRdTAeXDG+M9FjipUxNfbARuEg4iHIbhnhs78BCHNbSxEQ==}
+  dotenv@17.2.3:
+    resolution: {integrity: sha512-JVUnt+DUIzu87TABbhPmNfVdBDt18BLOWjMUFJMSi/Qqg7NTYtabbvSNJGOJ7afbRuv9D/lngizHtP7QyLQ+9w==}
     engines: {node: '>=12'}
 
   earcut@3.0.2:
@@ -3698,6 +3698,7 @@ packages:
 
   rwsdk@0.1.35:
     resolution: {integrity: sha512-SsT2hAuYevfKON2950CHEBM99xopqfOVrMRhemoB9Fl49yzAjCk+c/uupIUijwyH5Q9NQ4VCGZUE7y9G52zuxg==}
+    deprecated: 'This version bundles vulnerable RSC packages (CVE-2025-55182). Upgrade to rwsdk >= 1.0.0-alpha.1 and run: npm install react@latest react-dom@latest react-server-dom-webpack@latest'
     hasBin: true
     peerDependencies:
       vite: ^6.2.6
@@ -6360,7 +6361,7 @@ snapshots:
       '@babel/runtime': 7.28.2
       csstype: 3.1.3
 
-  dotenv@17.2.1: {}
+  dotenv@17.2.3: {}
 
   earcut@3.0.2:
     optional: true
