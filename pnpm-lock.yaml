@@ -71,8 +71,8 @@ importers:
         specifier: 7946.0.16
         version: 7946.0.16
       kanel:
-        specifier: 3.14.4
-        version: 3.14.4(@electric-sql/pglite@0.2.17)
+        specifier: 3.16.0
+        version: 3.16.0(@electric-sql/pglite@0.2.17)
       typescript:
         specifier: 5.9.2
         version: 5.9.2
@@ -2871,8 +2871,8 @@ packages:
     resolution: {integrity: sha512-p/nXbhSEcu3pZRdkW1OfJhpsVtW1gd4Wa1fnQc9YLiTfAjn0312eMKimbdIQzuZl9aa9xUGaRlP9T/CJE/ditQ==}
     engines: {node: '>=0.10.0'}
 
-  kanel@3.14.4:
-    resolution: {integrity: sha512-yUs537wd8W2DBjbxExHJqWMP4tkmEQgsE5hUHlC3ACuN+pfeszMJpFmbUVpDKgwVeLj0V6ZvFtwoYp8/xsoQOg==}
+  kanel@3.16.0:
+    resolution: {integrity: sha512-bUTYLF1DVMk03CiRj7yV7/zpW1lE2lvIGJBYYY0A8A0aEy2hi1sJiYB6AWFPP71NqNx/pr+2eqRamcSpO5Wxbw==}
     engines: {node: '>=16.0.0'}
     hasBin: true
 
@@ -3536,6 +3536,9 @@ packages:
   ramda@0.31.3:
     resolution: {integrity: sha512-xKADKRNnqmDdX59PPKLm3gGmk1ZgNnj3k7DryqWwkamp4TJ6B36DdpyKEQ0EoEYmH2R62bV4Q+S0ym2z8N2f3Q==}
 
+  ramda@0.32.0:
+    resolution: {integrity: sha512-GQWAHhxhxWBWA8oIBr1XahFVjQ9Fic6MK9ikijfd4TZHfE2+urfk+irVlR5VOn48uwMgM+loRRBJd6Yjsbc0zQ==}
+
   randombytes@2.1.0:
     resolution: {integrity: sha512-vYl3iOX+4CKUWuxGi9Ukhie6fsqXqS9FE2Zaic4tNFD2N2QQaXOMFbuKK4QmDHC0JO6B1Zp41J0LpT0oR68amQ==}
 
@@ -3698,6 +3701,7 @@ packages:
 
   rwsdk@0.1.35:
     resolution: {integrity: sha512-SsT2hAuYevfKON2950CHEBM99xopqfOVrMRhemoB9Fl49yzAjCk+c/uupIUijwyH5Q9NQ4VCGZUE7y9G52zuxg==}
+    deprecated: 'This version bundles vulnerable RSC packages (CVE-2025-55182). Upgrade to rwsdk >= 1.0.0-alpha.1 and run: npm install react@latest react-dom@latest react-server-dom-webpack@latest'
     hasBin: true
     peerDependencies:
       vite: ^6.2.6
@@ -6920,7 +6924,7 @@ snapshots:
 
   jsonpointer@5.0.1: {}
 
-  kanel@3.14.4(@electric-sql/pglite@0.2.17):
+  kanel@3.16.0(@electric-sql/pglite@0.2.17):
     dependencies:
       '@kristiandupont/recase': 1.4.1
       chalk: 4.1.2
@@ -6928,7 +6932,7 @@ snapshots:
       extract-pg-schema: 5.7.4(@electric-sql/pglite@0.2.17)
       optionator: 0.9.4
       pg: 8.16.3
-      ramda: 0.30.1
+      ramda: 0.32.0
       rimraf: 6.0.1
       tagged-comment-parser: 1.3.8
     transitivePeerDependencies:
@@ -7624,6 +7628,8 @@ snapshots:
   ramda@0.30.1: {}
 
   ramda@0.31.3: {}
+
+  ramda@0.32.0: {}
 
   randombytes@2.1.0:
     dependencies:
