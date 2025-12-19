@@ -12,7 +12,8 @@
   },
   "devDependencies": {
     "lefthook": "^1.12.2",
-    "typescript": "5.9.2"
+    "typescript": "5.9.2",
+    "wrangler": "^4.56.0"
   },
   "pnpm": {
     "onlyBuiltDependencies": [

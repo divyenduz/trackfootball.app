@@ -236,18 +236,17 @@ export async function processStravaWebhookEvent(
           console.error(
             `Post to be deleted not found, Strava key: ${activityDeleteEvent.object_id}`
           )
-          return
-        }
-
-        await createDiscordMessageFn({
-          heading: 'Activity Deleted (Webhook)',
-          name: `${post.text}`,
-          description: `
+        } else {
+          await createDiscordMessageFn({
+            heading: 'Activity Deleted (Webhook)',
+            name: `${post.text}`,
+            description: `
       ID: ${post.id} / Strava ID: ${activityDeleteEvent.object_id}
       Activity Time: ${post?.startTime}
       User: ${user.firstName} ${user.lastName}
       Link: ${env.HOMEPAGE_URL}/activity/${post.id}`,
-        })
+          })
+        }
 
         await repository.updateStravaWebhookEventStatus(event.id, 'COMPLETED')
       }
