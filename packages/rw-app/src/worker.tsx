@@ -71,7 +71,8 @@ export default defineApp([
     if (
       !session &&
       url.pathname.startsWith('/api') &&
-      !url.pathname.startsWith('/api/auth')
+      !url.pathname.startsWith('/api/auth') &&
+      url.pathname !== '/api/social/strava/webhook/callback'
     ) {
       return new Response(JSON.stringify({ error: 'Unauthorized' }), {
         status: 401,
