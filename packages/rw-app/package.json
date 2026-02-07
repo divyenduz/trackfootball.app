@@ -22,17 +22,13 @@
     "lint": "tsc --noEmit"
   },
   "dependencies": {
-    "@math.gl/web-mercator": "4.1.0",
     "@mui/material": "7.3.1",
     "@panva/hkdf": "1.2.1",
     "@tailwindcss/vite": "4.1.10",
     "@trackfootball/open-api": "workspace:*",
     "@trackfootball/postgres": "workspace:*",
     "@trackfootball/service": "workspace:*",
-    "@trackfootball/utils": "workspace:*",
     "cookie": "1.0.2",
-    "date-fns": "4.1.0",
-    "install": "0.13.0",
     "jose": "6.0.12",
     "postgres": "3.4.7",
     "rwsdk": "0.1.35",

@@ -14,7 +14,6 @@
   "dependencies": {
     "@trackfootball/rw-app": "workspace:*",
     "@trackfootball/postgres": "workspace:*",
-    "@trackfootball/utils": "workspace:*",
     "@trackfootball/open-api": "workspace:*",
     "@tmcw/togeojson": "7.1.2",
     "@turf/area": "7.2.0",
