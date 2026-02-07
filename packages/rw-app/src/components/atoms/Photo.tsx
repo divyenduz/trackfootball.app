@@ -12,9 +12,7 @@ const Photo = ({ photo }: Props) => {
           <div className="w-15 h-15 overflow-hidden rounded-full border-2 border-white shadow-lg">
             <img
               alt="User's display picture"
-              width={40}
-              height={40}
-              className="object-cover rounded-full"
+              className="h-full w-full object-cover"
               src={photo}
             />
           </div>

@@ -1,4 +1,5 @@
 import { RequestInfo } from 'rwsdk/worker'
+import { Button } from '@/components/atoms/Button'
 
 export function Home({ ctx }: RequestInfo) {
   return (
@@ -23,8 +24,7 @@ export function Home({ ctx }: RequestInfo) {
             to TrackFootball.
           </p>
           <a href="/api/auth/login">
-            {/* <Button variant="contained">Get started now</Button> */}
-            <button>Get started now</button>
+            <Button>Get started now</Button>
           </a>
         </div>
       </div>
@@ -108,7 +108,7 @@ export function Home({ ctx }: RequestInfo) {
             </p>
           </div>
           <a href="/api/auth/login">
-            <button>Get started now</button>
+            <Button>Get started now</Button>
           </a>
         </div>
       </div>
