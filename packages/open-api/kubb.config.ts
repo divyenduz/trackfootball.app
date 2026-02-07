@@ -10,6 +10,7 @@ export default defineConfig({
   output: {
     path: './services/strava',
     clean: true,
+    format: 'prettier',
   },
   plugins: [
     pluginOas({
@@ -32,7 +33,6 @@ export default defineConfig({
       dateType: 'string',
       unknownType: 'unknown',
       optionalType: 'questionTokenAndUndefined',
-      oasType: false,
     }),
     pluginClient({
       baseURL: 'https://www.strava.com/api/v3',

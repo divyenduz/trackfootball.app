@@ -12,6 +12,7 @@
   },
   "devDependencies": {
     "lefthook": "catalog:",
+    "prettier": "catalog:",
     "typescript": "catalog:",
     "wrangler": "catalog:"
   },

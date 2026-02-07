@@ -13,6 +13,7 @@
     "@kubb/plugin-client": "catalog:",
     "@kubb/plugin-oas": "catalog:",
     "@kubb/plugin-ts": "catalog:",
+    "@kubb/react-fabric": "catalog:",
     "@kubb/cli": "catalog:",
     "@types/bun": "catalog:",
     "typescript": "catalog:"
