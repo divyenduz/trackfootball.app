@@ -9,15 +9,15 @@
     "lint": "tsc --noEmit"
   },
   "devDependencies": {
-    "@types/node": "24.3.0"
+    "@types/node": "catalog:"
   },
   "dependencies": {
-    "@stricli/auto-complete": "^1.1.2",
-    "@stricli/core": "^1.1.2",
+    "@stricli/auto-complete": "catalog:",
+    "@stricli/core": "catalog:",
     "@trackfootball/service": "workspace:*",
     "@trackfootball/postgres": "workspace:*",
-    "postgres": "3.4.7",
-    "tiny-invariant": "1.3.3",
-    "ts-pattern": "5.8.0"
+    "postgres": "catalog:",
+    "tiny-invariant": "catalog:",
+    "ts-pattern": "catalog:"
   }
 }
