@@ -1,4 +1,3 @@
-import { Avatar } from '@mui/material'
 import { ConditionalDisplay } from './ConditionalDisplay'
 
 interface Props {
@@ -10,15 +9,13 @@ const Photo = ({ photo }: Props) => {
     <>
       <ConditionalDisplay visible={Boolean(photo)}>
         {photo ? (
-          <Avatar className="w-15 h-15 border-2 border-white shadow-lg">
+          <div className="w-15 h-15 overflow-hidden rounded-full border-2 border-white shadow-lg">
             <img
               alt="User's display picture"
-              width={40}
-              height={40}
-              className="object-cover rounded-full"
+              className="h-full w-full object-cover"
               src={photo}
-            ></img>
-          </Avatar>
+            />
+          </div>
         ) : null}
       </ConditionalDisplay>
 

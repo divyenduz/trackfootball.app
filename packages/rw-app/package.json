@@ -22,7 +22,6 @@
     "lint": "tsc --noEmit"
   },
   "dependencies": {
-    "@mui/material": "catalog:",
     "@panva/hkdf": "catalog:",
     "@tailwindcss/vite": "catalog:",
     "@trackfootball/open-api": "workspace:*",

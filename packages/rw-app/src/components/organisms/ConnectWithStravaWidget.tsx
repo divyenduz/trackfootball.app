@@ -1,9 +1,9 @@
 'use client'
 
-import { Button } from '@mui/material'
 // import { disconnectStrava } from 'app/actions/disconnectStrava'
 import { match } from 'ts-pattern'
 import ConnectWithStrava from '@/components/atoms/strava/ConnectWithStrava'
+import { Button } from '@/components/atoms/Button'
 
 export type CheckStravaState =
   | 'LOADING'
@@ -25,9 +25,7 @@ export const ConnectWithStravaWidget: React.FC<Props> = ({
   return match(checkStravaState)
     .with('WORKING', () => (
       <Button
-        variant="contained"
-        color="secondary"
-        size="small"
+        variant="secondary"
         onClick={async () => {
           alert('Disconnecting Strava is not implemented yet.') // await disconnectStrava()
         }}
