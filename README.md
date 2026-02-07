@@ -1,78 +1,53 @@
-# Introduction
+# TrackFootball
 
-Repository for code of TrackFootball.app
+Track and visualize your football (soccer) activities using GPS data from Strava.
 
-# Contributing
+**[trackfootball.app](https://trackfootball.app)**
 
-1. Copy `.env-sample` to `.env`
-2. `pnpm install`
-3. `pnpm run dev`
-   (and more)
+## Tech Stack
 
-# Specification
+- **App**: React + [RedwoodSDK](https://rwsdk.com) on Cloudflare Workers
+- **Database**: PostgreSQL
+- **Language**: TypeScript
+- **Monorepo**: pnpm workspaces
 
-Spec: https://www.notion.so/zoid/TrackFootball-app-3863993bbc6149e194b55b7cdf608bcc
+## Project Structure
 
-# SQL
-
-## Fix Sequences
-
-```sql
-SELECT SETVAL('public."User_id_seq"', COALESCE(MAX(id), 1)) FROM public."User";
-SELECT SETVAL('public."Field_id_seq"', COALESCE(MAX(id), 1)) FROM public."Field";
-SELECT SETVAL('public."Post_id_seq"', COALESCE(MAX(id), 1)) FROM public."Post";
-SELECT SETVAL('public."SocialLogin_id_seq"', COALESCE(MAX(id), 1)) FROM public."SocialLogin";
+```
+packages/
+  rw-app/       # Web app (React + Cloudflare Workers + Vite)
+  service/      # Business logic (geo processing, Strava integration)
+  postgres/     # Database layer
+  open-api/     # Generated API client (Kubb)
+  cli/          # CLI tools
 ```
 
-## Fix Indexes
+## Getting Started
 
-```sql
-CREATE UNIQUE INDEX "User.email_unique" ON "User"("email");
-CREATE UNIQUE INDEX "SocialLogin.platformId_unique" ON "SocialLogin"("platformId");
-CREATE UNIQUE INDEX "User.auth0Sub_unique" ON "User"("auth0Sub");
-CREATE UNIQUE INDEX "Post.key_type_unique" ON "Post"("key", "type");
+### Prerequisites
+
+- Node.js 24+
+- pnpm
+- PostgreSQL
+
+### Setup
+
+```sh
+cp .env-sample .env  # configure your environment variables
+pnpm install
+pnpm run dev
 ```
 
-## Functions
+### Commands
 
-```sql
-CREATE OR REPLACE FUNCTION jsonb_array_max(arr jsonb)
-	RETURNS integer
-	IMMUTABLE
-	LANGUAGE plpgsql
-	AS $$
-BEGIN
-	RETURN (WITH el AS (
-		SELECT
-			max(jsonb_array_elements::int)
-		FROM
-			jsonb_array_elements(arr)
-)
-SELECT
-	*
-FROM
-	el LIMIT 1 );
-END;
-$$;
-```
+| Command | Description |
+|---------|-------------|
+| `pnpm run dev` | Start development server |
+| `pnpm run build` | Build all packages |
+| `pnpm run test` | Run all tests |
+| `pnpm run lint` | Typecheck all packages |
+| `pnpm run release` | Deploy to Cloudflare Workers |
 
-```sql
-CREATE OR REPLACE FUNCTION jsonb_array_avg(arr jsonb)
-	RETURNS integer
-	IMMUTABLE
-	LANGUAGE plpgsql
-	AS $$
-BEGIN
-	RETURN (WITH el AS (
-		SELECT
-			avg(jsonb_array_elements::int)
-		FROM
-			jsonb_array_elements(arr)
-)
-SELECT
-	*
-FROM
-	el LIMIT 1 );
-END;
-$$;
-```
+## License
+
+MIT
