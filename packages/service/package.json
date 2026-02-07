@@ -14,7 +14,6 @@
   "dependencies": {
     "@trackfootball/rw-app": "workspace:*",
     "@trackfootball/postgres": "workspace:*",
-    "@trackfootball/kanel": "workspace:*",
     "@trackfootball/sprint-detection": "workspace:*",
     "@trackfootball/utils": "workspace:*",
     "@trackfootball/open-api": "workspace:*",

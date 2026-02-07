@@ -1,4 +1,4 @@
-import { Field, Post, PostType, User } from '@trackfootball/kanel'
+import { type Field, type Post, type PostType, type User } from '../types'
 import type { FeatureCollection, LineString } from 'geojson'
 import invariant from 'tiny-invariant'
 import { Sql } from 'postgres'

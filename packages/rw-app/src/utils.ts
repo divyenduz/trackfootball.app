@@ -1,4 +1,4 @@
-import type { Field, Post } from '@trackfootball/kanel'
+import type { Field, Post } from '@trackfootball/postgres'
 import type { FeatureCollection, LineString, Position } from 'geojson'
 import invariant from 'tiny-invariant'
 

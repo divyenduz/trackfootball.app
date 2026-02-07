@@ -1,4 +1,4 @@
-import type { Field } from '@trackfootball/kanel'
+import type { Field } from '@trackfootball/postgres'
 import bearing from '@turf/bearing'
 import { bearingToAzimuth, featureCollection, lineString } from '@turf/helpers'
 import { match } from 'ts-pattern'

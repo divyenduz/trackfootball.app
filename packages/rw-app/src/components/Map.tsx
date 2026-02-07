@@ -1,4 +1,4 @@
-import type { Field, Post } from '@trackfootball/kanel'
+import type { Field, Post } from '@trackfootball/postgres'
 import { FieldSpace } from '@trackfootball/sprint-detection'
 import bearing from '@turf/bearing'
 import { bearingToAzimuth } from '@turf/helpers'

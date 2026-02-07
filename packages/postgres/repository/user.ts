@@ -1,4 +1,4 @@
-import type { SocialLogin, User } from '@trackfootball/kanel'
+import type { SocialLogin, User } from '../types'
 import { Sql } from 'postgres'
 
 export async function getUser(sql: Sql, id: number): Promise<User | null> {
@@ -48,7 +48,6 @@ export async function deleteStravaSocialLogin(sql: Sql, platformId: number) {
     await sql`DELETE FROM "SocialLogin" WHERE "platform" = 'STRAVA' AND "platformId" = ${platformId} RETURNING *`
   return socialLogins
 }
-
 
 
 

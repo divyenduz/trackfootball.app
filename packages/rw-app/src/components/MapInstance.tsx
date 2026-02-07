@@ -3,7 +3,7 @@ import type { ViewState } from 'react-map-gl/mapbox'
 import { match } from 'ts-pattern'
 
 import { Map } from './Map'
-import { Field, Post } from '@trackfootball/kanel'
+import type { Field, Post } from '@trackfootball/postgres'
 
 type ViewPort = ViewState & {
   width?: number

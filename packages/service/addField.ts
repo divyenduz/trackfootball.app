@@ -1,4 +1,4 @@
-import { type Field } from '@trackfootball/kanel'
+import type { Field } from '@trackfootball/postgres'
 import area from '@turf/area'
 import booleanPointInPolygon from '@turf/boolean-point-in-polygon'
 import center from '@turf/center'

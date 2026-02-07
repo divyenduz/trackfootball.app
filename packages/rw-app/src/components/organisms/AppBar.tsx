@@ -5,7 +5,7 @@ import { match } from 'ts-pattern'
 
 import Logo from '@/components/atoms/brand/core/Logo'
 import { Photo } from '@/components/atoms/Photo'
-import { User } from '@trackfootball/kanel'
+import type { User } from '@trackfootball/postgres'
 
 interface Props {
   user: User | null

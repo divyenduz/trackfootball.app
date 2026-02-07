@@ -1,4 +1,4 @@
-import { StravaWebhookEvent } from '@trackfootball/kanel'
+import type { StravaWebhookEvent } from '@trackfootball/postgres'
 import {
   createDiscordMessage,
   processStravaWebhookEvent,
@@ -63,5 +63,4 @@ export async function StravaWebhookCallback({
     headers: { Allow: 'GET, POST' },
   })
 }
-
 

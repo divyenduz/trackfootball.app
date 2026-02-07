@@ -20,7 +20,7 @@ import { StravaAuthCallback } from './app/pages/strava/StravaAuthCallback'
 import { StravaWebhookCallback } from './app/pages/strava/StravaWebhookCallback'
 import { Privacy } from './app/pages/compliance/Privacy'
 import { Terms } from './app/pages/compliance/Terms'
-import { User } from '@trackfootball/kanel'
+import type { User } from '@trackfootball/postgres'
 
 export type AppContext = {
   user: User | null

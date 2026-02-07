@@ -6,6 +6,7 @@ import * as fieldRepo from './repository/field'
 import * as userRepo from './repository/user'
 import * as stravaWebhookEventRepo from './repository/stravaWebhookEvent'
 import * as socialLoginRepo from './repository/socialLogin'
+export * from './types'
 
 export function getSql(connectionString: string) {
   const sql = postgres(connectionString, {

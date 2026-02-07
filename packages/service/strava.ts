@@ -1,4 +1,4 @@
-import { type PostType } from '@trackfootball/kanel'
+import type { PostType } from '@trackfootball/postgres'
 
 import invariant from 'tiny-invariant'
 import { createDiscordMessage } from './discord'

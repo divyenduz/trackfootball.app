@@ -1,4 +1,4 @@
-import { PostType, StravaWebhookEvent } from '@trackfootball/kanel'
+import type { PostType, StravaWebhookEvent } from '@trackfootball/postgres'
 import { createDiscordMessage as defaultCreateDiscordMessage } from './discord'
 import {
   fetchCompletePost,

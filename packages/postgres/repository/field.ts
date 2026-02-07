@@ -1,4 +1,4 @@
-import type { Field } from '@trackfootball/kanel'
+import type { Field } from '../types'
 import { Sql } from 'postgres'
 
 export async function getFieldsByUsage(
@@ -22,5 +22,3 @@ export async function getFieldsByName(
   `
   return fields
 }
-
-
