@@ -43,7 +43,7 @@ const lineStringFeatureSchema = z
   .object({
     type: z.literal('Feature'),
     geometry: lineStringGeometrySchema,
-    properties: z.record(z.unknown()).nullable().optional(),
+    properties: z.record(z.string(), z.unknown()).nullable().optional(),
     id: z.union([z.string(), z.number()]).optional(),
     bbox: z.array(z.number()).optional(),
   })
