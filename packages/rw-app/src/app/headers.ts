@@ -3,7 +3,7 @@ import { IS_DEV } from 'rwsdk/constants'
 
 export const setCommonHeaders =
   (): RouteMiddleware =>
-  ({ headers, rw: { nonce } }) => {
+  ({ response: { headers }, rw: { nonce } }) => {
     if (!IS_DEV) {
       // Forces browsers to always use HTTPS for a specified time period (2 years)
       headers.set(
