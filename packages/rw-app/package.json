@@ -31,15 +31,21 @@
     "cookie": "catalog:",
     "jose": "catalog:",
     "postgres": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "react-server-dom-webpack": "catalog:",
     "rwsdk": "catalog:",
     "tailwindcss": "catalog:",
     "tiny-invariant": "catalog:",
     "ts-pattern": "catalog:"
   },
   "devDependencies": {
+    "@cloudflare/vite-plugin": "catalog:",
+    "@cloudflare/workers-types": "catalog:",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
+    "capnweb": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",
     "wrangler": "catalog:"
