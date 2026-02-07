@@ -28,7 +28,7 @@ catalog:
   cookie: '1.0.2'
   geojson: '0.5.0'
   jose: '6.0.12'
-  lefthook: '^1.12.2'
+  lefthook: '^2.0.0'
   postgres: '3.4.7'
   rwsdk: '0.1.35'
   tailwindcss: '4.1.10'
