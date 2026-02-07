@@ -12,10 +12,10 @@ export async function Activity({ ctx, params }: RequestInfo) {
 
   return (
     <>
-      <title>{post.text} - Activity | TrackFootball.app</title>
+      <title>{`${post.text} - Activity | TrackFootball.app`}</title>
       <meta name="description" content={`View ${post.User.firstName} ${post.User.lastName}'s football activity: ${post.text}. Analyze performance metrics and training data on TrackFootball.`} />
-      <h1 className="text-2xl font-bold mb-4">{post.text}</h1>
-      <h2 className="text-lg font-semibold mb-2">
+      <h1 className="text-2xl font-bold">{post.text}</h1>
+      <h2 className="text-base text-gray-500 mb-6">
         {post.User.firstName} {post.User.lastName}
       </h2>
       <ActivityClient post={post} />

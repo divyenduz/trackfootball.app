@@ -8,7 +8,7 @@ The app is running at https://trackfootball.localhost. Do not attempt to run it,
 
 - **Dev**: `pnpm run dev` (starts Next.js app)
 - **Build**: `pnpm run build` (builds all packages)
-- **Test**: `pnpm run test` (runs all tests), `pnpm --filter @trackfootball/sprint-detection test` (single package test)
+- **Test**: `pnpm run test` (runs all tests), `pnpm --filter @trackfootball/service test` (single package test)
 - **Lint**: `pnpm run lint` (TypeScript check all packages), `pnpm --filter <package> lint` (single package)
 - **Release**: `pnpm run release` (deploys rw-app to Cloudflare Workers)
 
@@ -17,8 +17,8 @@ The app is running at https://trackfootball.localhost. Do not attempt to run it,
 - **Monorepo** with pnpm workspaces, packages in `packages/`
 - **Main app**: `rw-app` (React + Cloudflare Workers + Vite)
 - **Database**: PostgreSQL with custom functions (see README.md SQL section)
-- **Key packages**: `service` (business logic), `sprint-detection` (GPS analysis), `postgres` (DB layer)
-- **Testing**: Vitest for unit tests (`packages/sprint-detection/__tests__/`)
+- **Key packages**: `service` (business logic), `postgres` (DB layer), `rw-app` (UI)
+- **Testing**: Vitest for unit tests (package-level `__tests__` directories)
 
 ## Code Style
 

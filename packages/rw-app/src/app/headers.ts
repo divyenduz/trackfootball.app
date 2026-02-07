@@ -35,7 +35,7 @@ export const setCommonHeaders =
         `object-src 'none';`,
         `img-src 'self' https://lh3.googleusercontent.com https://i.pravatar.cc data:;`,
         `worker-src 'self' blob:;`,
-        `connect-src 'self' https://api.mapbox.com https://events.mapbox.com;`,
+        `connect-src 'self';`,
       ].join('')
     )
   }

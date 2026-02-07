@@ -8,10 +8,8 @@ import {
   getLoggedInAthleteActivities,
 } from '@trackfootball/open-api'
 import { match } from 'ts-pattern'
-import { GeoData } from '@trackfootball/sprint-detection/geoData'
-import { durationToSeconds } from '../unit-utils'
+import { GeoData } from './geoData'
 import { postAddField } from './addField'
-import { Core } from '@trackfootball/sprint-detection'
 import { createRepository } from '@trackfootball/postgres'
 
 import { env } from '@trackfootball/rw-app/src/env'
@@ -27,7 +25,7 @@ export async function importStravaActivity(
   repository: ReturnType<typeof createRepository>,
   ownerId: number,
   activityId: number,
-  source: 'WEBHOOK' | 'MANUAL'
+  source: 'WEBHOOK' | 'MANUAL',
 ) {
   try {
     const user = await repository.getUserBy(stringify(ownerId))
@@ -44,7 +42,7 @@ export async function importStravaActivity(
       })
       return Response.json(
         { error: 'User has no Strava social login configured' },
-        { status: 400 }
+        { status: 400 },
       )
     }
     invariant(user, `failed to find user by strava owner_id ${ownerId}`)
@@ -66,7 +64,7 @@ export async function importStravaActivity(
       if (existingWebhookEvent) {
         await repository.updateStravaWebhookEventStatus(
           existingWebhookEvent.id,
-          'COMPLETED'
+          'COMPLETED',
         )
       }
     }
@@ -94,7 +92,7 @@ export async function importStravaActivity(
     }
     invariant(
       activityType,
-      `activity must have a type, found ${activity.name} ${activity.type}`
+      `activity must have a type, found ${activity.name} ${activity.type}`,
     )
 
     const isGeoDataAvailable = Boolean(activity.map?.polyline)
@@ -115,12 +113,12 @@ export async function importStravaActivity(
       }
       return Response.json(
         { error: 'Activity has no geo data' },
-        { status: 400 }
+        { status: 400 },
       )
     }
     invariant(
       isGeoDataAvailable,
-      `activity must geo data, found ${activity.start_latlng} ${activity.end_latlng}`
+      `activity must geo data, found ${activity.start_latlng} ${activity.end_latlng}`,
     )
 
     if (!['Run', 'Soccer'].includes(activityType)) {
@@ -142,7 +140,7 @@ export async function importStravaActivity(
 
       return Response.json(
         { error: `Activity type ${activity.type} not supported` },
-        { status: 400 }
+        { status: 400 },
       )
     }
 
@@ -161,7 +159,7 @@ export async function importStravaActivity(
     if (!post) {
       return Response.json(
         { error: `Failed to create post for activity ${activityId}` },
-        { status: 500 }
+        { status: 500 },
       )
     }
 
@@ -185,7 +183,7 @@ export async function importStravaActivity(
     if (existingWebhookEvent) {
       await repository.updateStravaWebhookEventStatus(
         existingWebhookEvent.id,
-        'COMPLETED'
+        'COMPLETED',
       )
     }
 
@@ -234,7 +232,7 @@ type TokenExchangeResponse = {
 }
 
 export async function tokenExchange(
-  code: string
+  code: string,
 ): Promise<TokenExchangeResponse> {
   const stravaClientId = env.STRAVA_CLIENT_ID
   const stravaClientSecret = env.STRAVA_CLIENT_SECRET
@@ -257,7 +255,7 @@ export async function tokenExchange(
 }
 
 export async function tokenRefresh(
-  refreshToken: string
+  refreshToken: string,
 ): Promise<Omit<TokenExchangeResponse, 'athlete'>> {
   const stravaClientId = env.STRAVA_CLIENT_ID
   const stravaClientSecret = env.STRAVA_CLIENT_SECRET
@@ -289,7 +287,7 @@ export type Maybe<T = string, E = null> = T | E
  */
 export async function getStravaToken(
   repository: ReturnType<typeof createRepository>,
-  userId: number
+  userId: number,
 ): Promise<Maybe> {
   const now = new Date()
 
@@ -302,7 +300,7 @@ export async function getStravaToken(
   const stravaSocialLogin = await repository.getUserStravaSocialLogin(userId)
   if (!stravaSocialLogin) {
     console.error(
-      `getStravaToken: Strava social login with user id ${userId} not found`
+      `getStravaToken: Strava social login with user id ${userId} not found`,
     )
     return null
   }
@@ -324,7 +322,7 @@ export async function getStravaToken(
           tokenRefreshResponse.message,
           ` Errors: `,
           //@ts-expect-error
-          tokenRefreshResponse.errors
+          tokenRefreshResponse.errors,
         )
         return null
       }
@@ -335,7 +333,7 @@ export async function getStravaToken(
         userStravaId!.toString(),
         tokenRefreshResponse.access_token,
         tokenRefreshResponse.refresh_token,
-        expiresAt
+        expiresAt,
       )
 
       return tokenRefreshResponse.access_token
@@ -350,7 +348,7 @@ export async function getStravaToken(
 
 async function getStravaAccessTokenHeaders(
   repository: ReturnType<typeof createRepository>,
-  userId: number
+  userId: number,
 ) {
   const stravaAccessToken = await getStravaToken(repository, userId)
   return {
@@ -360,11 +358,11 @@ async function getStravaAccessTokenHeaders(
 
 export async function checkStravaAccessToken(
   repository: ReturnType<typeof createRepository>,
-  userId: number
+  userId: number,
 ) {
   const stravaAccessTokenHeaders = await getStravaAccessTokenHeaders(
     repository,
-    userId
+    userId,
   )
   try {
     await getLoggedInAthleteActivities(
@@ -373,7 +371,7 @@ export async function checkStravaAccessToken(
       },
       {
         headers: stravaAccessTokenHeaders,
-      }
+      },
     )
     return true
   } catch (e) {
@@ -386,11 +384,11 @@ export async function checkStravaAccessToken(
 export async function fetchStravaActivity(
   repository: ReturnType<typeof createRepository>,
   activityId: number,
-  userId: number
+  userId: number,
 ) {
   const stravaAccessTokenHeaders = await getStravaAccessTokenHeaders(
     repository,
-    userId
+    userId,
   )
   const activity = await getActivityById(
     activityId,
@@ -399,7 +397,7 @@ export async function fetchStravaActivity(
     },
     {
       headers: stravaAccessTokenHeaders,
-    }
+    },
   )
   return activity
 }
@@ -407,11 +405,11 @@ export async function fetchStravaActivity(
 export async function fetchStravaActivityGeoJson(
   repository: ReturnType<typeof createRepository>,
   activityId: number,
-  userId: number
+  userId: number,
 ) {
   const stravaAccessTokenHeaders = await getStravaAccessTokenHeaders(
     repository,
-    userId
+    userId,
   )
   const activityStreams = await getActivityStreams(
     activityId,
@@ -421,7 +419,7 @@ export async function fetchStravaActivityGeoJson(
     },
     {
       headers: stravaAccessTokenHeaders,
-    }
+    },
   )
 
   const activity = await fetchStravaActivity(repository, activityId, userId)
@@ -435,8 +433,8 @@ export async function fetchStravaActivityGeoJson(
         activityName,
         JSON.stringify(activityStreams),
         'StravaActivityStream',
-        new Date(activityStartDate)
-      ).toGeoJson()
+        new Date(activityStartDate),
+      ).toGeoJson(),
     )
     .otherwise(() => null)
 
@@ -449,7 +447,7 @@ interface FetchCompletePostArgs {
 
 export async function fetchCompletePost(
   repository: ReturnType<typeof createRepository>,
-  { postId }: FetchCompletePostArgs
+  { postId }: FetchCompletePostArgs,
 ) {
   {
     const post = await repository.getPostByIdWithoutField(postId)
@@ -464,7 +462,7 @@ export async function fetchCompletePost(
     const geoJson = await fetchStravaActivityGeoJson(
       repository,
       parseInt(post.key),
-      post.userId
+      post.userId,
     )
 
     if (geoJson instanceof Error) {
@@ -475,19 +473,27 @@ export async function fetchCompletePost(
       throw new Error(`No geoJson found for Post id: ${postId}`)
     }
 
-    const core = new Core(geoJson)
+    const activity = await fetchStravaActivity(
+      repository,
+      parseInt(post.key),
+      post.userId,
+    )
 
     const updatedPost = await repository.updatePostComplete({
       id: post.id,
       geoJson: geoJson as any,
-      totalDistance: core.totalDistance(),
-      startTime: new Date(core.getStartTime()),
-      elapsedTime: durationToSeconds(core.elapsedTime()),
-      totalSprintTime: durationToSeconds(core.totalSprintTime()),
-      sprints: core.sprints() as any,
-      runs: core.runs() as any,
-      maxSpeed: core.maxSpeed(),
-      averageSpeed: core.averageSpeed(),
+      totalDistance: activity.distance ?? 0,
+      startTime: activity.start_date
+        ? new Date(activity.start_date)
+        : new Date(),
+      elapsedTime: activity.elapsed_time ?? 0,
+      // Note Sprint/runs are intentionally empty: geojson-based detection moved out
+      // while we design the future XY-based analysis pipeline.
+      totalSprintTime: 0,
+      sprints: [],
+      runs: [],
+      maxSpeed: activity.max_speed ?? 0,
+      averageSpeed: activity.average_speed ?? 0,
     })
 
     await postAddField(repository, {

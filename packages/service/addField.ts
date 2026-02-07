@@ -16,7 +16,7 @@ interface PostAddFieldArgs {
 
 export async function postAddField(
   repository: ReturnType<typeof createRepository>,
-  { postId }: PostAddFieldArgs
+  { postId }: PostAddFieldArgs,
 ) {
   {
     const post = await repository.getPostById(postId)
@@ -45,13 +45,13 @@ export async function postAddField(
 
     if (!Boolean(matchingFullField)) {
       console.error(
-        `info: post ${post.id} unable to find a matching full field`
+        `info: post ${post.id} unable to find a matching full field`,
       )
       return
     }
 
     const fields: Field[] = await repository.getFieldsByName(
-      matchingFullField!.name
+      matchingFullField!.name,
     )
 
     const fieldsWithIntersectionArea = fields.map((field) => {
@@ -65,7 +65,7 @@ export async function postAddField(
       const totalFieldArea = area(fieldCover)
 
       const intersection = intersect(
-        featureCollection([geoJsonCover, fieldCover])
+        featureCollection([geoJsonCover, fieldCover]),
       )
       const intersectionArea = match(Boolean(intersection))
         .with(true, () => area(intersection!))
@@ -73,7 +73,7 @@ export async function postAddField(
         .exhaustive()
 
       const percentageAreaCovered = Math.round(
-        (intersectionArea / totalFieldArea) * 100
+        (intersectionArea / totalFieldArea) * 100,
       )
 
       return {
@@ -85,7 +85,7 @@ export async function postAddField(
     const firstFieldWithIntersectionArea = fieldsWithIntersectionArea[0]
     invariant(
       firstFieldWithIntersectionArea,
-      `expected one field with matching intersection area to exist`
+      `expected one field with matching intersection area to exist`,
     )
 
     const matchingField = fieldsWithIntersectionArea.reduce(
@@ -99,22 +99,22 @@ export async function postAddField(
           return maxAreaField
         }
       },
-      firstFieldWithIntersectionArea
+      firstFieldWithIntersectionArea,
     ).field
 
     if (Boolean(matchingField)) {
       const updatedPost = await repository.updatePostFieldId(
         post.id,
-        matchingField!.id
+        matchingField!.id,
       )
 
       if (updatedPost) {
         console.info(
-          `info: post ${updatedPost.id} updated with a field named ${matchingField?.name} (${matchingField?.usage})`
+          `info: post ${updatedPost.id} updated with a field named ${matchingField?.name} (${matchingField?.usage})`,
         )
       } else {
         console.error(
-          `error: failed to updte post ${post.id} with field ${matchingField.id} ${matchingField.name}`
+          `error: failed to updte post ${post.id} with field ${matchingField.id} ${matchingField.name}`,
         )
       }
     } else {

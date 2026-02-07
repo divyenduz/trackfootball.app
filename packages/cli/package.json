@@ -17,7 +17,6 @@
     "@trackfootball/open-api": "workspace:*",
     "@trackfootball/service": "workspace:*",
     "@trackfootball/postgres": "workspace:*",
-    "@trackfootball/sprint-detection": "workspace:*",
     "@trackfootball/utils": "workspace:*",
     "postgres": "3.4.7",
     "tiny-invariant": "1.3.3",
