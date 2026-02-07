@@ -1,7 +1,7 @@
 import type {
   StravaWebhookEvent,
   StravaWebhookEventStatus,
-} from '@trackfootball/kanel'
+} from '../types'
 import { Sql } from 'postgres'
 import invariant from 'tiny-invariant'
 

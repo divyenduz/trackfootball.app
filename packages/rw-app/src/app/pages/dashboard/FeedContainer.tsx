@@ -1,6 +1,6 @@
 'use client'
 
-import { Post, User } from '@trackfootball/kanel'
+import type { Post, User } from '@trackfootball/postgres'
 import { useState, useRef, useEffect } from 'react'
 import { getFeed } from './feed'
 

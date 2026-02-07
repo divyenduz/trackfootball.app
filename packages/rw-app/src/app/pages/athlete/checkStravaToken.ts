@@ -4,7 +4,7 @@ import { requestInfo } from 'rwsdk/worker'
 import invariant from 'tiny-invariant'
 import { match } from 'ts-pattern'
 import { getLoggedInAthleteActivities } from '@trackfootball/open-api'
-import { SocialLogin, User } from '@trackfootball/kanel'
+import type { SocialLogin, User } from '@trackfootball/postgres'
 import { env } from '@/env'
 
 type Athlete = {

@@ -1,5 +1,8 @@
 // Import the Workflow definition
-import { createRepository } from '@trackfootball/postgres'
+import {
+  createRepository,
+  serializeStravaWebhookEvent,
+} from '@trackfootball/postgres'
 import {
   WorkflowEntrypoint,
   WorkflowEvent,
@@ -13,7 +16,7 @@ import {
   StravaEvent,
   stringify,
 } from '@trackfootball/service'
-import { PostType } from '@trackfootball/kanel'
+import type { PostType } from '@trackfootball/postgres'
 
 type Params = {
   body: Record<string, unknown>
@@ -34,7 +37,7 @@ export class StravaWebhookCallbackWorkflow extends WorkflowEntrypoint<
           body: JSON.stringify(event.payload.body),
           errors: [],
         })
-        return stravaWebhookEvent
+        return serializeStravaWebhookEvent(stravaWebhookEvent)
       }
     )
 

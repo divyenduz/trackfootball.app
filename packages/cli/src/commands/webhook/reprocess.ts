@@ -58,7 +58,7 @@ export async function cmd(
       })
 
       const answer = await rl.question(
-        `\nDo you want to reprocess all ${pendingEvents.length} PENDING webhook events? (y/n): `
+        `\nDo you want to reprocess all ${pendingEvents.length} PENDING webhook events? (y/n): `,
       )
       rl.close()
 
@@ -127,7 +127,7 @@ export async function cmd(
   sql.end()
 
   console.log(
-    `\n✓ Completed processing ${eventIds.length} event(s): ${successCount} succeeded, ${errorCount} failed.`
+    `\n✓ Completed processing ${eventIds.length} event(s): ${successCount} succeeded, ${errorCount} failed.`,
   )
 }
 
