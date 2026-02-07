@@ -34,7 +34,7 @@ catalog:
   postgres: '3.4.8'
   '@cloudflare/vite-plugin': '1.23.1'
   '@cloudflare/workers-types': '4.20260207.0'
-  capnweb: '0.2.0'
+  capnweb: '0.4.0'
   react: '19.2.4'
   react-dom: '19.2.4'
   react-server-dom-webpack: '19.2.4'
