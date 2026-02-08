@@ -22,3 +22,5 @@ README.md
 .snaplet
 .devcontainer
 https_cert
+
+secrets.json
