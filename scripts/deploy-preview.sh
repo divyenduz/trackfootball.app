@@ -32,7 +32,7 @@ fi
 
 # Bootstrap: deploy a stub worker so secrets can be set before the real deploy.
 # The real worker code uses tiny-invariant checks that fail without secrets.
-STUB=$(mktemp /tmp/stub-XXXXXX.js)
+STUB="$REPO_ROOT/.stub-worker.js"
 echo 'export default { fetch() { return new Response("initializing", { status: 503 }) } }' > "$STUB"
 npx wrangler deploy "$STUB" \
   --name "$WORKER" \
