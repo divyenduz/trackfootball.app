@@ -20,9 +20,9 @@ export async function cmd(
   invariant(process.env.DATABASE_URL, 'DATABASE_URL must be set')
   const sql = postgres(process.env.DATABASE_URL)
   const repository = await createRepository(sql)
-  
+
   let activityIds: number[] = []
-  
+
   if (activityIdArgs.length === 0) {
     // No arguments provided, fetch all uncompleted posts
     const uncompletedPosts = await sql`
@@ -31,52 +31,58 @@ export async function cmd(
       WHERE status <> 'COMPLETED'
       ORDER BY id DESC
     `
-    
+
     if (uncompletedPosts.length === 0) {
       console.log('No uncompleted posts found.')
       sql.end()
       return
     }
-    
+
     console.log(`Found ${uncompletedPosts.length} uncompleted posts:`)
-    uncompletedPosts.forEach(post => {
-      console.log(`  - ID: ${post.id}, Status: ${post.status}, Text: ${post.text?.substring(0, 50)}${post.text?.length > 50 ? '...' : ''}`)
+    uncompletedPosts.forEach((post) => {
+      console.log(
+        `  - ID: ${post.id}, Status: ${post.status}, Text: ${post.text?.substring(0, 50)}${post.text?.length > 50 ? '...' : ''}`,
+      )
     })
-    
+
     const rl = readline.createInterface({
       input: process.stdin,
-      output: process.stdout
+      output: process.stdout,
     })
-    
-    const answer = await rl.question(`\nDo you want to refresh all ${uncompletedPosts.length} uncompleted posts? (y/n): `)
+
+    const answer = await rl.question(
+      `\nDo you want to refresh all ${uncompletedPosts.length} uncompleted posts? (y/n): `,
+    )
     rl.close()
-    
+
     if (answer.toLowerCase() !== 'y') {
       console.log('Operation cancelled.')
       sql.end()
       return
     }
-    
-    activityIds = uncompletedPosts.map(post => post.id as number)
+
+    activityIds = uncompletedPosts.map((post) => post.id as number)
   } else {
     // Arguments provided, parse them
-    activityIds = activityIdArgs.map(id => {
+    activityIds = activityIdArgs.map((id) => {
       const parsed = parseInt(id)
       invariant(!isNaN(parsed), `Invalid activity ID: ${id}`)
       return parsed
     })
   }
-  
+
   console.log(`\nRefreshing ${activityIds.length} activities...`)
-  
+
   for (let i = 0; i < activityIds.length; i++) {
     const activityId = activityIds[i]
     invariant(activityId !== undefined, 'Activity ID should be defined')
-    console.log(`\n[${i + 1}/${activityIds.length}] Processing activity ${activityId}...`)
+    console.log(
+      `\n[${i + 1}/${activityIds.length}] Processing activity ${activityId}...`,
+    )
     try {
       const activity = await repository.getPostById(activityId)
       invariant(activity, `Activity with id ${activityId} not found`)
-      
+
       console.log(activity)
       const user = await repository.getUser(activity.userId)
       invariant(user, `User not found for activity with id ${activityId}`)
@@ -84,18 +90,18 @@ export async function cmd(
       const stravaActivity = await fetchStravaActivity(
         repository,
         parseInt(activity.key),
-        user.id
+        user.id,
       )
       invariant(
         stravaActivity,
-        `Strava activity not found for activity with id ${activityId}`
+        `Strava activity not found for activity with id ${activityId}`,
       )
       console.log(stravaActivity)
 
       const activityType = stravaActivity.type
       invariant(
         activityType,
-        `Activity with id ${activityId} has no type, found ${stravaActivity.type}`
+        `Activity with id ${activityId} has no type, found ${stravaActivity.type}`,
       )
 
       const isGeoDataAvailable = Boolean(stravaActivity.map?.polyline)
@@ -104,7 +110,7 @@ export async function cmd(
       if (!['Run', 'Soccer'].includes(activityType)) {
         invariant(
           false,
-          `Activity type ${activityType} not supported for activity with id ${activityId}`
+          `Activity type ${activityType} not supported for activity with id ${activityId}`,
         )
       }
 
@@ -117,22 +123,22 @@ export async function cmd(
       const updatedPost = await repository.getPostWithUserAndFields(activity.id)
       invariant(
         updatedPost,
-        `Updated post not found for activity with id ${activityId}`
+        `Updated post not found for activity with id ${activityId}`,
       )
 
       const existingWebhookEvent =
         await repository.findStravaWebhookEventByActivityId(
-          parseInt(activity.key)
+          parseInt(activity.key),
         )
       if (existingWebhookEvent) {
         await repository.updateStravaWebhookEventStatus(
           existingWebhookEvent.id,
-          'COMPLETED'
+          'COMPLETED',
         )
       }
 
       console.log(
-        `Activity with id ${updatedPost.id} has been refreshed successfully`
+        `Activity with id ${updatedPost.id} has been refreshed successfully`,
       )
     } catch (e) {
       console.error(`Error refreshing activity ${activityId}:`, e)
@@ -141,7 +147,7 @@ export async function cmd(
         if (activity) {
           const existingWebhookEvent =
             await repository.findStravaWebhookEventByActivityId(
-              parseInt(activity.key)
+              parseInt(activity.key),
             )
           console.log(existingWebhookEvent)
           if (existingWebhookEvent) {
@@ -149,13 +155,18 @@ export async function cmd(
           }
         }
       } catch (cleanupError) {
-        console.error(`Error during cleanup for activity ${activityId}:`, cleanupError)
+        console.error(
+          `Error during cleanup for activity ${activityId}:`,
+          cleanupError,
+        )
       }
     }
   }
-  
+
   sql.end()
-  console.log(`\n✓ Completed processing ${activityIds.length} ${activityIds.length === 1 ? 'activity' : 'activities'}.`)
+  console.log(
+    `\n✓ Completed processing ${activityIds.length} ${activityIds.length === 1 ? 'activity' : 'activities'}.`,
+  )
 }
 
 export const ActivityRefreshCommand = buildCommand({

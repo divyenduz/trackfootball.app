@@ -15,7 +15,7 @@ export async function Athlete({ ctx, params }: RequestInfo) {
   }
 
   const athleteSocialLogin = await ctx.repository.getUserStravaSocialLogin(
-    athlete.id
+    athlete.id,
   )
 
   const stravaState = (await checkStravaToken({
@@ -25,8 +25,14 @@ export async function Athlete({ ctx, params }: RequestInfo) {
 
   return (
     <>
-      <title>{athlete.firstName} {athlete.lastName} - Athlete Profile | TrackFootball.app</title>
-      <meta name="description" content={`View ${athlete.firstName} ${athlete.lastName}'s football profile and activities. Track performance, analyze game data and connect on TrackFootball.`} />
+      <title>
+        {athlete.firstName} {athlete.lastName} - Athlete Profile |
+        TrackFootball.app
+      </title>
+      <meta
+        name="description"
+        content={`View ${athlete.firstName} ${athlete.lastName}'s football profile and activities. Track performance, analyze game data and connect on TrackFootball.`}
+      />
       <h1 className="text-2xl font-bold">
         {athlete.firstName} {athlete.lastName}
       </h1>

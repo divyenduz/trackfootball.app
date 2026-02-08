@@ -1,7 +1,4 @@
-import type {
-  StravaWebhookEvent,
-  StravaWebhookEventStatus,
-} from '../types'
+import type { StravaWebhookEvent, StravaWebhookEventStatus } from '../types'
 import { Sql } from 'postgres'
 import invariant from 'tiny-invariant'
 
@@ -13,7 +10,7 @@ interface CreateStravaWebhookEventInput {
 
 export async function createStravaWebhookEvent(
   sql: Sql,
-  input: CreateStravaWebhookEventInput
+  input: CreateStravaWebhookEventInput,
 ): Promise<StravaWebhookEvent> {
   const data = {
     ...input,
@@ -35,7 +32,7 @@ export async function createStravaWebhookEvent(
 export async function updateStravaWebhookEventStatus(
   sql: Sql,
   id: number,
-  status: StravaWebhookEventStatus
+  status: StravaWebhookEventStatus,
 ): Promise<void> {
   await sql`
     UPDATE "StravaWebhookEvent" 
@@ -46,7 +43,7 @@ export async function updateStravaWebhookEventStatus(
 
 export async function deleteStravaWebhookEvent(
   sql: Sql,
-  id: number
+  id: number,
 ): Promise<void> {
   await sql`
     DELETE FROM "StravaWebhookEvent" 
@@ -56,7 +53,7 @@ export async function deleteStravaWebhookEvent(
 
 export async function findStravaWebhookEventByActivityId(
   sql: Sql,
-  activityId: number
+  activityId: number,
 ): Promise<StravaWebhookEvent | null> {
   const events: StravaWebhookEvent[] = await sql`
     SELECT * FROM "StravaWebhookEvent" 

@@ -8,7 +8,7 @@ export const setCommonHeaders =
       // Forces browsers to always use HTTPS for a specified time period (2 years)
       headers.set(
         'Strict-Transport-Security',
-        'max-age=63072000; includeSubDomains; preload'
+        'max-age=63072000; includeSubDomains; preload',
       )
     }
 
@@ -21,7 +21,7 @@ export const setCommonHeaders =
     // Explicitly disables access to specific browser features/APIs
     headers.set(
       'Permissions-Policy',
-      'geolocation=(), microphone=(), camera=()'
+      'geolocation=(), microphone=(), camera=()',
     )
 
     // Defines trusted sources for content loading and script execution:
@@ -36,6 +36,6 @@ export const setCommonHeaders =
         `img-src 'self' https://lh3.googleusercontent.com https://i.pravatar.cc data:;`,
         `worker-src 'self' blob:;`,
         `connect-src 'self';`,
-      ].join('')
+      ].join(''),
     )
   }

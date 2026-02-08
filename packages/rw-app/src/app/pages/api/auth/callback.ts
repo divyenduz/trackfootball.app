@@ -11,7 +11,7 @@ export async function Callback({ request }: { request: Request }) {
   if (!code) {
     return new Response(
       JSON.stringify({ error: 'Missing authorization code' }),
-      { status: 400, headers: { 'Content-Type': 'application/json' } }
+      { status: 400, headers: { 'Content-Type': 'application/json' } },
     )
   }
 
@@ -28,7 +28,7 @@ export async function Callback({ request }: { request: Request }) {
           code,
           redirect_uri: `${env.AUTH0_BASE_URL}/api/auth/callback`,
         }),
-      }
+      },
     )
 
     if (!tokenResponse.ok) {

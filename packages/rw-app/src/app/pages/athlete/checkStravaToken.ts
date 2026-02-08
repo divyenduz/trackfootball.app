@@ -43,7 +43,7 @@ const stravaClientSecret = env.STRAVA_CLIENT_SECRET
 invariant(stravaClientSecret, `stravaClientSecret not set`)
 
 export async function tokenRefresh(
-  refreshToken: string
+  refreshToken: string,
 ): Promise<Omit<TokenExchangeResponse, 'athlete'>> {
   const link = 'https://www.strava.com/api/v3/oauth/token'
 
@@ -84,7 +84,7 @@ export async function getStravaToken(userId: number): Promise<Maybe> {
     await requestInfo.ctx.repository.getUserStravaSocialLogin(userId)
   if (!stravaSocialLogin) {
     console.error(
-      `getStravaToken: Strava social login with user id ${userId} not found`
+      `getStravaToken: Strava social login with user id ${userId} not found`,
     )
     return null
   }
@@ -106,7 +106,7 @@ export async function getStravaToken(userId: number): Promise<Maybe> {
           tokenRefreshResponse.message,
           ` Errors: `,
           //@ts-expect-error
-          tokenRefreshResponse.errors
+          tokenRefreshResponse.errors,
         )
         return null
       }
@@ -117,7 +117,7 @@ export async function getStravaToken(userId: number): Promise<Maybe> {
         userStravaId!.toString(),
         tokenRefreshResponse.access_token,
         tokenRefreshResponse.refresh_token,
-        expiresAt
+        expiresAt,
       )
 
       return tokenRefreshResponse.access_token
@@ -146,7 +146,7 @@ export async function checkStravaAccessToken(userId: number) {
       },
       {
         headers: stravaAccessTokenHeaders,
-      }
+      },
     )
     return true
   } catch (e) {
@@ -159,11 +159,11 @@ export async function checkStravaAccessToken(userId: number) {
 export async function checkStravaToken(
   user: User & {
     socialLogin: SocialLogin[]
-  }
+  },
 ) {
   if (!user) {
     console.error(
-      'Note: failed to get strava access token, user not found in context'
+      'Note: failed to get strava access token, user not found in context',
     )
     return 'NOT_WORKING'
   }

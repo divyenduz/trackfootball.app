@@ -38,7 +38,7 @@ export class StravaWebhookCallbackWorkflow extends WorkflowEntrypoint<
           errors: [],
         })
         return serializeStravaWebhookEvent(stravaWebhookEvent)
-      }
+      },
     )
 
     const analyzedEvent = await step.do('detect type of event', async () => {
@@ -90,15 +90,15 @@ export class StravaWebhookCallbackWorkflow extends WorkflowEntrypoint<
           })
           const existingWebhookEvent =
             await repository.findStravaWebhookEventByActivityId(
-              analyzedEvent.objectId
+              analyzedEvent.objectId,
             )
           if (existingWebhookEvent) {
             await repository.updateStravaWebhookEventStatus(
               existingWebhookEvent.id,
-              'COMPLETED'
+              'COMPLETED',
             )
           }
-        }
+        },
       )
       return
     }
@@ -121,15 +121,15 @@ export class StravaWebhookCallbackWorkflow extends WorkflowEntrypoint<
           })
           const existingWebhookEvent =
             await repository.findStravaWebhookEventByActivityId(
-              analyzedEvent.objectId
+              analyzedEvent.objectId,
             )
           if (existingWebhookEvent) {
             await repository.updateStravaWebhookEventStatus(
               existingWebhookEvent.id,
-              'COMPLETED'
+              'COMPLETED',
             )
           }
-        }
+        },
       )
       return
     }
@@ -146,10 +146,10 @@ export class StravaWebhookCallbackWorkflow extends WorkflowEntrypoint<
               const activity = await fetchStravaActivity(
                 repository,
                 activityCreateEvent.object_id,
-                activityCreateEvent.owner_id
+                activityCreateEvent.owner_id,
               )
               return activity
-            }
+            },
           )
 
           if (!stravaActivity.type) {
@@ -167,11 +167,11 @@ export class StravaWebhookCallbackWorkflow extends WorkflowEntrypoint<
               })
               const existingWebhookEvent =
                 await repository.findStravaWebhookEventByActivityId(
-                  analyzedEvent.objectId
+                  analyzedEvent.objectId,
                 )
               if (existingWebhookEvent) {
                 await repository.deleteStravaWebhookEvent(
-                  existingWebhookEvent.id
+                  existingWebhookEvent.id,
                 )
               }
               return
@@ -194,11 +194,11 @@ export class StravaWebhookCallbackWorkflow extends WorkflowEntrypoint<
 
               const existingWebhookEvent =
                 await repository.findStravaWebhookEventByActivityId(
-                  analyzedEvent.objectId
+                  analyzedEvent.objectId,
                 )
               if (existingWebhookEvent) {
                 await repository.deleteStravaWebhookEvent(
-                  existingWebhookEvent.id
+                  existingWebhookEvent.id,
                 )
               }
             })
@@ -222,11 +222,11 @@ export class StravaWebhookCallbackWorkflow extends WorkflowEntrypoint<
               })
               const existingWebhookEvent =
                 await repository.findStravaWebhookEventByActivityId(
-                  analyzedEvent.objectId
+                  analyzedEvent.objectId,
                 )
               if (existingWebhookEvent) {
                 await repository.deleteStravaWebhookEvent(
-                  existingWebhookEvent.id
+                  existingWebhookEvent.id,
                 )
               }
             })
@@ -246,34 +246,34 @@ export class StravaWebhookCallbackWorkflow extends WorkflowEntrypoint<
             const post = await repository.createPost(data)
             if (!post) {
               throw new Error(
-                `Failed to create post for activity ${analyzedEvent.objectId}`
+                `Failed to create post for activity ${analyzedEvent.objectId}`,
               )
             }
             console.log('created post with post id', post.id)
             return post
           })
-        }
+        },
       )
       .with(
         { object_type: 'activity', aspect_type: 'update' },
         async (activityUpdateEvent) => {
           console.log('handle activity update', activityUpdateEvent)
           // await step.do('handle update activity event', () => {})
-        }
+        },
       )
       .with(
         { object_type: 'activity', aspect_type: 'delete' },
         async (activityDeleteEvent) => {
           console.log('handle activity delete', activityDeleteEvent)
           // await step.do('handle delete activity event', () => {})
-        }
+        },
       )
       .with(
         { object_type: 'athlete', aspect_type: 'update' },
         async (athleteUpdateEvent) => {
           console.log('handle athlete update', athleteUpdateEvent)
           // await step.do('handle athlete update event', () => {})
-        }
+        },
       )
       .exhaustive()
   }

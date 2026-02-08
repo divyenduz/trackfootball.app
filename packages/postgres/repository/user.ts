@@ -6,11 +6,9 @@ export async function getUser(sql: Sql, id: number): Promise<User | null> {
   return users[0] || null
 }
 
-
-
 export async function getUserStravaSocialLogin(
   sql: Sql,
-  userId: number
+  userId: number,
 ): Promise<SocialLogin | null> {
   const socialLogins: SocialLogin[] =
     await sql`SELECT * FROM "SocialLogin" WHERE "userId" = ${userId}`
@@ -19,7 +17,7 @@ export async function getUserStravaSocialLogin(
 
 export async function getUserBy(
   sql: Sql,
-  stravaId: string
+  stravaId: string,
 ): Promise<User | null> {
   const users: User[] = await sql`
   SELECT
@@ -34,7 +32,7 @@ export async function getUserBy(
 
 export async function getUserByAuth0Sub(
   sql: Sql,
-  auth0Sub: string
+  auth0Sub: string,
 ): Promise<User | null> {
   const users: User[] = await sql`
   SELECT * FROM "User"
@@ -48,8 +46,3 @@ export async function deleteStravaSocialLogin(sql: Sql, platformId: number) {
     await sql`DELETE FROM "SocialLogin" WHERE "platform" = 'STRAVA' AND "platformId" = ${platformId} RETURNING *`
   return socialLogins
 }
-
-
-
-
-

@@ -3,7 +3,7 @@ import { Sql } from 'postgres'
 
 export async function getFieldsByUsage(
   sql: Sql,
-  usage: string
+  usage: string,
 ): Promise<Field[]> {
   const fields: Field[] = await sql`
     SELECT * FROM "Field" 
@@ -14,7 +14,7 @@ export async function getFieldsByUsage(
 
 export async function getFieldsByName(
   sql: Sql,
-  name: string
+  name: string,
 ): Promise<Field[]> {
   const fields: Field[] = await sql`
     SELECT * FROM "Field" 

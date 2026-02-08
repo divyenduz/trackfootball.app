@@ -12,7 +12,7 @@ export async function upsertSocialLogin(
     refreshToken: string
     expiresAt: Date
     updatedAt: Date
-  }
+  },
 ): Promise<void> {
   await sql`
     INSERT INTO "SocialLogin" ${sql(data)}
@@ -21,16 +21,12 @@ export async function upsertSocialLogin(
   `
 }
 
-
-
-
-
 export async function updateSocialLoginTokens(
   sql: Sql,
   platformId: string,
   accessToken: string,
   refreshToken: string,
-  expiresAt: Date
+  expiresAt: Date,
 ): Promise<void> {
   await sql`
     UPDATE "SocialLogin"
@@ -40,5 +36,3 @@ export async function updateSocialLoginTokens(
     WHERE "platform" = 'STRAVA' AND "platformId" = ${platformId}
   `
 }
-
-

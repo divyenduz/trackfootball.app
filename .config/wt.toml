@@ -1,0 +1,3 @@
+[post-create]
+install = "pnpm install"
+env = "wt step copy-ignored"

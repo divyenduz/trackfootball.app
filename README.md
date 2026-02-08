@@ -40,12 +40,12 @@ pnpm run dev
 
 ### Commands
 
-| Command | Description |
-|---------|-------------|
-| `pnpm run dev` | Start development server |
-| `pnpm run build` | Build all packages |
-| `pnpm run test` | Run all tests |
-| `pnpm run lint` | Typecheck all packages |
+| Command            | Description                  |
+| ------------------ | ---------------------------- |
+| `pnpm run dev`     | Start development server     |
+| `pnpm run build`   | Build all packages           |
+| `pnpm run test`    | Run all tests                |
+| `pnpm run lint`    | Typecheck all packages       |
 | `pnpm run release` | Deploy to Cloudflare Workers |
 
 ## License

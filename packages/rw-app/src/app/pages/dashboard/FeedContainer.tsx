@@ -154,7 +154,7 @@ export function FeedContainer({
                       onClick={(e) => {
                         e.preventDefault()
                         setOpenDropdown(
-                          openDropdown === post.id ? null : post.id
+                          openDropdown === post.id ? null : post.id,
                         )
                       }}
                     >

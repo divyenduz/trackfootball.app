@@ -5,7 +5,10 @@ export function Home({ ctx }: RequestInfo) {
   return (
     <>
       <title>TrackFootball.app - Social Network for Football Players</title>
-      <meta name="description" content="Join TrackFootball, the social network for casual football players. Record your game with any GPS watch or phone, upload your activities, and improve your performance with data-driven insights." />
+      <meta
+        name="description"
+        content="Join TrackFootball, the social network for casual football players. Record your game with any GPS watch or phone, upload your activities, and improve your performance with data-driven insights."
+      />
       <div className="hero-landing">
         <div className="hero-image">
           <img

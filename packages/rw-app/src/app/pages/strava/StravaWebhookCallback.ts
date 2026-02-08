@@ -63,4 +63,3 @@ export async function StravaWebhookCallback({
     headers: { Allow: 'GET, POST' },
   })
 }
-

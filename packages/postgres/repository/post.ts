@@ -144,7 +144,7 @@ export async function getPostByStravaId(sql: Sql, stravaId: number) {
 export async function updatePostTitle(
   sql: Sql,
   stravaId: number,
-  title: string
+  title: string,
 ) {
   const posts: Post[] = await sql`
     UPDATE "Post"
@@ -159,7 +159,7 @@ export async function updatePostTitle(
 
 export async function deletePostBy(
   sql: Sql,
-  stravaId: number
+  stravaId: number,
 ): Promise<Post | null> {
   const key = `${stravaId}`
   const posts: Post[] = await sql`
@@ -184,7 +184,7 @@ export type FeedItemType = Omit<Post, 'geoJson' | 'sprints' | 'runs'> & {
 export async function getFeed(
   sql: Sql,
   cursor: number = 0,
-  limit: number = 20
+  limit: number = 20,
 ) {
   const maxPostIds: { max: number }[] = await sql`SELECT MAX("id") FROM "Post"`
   const maxPostId = maxPostIds[0]
@@ -213,7 +213,7 @@ export async function getFeed(
 export async function updatePostFieldId(
   sql: Sql,
   postId: number,
-  fieldId: number
+  fieldId: number,
 ): Promise<Post | null> {
   const posts: Post[] = await sql`
     UPDATE "Post"
@@ -232,7 +232,7 @@ export async function updatePostFieldId(
 
 export async function getPostByIdWithoutField(
   sql: Sql,
-  postId: number
+  postId: number,
 ): Promise<Post | null> {
   const posts: Post[] = await sql`
     SELECT * FROM "Post"
@@ -244,7 +244,7 @@ export async function getPostByIdWithoutField(
 export async function updatePostStatus(
   sql: Sql,
   postId: number,
-  status: string
+  status: string,
 ): Promise<void> {
   await sql`
     UPDATE "Post"
@@ -268,7 +268,7 @@ interface UpdatePostCompleteInput {
 
 export async function updatePostComplete(
   sql: Sql,
-  input: UpdatePostCompleteInput
+  input: UpdatePostCompleteInput,
 ): Promise<Post | null> {
   const posts: Post[] = await sql`
     WITH PostModified AS (

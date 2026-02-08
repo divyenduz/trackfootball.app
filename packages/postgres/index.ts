@@ -23,38 +23,38 @@ export function createRepository(sql: ReturnType<typeof postgres>) {
     getPostById: (id: Parameters<typeof postRepo.getPostById>[1]) =>
       postRepo.getPostById(sql, id),
     getPostWithUserAndFields: (
-      id: Parameters<typeof postRepo.getPostWithUserAndFields>[1]
+      id: Parameters<typeof postRepo.getPostWithUserAndFields>[1],
     ) => postRepo.getPostWithUserAndFields(sql, id),
     getPostByStravaId: (
-      stravaId: Parameters<typeof postRepo.getPostByStravaId>[1]
+      stravaId: Parameters<typeof postRepo.getPostByStravaId>[1],
     ) => postRepo.getPostByStravaId(sql, stravaId),
     updatePostTitle: (
       stravaId: Parameters<typeof postRepo.updatePostTitle>[1],
-      title: Parameters<typeof postRepo.updatePostTitle>[2]
+      title: Parameters<typeof postRepo.updatePostTitle>[2],
     ) => postRepo.updatePostTitle(sql, stravaId, title),
     deletePostBy: (stravaId: Parameters<typeof postRepo.deletePostBy>[1]) =>
       postRepo.deletePostBy(sql, stravaId),
     getFeed: (
       cursor?: Parameters<typeof postRepo.getFeed>[1],
-      limit?: Parameters<typeof postRepo.getFeed>[2]
+      limit?: Parameters<typeof postRepo.getFeed>[2],
     ) => postRepo.getFeed(sql, cursor, limit),
     updatePostFieldId: (
       postId: Parameters<typeof postRepo.updatePostFieldId>[1],
-      fieldId: Parameters<typeof postRepo.updatePostFieldId>[2]
+      fieldId: Parameters<typeof postRepo.updatePostFieldId>[2],
     ) => postRepo.updatePostFieldId(sql, postId, fieldId),
     getPostByIdWithoutField: (
-      postId: Parameters<typeof postRepo.getPostByIdWithoutField>[1]
+      postId: Parameters<typeof postRepo.getPostByIdWithoutField>[1],
     ) => postRepo.getPostByIdWithoutField(sql, postId),
     updatePostStatus: (
       postId: Parameters<typeof postRepo.updatePostStatus>[1],
-      status: Parameters<typeof postRepo.updatePostStatus>[2]
+      status: Parameters<typeof postRepo.updatePostStatus>[2],
     ) => postRepo.updatePostStatus(sql, postId, status),
     updatePostComplete: (
-      input: Parameters<typeof postRepo.updatePostComplete>[1]
+      input: Parameters<typeof postRepo.updatePostComplete>[1],
     ) => postRepo.updatePostComplete(sql, input),
 
     getFieldsByUsage: (
-      usage: Parameters<typeof fieldRepo.getFieldsByUsage>[1]
+      usage: Parameters<typeof fieldRepo.getFieldsByUsage>[1],
     ) => fieldRepo.getFieldsByUsage(sql, usage),
     getFieldsByName: (name: Parameters<typeof fieldRepo.getFieldsByName>[1]) =>
       fieldRepo.getFieldsByName(sql, name),
@@ -63,21 +63,21 @@ export function createRepository(sql: ReturnType<typeof postgres>) {
       userRepo.getUser(sql, id),
 
     getUserStravaSocialLogin: (
-      userId: Parameters<typeof userRepo.getUserStravaSocialLogin>[1]
+      userId: Parameters<typeof userRepo.getUserStravaSocialLogin>[1],
     ) => userRepo.getUserStravaSocialLogin(sql, userId),
     getUserBy: (where: Parameters<typeof userRepo.getUserBy>[1]) =>
       userRepo.getUserBy(sql, where),
     getUserByAuth0Sub: (
-      auth0Sub: Parameters<typeof userRepo.getUserByAuth0Sub>[1]
+      auth0Sub: Parameters<typeof userRepo.getUserByAuth0Sub>[1],
     ) => userRepo.getUserByAuth0Sub(sql, auth0Sub),
     deleteStravaSocialLogin: (
-      userId: Parameters<typeof userRepo.deleteStravaSocialLogin>[1]
+      userId: Parameters<typeof userRepo.deleteStravaSocialLogin>[1],
     ) => userRepo.deleteStravaSocialLogin(sql, userId),
 
     createStravaWebhookEvent: (
       input: Parameters<
         typeof stravaWebhookEventRepo.createStravaWebhookEvent
-      >[1]
+      >[1],
     ) => stravaWebhookEventRepo.createStravaWebhookEvent(sql, input),
     updateStravaWebhookEventStatus: (
       id: Parameters<
@@ -85,19 +85,19 @@ export function createRepository(sql: ReturnType<typeof postgres>) {
       >[1],
       status: Parameters<
         typeof stravaWebhookEventRepo.updateStravaWebhookEventStatus
-      >[2]
+      >[2],
     ) => stravaWebhookEventRepo.updateStravaWebhookEventStatus(sql, id, status),
     deleteStravaWebhookEvent: (
-      id: Parameters<typeof stravaWebhookEventRepo.deleteStravaWebhookEvent>[1]
+      id: Parameters<typeof stravaWebhookEventRepo.deleteStravaWebhookEvent>[1],
     ) => stravaWebhookEventRepo.deleteStravaWebhookEvent(sql, id),
     findStravaWebhookEventByActivityId: (
       activityId: Parameters<
         typeof stravaWebhookEventRepo.findStravaWebhookEventByActivityId
-      >[1]
+      >[1],
     ) =>
       stravaWebhookEventRepo.findStravaWebhookEventByActivityId(
         sql,
-        activityId
+        activityId,
       ),
 
     updateSocialLoginTokens: (
@@ -108,17 +108,17 @@ export function createRepository(sql: ReturnType<typeof postgres>) {
       refreshToken: Parameters<
         typeof socialLoginRepo.updateSocialLoginTokens
       >[3],
-      expiresAt: Parameters<typeof socialLoginRepo.updateSocialLoginTokens>[4]
+      expiresAt: Parameters<typeof socialLoginRepo.updateSocialLoginTokens>[4],
     ) =>
       socialLoginRepo.updateSocialLoginTokens(
         sql,
         platformId,
         accessToken,
         refreshToken,
-        expiresAt
+        expiresAt,
       ),
     upsertSocialLogin: (
-      input: Parameters<typeof socialLoginRepo.upsertSocialLogin>[1]
+      input: Parameters<typeof socialLoginRepo.upsertSocialLogin>[1],
     ) => socialLoginRepo.upsertSocialLogin(sql, input),
   }
 }

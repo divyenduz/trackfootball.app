@@ -12,7 +12,7 @@ try {
   for (const { completion } of await proposeCompletions(
     app,
     inputs,
-    await buildContext(process)
+    await buildContext(process),
   )) {
     process.stdout.write(`${completion}\n`)
   }

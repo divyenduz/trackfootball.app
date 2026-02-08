@@ -23,7 +23,7 @@ export async function StravaAuthCallback({
       'Invalid code, maybe the Strava code expired. Please try again.',
       {
         status: 400,
-      }
+      },
     )
   }
   const userStravaId = tokenExchangeResponse.athlete.id.toString()

@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   --color-cardinal-800: #ce3241;
@@ -115,7 +115,8 @@
   background-color: #fff;
   position: relative;
   border-radius: 20px;
-  box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset,
+  box-shadow:
+    rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset,
     rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
     rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
   top: 50%;
@@ -150,7 +151,8 @@
   background-color: #fff;
   position: relative;
   border-radius: 20px;
-  box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset,
+  box-shadow:
+    rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset,
     rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
     rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
   top: 50%;
@@ -211,22 +213,26 @@
 /* MUI Overrides */
 
 .MuiPaper-elevation2 {
-  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1),
+  box-shadow:
+    0px 10px 15px -3px rgba(0, 0, 0, 0.1),
     0px 4px 6px -2px rgba(50, 50, 93, 0.05) !important;
 }
 .MuiPaper-elevation1 {
-  box-shadow: 0px -1px 4px -2px rgba(50, 50, 93, 0.1),
+  box-shadow:
+    0px -1px 4px -2px rgba(50, 50, 93, 0.1),
     0px 4px 6px -2px rgba(50, 50, 93, 0.15) !important;
 }
 
 .MuiPaper-elevation6 {
-  box-shadow: 0px 50px 100px rgba(85, 68, 96, 0.1),
+  box-shadow:
+    0px 50px 100px rgba(85, 68, 96, 0.1),
     0px 30px 60px rgba(38, 38, 65, 0.15) !important;
 }
 
 .MuiAppBar-colorDefault {
   background-color: #fff !important;
-  box-shadow: 0px -1px 4px -2px rgba(50, 50, 93, 0.1),
+  box-shadow:
+    0px -1px 4px -2px rgba(50, 50, 93, 0.1),
     0px 4px 6px -2px rgba(50, 50, 93, 0.15) !important;
 }
 
@@ -267,7 +273,8 @@ a {
   color: #ce3241 !important;
 }
 .MuiSwitch {
-  box-shadow: 0px 5.5px 5px -3px rgba(14, 14, 44, 0.2),
+  box-shadow:
+    0px 5.5px 5px -3px rgba(14, 14, 44, 0.2),
     inset 0px -1px 0px rgba(14, 14, 44, 0.4);
 }
 
@@ -345,7 +352,8 @@ a {
 }
 .ant-select-dropdown {
   border-radius: 8px;
-  box-shadow: 0px -1px 4px -2px rgba(50, 50, 93, 0.1),
+  box-shadow:
+    0px -1px 4px -2px rgba(50, 50, 93, 0.1),
     0px 4px 6px -2px rgba(50, 50, 93, 0.15) !important;
 }
 .ant-statistic-content-prefix {

@@ -39,7 +39,7 @@ export class GeoData {
     title: string,
     data: string,
     type: DataType,
-    startTime: Date = new Date()
+    startTime: Date = new Date(),
   ) {
     this.title = title
     this.data = data
@@ -64,14 +64,14 @@ export class GeoData {
                 const t = new Date(startTime)
                 t.setSeconds(t.getSeconds() + elapsedSeconds)
                 return t.toISOString()
-              }
+              },
             ),
             heartRates: streams.heartrate?.data || [],
           },
           geometry: {
             type: 'LineString' as const,
             coordinates: ((streams.latlng?.data as number[][]) || []).map(
-              (coord: number[]) => coord.slice().reverse()
+              (coord: number[]) => coord.slice().reverse(),
             ) as unknown as Position[],
           },
         },

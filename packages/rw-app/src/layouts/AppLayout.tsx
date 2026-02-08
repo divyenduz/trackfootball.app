@@ -7,7 +7,9 @@ export function AppLayout({ children, requestInfo }: LayoutProps) {
 
   return (
     <div className="app">
-      <title>TrackFootball.app - Track, Analyse and Improve Your Football Game</title>
+      <title>
+        TrackFootball.app - Track, Analyse and Improve Your Football Game
+      </title>
       <meta
         name="description"
         content="TrackFootball is a social network for casual Football players. Record your game with any GPS watch/phone and upload it to TrackFootball to track, analyse and improve your performance."

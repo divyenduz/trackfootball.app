@@ -53,7 +53,7 @@ export type WebhookProcessorDeps = {
 
 export async function processStravaWebhookEvent(
   event: StravaWebhookEvent,
-  deps: WebhookProcessorDeps
+  deps: WebhookProcessorDeps,
 ) {
   const { repository, env } = deps
   const createDiscordMessageFn =
@@ -70,13 +70,13 @@ export async function processStravaWebhookEvent(
         await importStravaActivity(repository, ownerId, activityId, 'WEBHOOK')
 
         await repository.updateStravaWebhookEventStatus(event.id, 'COMPLETED')
-      }
+      },
     )
     .with(
       { object_type: 'activity', aspect_type: 'update' },
       async (activityUpdateEvent) => {
         const user = await repository.getUserBy(
-          stringify(activityUpdateEvent.owner_id)
+          stringify(activityUpdateEvent.owner_id),
         )
 
         if (!user) {
@@ -92,18 +92,18 @@ export async function processStravaWebhookEvent(
         Activity Link: https://strava.com/activities/${activityUpdateEvent.object_id}`,
           })
           throw new Error(
-            `Failed to find user with Strava ID: ${activityUpdateEvent.owner_id}`
+            `Failed to find user with Strava ID: ${activityUpdateEvent.owner_id}`,
           )
         }
         invariant(
           user,
-          `failed to find user by strava owner_id ${activityUpdateEvent.owner_id}`
+          `failed to find user by strava owner_id ${activityUpdateEvent.owner_id}`,
         )
 
         const activity = await fetchStravaActivity(
           repository,
           activityUpdateEvent.object_id,
-          user.id
+          user.id,
         )
         const activityType = activity.type
         if (!activityType) {
@@ -121,7 +121,7 @@ export async function processStravaWebhookEvent(
         }
         invariant(
           activityType,
-          `activity must have a type, found ${activity.name} ${activity.type}`
+          `activity must have a type, found ${activity.name} ${activity.type}`,
         )
 
         const isGeoDataAvailable =
@@ -142,25 +142,25 @@ export async function processStravaWebhookEvent(
         }
         invariant(
           isGeoDataAvailable,
-          `activity must geo data, found ${activity.start_latlng} ${activity.end_latlng}`
+          `activity must geo data, found ${activity.start_latlng} ${activity.end_latlng}`,
         )
 
         if (!['Run', 'Soccer'].includes(activityType)) {
           console.info(
-            `Activity type ${activity.type} not supported, Strava key: ${activityUpdateEvent.object_id}`
+            `Activity type ${activity.type} not supported, Strava key: ${activityUpdateEvent.object_id}`,
           )
           await repository.updateStravaWebhookEventStatus(event.id, 'COMPLETED')
           return
         }
 
         const post = await repository.getPostByStravaId(
-          activityUpdateEvent.object_id
+          activityUpdateEvent.object_id,
         )
         if (post?.id) {
           try {
             await repository.updatePostTitle(
               activityUpdateEvent.object_id,
-              activityUpdateEvent.updates.title
+              activityUpdateEvent.updates.title,
             )
           } catch (e) {
             console.error(`activityUpdateEvent: `, e)
@@ -198,13 +198,13 @@ export async function processStravaWebhookEvent(
         }
 
         await repository.updateStravaWebhookEventStatus(event.id, 'COMPLETED')
-      }
+      },
     )
     .with(
       { object_type: 'activity', aspect_type: 'delete' },
       async (activityDeleteEvent) => {
         const user = await repository.getUserBy(
-          stringify(activityDeleteEvent.owner_id)
+          stringify(activityDeleteEvent.owner_id),
         )
 
         if (!user) {
@@ -220,21 +220,21 @@ export async function processStravaWebhookEvent(
         Activity Link: https://strava.com/activities/${activityDeleteEvent.object_id}`,
           })
           throw new Error(
-            `Failed to find user with Strava ID: ${activityDeleteEvent.owner_id}`
+            `Failed to find user with Strava ID: ${activityDeleteEvent.owner_id}`,
           )
         }
         invariant(
           user,
-          `failed to find user by strava owner_id ${activityDeleteEvent.owner_id}`
+          `failed to find user by strava owner_id ${activityDeleteEvent.owner_id}`,
         )
 
         const post = await repository.deletePostBy(
-          activityDeleteEvent.object_id
+          activityDeleteEvent.object_id,
         )
 
         if (!post) {
           console.error(
-            `Post to be deleted not found, Strava key: ${activityDeleteEvent.object_id}`
+            `Post to be deleted not found, Strava key: ${activityDeleteEvent.object_id}`,
           )
         } else {
           await createDiscordMessageFn({
@@ -249,7 +249,7 @@ export async function processStravaWebhookEvent(
         }
 
         await repository.updateStravaWebhookEventStatus(event.id, 'COMPLETED')
-      }
+      },
     )
     .with(
       { object_type: 'athlete', aspect_type: 'update' },
@@ -263,7 +263,7 @@ export async function processStravaWebhookEvent(
           })
         }
         await repository.updateStravaWebhookEventStatus(event.id, 'COMPLETED')
-      }
+      },
     )
     .exhaustive()
 }

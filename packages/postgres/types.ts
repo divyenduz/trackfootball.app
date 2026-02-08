@@ -71,7 +71,11 @@ export const postStatusSchema = z.enum([
 ])
 export type PostStatus = z.infer<typeof postStatusSchema>
 
-export const fieldUsageSchema = z.enum(['TOP_HALF', 'BOTTOM_HALF', 'FULL_FIELD'])
+export const fieldUsageSchema = z.enum([
+  'TOP_HALF',
+  'BOTTOM_HALF',
+  'FULL_FIELD',
+])
 export type FieldUsage = z.infer<typeof fieldUsageSchema>
 
 export const userTypeSchema = z.enum(['USER', 'ADMIN'])
@@ -175,7 +179,7 @@ export type StravaWebhookEventSerializable = Omit<
 }
 
 export const serializeStravaWebhookEvent = (
-  event: StravaWebhookEvent
+  event: StravaWebhookEvent,
 ): StravaWebhookEventSerializable => ({
   ...event,
   createdAt: event.createdAt.toISOString(),

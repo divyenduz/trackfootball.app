@@ -47,7 +47,7 @@ async function getSecret() {
     env.AUTH0_SECRET,
     '',
     ENCRYPTION_INFO,
-    BYTE_LENGTH
+    BYTE_LENGTH,
   )
   return secret
 }

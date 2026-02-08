@@ -82,7 +82,7 @@ export async function getSecret() {
     env.AUTH0_SECRET,
     '',
     ENCRYPTION_INFO,
-    BYTE_LENGTH
+    BYTE_LENGTH,
   )
   return secret
 }
@@ -107,7 +107,7 @@ async function isValidJwtIdTokenSignature(token: {
   const encoder = new TextEncoder()
   const data = encoder.encode([token.raw.header, token.raw.payload].join('.'))
   const signature = new Uint8Array(
-    Array.from(token.signature).map((c) => c.charCodeAt(0))
+    Array.from(token.signature).map((c) => c.charCodeAt(0)),
   )
   // JWK data from
   // https://zoid.auth0.com/.well-known/jwks.json
@@ -129,7 +129,7 @@ async function isValidJwtIdTokenSignature(token: {
     jwk,
     { name: 'RSASSA-PKCS1-v1_5', hash: 'SHA-256' },
     false,
-    ['verify']
+    ['verify'],
   )
   return crypto.subtle.verify('RSASSA-PKCS1-v1_5', key, signature, data)
 }

@@ -4,8 +4,7 @@ import fs from 'fs'
 import path from 'path'
 
 export interface LocalContext
-  extends CommandContext,
-    StricliAutoCompleteContext {
+  extends CommandContext, StricliAutoCompleteContext {
   debug: boolean
 
   process: {
@@ -30,7 +29,7 @@ export interface LocalContext
 }
 
 export async function buildContext(
-  process: NodeJS.Process
+  process: NodeJS.Process,
 ): Promise<LocalContext> {
   const debug = Boolean(process.env.DEBUG)
 

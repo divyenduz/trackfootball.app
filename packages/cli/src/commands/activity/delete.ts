@@ -11,11 +11,7 @@ type Flags = {}
 
 export const help = `${CLI_NAME} activity delete [id] | delete one activity by id, or delete all non-Run/Soccer uncompleted posts if no id provided`
 
-export async function cmd(
-  this: LocalContext,
-  {}: Flags,
-  idArg?: string
-) {
+export async function cmd(this: LocalContext, {}: Flags, idArg?: string) {
   invariant(process.env.DATABASE_URL, 'DATABASE_URL must be set')
   const sql = postgres(process.env.DATABASE_URL)
   const repository = await createRepository(sql)
@@ -41,7 +37,7 @@ export async function cmd(
     if (webhook) {
       await repository.deleteStravaWebhookEvent(webhook.id)
       console.log(
-        `✓ Deleted StravaWebhookEvent ${webhook.id} for activity ${activityId}`
+        `✓ Deleted StravaWebhookEvent ${webhook.id} for activity ${activityId}`,
       )
     }
   }
@@ -52,7 +48,7 @@ export async function cmd(
       invariant(!Number.isNaN(postId), `Invalid activity ID: ${idArg}`)
 
       const answer = await rl.question(
-        `Are you sure you want to permanently delete activity ${postId}? (y/n): `
+        `Are you sure you want to permanently delete activity ${postId}? (y/n): `,
       )
       if (answer.toLowerCase() !== 'y') {
         console.log('Operation cancelled.')
@@ -80,12 +76,12 @@ export async function cmd(
     uncompletedPosts.forEach((post) => {
       const text = post.text ?? ''
       console.log(
-        `  - ID: ${post.id}, Status: ${post.status}, Text: ${text.substring(0, 50)}${text.length > 50 ? '...' : ''}`
+        `  - ID: ${post.id}, Status: ${post.status}, Text: ${text.substring(0, 50)}${text.length > 50 ? '...' : ''}`,
       )
     })
 
     const answer = await rl.question(
-      `\nProceed to scan and delete non-Run/Soccer activities among these ${uncompletedPosts.length} posts? (y/n): `
+      `\nProceed to scan and delete non-Run/Soccer activities among these ${uncompletedPosts.length} posts? (y/n): `,
     )
     if (answer.toLowerCase() !== 'y') {
       console.log('Operation cancelled.')
@@ -101,7 +97,7 @@ export async function cmd(
       const postId = row.id as number
       processed++
       console.log(
-        `\n[${processed}/${uncompletedPosts.length}] Evaluating post ${postId}...`
+        `\n[${processed}/${uncompletedPosts.length}] Evaluating post ${postId}...`,
       )
 
       try {
@@ -118,7 +114,7 @@ export async function cmd(
         const activityId = Number.parseInt(post.key)
         if (!Number.isFinite(activityId)) {
           console.warn(
-            `Invalid Strava activity id for post ${postId}, skipping.`
+            `Invalid Strava activity id for post ${postId}, skipping.`,
           )
           kept++
           continue
@@ -127,12 +123,12 @@ export async function cmd(
         const stravaActivity = await fetchStravaActivity(
           repository,
           activityId,
-          user.id
+          user.id,
         )
         const kind = stravaActivity?.type
         if (!kind) {
           console.warn(
-            `No Strava type for post ${postId} (activity ${activityId}), skipping.`
+            `No Strava type for post ${postId} (activity ${activityId}), skipping.`,
           )
           kept++
           continue
@@ -154,7 +150,7 @@ export async function cmd(
     }
 
     console.log(
-      `\n✓ Completed. Processed=${processed}, Deleted=${deleted}, Kept=${kept}, Failed=${failed}.`
+      `\n✓ Completed. Processed=${processed}, Deleted=${deleted}, Kept=${kept}, Failed=${failed}.`,
     )
   } finally {
     rl.close()
