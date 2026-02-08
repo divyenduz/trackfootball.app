@@ -27,3 +27,6 @@ unsafe_user.json
 
 samples/
 .kamal/
+
+secrets.json
+.stub-worker.js

@@ -5,24 +5,25 @@
   "compatibility_date": "2025-08-21",
   "compatibility_flags": ["nodejs_compat"],
   "assets": {
-    "binding": "ASSETS"
+    "binding": "ASSETS",
   },
   "observability": {
-    "enabled": true
+    "enabled": true,
   },
   "vars": {
     "BACKEND_API": "https://trackfootball.app/api",
     "COOKIE_DOMAIN": ".trackfootball.app",
     "HOMEPAGE_URL": "https://trackfootball.app",
-    "AUTH0_BASE_URL": "https://trackfootball.app"
+    "AUTH0_BASE_URL": "https://trackfootball.app",
   },
   "limits": {
-    "cpu_ms": 1000
+    "cpu_ms": 1000,
   },
   "routes": [
     {
       "pattern": "trackfootball.app",
-      "custom_domain": true
-    }
-  ]
+      "custom_domain": true,
+    },
+  ],
+
 }
