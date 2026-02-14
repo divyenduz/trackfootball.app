@@ -15,7 +15,6 @@
     "@kubb/plugin-ts": "catalog:",
     "@kubb/react-fabric": "catalog:",
     "@kubb/cli": "catalog:",
-    "@types/bun": "catalog:",
     "typescript": "catalog:"
   }
 }
