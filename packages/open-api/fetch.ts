@@ -62,7 +62,6 @@ export const client = async <TData, TError = unknown, TVariables = unknown>(
     }
   }
 
-  // Use Bun's native fetch
   const response = await fetch(url.toString(), options)
 
   // Parse response based on responseType
