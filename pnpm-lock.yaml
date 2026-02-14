@@ -10,8 +10,8 @@ catalogs:
       specifier: 1.25.0
       version: 1.25.0
     '@cloudflare/workers-types':
-      specifier: 4.20260207.0
-      version: 4.20260207.0
+      specifier: 4.20260214.0
+      version: 4.20260214.0
     '@kubb/cli':
       specifier: 4.22.3
       version: 4.22.3
@@ -158,7 +158,7 @@ importers:
         version: 5.9.3
       wrangler:
         specifier: 'catalog:'
-        version: 4.65.0(@cloudflare/workers-types@4.20260207.0)
+        version: 4.65.0(@cloudflare/workers-types@4.20260214.0)
 
   packages/cli:
     dependencies:
@@ -268,7 +268,7 @@ importers:
         version: 19.2.4(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(webpack@5.99.9)
       rwsdk:
         specifier: 'catalog:'
-        version: 1.0.0-beta.53(@cloudflare/vite-plugin@1.25.0(vite@7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0))(workerd@1.20260212.0)(wrangler@4.65.0(@cloudflare/workers-types@4.20260207.0)))(capnweb@0.4.0)(react-dom@19.2.4(react@19.2.4))(react-server-dom-webpack@19.2.4(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(webpack@5.99.9))(react@19.2.4)(typescript@5.9.3)(vite@7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0))(wrangler@4.65.0(@cloudflare/workers-types@4.20260207.0))
+        version: 1.0.0-beta.53(@cloudflare/vite-plugin@1.25.0(vite@7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0))(workerd@1.20260212.0)(wrangler@4.65.0(@cloudflare/workers-types@4.20260214.0)))(capnweb@0.4.0)(react-dom@19.2.4(react@19.2.4))(react-server-dom-webpack@19.2.4(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(webpack@5.99.9))(react@19.2.4)(typescript@5.9.3)(vite@7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0))(wrangler@4.65.0(@cloudflare/workers-types@4.20260214.0))
       tailwindcss:
         specifier: 'catalog:'
         version: 4.1.18
@@ -281,10 +281,10 @@ importers:
     devDependencies:
       '@cloudflare/vite-plugin':
         specifier: 'catalog:'
-        version: 1.25.0(vite@7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0))(workerd@1.20260212.0)(wrangler@4.65.0(@cloudflare/workers-types@4.20260207.0))
+        version: 1.25.0(vite@7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0))(workerd@1.20260212.0)(wrangler@4.65.0(@cloudflare/workers-types@4.20260214.0))
       '@cloudflare/workers-types':
         specifier: 'catalog:'
-        version: 4.20260207.0
+        version: 4.20260214.0
       '@types/node':
         specifier: 'catalog:'
         version: 24.10.13
@@ -305,7 +305,7 @@ importers:
         version: 7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0)
       wrangler:
         specifier: 'catalog:'
-        version: 4.65.0(@cloudflare/workers-types@4.20260207.0)
+        version: 4.65.0(@cloudflare/workers-types@4.20260214.0)
 
   packages/service:
     dependencies:
@@ -593,8 +593,8 @@ packages:
   '@cloudflare/workers-types@4.20260131.0':
     resolution: {integrity: sha512-ELgvb2mp68Al50p+FmpgCO2hgU5o4tmz8pi7kShN+cRXc0UZoEdxpDIikR0CeT7b3tV7wlnEnsUzd0UoJLS0oQ==}
 
-  '@cloudflare/workers-types@4.20260207.0':
-    resolution: {integrity: sha512-PSxgnAOK0EtTytlY7/+gJcsQJYg0Qo7KlOMSC/wiBE+pBqKjuKdd1ZgM+NvpPNqZAjWV5jqAMTTNYEmgk27gYw==}
+  '@cloudflare/workers-types@4.20260214.0':
+    resolution: {integrity: sha512-qb8rgbAdJR4BAPXolXhFL/wuGtecHLh1veOyZ1mK6QqWuCdI3vK1biKC0i3lzmzdLR/DZvsN3mNtpUE8zpWGEg==}
 
   '@cspotcode/source-map-support@0.8.1':
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
@@ -4254,13 +4254,13 @@ snapshots:
     optionalDependencies:
       workerd: 1.20260212.0
 
-  '@cloudflare/vite-plugin@1.25.0(vite@7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0))(workerd@1.20260212.0)(wrangler@4.65.0(@cloudflare/workers-types@4.20260207.0))':
+  '@cloudflare/vite-plugin@1.25.0(vite@7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0))(workerd@1.20260212.0)(wrangler@4.65.0(@cloudflare/workers-types@4.20260214.0))':
     dependencies:
       '@cloudflare/unenv-preset': 2.12.1(unenv@2.0.0-rc.24)(workerd@1.20260212.0)
       miniflare: 4.20260212.0
       unenv: 2.0.0-rc.24
       vite: 7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0)
-      wrangler: 4.65.0(@cloudflare/workers-types@4.20260207.0)
+      wrangler: 4.65.0(@cloudflare/workers-types@4.20260214.0)
       ws: 8.18.0
     transitivePeerDependencies:
       - bufferutil
@@ -4284,7 +4284,7 @@ snapshots:
 
   '@cloudflare/workers-types@4.20260131.0': {}
 
-  '@cloudflare/workers-types@4.20260207.0': {}
+  '@cloudflare/workers-types@4.20260214.0': {}
 
   '@cspotcode/source-map-support@0.8.1':
     dependencies:
@@ -7265,10 +7265,10 @@ snapshots:
 
   rsc-html-stream@0.0.6: {}
 
-  rwsdk@1.0.0-beta.53(@cloudflare/vite-plugin@1.25.0(vite@7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0))(workerd@1.20260212.0)(wrangler@4.65.0(@cloudflare/workers-types@4.20260207.0)))(capnweb@0.4.0)(react-dom@19.2.4(react@19.2.4))(react-server-dom-webpack@19.2.4(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(webpack@5.99.9))(react@19.2.4)(typescript@5.9.3)(vite@7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0))(wrangler@4.65.0(@cloudflare/workers-types@4.20260207.0)):
+  rwsdk@1.0.0-beta.53(@cloudflare/vite-plugin@1.25.0(vite@7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0))(workerd@1.20260212.0)(wrangler@4.65.0(@cloudflare/workers-types@4.20260214.0)))(capnweb@0.4.0)(react-dom@19.2.4(react@19.2.4))(react-server-dom-webpack@19.2.4(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(webpack@5.99.9))(react@19.2.4)(typescript@5.9.3)(vite@7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0))(wrangler@4.65.0(@cloudflare/workers-types@4.20260214.0)):
     dependencies:
       '@ast-grep/napi': 0.39.9
-      '@cloudflare/vite-plugin': 1.25.0(vite@7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0))(workerd@1.20260212.0)(wrangler@4.65.0(@cloudflare/workers-types@4.20260207.0))
+      '@cloudflare/vite-plugin': 1.25.0(vite@7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0))(workerd@1.20260212.0)(wrangler@4.65.0(@cloudflare/workers-types@4.20260214.0))
       '@cloudflare/workers-types': 4.20260131.0
       '@mdx-js/mdx': 3.1.1
       '@puppeteer/browsers': 2.10.10
@@ -7311,7 +7311,7 @@ snapshots:
       vibe-rules: 0.3.91
       vite: 7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0)
       vite-tsconfig-paths: 5.1.4(typescript@5.9.3)(vite@7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0))
-      wrangler: 4.65.0(@cloudflare/workers-types@4.20260207.0)
+      wrangler: 4.65.0(@cloudflare/workers-types@4.20260214.0)
     transitivePeerDependencies:
       - bare-buffer
       - bufferutil
@@ -7876,7 +7876,7 @@ snapshots:
       '@cloudflare/workerd-linux-arm64': 1.20260212.0
       '@cloudflare/workerd-windows-64': 1.20260212.0
 
-  wrangler@4.65.0(@cloudflare/workers-types@4.20260207.0):
+  wrangler@4.65.0(@cloudflare/workers-types@4.20260214.0):
     dependencies:
       '@cloudflare/kv-asset-handler': 0.4.2
       '@cloudflare/unenv-preset': 2.12.1(unenv@2.0.0-rc.24)(workerd@1.20260212.0)
@@ -7887,7 +7887,7 @@ snapshots:
       unenv: 2.0.0-rc.24
       workerd: 1.20260212.0
     optionalDependencies:
-      '@cloudflare/workers-types': 4.20260207.0
+      '@cloudflare/workers-types': 4.20260214.0
       fsevents: 2.3.3
     transitivePeerDependencies:
       - bufferutil
