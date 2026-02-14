@@ -64,8 +64,8 @@ catalogs:
       specifier: 7946.0.16
       version: 7946.0.16
     '@types/node':
-      specifier: 24.10.12
-      version: 24.10.12
+      specifier: 24.10.13
+      version: 24.10.13
     '@types/react':
       specifier: 19.2.13
       version: 19.2.13
@@ -186,7 +186,7 @@ importers:
     devDependencies:
       '@types/node':
         specifier: 'catalog:'
-        version: 24.10.12
+        version: 24.10.13
 
   packages/open-api:
     devDependencies:
@@ -232,7 +232,7 @@ importers:
         version: 7946.0.16
       '@types/node':
         specifier: 'catalog:'
-        version: 24.10.12
+        version: 24.10.13
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
@@ -241,7 +241,7 @@ importers:
     dependencies:
       '@tailwindcss/vite':
         specifier: 'catalog:'
-        version: 4.1.18(vite@7.3.1(@types/node@24.10.12)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0))
+        version: 4.1.18(vite@7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0))
       '@trackfootball/open-api':
         specifier: workspace:*
         version: link:../open-api
@@ -268,7 +268,7 @@ importers:
         version: 19.2.4(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(webpack@5.99.9)
       rwsdk:
         specifier: 'catalog:'
-        version: 1.0.0-beta.53(@cloudflare/vite-plugin@1.23.1(vite@7.3.1(@types/node@24.10.12)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0))(workerd@1.20260212.0)(wrangler@4.65.0(@cloudflare/workers-types@4.20260207.0)))(capnweb@0.4.0)(react-dom@19.2.4(react@19.2.4))(react-server-dom-webpack@19.2.4(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(webpack@5.99.9))(react@19.2.4)(typescript@5.9.3)(vite@7.3.1(@types/node@24.10.12)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0))(wrangler@4.65.0(@cloudflare/workers-types@4.20260207.0))
+        version: 1.0.0-beta.53(@cloudflare/vite-plugin@1.23.1(vite@7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0))(workerd@1.20260212.0)(wrangler@4.65.0(@cloudflare/workers-types@4.20260207.0)))(capnweb@0.4.0)(react-dom@19.2.4(react@19.2.4))(react-server-dom-webpack@19.2.4(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(webpack@5.99.9))(react@19.2.4)(typescript@5.9.3)(vite@7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0))(wrangler@4.65.0(@cloudflare/workers-types@4.20260207.0))
       tailwindcss:
         specifier: 'catalog:'
         version: 4.1.18
@@ -281,13 +281,13 @@ importers:
     devDependencies:
       '@cloudflare/vite-plugin':
         specifier: 'catalog:'
-        version: 1.23.1(vite@7.3.1(@types/node@24.10.12)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0))(workerd@1.20260212.0)(wrangler@4.65.0(@cloudflare/workers-types@4.20260207.0))
+        version: 1.23.1(vite@7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0))(workerd@1.20260212.0)(wrangler@4.65.0(@cloudflare/workers-types@4.20260207.0))
       '@cloudflare/workers-types':
         specifier: 'catalog:'
         version: 4.20260207.0
       '@types/node':
         specifier: 'catalog:'
-        version: 24.10.12
+        version: 24.10.13
       '@types/react':
         specifier: 'catalog:'
         version: 19.2.13
@@ -302,7 +302,7 @@ importers:
         version: 5.9.3
       vite:
         specifier: 'catalog:'
-        version: 7.3.1(@types/node@24.10.12)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0)
+        version: 7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0)
       wrangler:
         specifier: 'catalog:'
         version: 4.65.0(@cloudflare/workers-types@4.20260207.0)
@@ -357,7 +357,7 @@ importers:
         version: 7946.0.16
       '@types/node':
         specifier: 'catalog:'
-        version: 24.10.12
+        version: 24.10.13
 
 packages:
 
@@ -1620,8 +1620,8 @@ packages:
   '@types/ms@2.1.0':
     resolution: {integrity: sha512-GsCCIZDE/p3i96vtEqx+7dBUGXrc7zeSK3wwPHIaRThS+9OhWIXRqzs4d6k1SVU8g91DrNRWxWUGhp5KXQb2VA==}
 
-  '@types/node@24.10.12':
-    resolution: {integrity: sha512-68e+T28EbdmLSTkPgs3+UacC6rzmqrcWFPQs1C8mwJhI/r5Uxr0yEuQotczNRROd1gq30NGxee+fo0rSIxpyAw==}
+  '@types/node@24.10.13':
+    resolution: {integrity: sha512-oH72nZRfDv9lADUBSo104Aq7gPHpQZc4BTx38r9xf9pg5LfP6EzSyH2n7qFmmxRQXh7YlUXODcYsg6PuTDSxGg==}
 
   '@types/node@25.2.1':
     resolution: {integrity: sha512-CPrnr8voK8vC6eEtyRzvMpgp3VyVRhgclonE7qYi6P9sXwYb59ucfrnmFBTaP0yUi8Gk4yZg/LlTJULGxvTNsg==}
@@ -4321,12 +4321,12 @@ snapshots:
     optionalDependencies:
       workerd: 1.20260212.0
 
-  '@cloudflare/vite-plugin@1.23.1(vite@7.3.1(@types/node@24.10.12)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0))(workerd@1.20260212.0)(wrangler@4.65.0(@cloudflare/workers-types@4.20260207.0))':
+  '@cloudflare/vite-plugin@1.23.1(vite@7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0))(workerd@1.20260212.0)(wrangler@4.65.0(@cloudflare/workers-types@4.20260207.0))':
     dependencies:
       '@cloudflare/unenv-preset': 2.12.0(unenv@2.0.0-rc.24)(workerd@1.20260212.0)
       miniflare: 4.20260205.0
       unenv: 2.0.0-rc.24
-      vite: 7.3.1(@types/node@24.10.12)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0)
+      vite: 7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0)
       wrangler: 4.65.0(@cloudflare/workers-types@4.20260207.0)
       ws: 8.18.0
     transitivePeerDependencies:
@@ -5091,12 +5091,12 @@ snapshots:
       '@tailwindcss/oxide-win32-arm64-msvc': 4.1.18
       '@tailwindcss/oxide-win32-x64-msvc': 4.1.18
 
-  '@tailwindcss/vite@4.1.18(vite@7.3.1(@types/node@24.10.12)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0))':
+  '@tailwindcss/vite@4.1.18(vite@7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0))':
     dependencies:
       '@tailwindcss/node': 4.1.18
       '@tailwindcss/oxide': 4.1.18
       tailwindcss: 4.1.18
-      vite: 7.3.1(@types/node@24.10.12)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0)
+      vite: 7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0)
 
   '@tmcw/togeojson@7.1.2': {}
 
@@ -5203,7 +5203,7 @@ snapshots:
 
   '@types/decompress@4.2.7':
     dependencies:
-      '@types/node': 25.2.1
+      '@types/node': 24.10.13
 
   '@types/eslint-scope@3.7.7':
     dependencies:
@@ -5226,14 +5226,14 @@ snapshots:
   '@types/fs-extra@11.0.4':
     dependencies:
       '@types/jsonfile': 6.1.4
-      '@types/node': 25.2.1
+      '@types/node': 24.10.13
 
   '@types/geojson@7946.0.16': {}
 
   '@types/glob@8.1.0':
     dependencies:
       '@types/minimatch': 5.1.2
-      '@types/node': 25.2.1
+      '@types/node': 24.10.13
 
   '@types/hast@3.0.4':
     dependencies:
@@ -5243,7 +5243,7 @@ snapshots:
 
   '@types/jsonfile@6.1.4':
     dependencies:
-      '@types/node': 25.2.1
+      '@types/node': 24.10.13
 
   '@types/mdast@4.0.4':
     dependencies:
@@ -5255,7 +5255,7 @@ snapshots:
 
   '@types/ms@2.1.0': {}
 
-  '@types/node@24.10.12':
+  '@types/node@24.10.13':
     dependencies:
       undici-types: 7.16.0
 
@@ -5283,12 +5283,12 @@ snapshots:
 
   '@types/yauzl@2.10.3':
     dependencies:
-      '@types/node': 25.2.1
+      '@types/node': 24.10.13
     optional: true
 
   '@ungap/structured-clone@1.3.0': {}
 
-  '@vitejs/plugin-react@5.0.4(vite@7.3.1(@types/node@24.10.12)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0))':
+  '@vitejs/plugin-react@5.0.4(vite@7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0))':
     dependencies:
       '@babel/core': 7.29.0
       '@babel/plugin-transform-react-jsx-self': 7.27.1(@babel/core@7.29.0)
@@ -5296,7 +5296,7 @@ snapshots:
       '@rolldown/pluginutils': 1.0.0-beta.38
       '@types/babel__core': 7.20.5
       react-refresh: 0.17.0
-      vite: 7.3.1(@types/node@24.10.12)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0)
+      vite: 7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -7364,10 +7364,10 @@ snapshots:
 
   rsc-html-stream@0.0.6: {}
 
-  rwsdk@1.0.0-beta.53(@cloudflare/vite-plugin@1.23.1(vite@7.3.1(@types/node@24.10.12)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0))(workerd@1.20260212.0)(wrangler@4.65.0(@cloudflare/workers-types@4.20260207.0)))(capnweb@0.4.0)(react-dom@19.2.4(react@19.2.4))(react-server-dom-webpack@19.2.4(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(webpack@5.99.9))(react@19.2.4)(typescript@5.9.3)(vite@7.3.1(@types/node@24.10.12)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0))(wrangler@4.65.0(@cloudflare/workers-types@4.20260207.0)):
+  rwsdk@1.0.0-beta.53(@cloudflare/vite-plugin@1.23.1(vite@7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0))(workerd@1.20260212.0)(wrangler@4.65.0(@cloudflare/workers-types@4.20260207.0)))(capnweb@0.4.0)(react-dom@19.2.4(react@19.2.4))(react-server-dom-webpack@19.2.4(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(webpack@5.99.9))(react@19.2.4)(typescript@5.9.3)(vite@7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0))(wrangler@4.65.0(@cloudflare/workers-types@4.20260207.0)):
     dependencies:
       '@ast-grep/napi': 0.39.9
-      '@cloudflare/vite-plugin': 1.23.1(vite@7.3.1(@types/node@24.10.12)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0))(workerd@1.20260212.0)(wrangler@4.65.0(@cloudflare/workers-types@4.20260207.0))
+      '@cloudflare/vite-plugin': 1.23.1(vite@7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0))(workerd@1.20260212.0)(wrangler@4.65.0(@cloudflare/workers-types@4.20260207.0))
       '@cloudflare/workers-types': 4.20260131.0
       '@mdx-js/mdx': 3.1.1
       '@puppeteer/browsers': 2.10.10
@@ -7377,7 +7377,7 @@ snapshots:
       '@types/react': 19.2.13
       '@types/react-dom': 19.2.3(@types/react@19.2.13)
       '@types/react-is': 19.0.0
-      '@vitejs/plugin-react': 5.0.4(vite@7.3.1(@types/node@24.10.12)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0))
+      '@vitejs/plugin-react': 5.0.4(vite@7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0))
       capnweb: 0.4.0
       chokidar: 4.0.3
       debug: 4.4.3
@@ -7408,8 +7408,8 @@ snapshots:
       ts-morph: 27.0.2
       unique-names-generator: 4.7.1
       vibe-rules: 0.3.91
-      vite: 7.3.1(@types/node@24.10.12)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0)
-      vite-tsconfig-paths: 5.1.4(typescript@5.9.3)(vite@7.3.1(@types/node@24.10.12)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0))
+      vite: 7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0)
+      vite-tsconfig-paths: 5.1.4(typescript@5.9.3)(vite@7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0))
       wrangler: 4.65.0(@cloudflare/workers-types@4.20260207.0)
     transitivePeerDependencies:
       - bare-buffer
@@ -7879,18 +7879,18 @@ snapshots:
       import-meta-resolve: 4.2.0
       zod: 3.25.76
 
-  vite-tsconfig-paths@5.1.4(typescript@5.9.3)(vite@7.3.1(@types/node@24.10.12)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0)):
+  vite-tsconfig-paths@5.1.4(typescript@5.9.3)(vite@7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0)):
     dependencies:
       debug: 4.4.3
       globrex: 0.1.2
       tsconfck: 3.1.6(typescript@5.9.3)
     optionalDependencies:
-      vite: 7.3.1(@types/node@24.10.12)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0)
+      vite: 7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0)
     transitivePeerDependencies:
       - supports-color
       - typescript
 
-  vite@7.3.1(@types/node@24.10.12)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0):
+  vite@7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.0):
     dependencies:
       esbuild: 0.27.0
       fdir: 6.5.0(picomatch@4.0.3)
@@ -7899,7 +7899,7 @@ snapshots:
       rollup: 4.43.0
       tinyglobby: 0.2.15
     optionalDependencies:
-      '@types/node': 24.10.12
+      '@types/node': 24.10.13
       fsevents: 2.3.3
       jiti: 2.6.1
       lightningcss: 1.30.2
