@@ -8,9 +8,11 @@
     "start": "pnpm --filter @trackfootball/next-js-app start",
     "test": "pnpm --filter @trackfootball/* test",
     "lint": "pnpm --filter @trackfootball/* lint",
-    "release": "pnpm --filter @trackfootball/rw-app release"
+    "release": "pnpm --filter @trackfootball/rw-app release",
+    "knip": "knip"
   },
   "devDependencies": {
+    "knip": "catalog:",
     "lefthook": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:",
