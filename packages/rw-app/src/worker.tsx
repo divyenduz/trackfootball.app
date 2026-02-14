@@ -69,7 +69,16 @@ export default defineApp([
     })
 
     if (session?.user) {
-      const domainUser = await repository.getUserByEmail(session.user.email)
+      let domainUser = await repository.getUserByEmail(session.user.email)
+
+      if (!domainUser) {
+        domainUser = await repository.createUserFromAuthSession({
+          email: session.user.email,
+          name: session.user.name,
+          image: session.user.image,
+        })
+      }
+
       ctx.user = domainUser
     }
 

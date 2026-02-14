@@ -72,6 +72,9 @@ export function createRepository(sql: ReturnType<typeof postgres>) {
     ) => userRepo.getUserByAuth0Sub(sql, auth0Sub),
     getUserByEmail: (email: Parameters<typeof userRepo.getUserByEmail>[1]) =>
       userRepo.getUserByEmail(sql, email),
+    createUserFromAuthSession: (
+      authUser: Parameters<typeof userRepo.createUserFromAuthSession>[1],
+    ) => userRepo.createUserFromAuthSession(sql, authUser),
     deleteStravaSocialLogin: (
       userId: Parameters<typeof userRepo.deleteStravaSocialLogin>[1],
     ) => userRepo.deleteStravaSocialLogin(sql, userId),
