@@ -46,7 +46,7 @@ catalog:
   ts-pattern: 5.9.0
   typescript: 5.9.3
   vite: 7.3.1
-  wrangler: 4.63.0
+  wrangler: 4.65.0
   zod: 4.3.6
 
 catalogMode: strict
