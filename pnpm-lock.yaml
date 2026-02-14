@@ -13,20 +13,20 @@ catalogs:
       specifier: 4.20260207.0
       version: 4.20260207.0
     '@kubb/cli':
-      specifier: 4.21.2
-      version: 4.21.2
+      specifier: 4.22.3
+      version: 4.22.3
     '@kubb/core':
-      specifier: 4.21.2
-      version: 4.21.2
+      specifier: 4.22.3
+      version: 4.22.3
     '@kubb/plugin-client':
-      specifier: 4.21.2
-      version: 4.21.2
+      specifier: 4.22.3
+      version: 4.22.3
     '@kubb/plugin-oas':
-      specifier: 4.21.2
-      version: 4.21.2
+      specifier: 4.22.3
+      version: 4.22.3
     '@kubb/plugin-ts':
-      specifier: 4.21.2
-      version: 4.21.2
+      specifier: 4.22.3
+      version: 4.22.3
     '@kubb/react-fabric':
       specifier: 0.12.11
       version: 0.12.11
@@ -192,19 +192,19 @@ importers:
     devDependencies:
       '@kubb/cli':
         specifier: 'catalog:'
-        version: 4.21.2(@kubb/react-fabric@0.12.11)(typescript@5.9.3)
+        version: 4.22.3(@kubb/react-fabric@0.12.11)(typescript@5.9.3)
       '@kubb/core':
         specifier: 'catalog:'
-        version: 4.21.2(@kubb/react-fabric@0.12.11)
+        version: 4.22.3(@kubb/react-fabric@0.12.11)
       '@kubb/plugin-client':
         specifier: 'catalog:'
-        version: 4.21.2(@kubb/react-fabric@0.12.11)(typescript@5.9.3)
+        version: 4.22.3(@kubb/react-fabric@0.12.11)(typescript@5.9.3)
       '@kubb/plugin-oas':
         specifier: 'catalog:'
-        version: 4.21.2(@kubb/react-fabric@0.12.11)
+        version: 4.22.3(@kubb/react-fabric@0.12.11)
       '@kubb/plugin-ts':
         specifier: 'catalog:'
-        version: 4.21.2(@kubb/react-fabric@0.12.11)(typescript@5.9.3)
+        version: 4.22.3(@kubb/react-fabric@0.12.11)(typescript@5.9.3)
       '@kubb/react-fabric':
         specifier: 'catalog:'
         version: 0.12.11
@@ -1163,13 +1163,13 @@ packages:
     peerDependencies:
       jsep: ^0.4.0||^1.0.0
 
-  '@kubb/cli@4.21.2':
-    resolution: {integrity: sha512-NUmllOmC5ipMXSw2AeNQG0sImedLryqKOWXvem4BsSPnUUZIGcFzfKJ1ChjD8Br6ISCvudcNfCv7bzaBC9JI5g==}
+  '@kubb/cli@4.22.3':
+    resolution: {integrity: sha512-qKWX07svIK5opKnat2hZVzRQKmZ7418ExJMBqiFhma3u5+JMQS4mzyg9g93/H78DeVmMAwpjrwEPxy+7BnazZQ==}
     engines: {node: '>=20'}
     hasBin: true
 
-  '@kubb/core@4.21.2':
-    resolution: {integrity: sha512-vaX1iYtpIpVYJc6PB0PSgGDegPNHZ6f5MZ6VyK/XWfv/bA8bLKjAsvS/6/sopY5jG+xu+Ejny2lgrW+Untatmg==}
+  '@kubb/core@4.22.3':
+    resolution: {integrity: sha512-6DaJQmR+IzC5qZzicDJtKdF/zS39oTCh2v7geF1jkBnzjvSZvYr6BCynwf0WzWwh98TVZPx7i2vSF5t1UjEfUw==}
     engines: {node: '>=20'}
     peerDependencies:
       '@kubb/react-fabric': 0.12.10
@@ -1178,12 +1178,12 @@ packages:
     resolution: {integrity: sha512-RjWEwdglJFc9s4Ph+A2CX1bUAPFhIH9KkRldoUv3VOsmfMpgFKncQIgHYLFU9W0hcGQjvWMkOyU0qxKKcRvQ8Q==}
     engines: {node: '>=20'}
 
-  '@kubb/oas@4.21.2':
-    resolution: {integrity: sha512-c74D13ydoCgZa1qTxrBLQqARtCe8fIFgoDE9kxL0SRA2DH1MngRkCujWtIBzz9KSIssMR5YQXTBLWzkdFHlg3Q==}
+  '@kubb/oas@4.22.3':
+    resolution: {integrity: sha512-Bo+KfBPOkKH0B/pDpibBE3Ofl/RUjqqOLZhALabNRSs0bQAhv+iY8JW9p39qZko25kis1KZf1WpOCDr4hAT6wQ==}
     engines: {node: '>=20'}
 
-  '@kubb/plugin-client@4.21.2':
-    resolution: {integrity: sha512-TENE7RZW51uT14v0PJfXi+gzkWjZ2x/lRNOUlFdDvU13g7Hr6s+uD2vvDSdMcpEvTyJuzkdgCFLtTeWWDo0nNA==}
+  '@kubb/plugin-client@4.22.3':
+    resolution: {integrity: sha512-GxUr2bj+6duFvpcgV2up/J4TvYLj8WD8FUGyYBeYURPTQaaBR8bEtjlR0MPdkA7fs4YGs+TebZTwuxkgmMRKVQ==}
     engines: {node: '>=20'}
     peerDependencies:
       '@kubb/react-fabric': 0.12.11
@@ -1192,21 +1192,21 @@ packages:
       axios:
         optional: true
 
-  '@kubb/plugin-oas@4.21.2':
-    resolution: {integrity: sha512-kGsmU6tRP7NFa1qwxQtgNYTKo67pCSnpxTG5rrzXJJ3gOxQUUSmF2LrNZzKg9li+Zfki0Th7FNDVQGwSsB0nKw==}
+  '@kubb/plugin-oas@4.22.3':
+    resolution: {integrity: sha512-slL7+3fBgLUkpXJoGQaxoraASACuPx18DzOc0MQvFlpLQjIaktQsG6vV8EU7ks+jinbdUqIPK5QWdlLMsXYxKQ==}
     engines: {node: '>=20'}
     peerDependencies:
       '@kubb/react-fabric': 0.12.11
 
-  '@kubb/plugin-ts@4.21.2':
-    resolution: {integrity: sha512-8KHjMVFxY7M3/4d4mlpbC3zWwlogClXo0oXgtTWz0TYs7sR1V+Ta0VXt0ngT60H4I8haT8Ur6zExxhbXcySHzA==}
+  '@kubb/plugin-ts@4.22.3':
+    resolution: {integrity: sha512-swE+IykQDSIEbMQgfS6kgkg9AmsUvavgJspFoK/98V5GDG3HClwiTiHC/UmuIUhzuXe/ew/guu+J33Esih1scQ==}
     engines: {node: '>=20'}
     peerDependencies:
       '@kubb/react-fabric': 0.12.11
       typescript: '>=5.9.0'
 
-  '@kubb/plugin-zod@4.21.2':
-    resolution: {integrity: sha512-MelrTe82h1xUNx8D8k8phqYkfGMOph8/YTC/ivm2YrZdzas8xlpcPyPIkfH3DOtv5ya1Hkpsnaurr4AbLxbyrA==}
+  '@kubb/plugin-zod@4.22.3':
+    resolution: {integrity: sha512-Ou8HO9wncqC/h1ImXYvpEUooKDu2C5cFgDvrXHBOVSlMdd7+3JUDJriWsbZxO0o99BFJ29ejOZDsi71M2i5NLQ==}
     engines: {node: '>=20'}
 
   '@kubb/react-fabric@0.12.11':
@@ -1273,17 +1273,14 @@ packages:
     resolution: {integrity: sha512-VvV2Hzjskz01m8doSn7Ypt6cSZzgjnypVqXy1ipThbyYD6SGiM74VSePXykOODj/43Y2m6zeYedPk/ZLts/HvQ==}
     engines: {node: '>=14'}
 
-  '@redocly/ajv@8.17.2':
-    resolution: {integrity: sha512-rcbDZOfXAgGEJeJ30aWCVVJvxV9ooevb/m1/SFblO2qHs4cqTk178gx7T/vdslf57EA4lTofrwsq5K8rxK9g+g==}
+  '@redocly/ajv@8.17.4':
+    resolution: {integrity: sha512-BieiCML/IgP6x99HZByJSt7fJE4ipgzO7KAFss92Bs+PEI35BhY7vGIysFXLT+YmS7nHtQjZjhOQyPPEf7xGHA==}
 
-  '@redocly/ajv@8.17.3':
-    resolution: {integrity: sha512-NQsbJbB/GV7JVO88ebFkMndrnuGp/dTm5/2NISeg+JGcLzTfGBJZ01+V5zD8nKBOpi/dLLNFT+Ql6IcUk8ehng==}
+  '@redocly/config@0.43.0':
+    resolution: {integrity: sha512-AbyFKRHKJ2VBmh9nO2lrG9tO2Gu/Lmnfdj4Uwoh7h/a7jWr1104t4fBgQZs/NwgGBAOkGmyQYAvardwyBeRGZA==}
 
-  '@redocly/config@0.41.4':
-    resolution: {integrity: sha512-LaRKXpHyK5GxmgG2n2e8xp2NyUa8qZls3WMAVg5hKO4b2d7X5uU5F2jvH6JUTVdRW/VfStQqan5DQ1uQz7MVzg==}
-
-  '@redocly/openapi-core@2.16.0':
-    resolution: {integrity: sha512-/GzDiwmA9p7VCkN2Rzrgc6xU3f+Cpik4QXXwdtM5BykdhJas0K1nrRxgMJCwuxZPEOI9VzROWn56Hv1PJgajhA==}
+  '@redocly/openapi-core@2.18.1':
+    resolution: {integrity: sha512-1fjuH85SpFyIFHcdQiGoT5uWsoErs+qJyK+2HqaqTANkNO3ONpDBS6B79Z/mYUH44+LxeTTVzbDPBEcI0ZJHhQ==}
     engines: {node: '>=22.12.0 || >=20.19.0 <21.0.0', npm: '>=10'}
 
   '@rolldown/pluginutils@1.0.0-beta.38':
@@ -3442,6 +3439,9 @@ packages:
   remeda@2.33.5:
     resolution: {integrity: sha512-FqmpPA9i9T5EGcqgyHf9kHjefnyCZM1M3kSdZjPk1j2StGNoJyoYp0807RYcjNkQ1UpsEQa5qzgsjLY4vYtT8g==}
 
+  remeda@2.33.6:
+    resolution: {integrity: sha512-tazDGH7s75kUPGBKLvhgBEHMgW+TdDFhjUAMdQj57IoWz6HsGa5D2RX5yDUz6IIqiRRvZiaEHzCzWdTeixc/Kg==}
+
   remove-undefined-objects@7.0.0:
     resolution: {integrity: sha512-+9ycqqqpv6EdaOvHpyOkf81SXJ4MjARKX450Je6AmshEYeqAuiVcfbLx1coNICO3KulleXlOHd0GSHFkEdB3YQ==}
     engines: {node: '>=18'}
@@ -4690,10 +4690,10 @@ snapshots:
     dependencies:
       jsep: 1.4.0
 
-  '@kubb/cli@4.21.2(@kubb/react-fabric@0.12.11)(typescript@5.9.3)':
+  '@kubb/cli@4.22.3(@kubb/react-fabric@0.12.11)(typescript@5.9.3)':
     dependencies:
       '@clack/prompts': 1.0.0
-      '@kubb/core': 4.21.2(@kubb/react-fabric@0.12.11)
+      '@kubb/core': 4.22.3(@kubb/react-fabric@0.12.11)
       chokidar: 4.0.3
       citty: 0.1.6
       cosmiconfig: 9.0.0(typescript@5.9.3)
@@ -4709,7 +4709,7 @@ snapshots:
       - '@kubb/react-fabric'
       - typescript
 
-  '@kubb/core@4.21.2(@kubb/react-fabric@0.12.11)':
+  '@kubb/core@4.22.3(@kubb/react-fabric@0.12.11)':
     dependencies:
       '@kubb/react-fabric': 0.12.11
       camelcase: 8.0.0
@@ -4719,7 +4719,7 @@ snapshots:
       js-runtime: 0.0.8
       natural-orderby: 5.0.0
       p-limit: 7.3.0
-      remeda: 2.33.5
+      remeda: 2.33.6
       semver: 7.7.4
 
   '@kubb/fabric-core@0.12.11':
@@ -4729,7 +4729,7 @@ snapshots:
       natural-orderby: 5.0.0
       p-limit: 7.3.0
       picocolors: 1.1.1
-      remeda: 2.33.5
+      remeda: 2.33.6
       serve-handler: 6.1.6
       signal-exit: 4.1.0
       typescript: 5.9.3
@@ -4738,27 +4738,27 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@kubb/oas@4.21.2(@kubb/react-fabric@0.12.11)':
+  '@kubb/oas@4.22.3(@kubb/react-fabric@0.12.11)':
     dependencies:
-      '@kubb/core': 4.21.2(@kubb/react-fabric@0.12.11)
-      '@redocly/openapi-core': 2.16.0
+      '@kubb/core': 4.22.3(@kubb/react-fabric@0.12.11)
+      '@redocly/openapi-core': 2.18.1
       jsonpointer: 5.0.1
       oas: 28.9.0
       oas-normalize: 15.7.1
       openapi-types: 12.1.3
-      remeda: 2.33.5
+      remeda: 2.33.6
       swagger2openapi: 7.0.8
     transitivePeerDependencies:
       - '@kubb/react-fabric'
       - encoding
 
-  '@kubb/plugin-client@4.21.2(@kubb/react-fabric@0.12.11)(typescript@5.9.3)':
+  '@kubb/plugin-client@4.22.3(@kubb/react-fabric@0.12.11)(typescript@5.9.3)':
     dependencies:
-      '@kubb/core': 4.21.2(@kubb/react-fabric@0.12.11)
-      '@kubb/oas': 4.21.2(@kubb/react-fabric@0.12.11)
-      '@kubb/plugin-oas': 4.21.2(@kubb/react-fabric@0.12.11)
-      '@kubb/plugin-ts': 4.21.2(@kubb/react-fabric@0.12.11)(typescript@5.9.3)
-      '@kubb/plugin-zod': 4.21.2(typescript@5.9.3)
+      '@kubb/core': 4.22.3(@kubb/react-fabric@0.12.11)
+      '@kubb/oas': 4.22.3(@kubb/react-fabric@0.12.11)
+      '@kubb/plugin-oas': 4.22.3(@kubb/react-fabric@0.12.11)
+      '@kubb/plugin-ts': 4.22.3(@kubb/react-fabric@0.12.11)(typescript@5.9.3)
+      '@kubb/plugin-zod': 4.22.3(typescript@5.9.3)
       '@kubb/react-fabric': 0.12.11
     transitivePeerDependencies:
       - bufferutil
@@ -4766,37 +4766,37 @@ snapshots:
       - typescript
       - utf-8-validate
 
-  '@kubb/plugin-oas@4.21.2(@kubb/react-fabric@0.12.11)':
+  '@kubb/plugin-oas@4.22.3(@kubb/react-fabric@0.12.11)':
     dependencies:
-      '@kubb/core': 4.21.2(@kubb/react-fabric@0.12.11)
-      '@kubb/oas': 4.21.2(@kubb/react-fabric@0.12.11)
+      '@kubb/core': 4.22.3(@kubb/react-fabric@0.12.11)
+      '@kubb/oas': 4.22.3(@kubb/react-fabric@0.12.11)
       '@kubb/react-fabric': 0.12.11
       p-limit: 7.3.0
-      remeda: 2.33.5
+      remeda: 2.33.6
     transitivePeerDependencies:
       - encoding
 
-  '@kubb/plugin-ts@4.21.2(@kubb/react-fabric@0.12.11)(typescript@5.9.3)':
+  '@kubb/plugin-ts@4.22.3(@kubb/react-fabric@0.12.11)(typescript@5.9.3)':
     dependencies:
-      '@kubb/core': 4.21.2(@kubb/react-fabric@0.12.11)
+      '@kubb/core': 4.22.3(@kubb/react-fabric@0.12.11)
       '@kubb/fabric-core': 0.12.11
-      '@kubb/oas': 4.21.2(@kubb/react-fabric@0.12.11)
-      '@kubb/plugin-oas': 4.21.2(@kubb/react-fabric@0.12.11)
+      '@kubb/oas': 4.22.3(@kubb/react-fabric@0.12.11)
+      '@kubb/plugin-oas': 4.22.3(@kubb/react-fabric@0.12.11)
       '@kubb/react-fabric': 0.12.11
       natural-orderby: 5.0.0
-      remeda: 2.33.5
+      remeda: 2.33.6
       typescript: 5.9.3
     transitivePeerDependencies:
       - bufferutil
       - encoding
       - utf-8-validate
 
-  '@kubb/plugin-zod@4.21.2(typescript@5.9.3)':
+  '@kubb/plugin-zod@4.22.3(typescript@5.9.3)':
     dependencies:
-      '@kubb/core': 4.21.2(@kubb/react-fabric@0.12.11)
-      '@kubb/oas': 4.21.2(@kubb/react-fabric@0.12.11)
-      '@kubb/plugin-oas': 4.21.2(@kubb/react-fabric@0.12.11)
-      '@kubb/plugin-ts': 4.21.2(@kubb/react-fabric@0.12.11)(typescript@5.9.3)
+      '@kubb/core': 4.22.3(@kubb/react-fabric@0.12.11)
+      '@kubb/oas': 4.22.3(@kubb/react-fabric@0.12.11)
+      '@kubb/plugin-oas': 4.22.3(@kubb/react-fabric@0.12.11)
+      '@kubb/plugin-ts': 4.22.3(@kubb/react-fabric@0.12.11)(typescript@5.9.3)
       '@kubb/react-fabric': 0.12.11
     transitivePeerDependencies:
       - bufferutil
@@ -4921,30 +4921,23 @@ snapshots:
       marked: 4.3.0
       mustache: 4.2.0
 
-  '@redocly/ajv@8.17.2':
+  '@redocly/ajv@8.17.4':
     dependencies:
       fast-deep-equal: 3.1.3
       fast-uri: 3.1.0
       json-schema-traverse: 1.0.0
       require-from-string: 2.0.2
 
-  '@redocly/ajv@8.17.3':
-    dependencies:
-      fast-deep-equal: 3.1.3
-      fast-uri: 3.1.0
-      json-schema-traverse: 1.0.0
-      require-from-string: 2.0.2
-
-  '@redocly/config@0.41.4':
+  '@redocly/config@0.43.0':
     dependencies:
       json-schema-to-ts: 2.7.2
 
-  '@redocly/openapi-core@2.16.0':
+  '@redocly/openapi-core@2.18.1':
     dependencies:
-      '@redocly/ajv': 8.17.3
-      '@redocly/config': 0.41.4
-      ajv: '@redocly/ajv@8.17.2'
-      ajv-formats: 3.0.1(@redocly/ajv@8.17.2)
+      '@redocly/ajv': 8.17.4
+      '@redocly/config': 0.43.0
+      ajv: '@redocly/ajv@8.17.4'
+      ajv-formats: 3.0.1(@redocly/ajv@8.17.4)
       colorette: 1.4.0
       js-levenshtein: 1.1.6
       js-yaml: 4.1.0
@@ -5402,9 +5395,9 @@ snapshots:
     optionalDependencies:
       ajv: 8.17.1
 
-  ajv-formats@3.0.1(@redocly/ajv@8.17.2):
+  ajv-formats@3.0.1(@redocly/ajv@8.17.4):
     optionalDependencies:
-      ajv: '@redocly/ajv@8.17.2'
+      ajv: '@redocly/ajv@8.17.4'
 
   ajv-keywords@5.1.0(ajv@8.17.1):
     dependencies:
@@ -7321,6 +7314,8 @@ snapshots:
       vfile: 6.0.3
 
   remeda@2.33.5: {}
+
+  remeda@2.33.6: {}
 
   remove-undefined-objects@7.0.0: {}
 
