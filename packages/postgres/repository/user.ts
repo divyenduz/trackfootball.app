@@ -41,6 +41,17 @@ export async function getUserByAuth0Sub(
   return users[0] || null
 }
 
+export async function getUserByEmail(
+  sql: Sql,
+  email: string,
+): Promise<User | null> {
+  const users: User[] = await sql`
+  SELECT * FROM "User"
+  WHERE "User"."email" = ${email}
+  `
+  return users[0] || null
+}
+
 export async function deleteStravaSocialLogin(sql: Sql, platformId: number) {
   const socialLogins: SocialLogin[] =
     await sql`DELETE FROM "SocialLogin" WHERE "platform" = 'STRAVA' AND "platformId" = ${platformId} RETURNING *`

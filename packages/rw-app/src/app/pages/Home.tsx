@@ -1,5 +1,6 @@
 import { RequestInfo } from 'rwsdk/worker'
 import { Button } from '@/components/atoms/Button'
+import { LoginButton } from '@/components/atoms/LoginButton'
 
 export function Home({ ctx }: RequestInfo) {
   return (
@@ -26,9 +27,9 @@ export function Home({ ctx }: RequestInfo) {
             football and record your game with any GPS watch/phone and upload it
             to TrackFootball.
           </p>
-          <a href="/api/auth/login">
+          <LoginButton>
             <Button>Get started now</Button>
-          </a>
+          </LoginButton>
         </div>
       </div>
       <div className="hero-stats">
@@ -110,9 +111,9 @@ export function Home({ ctx }: RequestInfo) {
               for a club to get meaningful stats for your game.
             </p>
           </div>
-          <a href="/api/auth/login">
+          <LoginButton>
             <Button>Get started now</Button>
-          </a>
+          </LoginButton>
         </div>
       </div>
     </>

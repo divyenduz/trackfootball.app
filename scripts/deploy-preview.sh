@@ -48,6 +48,7 @@ npx wrangler deploy \
   --name "$WORKER" \
   --var "BACKEND_API:https://$HOST/api" \
   --var "HOMEPAGE_URL:https://$HOST" \
-  --var "AUTH0_BASE_URL:https://$HOST"
+  --var "BETTER_AUTH_URL:https://$HOST" \
+  --var "AUTH0_BASE_URL:https://$HOST" \
 
 echo "Done: https://$HOST"
