@@ -13,20 +13,20 @@ catalogs:
       specifier: 4.20260207.0
       version: 4.20260207.0
     '@kubb/cli':
-      specifier: 4.21.2
-      version: 4.21.2
+      specifier: 4.22.3
+      version: 4.22.3
     '@kubb/core':
-      specifier: 4.21.2
-      version: 4.21.2
+      specifier: 4.22.3
+      version: 4.22.3
     '@kubb/plugin-client':
-      specifier: 4.21.2
-      version: 4.21.2
+      specifier: 4.22.3
+      version: 4.22.3
     '@kubb/plugin-oas':
-      specifier: 4.21.2
-      version: 4.21.2
+      specifier: 4.22.3
+      version: 4.22.3
     '@kubb/plugin-ts':
-      specifier: 4.21.2
-      version: 4.21.2
+      specifier: 4.22.3
+      version: 4.22.3
     '@kubb/react-fabric':
       specifier: 0.12.11
       version: 0.12.11
@@ -195,19 +195,19 @@ importers:
     devDependencies:
       '@kubb/cli':
         specifier: 'catalog:'
-        version: 4.21.2(@kubb/react-fabric@0.12.11)(typescript@5.9.3)
+        version: 4.22.3(@kubb/react-fabric@0.12.11)(typescript@5.9.3)
       '@kubb/core':
         specifier: 'catalog:'
-        version: 4.21.2(@kubb/react-fabric@0.12.11)
+        version: 4.22.3(@kubb/react-fabric@0.12.11)
       '@kubb/plugin-client':
         specifier: 'catalog:'
-        version: 4.21.2(@kubb/react-fabric@0.12.11)(typescript@5.9.3)
+        version: 4.22.3(@kubb/react-fabric@0.12.11)(typescript@5.9.3)
       '@kubb/plugin-oas':
         specifier: 'catalog:'
-        version: 4.21.2(@kubb/react-fabric@0.12.11)
+        version: 4.22.3(@kubb/react-fabric@0.12.11)
       '@kubb/plugin-ts':
         specifier: 'catalog:'
-        version: 4.21.2(@kubb/react-fabric@0.12.11)(typescript@5.9.3)
+        version: 4.22.3(@kubb/react-fabric@0.12.11)(typescript@5.9.3)
       '@kubb/react-fabric':
         specifier: 'catalog:'
         version: 0.12.11
@@ -388,24 +388,28 @@ packages:
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
 
   '@ast-grep/napi-linux-arm64-musl@0.39.9':
     resolution: {integrity: sha512-U9KVohyburVGEWiiREFq+iTxdMdSbRyXL+yzCVvGPmLPW4Ca4zpX9Cret4jCJBp8dljSIK0C7txXAc7fM+6rag==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
 
   '@ast-grep/napi-linux-x64-gnu@0.39.9':
     resolution: {integrity: sha512-C5WwiNr/eE7lS0vl9bNdSXrsGIUAga2SaqV3G+ogVl9HeRU2jtGhv+3AgzGvYWj+PtnbtuZ2Nxkm10gEVPhv1A==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
 
   '@ast-grep/napi-linux-x64-musl@0.39.9':
     resolution: {integrity: sha512-KutzZSMhHP3P43nQ+kNSbuiDaqkCcdqOcXLnq28MRvS+qwvW+01dJ8eWRlpMJC9vCJmaJAZfI7xkNSp74WkdxA==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
 
   '@ast-grep/napi-win32-arm64-msvc@0.39.9':
     resolution: {integrity: sha512-S2kC6K9I7e70oMVn2FDICzVlz7SPZVWNCRKCBD+Dgy1OTn0byzmMLaGpjth3pqN93UCssEC03ooP3tuclS0JSA==}
@@ -798,89 +802,105 @@ packages:
     resolution: {integrity: sha512-excjX8DfsIcJ10x1Kzr4RcWe1edC9PquDRRPx3YVCvQv+U5p7Yin2s32ftzikXojb1PIFc/9Mt28/y+iRklkrw==}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
 
   '@img/sharp-libvips-linux-arm@1.2.4':
     resolution: {integrity: sha512-bFI7xcKFELdiNCVov8e44Ia4u2byA+l3XtsAj+Q8tfCwO6BQ8iDojYdvoPMqsKDkuoOo+X6HZA0s0q11ANMQ8A==}
     cpu: [arm]
     os: [linux]
+    libc: [glibc]
 
   '@img/sharp-libvips-linux-ppc64@1.2.4':
     resolution: {integrity: sha512-FMuvGijLDYG6lW+b/UvyilUWu5Ayu+3r2d1S8notiGCIyYU/76eig1UfMmkZ7vwgOrzKzlQbFSuQfgm7GYUPpA==}
     cpu: [ppc64]
     os: [linux]
+    libc: [glibc]
 
   '@img/sharp-libvips-linux-riscv64@1.2.4':
     resolution: {integrity: sha512-oVDbcR4zUC0ce82teubSm+x6ETixtKZBh/qbREIOcI3cULzDyb18Sr/Wcyx7NRQeQzOiHTNbZFF1UwPS2scyGA==}
     cpu: [riscv64]
     os: [linux]
+    libc: [glibc]
 
   '@img/sharp-libvips-linux-s390x@1.2.4':
     resolution: {integrity: sha512-qmp9VrzgPgMoGZyPvrQHqk02uyjA0/QrTO26Tqk6l4ZV0MPWIW6LTkqOIov+J1yEu7MbFQaDpwdwJKhbJvuRxQ==}
     cpu: [s390x]
     os: [linux]
+    libc: [glibc]
 
   '@img/sharp-libvips-linux-x64@1.2.4':
     resolution: {integrity: sha512-tJxiiLsmHc9Ax1bz3oaOYBURTXGIRDODBqhveVHonrHJ9/+k89qbLl0bcJns+e4t4rvaNBxaEZsFtSfAdquPrw==}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
 
   '@img/sharp-libvips-linuxmusl-arm64@1.2.4':
     resolution: {integrity: sha512-FVQHuwx1IIuNow9QAbYUzJ+En8KcVm9Lk5+uGUQJHaZmMECZmOlix9HnH7n1TRkXMS0pGxIJokIVB9SuqZGGXw==}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
 
   '@img/sharp-libvips-linuxmusl-x64@1.2.4':
     resolution: {integrity: sha512-+LpyBk7L44ZIXwz/VYfglaX/okxezESc6UxDSoyo2Ks6Jxc4Y7sGjpgU9s4PMgqgjj1gZCylTieNamqA1MF7Dg==}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
 
   '@img/sharp-linux-arm64@0.34.5':
     resolution: {integrity: sha512-bKQzaJRY/bkPOXyKx5EVup7qkaojECG6NLYswgktOZjaXecSAeCWiZwwiFf3/Y+O1HrauiE3FVsGxFg8c24rZg==}
     engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
 
   '@img/sharp-linux-arm@0.34.5':
     resolution: {integrity: sha512-9dLqsvwtg1uuXBGZKsxem9595+ujv0sJ6Vi8wcTANSFpwV/GONat5eCkzQo/1O6zRIkh0m/8+5BjrRr7jDUSZw==}
     engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
     cpu: [arm]
     os: [linux]
+    libc: [glibc]
 
   '@img/sharp-linux-ppc64@0.34.5':
     resolution: {integrity: sha512-7zznwNaqW6YtsfrGGDA6BRkISKAAE1Jo0QdpNYXNMHu2+0dTrPflTLNkpc8l7MUP5M16ZJcUvysVWWrMefZquA==}
     engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
     cpu: [ppc64]
     os: [linux]
+    libc: [glibc]
 
   '@img/sharp-linux-riscv64@0.34.5':
     resolution: {integrity: sha512-51gJuLPTKa7piYPaVs8GmByo7/U7/7TZOq+cnXJIHZKavIRHAP77e3N2HEl3dgiqdD/w0yUfiJnII77PuDDFdw==}
     engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
     cpu: [riscv64]
     os: [linux]
+    libc: [glibc]
 
   '@img/sharp-linux-s390x@0.34.5':
     resolution: {integrity: sha512-nQtCk0PdKfho3eC5MrbQoigJ2gd1CgddUMkabUj+rBevs8tZ2cULOx46E7oyX+04WGfABgIwmMC0VqieTiR4jg==}
     engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
     cpu: [s390x]
     os: [linux]
+    libc: [glibc]
 
   '@img/sharp-linux-x64@0.34.5':
     resolution: {integrity: sha512-MEzd8HPKxVxVenwAa+JRPwEC7QFjoPWuS5NZnBt6B3pu7EG2Ge0id1oLHZpPJdn3OQK+BQDiw9zStiHBTJQQQQ==}
     engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
 
   '@img/sharp-linuxmusl-arm64@0.34.5':
     resolution: {integrity: sha512-fprJR6GtRsMt6Kyfq44IsChVZeGN97gTD331weR1ex1c1rypDEABN6Tm2xa1wE6lYb5DdEnk03NZPqA7Id21yg==}
     engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
 
   '@img/sharp-linuxmusl-x64@0.34.5':
     resolution: {integrity: sha512-Jg8wNT1MUzIvhBFxViqrEhWDGzqymo3sV7z7ZsaWbZNDLXRJZoRGrjulp60YYtV4wfY8VIKcWidjojlLcWrd8Q==}
     engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
 
   '@img/sharp-wasm32@0.34.5':
     resolution: {integrity: sha512-OdWTEiVkY2PHwqkbBI8frFxQQFekHaSSkUIJkwzclWZe64O1X4UlUjqqqLaPbUpMOQk6FBu/HtlGXNblIs0huw==}
@@ -954,13 +974,13 @@ packages:
     peerDependencies:
       jsep: ^0.4.0||^1.0.0
 
-  '@kubb/cli@4.21.2':
-    resolution: {integrity: sha512-NUmllOmC5ipMXSw2AeNQG0sImedLryqKOWXvem4BsSPnUUZIGcFzfKJ1ChjD8Br6ISCvudcNfCv7bzaBC9JI5g==}
+  '@kubb/cli@4.22.3':
+    resolution: {integrity: sha512-qKWX07svIK5opKnat2hZVzRQKmZ7418ExJMBqiFhma3u5+JMQS4mzyg9g93/H78DeVmMAwpjrwEPxy+7BnazZQ==}
     engines: {node: '>=20'}
     hasBin: true
 
-  '@kubb/core@4.21.2':
-    resolution: {integrity: sha512-vaX1iYtpIpVYJc6PB0PSgGDegPNHZ6f5MZ6VyK/XWfv/bA8bLKjAsvS/6/sopY5jG+xu+Ejny2lgrW+Untatmg==}
+  '@kubb/core@4.22.3':
+    resolution: {integrity: sha512-6DaJQmR+IzC5qZzicDJtKdF/zS39oTCh2v7geF1jkBnzjvSZvYr6BCynwf0WzWwh98TVZPx7i2vSF5t1UjEfUw==}
     engines: {node: '>=20'}
     peerDependencies:
       '@kubb/react-fabric': 0.12.10
@@ -969,12 +989,12 @@ packages:
     resolution: {integrity: sha512-RjWEwdglJFc9s4Ph+A2CX1bUAPFhIH9KkRldoUv3VOsmfMpgFKncQIgHYLFU9W0hcGQjvWMkOyU0qxKKcRvQ8Q==}
     engines: {node: '>=20'}
 
-  '@kubb/oas@4.21.2':
-    resolution: {integrity: sha512-c74D13ydoCgZa1qTxrBLQqARtCe8fIFgoDE9kxL0SRA2DH1MngRkCujWtIBzz9KSIssMR5YQXTBLWzkdFHlg3Q==}
+  '@kubb/oas@4.22.3':
+    resolution: {integrity: sha512-Bo+KfBPOkKH0B/pDpibBE3Ofl/RUjqqOLZhALabNRSs0bQAhv+iY8JW9p39qZko25kis1KZf1WpOCDr4hAT6wQ==}
     engines: {node: '>=20'}
 
-  '@kubb/plugin-client@4.21.2':
-    resolution: {integrity: sha512-TENE7RZW51uT14v0PJfXi+gzkWjZ2x/lRNOUlFdDvU13g7Hr6s+uD2vvDSdMcpEvTyJuzkdgCFLtTeWWDo0nNA==}
+  '@kubb/plugin-client@4.22.3':
+    resolution: {integrity: sha512-GxUr2bj+6duFvpcgV2up/J4TvYLj8WD8FUGyYBeYURPTQaaBR8bEtjlR0MPdkA7fs4YGs+TebZTwuxkgmMRKVQ==}
     engines: {node: '>=20'}
     peerDependencies:
       '@kubb/react-fabric': 0.12.11
@@ -983,21 +1003,21 @@ packages:
       axios:
         optional: true
 
-  '@kubb/plugin-oas@4.21.2':
-    resolution: {integrity: sha512-kGsmU6tRP7NFa1qwxQtgNYTKo67pCSnpxTG5rrzXJJ3gOxQUUSmF2LrNZzKg9li+Zfki0Th7FNDVQGwSsB0nKw==}
+  '@kubb/plugin-oas@4.22.3':
+    resolution: {integrity: sha512-slL7+3fBgLUkpXJoGQaxoraASACuPx18DzOc0MQvFlpLQjIaktQsG6vV8EU7ks+jinbdUqIPK5QWdlLMsXYxKQ==}
     engines: {node: '>=20'}
     peerDependencies:
       '@kubb/react-fabric': 0.12.11
 
-  '@kubb/plugin-ts@4.21.2':
-    resolution: {integrity: sha512-8KHjMVFxY7M3/4d4mlpbC3zWwlogClXo0oXgtTWz0TYs7sR1V+Ta0VXt0ngT60H4I8haT8Ur6zExxhbXcySHzA==}
+  '@kubb/plugin-ts@4.22.3':
+    resolution: {integrity: sha512-swE+IykQDSIEbMQgfS6kgkg9AmsUvavgJspFoK/98V5GDG3HClwiTiHC/UmuIUhzuXe/ew/guu+J33Esih1scQ==}
     engines: {node: '>=20'}
     peerDependencies:
       '@kubb/react-fabric': 0.12.11
       typescript: '>=5.9.0'
 
-  '@kubb/plugin-zod@4.21.2':
-    resolution: {integrity: sha512-MelrTe82h1xUNx8D8k8phqYkfGMOph8/YTC/ivm2YrZdzas8xlpcPyPIkfH3DOtv5ya1Hkpsnaurr4AbLxbyrA==}
+  '@kubb/plugin-zod@4.22.3':
+    resolution: {integrity: sha512-Ou8HO9wncqC/h1ImXYvpEUooKDu2C5cFgDvrXHBOVSlMdd7+3JUDJriWsbZxO0o99BFJ29ejOZDsi71M2i5NLQ==}
     engines: {node: '>=20'}
 
   '@kubb/react-fabric@0.12.11':
@@ -1064,17 +1084,14 @@ packages:
     resolution: {integrity: sha512-VvV2Hzjskz01m8doSn7Ypt6cSZzgjnypVqXy1ipThbyYD6SGiM74VSePXykOODj/43Y2m6zeYedPk/ZLts/HvQ==}
     engines: {node: '>=14'}
 
-  '@redocly/ajv@8.17.2':
-    resolution: {integrity: sha512-rcbDZOfXAgGEJeJ30aWCVVJvxV9ooevb/m1/SFblO2qHs4cqTk178gx7T/vdslf57EA4lTofrwsq5K8rxK9g+g==}
+  '@redocly/ajv@8.17.4':
+    resolution: {integrity: sha512-BieiCML/IgP6x99HZByJSt7fJE4ipgzO7KAFss92Bs+PEI35BhY7vGIysFXLT+YmS7nHtQjZjhOQyPPEf7xGHA==}
 
-  '@redocly/ajv@8.17.3':
-    resolution: {integrity: sha512-NQsbJbB/GV7JVO88ebFkMndrnuGp/dTm5/2NISeg+JGcLzTfGBJZ01+V5zD8nKBOpi/dLLNFT+Ql6IcUk8ehng==}
+  '@redocly/config@0.43.0':
+    resolution: {integrity: sha512-AbyFKRHKJ2VBmh9nO2lrG9tO2Gu/Lmnfdj4Uwoh7h/a7jWr1104t4fBgQZs/NwgGBAOkGmyQYAvardwyBeRGZA==}
 
-  '@redocly/config@0.41.4':
-    resolution: {integrity: sha512-LaRKXpHyK5GxmgG2n2e8xp2NyUa8qZls3WMAVg5hKO4b2d7X5uU5F2jvH6JUTVdRW/VfStQqan5DQ1uQz7MVzg==}
-
-  '@redocly/openapi-core@2.16.0':
-    resolution: {integrity: sha512-/GzDiwmA9p7VCkN2Rzrgc6xU3f+Cpik4QXXwdtM5BykdhJas0K1nrRxgMJCwuxZPEOI9VzROWn56Hv1PJgajhA==}
+  '@redocly/openapi-core@2.18.1':
+    resolution: {integrity: sha512-1fjuH85SpFyIFHcdQiGoT5uWsoErs+qJyK+2HqaqTANkNO3ONpDBS6B79Z/mYUH44+LxeTTVzbDPBEcI0ZJHhQ==}
     engines: {node: '>=22.12.0 || >=20.19.0 <21.0.0', npm: '>=10'}
 
   '@rolldown/pluginutils@1.0.0-beta.38':
@@ -1114,56 +1131,67 @@ packages:
     resolution: {integrity: sha512-gTJ/JnnjCMc15uwB10TTATBEhK9meBIY+gXP4s0sHD1zHOaIh4Dmy1X9wup18IiY9tTNk5gJc4yx9ctj/fjrIw==}
     cpu: [arm]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-arm-musleabihf@4.43.0':
     resolution: {integrity: sha512-ZJ3gZynL1LDSIvRfz0qXtTNs56n5DI2Mq+WACWZ7yGHFUEirHBRt7fyIk0NsCKhmRhn7WAcjgSkSVVxKlPNFFw==}
     cpu: [arm]
     os: [linux]
+    libc: [musl]
 
   '@rollup/rollup-linux-arm64-gnu@4.43.0':
     resolution: {integrity: sha512-8FnkipasmOOSSlfucGYEu58U8cxEdhziKjPD2FIa0ONVMxvl/hmONtX/7y4vGjdUhjcTHlKlDhw3H9t98fPvyA==}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-arm64-musl@4.43.0':
     resolution: {integrity: sha512-KPPyAdlcIZ6S9C3S2cndXDkV0Bb1OSMsX0Eelr2Bay4EsF9yi9u9uzc9RniK3mcUGCLhWY9oLr6er80P5DE6XA==}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
 
   '@rollup/rollup-linux-loongarch64-gnu@4.43.0':
     resolution: {integrity: sha512-HPGDIH0/ZzAZjvtlXj6g+KDQ9ZMHfSP553za7o2Odegb/BEfwJcR0Sw0RLNpQ9nC6Gy8s+3mSS9xjZ0n3rhcYg==}
     cpu: [loong64]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-powerpc64le-gnu@4.43.0':
     resolution: {integrity: sha512-gEmwbOws4U4GLAJDhhtSPWPXUzDfMRedT3hFMyRAvM9Mrnj+dJIFIeL7otsv2WF3D7GrV0GIewW0y28dOYWkmw==}
     cpu: [ppc64]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-riscv64-gnu@4.43.0':
     resolution: {integrity: sha512-XXKvo2e+wFtXZF/9xoWohHg+MuRnvO29TI5Hqe9xwN5uN8NKUYy7tXUG3EZAlfchufNCTHNGjEx7uN78KsBo0g==}
     cpu: [riscv64]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-riscv64-musl@4.43.0':
     resolution: {integrity: sha512-ruf3hPWhjw6uDFsOAzmbNIvlXFXlBQ4nk57Sec8E8rUxs/AI4HD6xmiiasOOx/3QxS2f5eQMKTAwk7KHwpzr/Q==}
     cpu: [riscv64]
     os: [linux]
+    libc: [musl]
 
   '@rollup/rollup-linux-s390x-gnu@4.43.0':
     resolution: {integrity: sha512-QmNIAqDiEMEvFV15rsSnjoSmO0+eJLoKRD9EAa9rrYNwO/XRCtOGM3A5A0X+wmG+XRrw9Fxdsw+LnyYiZWWcVw==}
     cpu: [s390x]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-x64-gnu@4.43.0':
     resolution: {integrity: sha512-jAHr/S0iiBtFyzjhOkAics/2SrXE092qyqEg96e90L3t9Op8OTzS6+IX0Fy5wCt2+KqeHAkti+eitV0wvblEoQ==}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-x64-musl@4.43.0':
     resolution: {integrity: sha512-3yATWgdeXyuHtBhrLt98w+5fKurdqvs8B53LaoKD7P7H7FKOONLsBVMNl9ghPQZQuYcceV5CDyPfyfGpMWD9mQ==}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
 
   '@rollup/rollup-win32-arm64-msvc@4.43.0':
     resolution: {integrity: sha512-wVzXp2qDSCOpcBCT5WRWLmpJRIzv23valvcTwMHEobkjippNf+C3ys/+wf07poPkeNix0paTNemB2XrHr2TnGw==}
@@ -1242,24 +1270,28 @@ packages:
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
 
   '@tailwindcss/oxide-linux-arm64-musl@4.1.18':
     resolution: {integrity: sha512-1px92582HkPQlaaCkdRcio71p8bc8i/ap5807tPRDK/uw953cauQBT8c5tVGkOwrHMfc2Yh6UuxaH4vtTjGvHg==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
 
   '@tailwindcss/oxide-linux-x64-gnu@4.1.18':
     resolution: {integrity: sha512-v3gyT0ivkfBLoZGF9LyHmts0Isc8jHZyVcbzio6Wpzifg/+5ZJpDiRiUhDLkcr7f/r38SWNe7ucxmGW3j3Kb/g==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
 
   '@tailwindcss/oxide-linux-x64-musl@4.1.18':
     resolution: {integrity: sha512-bhJ2y2OQNlcRwwgOAGMY0xTFStt4/wyU6pvI6LSuZpRgKQwxTec0/3Scu91O8ir7qCR3AuepQKLU/kX99FouqQ==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
 
   '@tailwindcss/oxide-wasm32-wasi@4.1.18':
     resolution: {integrity: sha512-LffYTvPjODiP6PT16oNeUQJzNVyJl1cjIebq/rWWBF+3eDst5JGEFSc5cWxyRCJ0Mxl+KyIkqRxk1XPEs9x8TA==}
@@ -2615,24 +2647,28 @@ packages:
     engines: {node: '>= 12.0.0'}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
 
   lightningcss-linux-arm64-musl@1.30.2:
     resolution: {integrity: sha512-5Vh9dGeblpTxWHpOx8iauV02popZDsCYMPIgiuw97OJ5uaDsL86cnqSFs5LZkG3ghHoX5isLgWzMs+eD1YzrnA==}
     engines: {node: '>= 12.0.0'}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
 
   lightningcss-linux-x64-gnu@1.30.2:
     resolution: {integrity: sha512-Cfd46gdmj1vQ+lR6VRTTadNHu6ALuw2pKR9lYq4FnhvgBc4zWY1EtZcAc6EffShbb1MFrIPfLDXD6Xprbnni4w==}
     engines: {node: '>= 12.0.0'}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
 
   lightningcss-linux-x64-musl@1.30.2:
     resolution: {integrity: sha512-XJaLUUFXb6/QG2lGIW6aIk6jKdtjtcffUT0NKvIqhSBY3hh9Ch+1LCeH80dR9q9LBjG3ewbDjnumefsLsP6aiA==}
     engines: {node: '>= 12.0.0'}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
 
   lightningcss-win32-arm64-msvc@1.30.2:
     resolution: {integrity: sha512-FZn+vaj7zLv//D/192WFFVA0RgHawIcHqLX9xuWiQt7P0PtdFEVaxgF9rjM/IRYHQXNnk61/H/gb2Ei+kUQ4xQ==}
@@ -3209,6 +3245,9 @@ packages:
 
   remeda@2.33.5:
     resolution: {integrity: sha512-FqmpPA9i9T5EGcqgyHf9kHjefnyCZM1M3kSdZjPk1j2StGNoJyoYp0807RYcjNkQ1UpsEQa5qzgsjLY4vYtT8g==}
+
+  remeda@2.33.6:
+    resolution: {integrity: sha512-tazDGH7s75kUPGBKLvhgBEHMgW+TdDFhjUAMdQj57IoWz6HsGa5D2RX5yDUz6IIqiRRvZiaEHzCzWdTeixc/Kg==}
 
   remove-undefined-objects@7.0.0:
     resolution: {integrity: sha512-+9ycqqqpv6EdaOvHpyOkf81SXJ4MjARKX450Je6AmshEYeqAuiVcfbLx1coNICO3KulleXlOHd0GSHFkEdB3YQ==}
@@ -4354,10 +4393,10 @@ snapshots:
     dependencies:
       jsep: 1.4.0
 
-  '@kubb/cli@4.21.2(@kubb/react-fabric@0.12.11)(typescript@5.9.3)':
+  '@kubb/cli@4.22.3(@kubb/react-fabric@0.12.11)(typescript@5.9.3)':
     dependencies:
       '@clack/prompts': 1.0.0
-      '@kubb/core': 4.21.2(@kubb/react-fabric@0.12.11)
+      '@kubb/core': 4.22.3(@kubb/react-fabric@0.12.11)
       chokidar: 4.0.3
       citty: 0.1.6
       cosmiconfig: 9.0.0(typescript@5.9.3)
@@ -4373,7 +4412,7 @@ snapshots:
       - '@kubb/react-fabric'
       - typescript
 
-  '@kubb/core@4.21.2(@kubb/react-fabric@0.12.11)':
+  '@kubb/core@4.22.3(@kubb/react-fabric@0.12.11)':
     dependencies:
       '@kubb/react-fabric': 0.12.11
       camelcase: 8.0.0
@@ -4383,7 +4422,7 @@ snapshots:
       js-runtime: 0.0.8
       natural-orderby: 5.0.0
       p-limit: 7.3.0
-      remeda: 2.33.5
+      remeda: 2.33.6
       semver: 7.7.4
 
   '@kubb/fabric-core@0.12.11':
@@ -4393,7 +4432,7 @@ snapshots:
       natural-orderby: 5.0.0
       p-limit: 7.3.0
       picocolors: 1.1.1
-      remeda: 2.33.5
+      remeda: 2.33.6
       serve-handler: 6.1.6
       signal-exit: 4.1.0
       typescript: 5.9.3
@@ -4402,27 +4441,27 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@kubb/oas@4.21.2(@kubb/react-fabric@0.12.11)':
+  '@kubb/oas@4.22.3(@kubb/react-fabric@0.12.11)':
     dependencies:
-      '@kubb/core': 4.21.2(@kubb/react-fabric@0.12.11)
-      '@redocly/openapi-core': 2.16.0
+      '@kubb/core': 4.22.3(@kubb/react-fabric@0.12.11)
+      '@redocly/openapi-core': 2.18.1
       jsonpointer: 5.0.1
       oas: 28.9.0
       oas-normalize: 15.7.1
       openapi-types: 12.1.3
-      remeda: 2.33.5
+      remeda: 2.33.6
       swagger2openapi: 7.0.8
     transitivePeerDependencies:
       - '@kubb/react-fabric'
       - encoding
 
-  '@kubb/plugin-client@4.21.2(@kubb/react-fabric@0.12.11)(typescript@5.9.3)':
+  '@kubb/plugin-client@4.22.3(@kubb/react-fabric@0.12.11)(typescript@5.9.3)':
     dependencies:
-      '@kubb/core': 4.21.2(@kubb/react-fabric@0.12.11)
-      '@kubb/oas': 4.21.2(@kubb/react-fabric@0.12.11)
-      '@kubb/plugin-oas': 4.21.2(@kubb/react-fabric@0.12.11)
-      '@kubb/plugin-ts': 4.21.2(@kubb/react-fabric@0.12.11)(typescript@5.9.3)
-      '@kubb/plugin-zod': 4.21.2(typescript@5.9.3)
+      '@kubb/core': 4.22.3(@kubb/react-fabric@0.12.11)
+      '@kubb/oas': 4.22.3(@kubb/react-fabric@0.12.11)
+      '@kubb/plugin-oas': 4.22.3(@kubb/react-fabric@0.12.11)
+      '@kubb/plugin-ts': 4.22.3(@kubb/react-fabric@0.12.11)(typescript@5.9.3)
+      '@kubb/plugin-zod': 4.22.3(typescript@5.9.3)
       '@kubb/react-fabric': 0.12.11
     transitivePeerDependencies:
       - bufferutil
@@ -4430,37 +4469,37 @@ snapshots:
       - typescript
       - utf-8-validate
 
-  '@kubb/plugin-oas@4.21.2(@kubb/react-fabric@0.12.11)':
+  '@kubb/plugin-oas@4.22.3(@kubb/react-fabric@0.12.11)':
     dependencies:
-      '@kubb/core': 4.21.2(@kubb/react-fabric@0.12.11)
-      '@kubb/oas': 4.21.2(@kubb/react-fabric@0.12.11)
+      '@kubb/core': 4.22.3(@kubb/react-fabric@0.12.11)
+      '@kubb/oas': 4.22.3(@kubb/react-fabric@0.12.11)
       '@kubb/react-fabric': 0.12.11
       p-limit: 7.3.0
-      remeda: 2.33.5
+      remeda: 2.33.6
     transitivePeerDependencies:
       - encoding
 
-  '@kubb/plugin-ts@4.21.2(@kubb/react-fabric@0.12.11)(typescript@5.9.3)':
+  '@kubb/plugin-ts@4.22.3(@kubb/react-fabric@0.12.11)(typescript@5.9.3)':
     dependencies:
-      '@kubb/core': 4.21.2(@kubb/react-fabric@0.12.11)
+      '@kubb/core': 4.22.3(@kubb/react-fabric@0.12.11)
       '@kubb/fabric-core': 0.12.11
-      '@kubb/oas': 4.21.2(@kubb/react-fabric@0.12.11)
-      '@kubb/plugin-oas': 4.21.2(@kubb/react-fabric@0.12.11)
+      '@kubb/oas': 4.22.3(@kubb/react-fabric@0.12.11)
+      '@kubb/plugin-oas': 4.22.3(@kubb/react-fabric@0.12.11)
       '@kubb/react-fabric': 0.12.11
       natural-orderby: 5.0.0
-      remeda: 2.33.5
+      remeda: 2.33.6
       typescript: 5.9.3
     transitivePeerDependencies:
       - bufferutil
       - encoding
       - utf-8-validate
 
-  '@kubb/plugin-zod@4.21.2(typescript@5.9.3)':
+  '@kubb/plugin-zod@4.22.3(typescript@5.9.3)':
     dependencies:
-      '@kubb/core': 4.21.2(@kubb/react-fabric@0.12.11)
-      '@kubb/oas': 4.21.2(@kubb/react-fabric@0.12.11)
-      '@kubb/plugin-oas': 4.21.2(@kubb/react-fabric@0.12.11)
-      '@kubb/plugin-ts': 4.21.2(@kubb/react-fabric@0.12.11)(typescript@5.9.3)
+      '@kubb/core': 4.22.3(@kubb/react-fabric@0.12.11)
+      '@kubb/oas': 4.22.3(@kubb/react-fabric@0.12.11)
+      '@kubb/plugin-oas': 4.22.3(@kubb/react-fabric@0.12.11)
+      '@kubb/plugin-ts': 4.22.3(@kubb/react-fabric@0.12.11)(typescript@5.9.3)
       '@kubb/react-fabric': 0.12.11
     transitivePeerDependencies:
       - bufferutil
@@ -4585,30 +4624,23 @@ snapshots:
       marked: 4.3.0
       mustache: 4.2.0
 
-  '@redocly/ajv@8.17.2':
+  '@redocly/ajv@8.17.4':
     dependencies:
       fast-deep-equal: 3.1.3
       fast-uri: 3.1.0
       json-schema-traverse: 1.0.0
       require-from-string: 2.0.2
 
-  '@redocly/ajv@8.17.3':
-    dependencies:
-      fast-deep-equal: 3.1.3
-      fast-uri: 3.1.0
-      json-schema-traverse: 1.0.0
-      require-from-string: 2.0.2
-
-  '@redocly/config@0.41.4':
+  '@redocly/config@0.43.0':
     dependencies:
       json-schema-to-ts: 2.7.2
 
-  '@redocly/openapi-core@2.16.0':
+  '@redocly/openapi-core@2.18.1':
     dependencies:
-      '@redocly/ajv': 8.17.3
-      '@redocly/config': 0.41.4
-      ajv: '@redocly/ajv@8.17.2'
-      ajv-formats: 3.0.1(@redocly/ajv@8.17.2)
+      '@redocly/ajv': 8.17.4
+      '@redocly/config': 0.43.0
+      ajv: '@redocly/ajv@8.17.4'
+      ajv-formats: 3.0.1(@redocly/ajv@8.17.4)
       colorette: 1.4.0
       js-levenshtein: 1.1.6
       js-yaml: 4.1.0
@@ -5070,9 +5102,9 @@ snapshots:
     optionalDependencies:
       ajv: 8.17.1
 
-  ajv-formats@3.0.1(@redocly/ajv@8.17.2):
+  ajv-formats@3.0.1(@redocly/ajv@8.17.4):
     optionalDependencies:
-      ajv: '@redocly/ajv@8.17.2'
+      ajv: '@redocly/ajv@8.17.4'
 
   ajv-keywords@5.1.0(ajv@8.17.1):
     dependencies:
@@ -6952,6 +6984,8 @@ snapshots:
       vfile: 6.0.3
 
   remeda@2.33.5: {}
+
+  remeda@2.33.6: {}
 
   remove-undefined-objects@7.0.0: {}
 
