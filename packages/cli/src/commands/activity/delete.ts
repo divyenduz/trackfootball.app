@@ -9,9 +9,9 @@ import * as readline from 'readline/promises'
 
 type Flags = {}
 
-export const help = `${CLI_NAME} activity delete [id] | delete one activity by id, or delete all non-Run/Soccer uncompleted posts if no id provided`
+const help = `${CLI_NAME} activity delete [id] | delete one activity by id, or delete all non-Run/Soccer uncompleted posts if no id provided`
 
-export async function cmd(this: LocalContext, {}: Flags, idArg?: string) {
+async function cmd(this: LocalContext, {}: Flags, idArg?: string) {
   invariant(process.env.DATABASE_URL, 'DATABASE_URL must be set')
   const sql = postgres(process.env.DATABASE_URL)
   const repository = await createRepository(sql)

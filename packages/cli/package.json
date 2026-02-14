@@ -17,7 +17,6 @@
     "@trackfootball/service": "workspace:*",
     "@trackfootball/postgres": "workspace:*",
     "postgres": "catalog:",
-    "tiny-invariant": "catalog:",
-    "ts-pattern": "catalog:"
+    "tiny-invariant": "catalog:"
   }
 }

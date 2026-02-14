@@ -3,7 +3,7 @@ import type { FeatureCollection, LineString } from 'geojson'
 import invariant from 'tiny-invariant'
 import { Sql } from 'postgres'
 
-export const stringify = (value: number | string): string => {
+const stringify = (value: number | string): string => {
   if (typeof value === 'number') {
     return value.toString()
   }
@@ -176,7 +176,7 @@ export async function deletePostBy(
   }
 }
 
-export type FeedItemType = Omit<Post, 'geoJson' | 'sprints' | 'runs'> & {
+type FeedItemType = Omit<Post, 'geoJson' | 'sprints' | 'runs'> & {
   Field: Field
   User: User
 }

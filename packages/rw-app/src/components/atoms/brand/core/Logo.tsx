@@ -4,7 +4,7 @@ interface Props {
   size?: Size
 }
 
-export const Logo = ({ size }: Props) => {
+const Logo = ({ size }: Props) => {
   const sizePxMap: { [key in Size]: number } = {
     xs: 50,
   }

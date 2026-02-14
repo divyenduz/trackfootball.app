@@ -4,7 +4,7 @@ interface Props {
   callbackUrl: string
 }
 
-export const ConnectWithStrava: React.FC<Props> = ({ callbackUrl }) => {
+const ConnectWithStrava: React.FC<Props> = ({ callbackUrl }) => {
   const clientId = '17984'
   const scope =
     'activity:read,activity:read_all' as 'activity:read_all,activity:read_all'

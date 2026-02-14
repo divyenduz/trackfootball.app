@@ -97,4 +97,3 @@ export function createAuth() {
   })
 }
 
-export type Auth = ReturnType<typeof createAuth>

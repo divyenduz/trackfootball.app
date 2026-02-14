@@ -14,9 +14,9 @@ type Flags = {
   yes?: boolean
 }
 
-export const help = `${CLI_NAME} webhook reprocess [ids...] | reprocess PENDING Strava webhook events`
+const help = `${CLI_NAME} webhook reprocess [ids...] | reprocess PENDING Strava webhook events`
 
-export async function cmd(
+async function cmd(
   this: LocalContext,
   { yes }: Flags,
   ...eventIdArgs: string[]

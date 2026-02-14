@@ -10,9 +10,9 @@ import * as readline from 'readline/promises'
 
 type Flags = {}
 
-export const help = `${CLI_NAME} activity refresh [ids...] | refresh one or more activities, or all uncompleted posts if no ids provided`
+const help = `${CLI_NAME} activity refresh [ids...] | refresh one or more activities, or all uncompleted posts if no ids provided`
 
-export async function cmd(
+async function cmd(
   this: LocalContext,
   {}: Flags,
   ...activityIdArgs: string[]
