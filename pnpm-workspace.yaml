@@ -23,7 +23,7 @@ catalog:
   '@turf/intersect': 7.3.4
   '@types/geojson': 7946.0.16
   '@types/node': 24.10.13
-  '@types/react': 19.2.13
+  '@types/react': 19.2.14
   '@types/react-dom': 19.2.3
   '@xmldom/xmldom': 0.9.8
   better-auth: 1.4.18
