@@ -2,7 +2,6 @@
   "name": "@trackfootball/cli",
   "version": "0.0.0",
   "private": true,
-  "main": "index.ts",
   "scripts": {
     "dev": "bun run src/bin/cli.ts",
     "test": "echo 'No tests defined' && exit 0",
