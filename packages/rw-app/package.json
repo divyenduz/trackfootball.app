@@ -22,13 +22,11 @@
     "lint": "tsc --noEmit"
   },
   "dependencies": {
-    "@panva/hkdf": "catalog:",
     "@tailwindcss/vite": "catalog:",
     "@trackfootball/open-api": "workspace:*",
     "@trackfootball/postgres": "workspace:*",
     "@trackfootball/service": "workspace:*",
-    "cookie": "catalog:",
-    "jose": "catalog:",
+    "better-auth": "catalog:",
     "postgres": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",

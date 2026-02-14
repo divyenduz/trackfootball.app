@@ -4,7 +4,9 @@ import React, { useState } from 'react'
 import { match } from 'ts-pattern'
 
 import Logo from '@/components/atoms/brand/core/Logo'
+import { LoginButton } from '@/components/atoms/LoginButton'
 import { Photo } from '@/components/atoms/Photo'
+import { signOut } from '@/auth/auth-client'
 import type { User } from '@trackfootball/postgres'
 
 interface Props {
@@ -34,9 +36,7 @@ export const AppBar: React.FC<Props> = ({
             {match(user)
               .with(null, () => {
                 return (
-                  <a href="/api/auth/login">
-                    <button>Login</button>
-                  </a>
+                <LoginButton />
                 )
               })
               .otherwise((user) => {
@@ -79,14 +79,23 @@ export const AppBar: React.FC<Props> = ({
 
                               <hr className="my-1 border-gray-200" />
 
-                              <a
-                                href="/api/auth/logout"
-                                className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
-                                onClick={() => setAnchorEl(null)}
+                              <button
+                                type="button"
+                                className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+                                onClick={async () => {
+                                  setAnchorEl(null)
+                                  await signOut({
+                                    fetchOptions: {
+                                      onSuccess: () => {
+                                        window.location.href = '/home'
+                                      },
+                                    },
+                                  })
+                                }}
                               >
                                 <span className="mr-3">😵</span>
                                 Logout
-                              </a>
+                              </button>
                             </div>
                           </div>
                         </>

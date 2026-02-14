@@ -23,5 +23,10 @@
       "sharp",
       "workerd"
     ]
+  },
+  "dependencies": {
+    "kysely": "catalog:",
+    "kysely-postgres-js": "catalog:",
+    "postgres": "catalog:"
   }
 }

@@ -10,7 +10,7 @@ export * from './types'
 
 export function getSql(connectionString: string) {
   const sql = postgres(connectionString, {
-    max: 5,
+    max: 10,
   })
   return sql
 }
@@ -70,6 +70,11 @@ export function createRepository(sql: ReturnType<typeof postgres>) {
     getUserByAuth0Sub: (
       auth0Sub: Parameters<typeof userRepo.getUserByAuth0Sub>[1],
     ) => userRepo.getUserByAuth0Sub(sql, auth0Sub),
+    getUserByEmail: (email: Parameters<typeof userRepo.getUserByEmail>[1]) =>
+      userRepo.getUserByEmail(sql, email),
+    createUserFromAuthSession: (
+      authUser: Parameters<typeof userRepo.createUserFromAuthSession>[1],
+    ) => userRepo.createUserFromAuthSession(sql, authUser),
     deleteStravaSocialLogin: (
       userId: Parameters<typeof userRepo.deleteStravaSocialLogin>[1],
     ) => userRepo.deleteStravaSocialLogin(sql, userId),

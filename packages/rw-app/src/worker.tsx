@@ -11,11 +11,7 @@ import { Sql } from 'postgres'
 import { createRepository, getSql } from '@trackfootball/postgres'
 import { Athlete } from './app/pages/athlete/Athlete'
 import { Activity } from './app/pages/activity/Activity'
-import { getSession } from './auth/lib'
-import { hkdf } from '@panva/hkdf'
-import { Logout } from './app/pages/api/auth/logout'
-import { Callback } from './app/pages/api/auth/callback'
-import { Login } from './app/pages/api/auth/login'
+import { createAuth } from './auth/auth'
 import { StravaAuthCallback } from './app/pages/strava/StravaAuthCallback'
 import { StravaWebhookCallback } from './app/pages/strava/StravaWebhookCallback'
 import { Privacy } from './app/pages/compliance/Privacy'
@@ -37,21 +33,6 @@ function needsAuth({ ctx }: { ctx: AppContext }) {
   }
 }
 
-const DIGEST = 'sha256'
-const BYTE_LENGTH = 32
-const ENCRYPTION_INFO = 'JWE CEK'
-
-async function getSecret() {
-  const secret = await hkdf(
-    DIGEST,
-    env.AUTH0_SECRET,
-    '',
-    ENCRYPTION_INFO,
-    BYTE_LENGTH,
-  )
-  return secret
-}
-
 export default defineApp([
   setCommonHeaders(),
   async ({ ctx, request }) => {
@@ -60,30 +41,8 @@ export default defineApp([
     const repository = createRepository(sql)
     ctx.repository = repository
 
-    const session = await getSession(request.headers)
     ctx.user = null
-    if (session) {
-      const user = await repository.getUserByAuth0Sub(session.sub)
-      ctx.user = user
-    }
 
-    const url = new URL(request.url)
-    if (
-      !session &&
-      url.pathname.startsWith('/api') &&
-      !url.pathname.startsWith('/api/auth') &&
-      !url.pathname.includes('/api/social/strava/webhook/callback')
-    ) {
-      console.log('Unauthorized API request to:', url.pathname)
-      return new Response(JSON.stringify({ error: 'Unauthorized' }), {
-        status: 401,
-        headers: {
-          'Content-Type': 'application/json',
-          'WWW-Authenticate':
-            'Bearer error="invalid_token", error_description="expired or invalid session"',
-        },
-      })
-    }
     if (
       env.UNSAFE_AUTH_BYPASS_USER === '1' ||
       env.UNSAFE_AUTH_BYPASS_USER === 'true'
@@ -101,8 +60,50 @@ export default defineApp([
         emailVerified: true,
         type: 'ADMIN',
       } as User
+      return
+    }
+
+    const auth = createAuth()
+    const session = await auth.api.getSession({
+      headers: request.headers,
+    })
+
+    if (session?.user) {
+      let domainUser = await repository.getUserByEmail(session.user.email)
+
+      if (!domainUser) {
+        domainUser = await repository.createUserFromAuthSession({
+          email: session.user.email,
+          name: session.user.name,
+          image: session.user.image,
+        })
+      }
+
+      ctx.user = domainUser
+    }
+
+    const url = new URL(request.url)
+    if (
+      !ctx.user &&
+      url.pathname.startsWith('/api') &&
+      !url.pathname.startsWith('/api/auth') &&
+      !url.pathname.includes('/api/social/strava/webhook/callback')
+    ) {
+      console.log('Unauthorized API request to:', url.pathname)
+      return new Response(JSON.stringify({ error: 'Unauthorized' }), {
+        status: 401,
+        headers: {
+          'Content-Type': 'application/json',
+          'WWW-Authenticate':
+            'Bearer error="invalid_token", error_description="expired or invalid session"',
+        },
+      })
     }
   },
+  route('/api/auth/*', ({ request }) => {
+    const auth = createAuth()
+    return auth.handler(request)
+  }),
   render(Document, [
     layout(AppLayout, [
       route('/', ({ ctx }) => {
@@ -121,9 +122,6 @@ export default defineApp([
       route('/dashboard', [needsAuth, Dashboard]),
       route('/athlete/:id', [Athlete]),
       route('/activity/:id', [Activity]),
-      route('/api/auth/login', [Login]),
-      route('/api/auth/callback', [Callback]),
-      route('/api/auth/logout', [Logout]),
       route('/api/social/strava/callback', [StravaAuthCallback]),
       route('/api/social/strava/webhook/callback', [StravaWebhookCallback]),
       route('/privacy', [Privacy]),
