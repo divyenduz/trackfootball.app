@@ -22,4 +22,3 @@ export const ShowToOwner: React.FC<ShowToOwnerProps> = ({
   }
 }
 
-export default ShowToOwner

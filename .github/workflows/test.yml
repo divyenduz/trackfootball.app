@@ -15,7 +15,7 @@ jobs:
     timeout-minutes: 30
     strategy:
       matrix:
-        task: [build, lint, test]
+        task: [build, lint, test, knip]
       fail-fast: false
     steps:
       - uses: actions/checkout@v6

@@ -14,7 +14,7 @@ export type RequestConfig<TData = unknown> = {
   headers?: HeadersInit
 }
 
-export type ResponseConfig<TData = unknown> = {
+type ResponseConfig<TData = unknown> = {
   data: TData
   status: number
   statusText: string
@@ -26,7 +26,7 @@ export type ResponseErrorConfig<TError = unknown> = {
   statusText: string
 }
 
-export const client = async <TData, TError = unknown, TVariables = unknown>(
+const client = async <TData, TError = unknown, TVariables = unknown>(
   config: RequestConfig<TVariables>,
 ): Promise<ResponseConfig<TData>> => {
   // Build URL with query params if present

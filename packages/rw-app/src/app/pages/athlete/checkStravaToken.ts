@@ -42,7 +42,7 @@ invariant(stravaClientId, `stravaClientId not set`)
 const stravaClientSecret = env.STRAVA_CLIENT_SECRET
 invariant(stravaClientSecret, `stravaClientSecret not set`)
 
-export async function tokenRefresh(
+async function tokenRefresh(
   refreshToken: string,
 ): Promise<Omit<TokenExchangeResponse, 'athlete'>> {
   const link = 'https://www.strava.com/api/v3/oauth/token'
@@ -64,14 +64,14 @@ export async function tokenRefresh(
   return tokenRefreshResponse as TokenExchangeResponse
 }
 
-export type Maybe<T = string, E = null> = T | E
+type Maybe<T = string, E = null> = T | E
 
 /**
  *
  * @param userId user id in our database
  * @returns Strava access token, refreshed if needed
  */
-export async function getStravaToken(userId: number): Promise<Maybe> {
+async function getStravaToken(userId: number): Promise<Maybe> {
   const now = new Date()
 
   const user = await requestInfo.ctx.repository.getUser(userId)
@@ -137,7 +137,7 @@ async function getStravaAccessTokenHeaders(userId: number) {
   }
 }
 
-export async function checkStravaAccessToken(userId: number) {
+async function checkStravaAccessToken(userId: number) {
   const stravaAccessTokenHeaders = await getStravaAccessTokenHeaders(userId)
   try {
     await getLoggedInAthleteActivities(
