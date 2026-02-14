@@ -3,7 +3,7 @@ import { DefaultAppContext } from 'rwsdk/worker'
 import type { Platform } from '@trackfootball/postgres'
 import { env } from 'cloudflare:workers'
 
-export const MESSAGE_UNAUTHORIZED =
+const MESSAGE_UNAUTHORIZED =
   'Unauthorized, are you logged in? Please login at ' + env.HOMEPAGE_URL
 
 export async function StravaAuthCallback({
