@@ -4,11 +4,11 @@ packages:
 catalog:
   '@cloudflare/vite-plugin': 1.25.0
   '@cloudflare/workers-types': 4.20260214.0
-  '@kubb/cli': 4.22.3
-  '@kubb/core': 4.22.3
-  '@kubb/plugin-client': 4.22.3
-  '@kubb/plugin-oas': 4.22.3
-  '@kubb/plugin-ts': 4.22.3
+  '@kubb/cli': 4.23.0
+  '@kubb/core': 4.23.0
+  '@kubb/plugin-client': 4.23.0
+  '@kubb/plugin-oas': 4.23.0
+  '@kubb/plugin-ts': 4.23.0
   '@kubb/react-fabric': 0.12.11
   '@stricli/auto-complete': 1.2.5
   '@stricli/core': 1.2.5
