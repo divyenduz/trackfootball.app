@@ -109,16 +109,6 @@ export class StravaWebhookCallbackWorkflow extends WorkflowEntrypoint<
         async () => {
           const sql = postgres(this.env.DATABASE_URL)
           const repository = createRepository(sql)
-          await createDiscordMessage({
-            heading: `New Activity Creation Failed - Post Already Exists (${analyzedEvent.source})`,
-            name: `${analyzedEvent.ownerId}/${analyzedEvent.objectId}`,
-            description: `
-            Strava ID: ${analyzedEvent.objectId}
-            Strava Owner: ${analyzedEvent.ownerId}
-            Athlete Link: https://strava.com/athletes/${analyzedEvent.ownerId}
-            Activity Link: https://strava.com/activities/${analyzedEvent.objectId}
-            Link: ${this.env.HOMEPAGE_URL}/activity/${analyzedEvent.existingPost?.id}`,
-          })
           const existingWebhookEvent =
             await repository.findStravaWebhookEventByActivityId(
               analyzedEvent.objectId,
@@ -156,15 +146,6 @@ export class StravaWebhookCallbackWorkflow extends WorkflowEntrypoint<
             await step.do('create discord event for no type', async () => {
               const sql = postgres(this.env.DATABASE_URL)
               const repository = createRepository(sql)
-              await createDiscordMessage({
-                heading: `New Activity Creation Failed - No Type (${analyzedEvent.source})`,
-                name: `${analyzedEvent.ownerId}/${analyzedEvent.objectId}`,
-                description: `
-      Strava ID: ${analyzedEvent.objectId}
-      Strava Owner: ${analyzedEvent.ownerId}
-      Athlete Link: https://strava.com/athletes/${analyzedEvent.ownerId}
-      Activity Link: https://strava.com/activities/${analyzedEvent.objectId}`,
-              })
               const existingWebhookEvent =
                 await repository.findStravaWebhookEventByActivityId(
                   analyzedEvent.objectId,
@@ -182,16 +163,6 @@ export class StravaWebhookCallbackWorkflow extends WorkflowEntrypoint<
             await step.do('', async () => {
               const sql = postgres(this.env.DATABASE_URL)
               const repository = createRepository(sql)
-              await createDiscordMessage({
-                heading: `New Activity Creation Failed - Type Not Supported ${stravaActivity.type} (${analyzedEvent.source})`,
-                name: `${analyzedEvent.ownerId}/${analyzedEvent.objectId}`,
-                description: `
-      Strava ID: ${analyzedEvent.objectId}
-      Strava Owner: ${analyzedEvent.ownerId}
-      Athlete Link: https://strava.com/athletes/${analyzedEvent.ownerId}
-      Activity Link: https://strava.com/activities/${analyzedEvent.objectId}`,
-              })
-
               const existingWebhookEvent =
                 await repository.findStravaWebhookEventByActivityId(
                   analyzedEvent.objectId,
@@ -211,15 +182,6 @@ export class StravaWebhookCallbackWorkflow extends WorkflowEntrypoint<
               const sql = postgres(this.env.DATABASE_URL)
               const repository = createRepository(sql)
 
-              await createDiscordMessage({
-                heading: `New Activity Creation Failed - No Geo Data (${analyzedEvent.source})`,
-                name: `${analyzedEvent.ownerId}/${analyzedEvent.objectId}`,
-                description: `
-      Strava ID: ${analyzedEvent.objectId}
-      Strava Owner: ${analyzedEvent.ownerId}
-      Athlete Link: https://strava.com/athletes/${analyzedEvent.ownerId}
-      Activity Link: https://strava.com/activities/${analyzedEvent.objectId}`,
-              })
               const existingWebhookEvent =
                 await repository.findStravaWebhookEventByActivityId(
                   analyzedEvent.objectId,
