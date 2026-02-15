@@ -107,15 +107,6 @@ export async function processStravaWebhookEvent(
         )
         const activityType = activity.type
         if (!activityType) {
-          await createDiscordMessageFn({
-            heading: 'New Activity Update Failed - No Type (Update Webhook)',
-            name: `${activityUpdateEvent.owner_id}/${activityUpdateEvent.object_id}`,
-            description: `
-        Strava ID: ${activityUpdateEvent.object_id}
-        Strava Owner: ${activityUpdateEvent.owner_id}
-        Athlete Link: https://strava.com/athletes/${activityUpdateEvent.owner_id}
-        Activity Link: https://strava.com/activities/${activityUpdateEvent.object_id}`,
-          })
           await repository.deleteStravaWebhookEvent(event.id)
           return
         }
@@ -127,16 +118,6 @@ export async function processStravaWebhookEvent(
         const isGeoDataAvailable =
           activity.start_latlng && activity.start_latlng.length > 0
         if (!isGeoDataAvailable) {
-          await createDiscordMessageFn({
-            heading:
-              'New Activity Update Failed - No Geo Data (Update Webhook)',
-            name: `${activityUpdateEvent.owner_id}/${activityUpdateEvent.object_id}`,
-            description: `
-        Strava ID: ${activityUpdateEvent.object_id}
-        Strava Owner: ${activityUpdateEvent.owner_id}
-        Athlete Link: https://strava.com/athletes/${activityUpdateEvent.owner_id}
-        Activity Link: https://strava.com/activities/${activityUpdateEvent.object_id}`,
-          })
           await repository.deleteStravaWebhookEvent(event.id)
           return
         }

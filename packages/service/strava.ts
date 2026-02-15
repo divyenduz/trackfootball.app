@@ -49,16 +49,6 @@ export async function importStravaActivity(
 
     const existingPost = await repository.getPostByStravaId(activityId)
     if (existingPost?.geoJson) {
-      await createDiscordMessage({
-        heading: `New Activity Creation Failed - Post Already Exists (${source})`,
-        name: `${ownerId}/${activityId}`,
-        description: `
-      Strava ID: ${activityId}
-      Strava Owner: ${ownerId}
-      Athlete Link: https://strava.com/athletes/${ownerId}
-      Activity Link: https://strava.com/activities/${activityId}
-      Link: ${env.HOMEPAGE_URL}/activity/${existingPost.id}`,
-      })
       const existingWebhookEvent =
         await repository.findStravaWebhookEventByActivityId(activityId)
       if (existingWebhookEvent) {
@@ -74,15 +64,6 @@ export async function importStravaActivity(
 
     const activityType = activity.type
     if (!activityType) {
-      await createDiscordMessage({
-        heading: `New Activity Creation Failed - No Type (${source})`,
-        name: `${ownerId}/${activityId}`,
-        description: `
-      Strava ID: ${activityId}
-      Strava Owner: ${ownerId}
-      Athlete Link: https://strava.com/athletes/${ownerId}
-      Activity Link: https://strava.com/activities/${activityId}`,
-      })
       const existingWebhookEvent =
         await repository.findStravaWebhookEventByActivityId(activityId)
       if (existingWebhookEvent) {
@@ -97,15 +78,6 @@ export async function importStravaActivity(
 
     const isGeoDataAvailable = Boolean(activity.map?.polyline)
     if (!isGeoDataAvailable) {
-      await createDiscordMessage({
-        heading: `New Activity Creation Failed - No Geo Data (${source})`,
-        name: `${ownerId}/${activityId}`,
-        description: `
-      Strava ID: ${activityId}
-      Strava Owner: ${ownerId}
-      Athlete Link: https://strava.com/athletes/${ownerId}
-      Activity Link: https://strava.com/activities/${activityId}`,
-      })
       const existingWebhookEvent =
         await repository.findStravaWebhookEventByActivityId(activityId)
       if (existingWebhookEvent) {
@@ -122,16 +94,6 @@ export async function importStravaActivity(
     )
 
     if (!['Run', 'Soccer'].includes(activityType)) {
-      await createDiscordMessage({
-        heading: `New Activity Creation Failed - Type Not Supported ${activityType} (${source})`,
-        name: `${ownerId}/${activityId}`,
-        description: `
-      Strava ID: ${activityId}
-      Strava Owner: ${ownerId}
-      Athlete Link: https://strava.com/athletes/${ownerId}
-      Activity Link: https://strava.com/activities/${activityId}`,
-      })
-
       const existingWebhookEvent =
         await repository.findStravaWebhookEventByActivityId(activityId)
       if (existingWebhookEvent) {
