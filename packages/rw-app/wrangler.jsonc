@@ -17,7 +17,7 @@
     "BETTER_AUTH_URL": "https://trackfootball.app",
   },
   "limits": {
-    "cpu_ms": 1000,
+    "cpu_ms": 30000,
   },
   "routes": [
     {
