@@ -10,9 +10,11 @@ import { env } from 'cloudflare:workers'
 export async function StravaWebhookCallback({
   request,
   ctx,
+  cf,
 }: {
   request: Request
   ctx: DefaultAppContext
+  cf: ExecutionContext
 }) {
   if (request.method === 'GET') {
     const { searchParams } = new URL(request.url)
@@ -44,17 +46,17 @@ export async function StravaWebhookCallback({
       errors: [],
     })
 
-    try {
-      await processStravaWebhookEvent(stravaWebhookEvent, {
+    cf.waitUntil(
+      processStravaWebhookEvent(stravaWebhookEvent, {
         repository: ctx.repository,
         createDiscordMessage,
         env: {
           HOMEPAGE_URL: env.HOMEPAGE_URL,
         },
-      })
-    } catch (e) {
-      console.error(`Error while processing event`, e)
-    }
+      }).catch((e) => {
+        console.error(`Error while processing event`, e)
+      }),
+    )
 
     return Response.json({ ok: true })
   }
